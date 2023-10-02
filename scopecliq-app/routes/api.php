@@ -32,7 +32,7 @@ Route::prefix('clients')->group(function () {
 // CLIENTS
 Route::prefix('deliverables')->group(function () {
 
-    Route::post('/', [DeliverablesController::class, 'getAll']);
+    Route::get('/', [DeliverablesController::class, 'getAll']);
     Route::post('/update/{id}', [DeliverablesController::class, 'update']);
 
 });
