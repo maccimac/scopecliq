@@ -1,6 +1,7 @@
 import Home from './views/Home.js';
 
-function App() {
+const App = () => {
+  
   return (
     <div className="scopecliq">
       <Home/>
