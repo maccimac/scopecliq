@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\MilestonesController;
 use App\Http\Controllers\DeliverablesController;
 
 /*
@@ -26,8 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('clients')->group(function () {
 
     Route::get('/', [ClientsController::class, 'fetchAllClients']);
-    Route::get('/{client_id}', [ClientsController::class, 'fetchSingleClient']);
-    Route::get('/consultant/{user_id}', [ClientsController::class, 'fetchClientsOfConsultant']);
+    Route::get('/{client_id}', [ClientsController::class, 'fetchClientById']);
+    Route::get('/consultant/{user_id}', [ClientsController::class, 'fetchClientsByConsultant']);
 
 });
 
@@ -36,10 +37,19 @@ Route::prefix('clients')->group(function () {
 Route::prefix('projects')->group(function () {
 
     Route::get('/', [ProjectsController::class, 'fetchAllProjects']);
-    Route::get('/{project_id}', [ProjectsController::class, 'fetchSingleProject']);
-    Route::get('/client/{client_id}', [ProjectsController::class, 'fetchProjectsOfClient']);
-    Route::get('/consultant/{consultant_id}', [ProjectsController::class, 'fetchProjectsOfConsultant']);
+    Route::get('/{project_id}', [ProjectsController::class, 'fetchById']);
+    Route::get('/client/{client_id}', [ProjectsController::class, 'fetchProjectsByClient']);
+    Route::get('/consultant/{consultant_id}', [ProjectsController::class, 'fetchProjectsByConsultant']);
 
+});
+
+// MILESTONES
+Route::prefix('milestones')->group(function () {
+
+    Route::get('/{milestone_id}', [MilestonesController::class, 'fetchMilestoneById']);
+    Route::get('/project/{project_id}', [MilestonesController::class, 'fetchMilestonesByProject']);
+    Route::get('/last-position/{project_id}', [MilestonesController::class, 'getProjectLastPosition']);
+    Route::post('/create/{project_id}', [MilestonesController::class, 'createMilestoneInProject']);
 });
 
 

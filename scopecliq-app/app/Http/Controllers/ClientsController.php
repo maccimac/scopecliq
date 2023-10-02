@@ -15,7 +15,7 @@ class ClientsController extends Controller
         return $clients;
     }
 
-    public function fetchSingleClient($client_id){
+    public function fetchClientById($client_id){
         $clients = DB::table('clients')
             -> select('*')
             -> where('id', $id)
@@ -23,7 +23,7 @@ class ClientsController extends Controller
         return $clients;
     }
 
-    public function fetchClientsOfConsultant($user_id){
+    public function fetchClientsByConsultant($user_id){
         $clients = DB::table('clients')
             -> select('*')
             -> where('consultant_id', $user_id)

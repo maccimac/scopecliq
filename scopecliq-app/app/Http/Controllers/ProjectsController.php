@@ -16,7 +16,7 @@ class ProjectsController extends Controller
         return $projects;
     }
 
-    public function fetchSingleProject($project_id){
+    public function fetchProjectById($project_id){
         $project = DB::table('projects')
             -> select('*')
             -> where('id', $project_id)
@@ -24,7 +24,7 @@ class ProjectsController extends Controller
         return $project;
     }
 
-    public function fetchProjectsOfClient($client_id){
+    public function fetchProjectsByClient($client_id){
         $projects = DB::table('projects')
             -> select('*')
             -> where('client_id', $client_id)
@@ -32,7 +32,7 @@ class ProjectsController extends Controller
         return $projects;
     }
 
-    public function fetchProjectsOfConsultant($consultant_id){
+    public function fetchProjectsByConsultant($consultant_id){
 
         /*
             select * 

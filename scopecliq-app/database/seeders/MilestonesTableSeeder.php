@@ -16,7 +16,6 @@ class MilestonesTableSeeder extends Seeder
     public function run(): void
     {
     
-      
         DB::table('milestones')->insert([
             [
                 'project_id' => 2,
