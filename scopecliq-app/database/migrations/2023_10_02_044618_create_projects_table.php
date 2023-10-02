@@ -11,15 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            // $table->increments('id');
-            $table->integer('user_id');
+
+            $table->integer('client_id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->mediumText('about');
-            $table->string('contact');
+            $table->text('about');
+            $table->decimal('budget');
+            $table->string('status');
+            $table->string('portal_subdomain');
+            $table->string('portal_password');
+
+            $table->timestamps();
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('projects');
     }
 };

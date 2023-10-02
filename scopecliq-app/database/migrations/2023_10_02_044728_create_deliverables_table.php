@@ -11,18 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('deliverables', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
 
-            $table->string('about');
-            $table->string('contact_number');
-            $table->string('organization_name');
-            
+            $table->integer('project_id');
+            $table->integer('milestone_id');
+            $table->integer('position');
+            $table->string('name');
+            $table->text('description');
+            $table->string('status');
+            $table->dateTime('datetime_started')->nullable();
+            $table->dateTime('datetime_completed')->nullable();
+
+
+
+
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('deliverables');
     }
 };

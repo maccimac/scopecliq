@@ -17,7 +17,7 @@ class OrganizationsController extends Controller
             -> where('id', $id)
             -> update([
                 'name'=> 'Company name'
-            ]);
+            ]); 
 
 
 
