@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\DeliverablesController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,4 +19,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+// CLIENTS
+Route::prefix('clients')->group(function () {
+
+    Route::get('/', [ClientsController::class, 'getAll']);
+
+});
+
+
+// CLIENTS
+Route::prefix('deliverables')->group(function () {
+
+    Route::post('/', [DeliverablesController::class, 'getAll']);
+    Route::post('/update/{id}', [DeliverablesController::class, 'update']);
+
 });
