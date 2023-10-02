@@ -19,18 +19,27 @@ class ProjectsTableSeeder extends Seeder
                 'name' => 'WaveKo Surf Lounge',
                 'about' => 'Design and build of resort villa',
                 'budget' => 88000,
-                'status' => 'negotiation',
+                'status' => 'pending',
                 'portal_subdomain' => 'waveko',
                 'portal_password' => 'aurella'
             ],
             [
                 'client_id' => 2,
                 'name' => 'Siesta Farm and Restaurant',
-                'about' => 'Farm to table artisinal easy dining',
+                'about' => 'Markekting package. Farm to table artisinal easy dining',
                 'budget' => 40600,
                 'status' => 'started',
                 'portal_subdomain' => 'siesta',
                 'portal_password' => 'pizza'
+            ],
+            [
+                'client_id' => 3,
+                'name' => 'Lettered Leather',
+                'about' => 'Markating package. Local leathered goods',
+                'budget' => 8000,
+                'status' => 'pending',
+                'portal_subdomain' => 'lettered-leather',
+                'portal_password' => 'luna'
             ],
         ]);
     }

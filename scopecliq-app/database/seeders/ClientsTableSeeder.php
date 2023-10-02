@@ -30,6 +30,14 @@ class ClientsTableSeeder extends Seeder
                 'contact_number' => '+63 234 567 8901',
                 'organization_name' => 'Julia Studios'  
             ],
+            [
+                'consultant_id' => 2,
+                'name' => 'Angela Sharma',
+                'email' => 'angela@office.com',
+                'about' => 'Accounts Manager',
+                'contact_number' => '+63 234 567 8901',
+                'organization_name' => 'Stationery Company'  
+            ],
         ]);    
     }
 }
