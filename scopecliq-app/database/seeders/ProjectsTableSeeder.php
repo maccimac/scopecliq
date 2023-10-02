@@ -16,20 +16,20 @@ class ProjectsTableSeeder extends Seeder
         DB::table('projects')->insert([
             [
                 'client_id' => 1,
-                'name' => 'Siesta Restort Villa',
+                'name' => 'WaveKo Surf Lounge',
                 'about' => 'Design and build of resort villa',
-                'budget' => 60000,
+                'budget' => 88000,
                 'status' => 'negotiation',
-                'portal_subdomain' => 'siestavilla',
+                'portal_subdomain' => 'waveko',
                 'portal_password' => 'aurella'
             ],
             [
                 'client_id' => 2,
-                'name' => 'Leatherworks Branding',
-                'about' => 'Help kick-off leatherworks',
-                'budget' => 4000,
+                'name' => 'Siesta Farm and Restaurant',
+                'about' => 'Farm to table artisinal easy dining',
+                'budget' => 40600,
                 'status' => 'started',
-                'portal_subdomain' => 'leatherworks',
+                'portal_subdomain' => 'siesta',
                 'portal_password' => 'pizza'
             ],
         ]);

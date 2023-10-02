@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('milestone_id');
             $table->integer('position');
             $table->string('name');
-            $table->text('description');
-            $table->string('status');
+            $table->text('description')->nullable();
+            $table->string('status')->default('not_started');
             $table->dateTime('datetime_started')->nullable();
             $table->dateTime('datetime_completed')->nullable();
 

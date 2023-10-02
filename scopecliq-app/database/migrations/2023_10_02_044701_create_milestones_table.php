@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('position');
             $table->string('name');
             $table->text('description');
-            $table->string('status_completion');
-            $table->string('status_payment');
+            $table->string('status_completion')->default('not_started');
+            $table->string('status_payment')->default('unbilled');
             $table->dateTime('datetime_started')->nullable();
             $table->dateTime('datetime_completed')->nullable();
             
