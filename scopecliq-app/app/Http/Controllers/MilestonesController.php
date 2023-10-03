@@ -25,7 +25,7 @@ class MilestonesController extends Controller
         return $projects;
     }
 
-    static public function getProjectLastPosition($project_id){
+    static public function getLastPositionByProject($project_id){
         
         /*
          SELECT position 
@@ -46,19 +46,11 @@ class MilestonesController extends Controller
     }
 
 
-    public function createMilestoneInProject(Request $req, $project_id) {
-        // $proj =  Deliverable::findorFail($id);
-
-        // $appt['user_id'] = $req->user_id;
-        // $appt['doctor_id'] = $req->doctor_id;
-        // $appt['datetime_start'] = $startDateTime;
-        
+    public function addMilestoneToProject(Request $req, $project_id) {
         
         // get last position
-        $lastPosition = $this -> getProjectLastPosition($project_id);
-        // return $lastPosition;
+        $lastPosition = $this -> getLastPositionByProject($project_id);
 
-        // dd($lastPosition);
         DB::table('milestones')
             ->insert([
             [

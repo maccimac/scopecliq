@@ -48,16 +48,18 @@ Route::prefix('milestones')->group(function () {
 
     Route::get('/{milestone_id}', [MilestonesController::class, 'fetchMilestoneById']);
     Route::get('/project/{project_id}', [MilestonesController::class, 'fetchMilestonesByProject']);
-    Route::get('/last-position/{project_id}', [MilestonesController::class, 'getProjectLastPosition']);
-    Route::post('/create/{project_id}', [MilestonesController::class, 'createMilestoneInProject']);
+    Route::get('/last-position/{project_id}', [MilestonesController::class, 'getLastPositionByProject']);
+    Route::post('/add/{project_id}', [MilestonesController::class, 'addMilestoneToProject']);
 });
 
 
 // DELIVERABLES
 Route::prefix('deliverables')->group(function () {
 
-    Route::get('/', [DeliverablesController::class, 'getAll']);
-    Route::post('/update/{id}', [DeliverablesController::class, 'update']);
+    Route::get('/{id}', [DeliverablesController::class, 'fetchDeliverableById']);
+    Route::get('/project/{project_id}', [DeliverablesController::class, 'fetchDeliverablesByProject']);
+    Route::post('/update/{id}/status/{status}', [DeliverablesController::class, 'updateDeliverableStatus']);
+    Route::post('/add/milestone/{milestone_id}', [DeliverablesController::class, 'addDeliverableToMilestone']);
+    Route::post('/edit/{id}', [DeliverablesController::class, 'editDeliverableById']);
     
-
 });
