@@ -21,31 +21,66 @@ const Home = () => {
     }
 
     const getDeliverables = async() =>{
-        const res = await axios.get(api+'/deliverables')
+        const res = await axios.get(api+'/deliverables/project/'+ projId)
         console.log(res.data)
         setDeliverables(res.data)
     }
 
     const updateDeliverableStatus = async() => {
+        // const payloadStatus = {
+        //     status: "updated"
+        // }
+
+        // const res = await axios.post(`${api}/deliverables/update/1`, payloadStatus, {
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        // });
+        // console.log(res)
+
+        const res = await axios.post(`${api}/deliverables/update/1/status/not_started`)
+        console.log(res)
+
+    }
+
+    const editDeliverable = async(deliverable) => {
         const payloadStatus = {
-            status: "updated"
+            // ...deliverable,
+            description: deliverable.description + " (Edited)",
         }
 
-        const res = await axios.post(`${api}/deliverables/update/1`, payloadStatus, {
+        const res = await axios.post(`${api}/deliverables/edit/${deliverable.id}`, payloadStatus, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+        });
+        console.log(res)
+        getDeliverables()
+    }
+
+    const addDeliverable = async(milestoneId) =>{
+
+        const payloadStatus = {
+            description: "New deliverable"
+        }
+
+        const res = await axios.post(`${api}/deliverables/add/milestone/${milestoneId}`, payloadStatus, {
             headers: {
               "Content-Type": "application/json",
             },
         });
         console.log(res)
 
+        getDeliverables()
+
     }
 
-    const createMilestone = async() => {
+    const addMilestone = async() => {
         const payloadStatus = {
             name: title,
             description: "new desc"
         }
-        const res = await axios.post(`${api}/milestones/create/${projId}`, payloadStatus, {
+        const res = await axios.post(`${api}/milestones/add/${projId}`, payloadStatus, {
             headers: {
               "Content-Type": "application/json",
             },
@@ -67,6 +102,7 @@ const Home = () => {
         console.log({clients})
         updateDeliverableStatus();
         getDeliverables();
+        
         getMilestones();
     }, [])
 
@@ -86,23 +122,25 @@ const Home = () => {
             {deliverables.length && deliverables.map(
                 (d) => (
                     <div>
-                        {d.name} / {d.status}
+                        {d.description} / {d.status} / {d.milestone_id } /<button onClick={()=>{editDeliverable(d)}}>Edit</button>
                     </div>   
-
                 )
             )}
 
+            <br/>
+
             {milestones.length && milestones.map(
-                (m) => (
+                (m, i) => (
                     <div>
-                        {m.name} / {m.description}
+                        {m.name} / {m.description} / <button onClick={()=>{addDeliverable(m.id)}}>Add deliverable to milestone</button>
                     </div>   
+
 
                 )
             )}
 
             <input value={title} onChange={evt => setTitle(evt.target.value)}></input>
-            <button onClick={createMilestone}>Create milestone</button>
+            <button onClick={addMilestone}>add milestone</button>
     </div>    
     )
     
