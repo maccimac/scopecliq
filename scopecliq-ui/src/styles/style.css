@@ -1,0 +1,313 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;0,1000;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,1000&display=swap");
+.bg-sq-green {
+  background-color: #27D39F;
+}
+
+.border-sq-green {
+  border: 1px solid #27D39F;
+}
+
+.color-sq-green {
+  color: #27D39F !important;
+}
+
+.bg-sq-lav {
+  background-color: #5B79FC;
+}
+
+.border-sq-lav {
+  border: 1px solid #5B79FC;
+}
+
+.color-sq-lav {
+  color: #5B79FC !important;
+}
+
+.bg-sq-dark {
+  background-color: #4E4E4E;
+}
+
+.border-sq-dark {
+  border: 1px solid #4E4E4E;
+}
+
+.color-sq-dark {
+  color: #4E4E4E !important;
+}
+
+.bg-sq-med {
+  background-color: #777;
+}
+
+.border-sq-med {
+  border: 1px solid #777;
+}
+
+.color-sq-med {
+  color: #777 !important;
+}
+
+.bg-sq-med-light {
+  background-color: #999999;
+}
+
+.border-sq-med-light {
+  border: 1px solid #999999;
+}
+
+.color-sq-med-light {
+  color: #999999 !important;
+}
+
+.bg-sq-light {
+  background-color: #CCCCCC;
+}
+
+.border-sq-light {
+  border: 1px solid #CCCCCC;
+}
+
+.color-sq-light {
+  color: #CCCCCC !important;
+}
+
+.bg-sq-lightest {
+  background-color: #F9F9F9;
+}
+
+.border-sq-lightest {
+  border: 1px solid #F9F9F9;
+}
+
+.color-sq-lightest {
+  color: #F9F9F9 !important;
+}
+
+.bg-sq-lav-dark {
+  background-color: #565C79;
+}
+
+.border-sq-lav-dark {
+  border: 1px solid #565C79;
+}
+
+.color-sq-lav-dark {
+  color: #565C79 !important;
+}
+
+.bg-sq-lav-muted {
+  background-color: #ACB1C6;
+}
+
+.border-sq-lav-muted {
+  border: 1px solid #ACB1C6;
+}
+
+.color-sq-lav-muted {
+  color: #ACB1C6 !important;
+}
+
+.bg-sq-lav-light {
+  background-color: #EEF1FF;
+}
+
+.border-sq-lav-light {
+  border: 1px solid #EEF1FF;
+}
+
+.color-sq-lav-light {
+  color: #EEF1FF !important;
+}
+
+.bg-sq-lav-light-bright {
+  background-color: #BBC7FD;
+}
+
+.border-sq-lav-light-bright {
+  border: 1px solid #BBC7FD;
+}
+
+.color-sq-lav-light-bright {
+  color: #BBC7FD !important;
+}
+
+.bg-sq-lav-mid {
+  background-color: #4C68E5;
+}
+
+.border-sq-lav-mid {
+  border: 1px solid #4C68E5;
+}
+
+.color-sq-lav-mid {
+  color: #4C68E5 !important;
+}
+
+.bg-sq-green-light {
+  background-color: #E5F4F0;
+}
+
+.border-sq-green-light {
+  border: 1px solid #E5F4F0;
+}
+
+.color-sq-green-light {
+  color: #E5F4F0 !important;
+}
+
+.bg-sq-greeen-mid {
+  background-color: #00B47E;
+}
+
+.border-sq-greeen-mid {
+  border: 1px solid #00B47E;
+}
+
+.color-sq-greeen-mid {
+  color: #00B47E !important;
+}
+
+.bg-sq-tomato {
+  background-color: #FC5130;
+}
+
+.border-sq-tomato {
+  border: 1px solid #FC5130;
+}
+
+.color-sq-tomato {
+  color: #FC5130 !important;
+}
+
+.bg-sq-tomato-light {
+  background-color: #FD917C;
+}
+
+.border-sq-tomato-light {
+  border: 1px solid #FD917C;
+}
+
+.color-sq-tomato-light {
+  color: #FD917C !important;
+}
+
+.bg-sq-tomato-lightest {
+  background-color: #FFF1EE;
+}
+
+.border-sq-tomato-lightest {
+  border: 1px solid #FFF1EE;
+}
+
+.color-sq-tomato-lightest {
+  color: #FFF1EE !important;
+}
+
+.bg-sq-gold {
+  background-color: #FFBC42;
+}
+
+.border-sq-gold {
+  border: 1px solid #FFBC42;
+}
+
+.color-sq-gold {
+  color: #FFBC42 !important;
+}
+
+.bg-sq-gold-mid {
+  background-color: #F4A414;
+}
+
+.border-sq-gold-mid {
+  border: 1px solid #F4A414;
+}
+
+.color-sq-gold-mid {
+  color: #F4A414 !important;
+}
+
+.bg-sq-gold-light {
+  background-color: #F5C773;
+}
+
+.border-sq-gold-light {
+  border: 1px solid #F5C773;
+}
+
+.color-sq-gold-light {
+  color: #F5C773 !important;
+}
+
+.bg-sq-gold-lighter {
+  background-color: #FAD99C;
+}
+
+.border-sq-gold-lighter {
+  border: 1px solid #FAD99C;
+}
+
+.color-sq-gold-lighter {
+  color: #FAD99C !important;
+}
+
+.bg-sq-gold-lightest {
+  background-color: #FFF9EE;
+}
+
+.border-sq-gold-lightest {
+  border: 1px solid #FFF9EE;
+}
+
+.color-sq-gold-lightest {
+  color: #FFF9EE !important;
+}
+
+h2 {
+  color: #ACB1C6;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.sub {
+  color: #ACB1C6;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 2.56px;
+  text-transform: uppercase;
+}
+
+.sq-dashboard-portal {
+  background-color: #f4f4f4;
+}
+.sq-dashboard-portal .sq-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.sq-dashboard-portal .sq-body .sq-content {
+  flex-grow: 1;
+}
+
+.sq-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+.find-me {
+  outline: 2px solid hotpink;
+}
+
+.find-me-2 {
+  outline: 2px solid tomato;
+}
+
+/*# sourceMappingURL=style.css.map */
