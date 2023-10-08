@@ -10,6 +10,8 @@
 
 
 @import './modules/main.scss';
+@import './modules/milestones.scss';
+
 // @import './modules/navbar.scss';
 // @import './modules/home.scss';
 // @import './modules/property.scss';
@@ -20,6 +22,10 @@
 
 body{
     font-family: 'DM Sans', sans-serif;
+    line-height: 1.4;
+    color: $sq-med;
+    background-color:$sq-lightest;
+
 }
 
 .find-me{

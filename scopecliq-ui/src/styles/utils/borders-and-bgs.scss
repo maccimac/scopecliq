@@ -7,6 +7,8 @@ $color-variables: (
   sq-med-light: $sq-med-light,
   sq-light: $sq-light,
   sq-lightest: $sq-lightest,
+  sq-lighter: $sq-lighter,
+  sq-white: $sq-white,
   sq-lav-dark: $sq-lav-dark,
   sq-lav-muted: $sq-lav-muted,
   sq-lav-light: $sq-lav-light,
@@ -31,10 +33,11 @@ $color-variables: (
   }
 
   .border-#{$variable-name} {
-    border: 1px solid $color-value;
+    border: 1px solid $color-value !important;
   }
 
   .color-#{$variable-name} {
     color: $color-value !important;
   }
 }
+

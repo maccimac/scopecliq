@@ -1,0 +1,16 @@
+.sq-milestone{
+
+    .image{
+        background-position: center;
+       background-size: cover;
+        &.image--med{
+            min-height: 160px;
+        }
+        &.image--small{
+            min-height: 120px;
+        }
+    }
+
+    
+
+}
