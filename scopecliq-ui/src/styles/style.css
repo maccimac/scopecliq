@@ -554,6 +554,17 @@ p.description {
 .sq-milestone .image.image--small {
   min-height: 120px;
 }
+.sq-milestone .sq-deliverable.sq-deliverable--complete p.description {
+  color: #999999;
+  text-decoration: line-through;
+}
+.sq-milestone .sq-deliverable.sq-deliverable--cancelled {
+  opacity: 0.6;
+}
+.sq-milestone .sq-deliverable.sq-deliverable--cancelled p.description {
+  color: #999999;
+  text-decoration: line-through;
+}
 
 body {
   font-family: "DM Sans", sans-serif;

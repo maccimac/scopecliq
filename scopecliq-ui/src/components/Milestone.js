@@ -16,7 +16,7 @@ export const Milestone = ({isConsultant=true, position, title, description, imag
     return(
         <div class="sq-milestone col-4 border-sq-lighter rounded bg-sq-lightest my-2 p-4 mx-3">
             <div class="sub color-sq-green mb-2">
-                Completed
+                Complete
             </div>
             <div className='mb-2'>
                     <span className="label">Milestone {position}: &nbsp;</span>
@@ -47,14 +47,17 @@ export const Milestone = ({isConsultant=true, position, title, description, imag
             </div>
             <div className='deliverables-list'>
                 <Deliverable
-                    status="COMPLETE"
-                    description="Complete deliverable. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
-                    
+                    status="INCOMPLETE"
+                    description="Complete deliverable"
                 />
                 <Deliverable
                     status="COMPLETE"
                     description="Complete deliverable. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
                     image={placeholder2}
+                />
+                 <Deliverable
+                    status="CANCELLED"
+                    description="Complete deliverable. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
                 />
 
             </div>

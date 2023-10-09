@@ -2,20 +2,40 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import logo from '../assets/img/logo@2x.png'
 
-export const Deliverable = ({status="COMPLETED", isConsultant=true, isEdit, description, image} ) => {
+export const Deliverable = ({status="COMPLETE", isConsultant=true, isEdit, description, image} ) => {
     const api = global.config.API
-    const classNamesCompleted = " sq-deliverable--completed bg-sq-white"
-    const [classNameState, setClassNameState]  = useState(classNamesCompleted)
+
+    const statusClassNames = {
+        COMPLETE: {
+            outterClass: " sq-deliverable--complete bg-sq-white",
+            icon: "fa-circle-check color-sq-green"
+        },
+        INCOMPLETE: {
+            outterClass: " sq-deliverable--incomplete bg-sq-lav-light border-sq-lav",
+            icon: "fa-circle color-sq-lav"
+        },
+        CANCELLED: {
+            outterClass: " sq-deliverable--cancelled bg-sq-light",
+            icon: "fa-circle-xmark color-sq-med"
+        },
+    }
+    
+
+    const [classNameState, setClassNameState]  = useState(statusClassNames[status].outterClass)
+
+    const [statusIcon, setStatusIcon]  = useState(statusClassNames[status].icon)
+
+
 
 
     return(
-        <div className={'sq-deliverable rounded py-3 px-2 mb-2' + classNameState}>
-            <div className='d-flex'>
+        <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'}>
+            <div className='d-flex w-100'>
                 <div className='status'>
-                    <i className="fa-regular fa-circle-check color-sq-green fa-md m-1"></i>
+                    <i className={statusIcon + ' fa-regular fa-md m-1'}></i>
                 </div>
                 
-                <div className="ms-1">
+                <div className="ms-1 flex-fill">
                     <p className='description'>{description}</p>
                 </div>
 

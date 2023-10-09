@@ -10,6 +10,21 @@
             min-height: 120px;
         }
     }
+    .sq-deliverable{
+        &.sq-deliverable--complete{
+            p.description{
+                color: $sq-med-light;
+                text-decoration: line-through;
+            }
+        }
+        &.sq-deliverable--cancelled{
+            opacity: 0.6;
+            p.description{
+                color: $sq-med-light;
+                text-decoration: line-through;
+            }
+        }
+    }
 
     
 
