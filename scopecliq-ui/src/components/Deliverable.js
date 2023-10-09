@@ -6,7 +6,8 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
     const api = global.config.API;
     const [editMode, setEditMode]  = useState(false);
     const [statusModel, setStatusModel]  = useState(status);
-    const [modelDescription, setModelDescription]  = useState(description);
+    const [descriptionModel, setDescriptionModel]  = useState(description);
+    const [descriptionModelEdit, setDescriptionModelEdit]  = useState(description);
 
     const statusClassNames = {
         COMPLETE: {
@@ -53,6 +54,28 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
         setClassNameState(statusClassNames[statusModel].outterClass);
     } 
 
+    const updateDescription = async () =>{
+
+        const payloadDesc = {
+            description: descriptionModelEdit
+        }
+
+        const res = await axios.post(`${api}/deliverables/edit/${deliverableId}`, payloadDesc, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+        });
+        console.log(res)
+        if(res.status==200){
+            setDescriptionModel(descriptionModelEdit)
+        }
+
+
+        finishEdit()
+
+
+    }
+
     const resolveClassStyleByStatus = (statusModel) =>{
         setClassNameState(statusClassNames[statusModel].outterClass + (editMode && ' sq-deliverable--edit '));
         setStatusIcon(statusClassNames[statusModel].icon);
@@ -70,9 +93,13 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
                 </div>
                 
                 <div className="ms-1 flex-fill">
-                    <p onClick={enableEdit} className='description w-100'>{description}</p>
+                    <p onClick={enableEdit} className='description w-100'>{descriptionModel}</p>
                     {editMode && (
-                        <textarea className='description-edit' rows="4" cols="100">{modelDescription}</textarea>
+                        <textarea className='description-edit' rows="4" 
+                            onChange={(e)=>{
+                                setDescriptionModelEdit(e.target.value)
+                            }}
+                        cols="100">{descriptionModel}</textarea>
                     )}
                     
                 </div>
@@ -85,9 +112,9 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
                         </div>
                     ) :(
 
-                        <div className='d-flex mt-1' onClick={finishEdit}>
-                            <i className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs"></i>
-                            <i className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs"></i>
+                        <div className='d-flex mt-1'>
+                            <i onClick={(e)=>{updateDescription(e.target.value)}} className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs"></i>
+                            <i onClick={finishEdit} className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs"></i>
                         </div>
                     )    
                 }
