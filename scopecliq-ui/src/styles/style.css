@@ -552,7 +552,7 @@ p.description {
   left: 0;
 }
 .sq-dashboard-portal .sq-body {
-  padding-top: 120px;
+  padding-top: 90px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
