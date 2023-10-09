@@ -7,11 +7,22 @@ import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
 
 
-export const Milestone = ({isConsultant=true, position, title, description, image, fee}) => {
+export const Milestone = ({isConsultant=true, milestoneId=1, position, title, description, image, fee}) => {
     const api = global.config.API;
+    const [deliverables, setDeliverables] = useState([])
+
+    const fetchDeliverableByMilestone = async() =>{
+        const res = await axios.get(api+'c'+ milestoneId)
+        console.log(res.data)
+        setDeliverables(res.data)
+    }
 
     // ON RUN
     // [] set milestone status depending on deliverable status
+
+    useEffect(()=>{
+        fetchDeliverableByMilestone()
+    }, [])
 
     return(
         <div class="sq-milestone col-4 border-sq-lighter rounded bg-sq-lightest my-2 p-4 mx-3">
@@ -46,7 +57,12 @@ export const Milestone = ({isConsultant=true, position, title, description, imag
                 <span class="label">Deliverables: </span>
             </div>
             <div className='deliverables-list'>
-                <Deliverable
+                {deliverables.map( (d,i)=>(
+                    <Deliverable
+                    status={d.status}
+                    description={d.description}/>
+                ))}
+                {/* <Deliverable
                     status="INCOMPLETE"
                     description="Complete deliverable"
                 />
@@ -58,7 +74,7 @@ export const Milestone = ({isConsultant=true, position, title, description, imag
                  <Deliverable
                     status="CANCELLED"
                     description="Complete deliverable. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
-                />
+                /> */}
 
             </div>
 

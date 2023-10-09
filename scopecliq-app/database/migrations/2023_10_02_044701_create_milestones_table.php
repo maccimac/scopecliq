@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('status_completion')->nullable();
-            $table->string('status_payment')->nullable();
+            $table->string('status_invoice')->nullable();
             $table->dateTime('datetime_started')->nullable();
             $table->dateTime('datetime_completed')->nullable();
             

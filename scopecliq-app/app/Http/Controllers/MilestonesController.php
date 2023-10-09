@@ -59,7 +59,7 @@ class MilestonesController extends Controller
                 'name' => $req->name,
                 'description' => $req->description,
                 'status_completion' => null,
-                'status_payment' => null,
+                'status_invoice' => null,
                 'datetime_started' => null,
             ],
         ]);

@@ -21,9 +21,15 @@ export const Deliverable = ({status="COMPLETE", isConsultant=true, isEdit, descr
     }
     
 
-    const [classNameState, setClassNameState]  = useState(statusClassNames[status].outterClass)
+    const [classNameState, setClassNameState]  = useState(statusClassNames.COMPLETE.outterClass)
 
-    const [statusIcon, setStatusIcon]  = useState(statusClassNames[status].icon)
+    const [statusIcon, setStatusIcon]  = useState(statusClassNames.COMPLETE.icon)
+
+
+    useEffect(()=>{
+        setClassNameState(statusClassNames[status].outterClass);
+        setStatusIcon(statusClassNames[status].icon);
+    }, [])
 
 
 

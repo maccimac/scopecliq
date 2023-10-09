@@ -26,6 +26,15 @@ class DeliverablesController extends Controller
         return $deliverables;
     }
     
+
+    public function fetchDeliverablesByMilestone($milestone_id){
+        $deliverables = DB::table('deliverables')
+        -> select('*')
+        -> where('milestone_id', $milestone_id)
+        -> get();
+        return $deliverables;
+    }
+    
     public function updateDeliverableStatus($id, $status) {
 
         $deliverable = DB::table('deliverables')
