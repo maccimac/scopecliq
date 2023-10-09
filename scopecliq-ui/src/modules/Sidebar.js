@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const Sidebar = () => {
     const api = global.config.API;
 
-      const [showOffcanvas, setShowOffcanvas] = useState(true); // Set the initial state to true to show the Offcanvas
+      const [showOffcanvas, setShowOffcanvas] = useState(false); // Set the initial state to true to show the Offcanvas
 
   const toggleOffcanvas = () => {
     setShowOffcanvas(!showOffcanvas);

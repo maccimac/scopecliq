@@ -60,6 +60,7 @@ Route::prefix('deliverables')->group(function () {
     Route::get('/project/{project_id}', [DeliverablesController::class, 'fetchDeliverablesByProject']);
     Route::get('/milestone/{milestone_id}', [DeliverablesController::class, 'fetchDeliverablesByMilestone']);
     Route::post('/update/{id}/status/{status}', [DeliverablesController::class, 'updateDeliverableStatus']);
+    Route::post('/update/{id}/position/{position}', [DeliverablesController::class, 'updateDeliverablePosition']);
     Route::post('/add/milestone/{milestone_id}', [DeliverablesController::class, 'addDeliverableToMilestone']);
     Route::post('/edit/{id}', [DeliverablesController::class, 'editDeliverableById']);
     

@@ -31,6 +31,7 @@ class DeliverablesController extends Controller
         $deliverables = DB::table('deliverables')
         -> select('*')
         -> where('milestone_id', $milestone_id)
+        ->orderBy('position')
         -> get();
         return $deliverables;
     }
@@ -41,6 +42,16 @@ class DeliverablesController extends Controller
             -> where('id', $id)
             -> update([
                 'status'=> $status
+            ]);
+        return $deliverable;
+    }
+
+    public function updateDeliverablePosition($id, $position) {
+
+        $deliverable = DB::table('deliverables')
+            -> where('id', $id)
+            -> update([
+                'position'=> $position
             ]);
         return $deliverable;
     }
@@ -88,7 +99,7 @@ class DeliverablesController extends Controller
                 'project_id'=> $projId,
                 'milestone_id' => $milestone_id,
                 'position' => $lastPosition+1 || 0,
-                'status'=> 'new_stat',
+                'status'=> 'INCOMPLETE',
                 'description' => $req->description,
             ],
         ]);

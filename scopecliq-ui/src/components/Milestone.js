@@ -5,6 +5,7 @@ import Deliverable from './Deliverable';
 import placeholder1 from '../assets/img/placeholder-1.png'
 import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
+import BtnAdd from './BtnAdd';
 
 
 export const Milestone = ({isConsultant=true, milestoneId=1, position, title, description, image, fee}) => {
@@ -16,8 +17,11 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
         const res = await axios.get(api+ '/deliverables/milestone/' + milestoneId)
         console.log(res.data)
         setDeliverables(res.data)
+        updateMileStoneStatus(res.data)
+    }
+    const updateMileStoneStatus = (arr) => {
         let statArr = []
-        res.data.forEach(d => {
+        arr.forEach(d => {
             statArr.push(d.status)
         });
         if (!statArr.length){
@@ -30,8 +34,40 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
             }else{
                 setMilestoneStatus('pending')
             }
-            
         }
+    }
+
+    const addNewDeliverable =(index)=> {
+        const newDeliverable = {
+            id: null,
+            description:"",
+            position: 0,
+            status: "INCOMPLETE",
+            is_new: true,
+            milestone_id: milestoneId,
+        }
+        setDeliverables([])
+        let deliverabesCopy = [...deliverables];
+        deliverabesCopy.splice(index+1, 0, newDeliverable)
+        // console.log(deliverabesCopy)
+        setTimeout(()=>{
+            setDeliverables([...deliverabesCopy])
+        }, 0)
+    }
+    const cancelNewDeliverable = (index) => {
+        setDeliverables([])
+        let deliverabesCopy = [...deliverables];
+        deliverabesCopy.splice(index, 1)
+        // console.log(deliverabesCopy)
+        setTimeout(()=>{
+            setDeliverables([...deliverabesCopy])
+        }, 0)
+    }
+    const saveAllPositions =  () =>{
+        deliverables.map( async (d,i) =>{
+            const res = await axios.post(api + `/deliverables/update/${d.id}/position/${i}`)
+            console.log(res)
+        })
     }
 
     useEffect(()=>{
@@ -71,11 +107,27 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                 <span class="label">Deliverables: </span>
             </div>
             <div className='deliverables-list'>
-                {deliverables.map( (d,i)=>(
-                    <Deliverable
-                    deliverableId={d.id}
-                    status={d.status}
-                    description={d.description}/>
+                { deliverables.map( (d,i)=>(
+                    <div class="deliverable-set" key={i}>
+                        <Deliverable
+                            key={i}
+                            deliverableId={d.id}
+                            status={d.status}
+                            description={d.description}
+                            position={i}
+                            milestoneId={milestoneId}
+                            isNew={d.is_new}
+                            cancelNewDeliverable={()=>{
+                                cancelNewDeliverable(i)
+                            }}
+                            saveAllPositions={saveAllPositions}
+                            updateMilestoneStatus={()=>{
+                                updateMileStoneStatus(deliverables)
+                            }}
+ 
+                        />
+                        <BtnAdd cb={()=>{addNewDeliverable(i)}}/>
+                    </div>
                 ))}
                 {/* <Deliverable
                     status="INCOMPLETE"

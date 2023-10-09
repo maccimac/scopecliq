@@ -522,6 +522,29 @@ p.description {
   font-size: 48 !important;
 }
 
+.sq-btn-add {
+  height: 36px;
+  width: 36px;
+  background-color: #BBC7FD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -18px auto;
+  z-index: 10;
+  border-radius: 36px;
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+  box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
+  transition: all 0.6s ease;
+}
+.sq-btn-add:hover {
+  opacity: 1;
+}
+.sq-btn-add i {
+  color: #fff;
+}
+
 .sq-dashboard-portal .sq-navigation {
   position: fixed;
   width: 100%;
@@ -569,6 +592,10 @@ p.description {
 .sq-milestone .image.image--small {
   min-height: 120px;
 }
+.sq-milestone .sq-deliverable {
+  z-index: 1;
+  border: 1px solid transparent;
+}
 .sq-milestone .sq-deliverable.sq-deliverable--complete p.description {
   color: #999999;
   text-decoration: line-through;
@@ -581,8 +608,20 @@ p.description {
   text-decoration: line-through;
 }
 .sq-milestone .sq-deliverable.sq-deliverable--edit {
-  border: 1px solid #FAD99C !important;
+  border: 1px solid auto;
   box-shadow: 0px 0px 12px 0px rgba(86, 92, 121, 0.18) inset;
+  animation: editing 2s ease infinite;
+}
+@keyframes editing {
+  0% {
+    border-color: #CCCCCC;
+  }
+  50% {
+    border-color: #FAD99C;
+  }
+  100% {
+    border-color: #CCCCCC;
+  }
 }
 .sq-milestone .sq-deliverable.sq-deliverable--edit p.description {
   display: none;
@@ -608,6 +647,7 @@ body {
   line-height: 1.4;
   color: #777;
   background-color: #F9F9F9;
+  transition: all 0.4s ease;
 }
 
 .find-me {

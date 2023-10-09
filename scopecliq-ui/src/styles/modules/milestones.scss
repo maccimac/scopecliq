@@ -28,6 +28,8 @@
         }
     }
     .sq-deliverable{
+        z-index: 1;
+        border: 1px solid transparent;
         &.sq-deliverable--complete{
             p.description{
                 color: $sq-med-light;
@@ -43,8 +45,24 @@
         }
 
         &.sq-deliverable--edit{
-            border: 1px solid $sq-gold-lighter !important;
+            border: 1px solid auto;
             box-shadow: $sq-inner-shadow;
+            @keyframes editing {
+                0% {
+                  border-color: $sq-light;
+                }
+                50% {
+                  border-color: $sq-gold-lighter;
+                }
+                100% {
+                    border-color:  $sq-light;
+                  }
+            }
+            
+
+            animation: editing 2s ease infinite;
+
+
             p.description{
                 display: none;
             }

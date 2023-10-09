@@ -2,9 +2,16 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import logo from '../assets/img/logo@2x.png'
 
-export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true, isEdit, description, image} ) => {
+export const Deliverable = ({
+    deliverableId, status="COMPLETE", isConsultant=true,  
+    description, image, position,
+    milestoneId,
+    isNew=false, 
+    cancelNewDeliverable, saveAllPositions, updateMilestoneStatus
+} ) => {
     const api = global.config.API;
-    const [editMode, setEditMode]  = useState(false);
+    const [editMode, setEditMode]  = useState(isNew);
+    const [newMode, setnNewMode]  = useState(isNew);
     const [statusModel, setStatusModel]  = useState(status);
     const [descriptionModel, setDescriptionModel]  = useState(description);
     const [descriptionModelEdit, setDescriptionModelEdit]  = useState(description);
@@ -39,8 +46,8 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
         console.log(res)
         if(res.status==200){
             setStatusModel(status)
-            resolveClassStyleByStatus(status);
-
+            resolveClassStyleByStatus(status)
+            updateMilestoneStatus()
         }      
     } 
 
@@ -55,11 +62,9 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
     } 
 
     const updateDescription = async () =>{
-
         const payloadDesc = {
             description: descriptionModelEdit
         }
-
         const res = await axios.post(`${api}/deliverables/edit/${deliverableId}`, payloadDesc, {
             headers: {
               "Content-Type": "application/json",
@@ -69,10 +74,27 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
         if(res.status==200){
             setDescriptionModel(descriptionModelEdit)
         }
-
-
         finishEdit()
+    }
 
+    const saveNewDeliverable = async () => {
+    
+        const payload = {
+            description: descriptionModelEdit
+        }
+
+        const res = await axios.post(`${api}/deliverables/add/milestone/${milestoneId}`, payload, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+        });
+        console.log(res)
+        setnNewMode(false)
+        setEditMode(false)
+        setDescriptionModel(descriptionModelEdit)
+        finishEdit()
+        saveAllPositions()
+        updateMilestoneStatus()
 
     }
 
@@ -84,6 +106,10 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
     useEffect(()=>{
         resolveClassStyleByStatus(status);
     }, [])
+    
+    useEffect(()=>{
+        resolveClassStyleByStatus(status);
+    }, position)
 
     return(
         <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'}>
@@ -95,7 +121,7 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
                 <div className="ms-1 flex-fill">
                     <p onClick={enableEdit} className='description w-100'>{descriptionModel}</p>
                     {editMode && (
-                        <textarea className='description-edit' rows="4" 
+                        <textarea placeholder="Type a description" className='description-edit' rows="4" 
                             onChange={(e)=>{
                                 setDescriptionModelEdit(e.target.value)
                             }}
@@ -104,20 +130,32 @@ export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true
                     
                 </div>
 
-                {!editMode 
+                {
+                    newMode 
                     ?(
-                        <div className='d-flex mt-1'>
-                            <i className="fa-solid sq-btn-icon fa-pen-to-square color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
-                            <i className="fa-solid sq-btn-icon fa-bars color-sq-light m-1 fa-xs"></i>
-                        </div>
-                    ) :(
+                        <div className='d-flex mt-1 new-deliverable'>
+                            <i onClick={(e)=>{saveNewDeliverable(e.target.value)}} className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs"></i>
+                            <i onClick={cancelNewDeliverable} className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs"></i>
+                        </div>                  
+                    )
+                    :(
+                        editMode
+                        ?(
+                            <div className='d-flex mt-1'>
+                                <i onClick={(e)=>{updateDescription(e.target.value)}} className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs"></i>
+                                <i onClick={finishEdit} className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs"></i>
+                            </div>
+                        )
+                        :(
+                            <div className='d-flex mt-1'>
+                                <i className="fa-solid sq-btn-icon fa-pen-to-square color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
+                                <i className="fa-solid sq-btn-icon fa-bars color-sq-light m-1 fa-xs"></i>
+                            </div>
+                        )
 
-                        <div className='d-flex mt-1'>
-                            <i onClick={(e)=>{updateDescription(e.target.value)}} className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs"></i>
-                            <i onClick={finishEdit} className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs"></i>
-                        </div>
-                    )    
+                    )
                 }
+
 
                 
             </div>

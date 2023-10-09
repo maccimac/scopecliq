@@ -29,7 +29,9 @@ export const ProjectBlueprint = (isConsultant=true, projectId=2) => {
                  description={m.description}
                  position={m.position}
                  fee={m.budget_percentage}
-                 milestoneId={m.id} />
+                 milestoneId={m.id} 
+                 projectId={m.project_id}
+                 />
              ))}
             {/* <Milestone
                 title="Negotiation"
