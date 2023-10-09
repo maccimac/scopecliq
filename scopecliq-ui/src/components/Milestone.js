@@ -9,12 +9,29 @@ import placeholder3 from '../assets/img/placeholder-3.png'
 
 export const Milestone = ({isConsultant=true, milestoneId=1, position, title, description, image, fee}) => {
     const api = global.config.API;
+    const [milestoneStatus, setMilestoneStatus] = useState('complete')
     const [deliverables, setDeliverables] = useState([])
 
     const fetchDeliverableByMilestone = async() =>{
         const res = await axios.get(api+ '/deliverables/milestone/' + milestoneId)
         console.log(res.data)
         setDeliverables(res.data)
+        let statArr = []
+        res.data.forEach(d => {
+            statArr.push(d.status)
+        });
+        if (!statArr.length){
+            setMilestoneStatus('PENDING');
+            return;
+        }
+        if(statArr.includes('INCOMPLETE')){
+            if(statArr.includes('COMPLETE')){
+                setMilestoneStatus('started')
+            }else{
+                setMilestoneStatus('pending')
+            }
+            
+        }
     }
 
     // ON RUN
@@ -25,9 +42,9 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
     }, [])
 
     return(
-        <div class="sq-milestone col-1 col-sm-4 col-lg-3 border-sq-lighter rounded bg-sq-lightest my-2 p-4 mx-2">
-            <div class="sub color-sq-green mb-2">
-                Complete
+        <div class={`sq-milestone--${milestoneStatus} sq-milestone col-1 col-sm-4 col-lg-3 rounded bg-sq-lightest my-2 p-4 mx-2`}>
+            <div class="sub mb-2 milestone-status">
+                {milestoneStatus}
             </div>
             <div className='mb-2'>
                     <span className="label">Milestone {position}: &nbsp;</span>

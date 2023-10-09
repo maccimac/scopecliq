@@ -1,4 +1,21 @@
 .sq-milestone{
+    background-color: #f4f4f4;
+    border: 1px solid $sq-lighter;
+
+    &.sq-milestone--complete{
+        .milestone-status{
+            color: $sq-green;
+        }
+    }
+
+    &.sq-milestone--started{
+        .milestone-status{
+            color: $sq-lav;
+        }
+        border: 1px solid $sq-lav;
+        background-color: $sq-white;
+        box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
+    }
 
     .image{
         background-position: center;
@@ -24,6 +41,30 @@
                 text-decoration: line-through;
             }
         }
+
+        &.sq-deliverable--edit{
+            border: 1px solid $sq-med;
+            p.description{
+                display: none;
+            }
+            .description-edit{
+                font-size: 12px;
+                outline: none;
+                border: none;
+                width: 100%;
+                color: $sq-med;
+                margin: 0;
+                padding: 0;
+                background-color: transparent;
+                resize: none;
+                overflow: hidden;
+            }
+        }
+
+        .sq-btn-icon{
+            cursor: pointer;
+        }
+        
     }
 
     

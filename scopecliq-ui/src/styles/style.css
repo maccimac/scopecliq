@@ -544,6 +544,21 @@ p.description {
   right: 0;
 }
 
+.sq-milestone {
+  background-color: #f4f4f4;
+  border: 1px solid #E7E7E7;
+}
+.sq-milestone.sq-milestone--complete .milestone-status {
+  color: #27D39F;
+}
+.sq-milestone.sq-milestone--started {
+  border: 1px solid #5B79FC;
+  background-color: #fff;
+  box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
+}
+.sq-milestone.sq-milestone--started .milestone-status {
+  color: #5B79FC;
+}
 .sq-milestone .image {
   background-position: center;
   background-size: cover;
@@ -564,6 +579,27 @@ p.description {
 .sq-milestone .sq-deliverable.sq-deliverable--cancelled p.description {
   color: #999999;
   text-decoration: line-through;
+}
+.sq-milestone .sq-deliverable.sq-deliverable--edit {
+  border: 1px solid #777;
+}
+.sq-milestone .sq-deliverable.sq-deliverable--edit p.description {
+  display: none;
+}
+.sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit {
+  font-size: 12px;
+  outline: none;
+  border: none;
+  width: 100%;
+  color: #777;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  resize: none;
+  overflow: hidden;
+}
+.sq-milestone .sq-deliverable .sq-btn-icon {
+  cursor: pointer;
 }
 
 body {
