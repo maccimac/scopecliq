@@ -80,7 +80,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                 {milestoneStatus}
             </div>
             <div className='mb-2'>
-                    <span className="label">Milestone {position}: &nbsp;</span>
+                    <span className="label">Milestone {position+1}: &nbsp;</span>
                     <span className="title">{title}</span>
             </div>
             <div className='mb-2'>

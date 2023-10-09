@@ -20,7 +20,7 @@ class MilestonesTableSeeder extends Seeder
             [
                 'project_id' => 2,
                 'position' => 0,
-                'name' => 'Negotioation',
+                'name' => 'Negotiation',
                 'description' => "The consistent theme / image you want in your consumer’s mind.",
                 'budget_percentage'=> 0,
                 'status_completion' => 'COMPLETE',
