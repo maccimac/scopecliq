@@ -2,9 +2,10 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import logo from '../assets/img/logo@2x.png'
 
-export const Deliverable = ({status="COMPLETE", isConsultant=true, isEdit, description, image} ) => {
+export const Deliverable = ({deliverableId, status="COMPLETE", isConsultant=true, isEdit, description, image} ) => {
     const api = global.config.API;
     const [editMode, setEditMode]  = useState(false);
+    const [statusModel, setStatusModel]  = useState(status);
     const [modelDescription, setModelDescription]  = useState(description);
 
     const statusClassNames = {
@@ -23,32 +24,48 @@ export const Deliverable = ({status="COMPLETE", isConsultant=true, isEdit, descr
     }
     
 
-    const [classNameState, setClassNameState]  = useState(statusClassNames.COMPLETE.outterClass + (editMode && ' sq-deliverable--edit '))
-    const [statusIcon, setStatusIcon]  = useState(statusClassNames.COMPLETE.icon)
+    const [classNameState, setClassNameState]  = useState(null)
+    const [statusIcon, setStatusIcon]  = useState(null)
 
-    const toggleComplete = () => {
-        
+    const toggleComplete = async () => {
+        const status = (statusModel=='COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
+        const res = await axios.post(api + `/deliverables/update/${deliverableId}/status/${status}`)
+        // const res = await axios.post(`${api}/deliverables/update/1`, {status}, {
+        //         headers: {
+        //           "Content-Type": "application/json",
+        //         },
+        //     });
+        console.log(res)
+        if(res.status==200){
+            setStatusModel(status)
+            resolveClassStyleByStatus(status);
+
+        }      
     } 
 
     const enableEdit = () => {
         setEditMode(true);
-        setClassNameState(statusClassNames[status].outterClass + ( ' sq-deliverable--edit '));
+        setClassNameState(statusClassNames[statusModel].outterClass + ( ' sq-deliverable--edit '));
     } 
     
     const finishEdit = () => {
         setEditMode(false);
-        setClassNameState(statusClassNames[status].outterClass);
+        setClassNameState(statusClassNames[statusModel].outterClass);
     } 
 
+    const resolveClassStyleByStatus = (statusModel) =>{
+        setClassNameState(statusClassNames[statusModel].outterClass + (editMode && ' sq-deliverable--edit '));
+        setStatusIcon(statusClassNames[statusModel].icon);
+    }
+
     useEffect(()=>{
-        setClassNameState(statusClassNames[status].outterClass + (editMode && ' sq-deliverable--edit '));
-        setStatusIcon(statusClassNames[status].icon);
+        resolveClassStyleByStatus(status);
     }, [])
 
     return(
         <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'}>
             <div className='d-flex w-100'>
-                <div className='status'>
+                <div className='status' onClick={toggleComplete}>
                     <i className={statusIcon + ' fa-regular fa-md m-1 sq-btn-icon'}></i>
                 </div>
                 

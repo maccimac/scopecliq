@@ -14,7 +14,7 @@
         }
         border: 1px solid $sq-lav;
         background-color: $sq-white;
-        box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
+        box-shadow: $sq-outter-shadow;
     }
 
     .image{
@@ -43,7 +43,8 @@
         }
 
         &.sq-deliverable--edit{
-            border: 1px solid $sq-med;
+            border: 1px solid $sq-gold-lighter !important;
+            box-shadow: $sq-inner-shadow;
             p.description{
                 display: none;
             }

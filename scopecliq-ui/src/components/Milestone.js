@@ -34,9 +34,6 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
         }
     }
 
-    // ON RUN
-    // [] set milestone status depending on deliverable status
-
     useEffect(()=>{
         fetchDeliverableByMilestone()
     }, [])
@@ -76,6 +73,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
             <div className='deliverables-list'>
                 {deliverables.map( (d,i)=>(
                     <Deliverable
+                    deliverableId={d.id}
                     status={d.status}
                     description={d.description}/>
                 ))}

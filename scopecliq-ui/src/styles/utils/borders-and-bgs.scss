@@ -33,7 +33,7 @@ $color-variables: (
   }
 
   .border-#{$variable-name} {
-    border: 1px solid $color-value !important;
+    border: 1px solid $color-value;
   }
 
   .color-#{$variable-name} {
