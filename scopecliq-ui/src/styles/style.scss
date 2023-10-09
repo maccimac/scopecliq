@@ -1,0 +1,37 @@
+// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;0,1000;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,1000&display=swap');
+
+@import './utils/variables.scss';
+@import './utils/borders-and-bgs.scss';
+// @import './utils/reset.scss';
+@import './utils/typography.scss';
+@import './utils/effects.scss';
+@import './utils/buttons-and-forms.scss';
+
+
+@import './modules/main.scss';
+@import './modules/milestones.scss';
+
+// @import './modules/navbar.scss';
+// @import './modules/home.scss';
+// @import './modules/property.scss';
+// @import './modules/registration.scss';
+// @import './modules/addproperty.scss';
+// @import './modules/login.scss';
+// @import './modules/map.scss';
+
+body{
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.4;
+    color: $sq-med;
+    background-color:$sq-lightest;
+    transition: all  0.4s ease;
+
+}
+
+.find-me{
+    outline: 2px solid hotpink;
+}
+.find-me-2{
+    outline: 2px solid tomato;
+}

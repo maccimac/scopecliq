@@ -1,0 +1,29 @@
+.sq-dashboard-portal{
+    
+    .sq-navigation{
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+    .sq-body{
+        padding-top: 90px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        .sq-content{
+            flex-grow: 1;
+            // min-height: 100vh;
+        }
+    }
+}
+
+.sq-sidebar{
+    position: fixed;
+    top:0;
+    right: 0;
+    // width: 0;
+    // height: 0;
+    // width: 100px;
+    // height: 100px;
+}

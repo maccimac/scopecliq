@@ -1,0 +1,47 @@
+h2{
+    color: $sq-lav-muted;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+p{
+    margin-top: 2px;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 4px;
+    &.description{
+        font-size: 12px;
+        color: $sq-dark
+    }
+}
+
+.sub{
+    color: $sq-lav-muted;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 2.56px;
+    text-transform: uppercase;
+}
+.label{
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    color: $sq-lav-muted;
+}
+.title{
+    color: $sq-dark;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+
+@for $i from 1 through 48 {
+    .font-size-#{$i} {
+        font-size: $i !important;
+      }
+  }

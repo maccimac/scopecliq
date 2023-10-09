@@ -1,0 +1,91 @@
+.sq-milestone{
+    background-color: #f4f4f4;
+    border: 1px solid $sq-lighter;
+
+    &.sq-milestone--complete{
+        .milestone-status{
+            color: $sq-green;
+        }
+    }
+
+    &.sq-milestone--started{
+        .milestone-status{
+            color: $sq-lav;
+        }
+        border: 1px solid $sq-lav;
+        background-color: $sq-white;
+        box-shadow: $sq-outter-shadow;
+    }
+
+    .image{
+        background-position: center;
+       background-size: cover;
+        &.image--med{
+            min-height: 160px;
+        }
+        &.image--small{
+            min-height: 120px;
+        }
+    }
+    .sq-deliverable{
+        z-index: 1;
+        border: 1px solid transparent;
+        &.sq-deliverable--complete{
+            p.description{
+                color: $sq-med-light;
+                text-decoration: line-through;
+            }
+        }
+        &.sq-deliverable--cancelled{
+            opacity: 0.6;
+            p.description{
+                color: $sq-med-light;
+                text-decoration: line-through;
+            }
+        }
+
+        &.sq-deliverable--edit{
+            border: 1px solid auto;
+            box-shadow: $sq-inner-shadow;
+            @keyframes editing {
+                0% {
+                  border-color: $sq-light;
+                }
+                50% {
+                  border-color: $sq-gold-lighter;
+                }
+                100% {
+                    border-color:  $sq-light;
+                  }
+            }
+            
+
+            animation: editing 2s ease infinite;
+
+
+            p.description{
+                display: none;
+            }
+            .description-edit{
+                font-size: 12px;
+                outline: none;
+                border: none;
+                width: 100%;
+                color: $sq-med;
+                margin: 0;
+                padding: 0;
+                background-color: transparent;
+                resize: none;
+                overflow: hidden;
+            }
+        }
+
+        .sq-btn-icon{
+            cursor: pointer;
+        }
+        
+    }
+
+    
+
+}

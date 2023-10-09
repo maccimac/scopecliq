@@ -1,0 +1,22 @@
+.sq-btn-add{
+    height: 36px;
+    width: 36px;
+    background-color: $sq-lav-light-bright;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -18px auto;
+    z-index: 10;
+    border-radius: 36px;
+    position: relative;
+    opacity: 0;
+    cursor: pointer;
+    box-shadow: $sq-outter-shadow;
+    transition: all 0.6s ease;
+    &:hover{
+        opacity: 1;
+    }
+    i{
+        color: #fff;
+    }
+}
