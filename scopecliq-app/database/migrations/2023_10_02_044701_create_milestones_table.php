@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('position');
             $table->string('name');
             $table->text('description');
+            $table->integer('budget_percentage');
             $table->string('status_completion')->nullable();
             $table->string('status_invoice')->nullable();
             $table->dateTime('datetime_started')->nullable();

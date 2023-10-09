@@ -8,8 +8,8 @@ const App = () => {
   
   return (
     <div className="scopecliq">
-      {/* <ConsultantDashboard/> */}
-      <Home/>
+      <ConsultantDashboard/>
+      {/* <Home/> */}
     </div>
   );
 }

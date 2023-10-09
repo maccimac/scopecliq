@@ -12,7 +12,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
     const [deliverables, setDeliverables] = useState([])
 
     const fetchDeliverableByMilestone = async() =>{
-        const res = await axios.get(api+'c'+ milestoneId)
+        const res = await axios.get(api+ '/deliverables/milestone/' + milestoneId)
         console.log(res.data)
         setDeliverables(res.data)
     }
@@ -25,7 +25,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
     }, [])
 
     return(
-        <div class="sq-milestone col-4 border-sq-lighter rounded bg-sq-lightest my-2 p-4 mx-3">
+        <div class="sq-milestone col-1 col-sm-4 col-lg-3 border-sq-lighter rounded bg-sq-lightest my-2 p-4 mx-2">
             <div class="sub color-sq-green mb-2">
                 Complete
             </div>

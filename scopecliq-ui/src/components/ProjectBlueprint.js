@@ -11,7 +11,7 @@ export const ProjectBlueprint = (isConsultant=true, projectId=2) => {
     const [milestones, setMilestones] = useState([])
 
     const getMilestones = async() => {
-        const res = await axios.get(api+'/milestones/project/'+projectId)
+        const res = await axios.get(api+  '/milestones/project/'+2)
         console.log(res.data)
         setMilestones(res.data)
     }
@@ -23,15 +23,14 @@ export const ProjectBlueprint = (isConsultant=true, projectId=2) => {
 
     return(
         <div class="sq-project-blueprint p-4 d-flex bg-sq-lightest">
-            { milestones.map( (m,i)=>{
+            { milestones.map( (m,i)=>(
                  <Milestone
-                 title="Negotiation"
-                 description="This is the milestone description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ul"
-                 position={i}
-                 fee="0"
-             />
-
-            } )}
+                 title={m.name}
+                 description={m.description}
+                 position={m.position}
+                 fee={m.budget_percentage}
+                 milestoneId={m.id} />
+             ))}
             {/* <Milestone
                 title="Negotiation"
                 description="This is the milestone description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ul"
