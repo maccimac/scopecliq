@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
-import logo from '../assets/img/logo@2x.png'
 
 export const Deliverable = ({
     deliverableId, status="COMPLETE", isConsultant=true,  
@@ -9,6 +8,7 @@ export const Deliverable = ({
     isNew=false, 
     cancelNewDeliverable, saveAllPositions, updateMilestoneStatus
 } ) => {
+
     const api = global.config.API;
     const [editMode, setEditMode]  = useState(isNew);
     const [newMode, setnNewMode]  = useState(isNew);
@@ -31,20 +31,13 @@ export const Deliverable = ({
         },
     }
     
-
     const [classNameState, setClassNameState]  = useState(null)
     const [statusIcon, setStatusIcon]  = useState(null)
 
     const toggleComplete = async () => {
-        const status = (statusModel=='COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
+        const status = (statusModel == 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
         const res = await axios.post(api + `/deliverables/update/${deliverableId}/status/${status}`)
-        // const res = await axios.post(`${api}/deliverables/update/1`, {status}, {
-        //         headers: {
-        //           "Content-Type": "application/json",
-        //         },
-        //     });
-        console.log(res)
-        if(res.status==200){
+        if(res.status == 200){
             setStatusModel(status)
             resolveClassStyleByStatus(status)
             updateMilestoneStatus()
