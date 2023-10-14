@@ -538,9 +538,6 @@ p.description {
   box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
   transition: all 0.6s ease;
 }
-.sq-btn-add:hover {
-  opacity: 1;
-}
 .sq-btn-add i {
   color: #fff;
 }
@@ -609,6 +606,12 @@ p.description {
 }
 .sq-milestone.sq-milestone--started .milestone-status {
   color: #5B79FC;
+}
+.sq-milestone:hover .sq-btn-add {
+  opacity: 1;
+}
+.sq-milestone .sq-client-el {
+  display: none;
 }
 .sq-milestone .image {
   background-position: center;

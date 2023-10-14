@@ -57,6 +57,27 @@ class MilestonesTableSeeder extends Seeder
                 'status_invoice' => null,
                 'datetime_started' => null
             ],
+
+            [
+                'project_id' => 1,
+                'position' => 0,
+                'name' => 'Website',
+                'description' => "Best way possible leads can reach out. Home for articles and resources we can provide client.",
+                'budget_percentage'=> 50,
+                'status_completion' => 'PENDING',
+                'status_invoice' => null,
+                'datetime_started' => Carbon::create(2023, 9, 1, 14, 30, 0),
+            ],
+            [
+                'project_id' => 1,
+                'position' => 1,
+                'name' => 'Digital Marketing Strategy and Setup',
+                'description' => "Research. Marketing Plan. Corporate versus Personal Branding. Setup and Implementation.",
+                'budget_percentage'=> 25,
+                'status_completion' => 'PENDING',
+                'status_invoice' => null,
+                'datetime_started' => null
+            ],
             
         ]);
     }

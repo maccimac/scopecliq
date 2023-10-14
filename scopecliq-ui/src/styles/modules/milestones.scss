@@ -17,6 +17,16 @@
         box-shadow: $sq-outter-shadow;
     }
 
+    &:hover{
+        .sq-btn-add{
+            opacity: 1;
+        }
+    }
+
+    .sq-client-el{
+        display: none;
+    }
+
     .image{
         background-position: center;
        background-size: cover;

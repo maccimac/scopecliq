@@ -39,6 +39,7 @@ export const ProjectBlueprint = ({isConsultant, project}) => {
                  fee={m.budget_percentage}
                  milestoneId={m.id} 
                  projectId={m.project_id}
+                 isConsultant={isConsultant}
                  />
              ))}
             {/* <Milestone

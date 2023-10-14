@@ -23,7 +23,7 @@ const ConsultantDashboard = () => {
 
     return(
         <div class="sq-outter-frame">
-            {project && <DashboardLayout project={project}/>}
+            {project && <DashboardLayout project={project} isConsultant={true}/>}
             
         </div>
     )

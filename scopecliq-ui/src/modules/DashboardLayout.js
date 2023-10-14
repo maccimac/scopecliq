@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import NavBar from '../components/NavBar';
 import Sidebar from './Sidebar';
 import ProjectBlueprint from '../components/ProjectBlueprint';
-const DashboardLayout = ({project, isConsultant=true}) => {
+const DashboardLayout = ({project, isConsultant}) => {
     // const api = global.config.API
     console.log(project)
     return(
@@ -12,7 +12,7 @@ const DashboardLayout = ({project, isConsultant=true}) => {
                 <NavBar/>
                 <div class="sq-content h-100 ">
 
-                    <ProjectBlueprint project={project}/>
+                    <ProjectBlueprint project={project} isConsultant={isConsultant}/>
                 {/* {children ? (children) : (
                     (project && <ProjectBlueprint
                         project={project}

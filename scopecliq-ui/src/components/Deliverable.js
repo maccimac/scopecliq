@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 
 export const Deliverable = ({
-    deliverableId, status="COMPLETE", isConsultant=true,  
+    deliverableId, status="COMPLETE", isConsultant,  
     description, image, position,
     milestoneId,
     isNew=false, 
@@ -15,6 +15,8 @@ export const Deliverable = ({
     const [statusModel, setStatusModel]  = useState(status);
     const [descriptionModel, setDescriptionModel]  = useState(description);
     const [descriptionModelEdit, setDescriptionModelEdit]  = useState(description);
+
+    const clientClassName = " " // isConsultant ? null: "sq-client-el"
 
     const statusClassNames = {
         COMPLETE: {
@@ -107,7 +109,7 @@ export const Deliverable = ({
     return(
         <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'}>
             <div className='d-flex w-100'>
-                <div className='status' onClick={toggleComplete}>
+                <div className={'status ' + clientClassName} onClick={toggleComplete}>
                     <i className={statusIcon + ' fa-regular fa-md m-1 sq-btn-icon'}></i>
                 </div>
                 
