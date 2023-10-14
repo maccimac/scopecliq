@@ -6,16 +6,19 @@ import placeholder1 from '../assets/img/placeholder-1.png'
 import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
 import BtnAdd from './BtnAdd';
+import { useDispatch, useSelector} from 'react-redux';
+import { isClient } from '../store/user-store';
 
 
 export const Milestone = ({isConsultant=true, milestoneId=1, position, title, description, image, fee}) => {
     const api = global.config.API;
+    const clientMode = useSelector(isClient);
+
     const [milestoneStatus, setMilestoneStatus] = useState('complete')
     const [deliverables, setDeliverables] = useState([])
 
     const fetchDeliverableByMilestone = async() =>{
         const res = await axios.get(api+ '/deliverables/milestone/' + milestoneId)
-        console.log(res.data)
         setDeliverables(res.data)
         updateMileStoneStatus(res.data)
     }
@@ -49,7 +52,6 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
         setDeliverables([])
         let deliverabesCopy = [...deliverables];
         deliverabesCopy.splice(index+1, 0, newDeliverable)
-        // console.log(deliverabesCopy)
         setTimeout(()=>{
             setDeliverables([...deliverabesCopy])
         }, 0)
@@ -58,7 +60,6 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
         setDeliverables([])
         let deliverabesCopy = [...deliverables];
         deliverabesCopy.splice(index, 1)
-        // console.log(deliverabesCopy)
         setTimeout(()=>{
             setDeliverables([...deliverabesCopy])
         }, 0)
@@ -66,7 +67,6 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
     const saveAllPositions =  () =>{
         deliverables.map( async (d,i) =>{
             const res = await axios.post(api + `/deliverables/update/${d.id}/position/${i}`)
-            console.log(res)
         })
     }
 
@@ -75,7 +75,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
     }, [])
 
     return(
-        <div class={`sq-milestone--${milestoneStatus} sq-milestone col-1 col-sm-4 col-lg-3 rounded bg-sq-lightest my-2 p-4 mx-2`}>
+        <div class={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'}  sq-milestone col-1 col-sm-4 col-lg-3 rounded bg-sq-lightest my-2 p-4 mx-2`}>
             <div class="sub mb-2 milestone-status">
                 {milestoneStatus}
             </div>
@@ -126,7 +126,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                             }}
  
                         />
-                        <BtnAdd cb={()=>{addNewDeliverable(i)}}/>
+                        {!clientMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }
                     </div>
                 ))}
                 {/* <Deliverable

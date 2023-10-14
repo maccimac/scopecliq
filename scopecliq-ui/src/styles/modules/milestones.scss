@@ -17,15 +17,22 @@
         box-shadow: $sq-outter-shadow;
     }
 
+    &.sq-milestone--client-mode{
+        .sq-client--curser-def{
+            cursor: default;
+        }
+        .sq-client--hide{
+            display: none;
+        }
+    }
+
     &:hover{
         .sq-btn-add{
             opacity: 1;
         }
     }
 
-    .sq-client-el{
-        display: none;
-    }
+   
 
     .image{
         background-position: center;

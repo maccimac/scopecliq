@@ -9,7 +9,6 @@ const ConsultantDashboard = () => {
 
     const fetchProjectById = async() =>{
         const res = await axios.get(api+ '/projects/' + projId)
-        console.log(res)
         set_project(res.data)
         // setDeliverables(res.data)
         // updateMileStoneStatus(res.data)

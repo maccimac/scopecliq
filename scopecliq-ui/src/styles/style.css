@@ -607,11 +607,14 @@ p.description {
 .sq-milestone.sq-milestone--started .milestone-status {
   color: #5B79FC;
 }
+.sq-milestone.sq-milestone--client-mode .sq-client--curser-def {
+  cursor: default;
+}
+.sq-milestone.sq-milestone--client-mode .sq-client--hide {
+  display: none;
+}
 .sq-milestone:hover .sq-btn-add {
   opacity: 1;
-}
-.sq-milestone .sq-client-el {
-  display: none;
 }
 .sq-milestone .image {
   background-position: center;

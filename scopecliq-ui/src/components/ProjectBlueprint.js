@@ -12,7 +12,6 @@ export const ProjectBlueprint = ({isConsultant, project}) => {
 
     const getMilestones = async(projectId) => {
         const res = await axios.get(api+  '/milestones/project/'+ projectId )
-        console.log('ms', res)
         set_milestones(res.data)
     }
 
@@ -21,7 +20,6 @@ export const ProjectBlueprint = ({isConsultant, project}) => {
     // }, [])
 
     useEffect(()=>{
-        console.log({project})
         if(project){
             getMilestones(project.id)    
         }

@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector} from 'react-redux';
+import { isClient} from '../store/user-store';
 
 export const Deliverable = ({
     deliverableId, status="COMPLETE", isConsultant,  
@@ -8,20 +10,20 @@ export const Deliverable = ({
     isNew=false, 
     cancelNewDeliverable, saveAllPositions, updateMilestoneStatus
 } ) => {
-
     const api = global.config.API;
+    const clientMode = useSelector(isClient);
+
+
     const [editMode, setEditMode]  = useState(isNew);
     const [newMode, setnNewMode]  = useState(isNew);
     const [statusModel, setStatusModel]  = useState(status);
     const [descriptionModel, setDescriptionModel]  = useState(description);
     const [descriptionModelEdit, setDescriptionModelEdit]  = useState(description);
 
-    const clientClassName = " " // isConsultant ? null: "sq-client-el"
-
     const statusClassNames = {
         COMPLETE: {
             outterClass: " sq-deliverable--complete bg-sq-lightest ",
-            icon: "fa-circle-check color-sq-green"
+            icon: "fa-circle-check color-sq-green "
         },
         INCOMPLETE: {
             outterClass: " sq-deliverable--incomplete bg-sq-lav-light border-sq-lav ",
@@ -37,6 +39,7 @@ export const Deliverable = ({
     const [statusIcon, setStatusIcon]  = useState(null)
 
     const toggleComplete = async () => {
+        if (clientMode) return;
         const status = (statusModel == 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
         const res = await axios.post(api + `/deliverables/update/${deliverableId}/status/${status}`)
         if(res.status == 200){
@@ -47,6 +50,7 @@ export const Deliverable = ({
     } 
 
     const enableEdit = () => {
+        // console.log(modeClient)
         setEditMode(true);
         setClassNameState(statusClassNames[statusModel].outterClass + ( ' sq-deliverable--edit '));
     } 
@@ -65,7 +69,6 @@ export const Deliverable = ({
               "Content-Type": "application/json",
             },
         });
-        console.log(res)
         if(res.status==200){
             setDescriptionModel(descriptionModelEdit)
         }
@@ -83,7 +86,6 @@ export const Deliverable = ({
               "Content-Type": "application/json",
             },
         });
-        console.log(res)
         setnNewMode(false)
         setEditMode(false)
         setDescriptionModel(descriptionModelEdit)
@@ -109,8 +111,8 @@ export const Deliverable = ({
     return(
         <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'}>
             <div className='d-flex w-100'>
-                <div className={'status ' + clientClassName} onClick={toggleComplete}>
-                    <i className={statusIcon + ' fa-regular fa-md m-1 sq-btn-icon'}></i>
+                <div className={'status '} onClick={toggleComplete}>
+                    <i className={statusIcon + ' fa-regular fa-md m-1 sq-btn-icon sq-client--curser-def' }></i>
                 </div>
                 
                 <div className="ms-1 flex-fill">
@@ -129,8 +131,8 @@ export const Deliverable = ({
                     newMode 
                     ?(
                         <div className='d-flex mt-1 new-deliverable'>
-                            <i onClick={(e)=>{saveNewDeliverable(e.target.value)}} className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs"></i>
-                            <i onClick={cancelNewDeliverable} className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs"></i>
+                            <i onClick={(e)=>{saveNewDeliverable(e.target.value)}} className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs "></i>
+                            <i onClick={cancelNewDeliverable} className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs "></i>
                         </div>                  
                     )
                     :(
@@ -143,7 +145,7 @@ export const Deliverable = ({
                         )
                         :(
                             <div className='d-flex mt-1'>
-                                <i className="fa-solid sq-btn-icon fa-pen-to-square color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
+                                <i className="fa-solid sq-btn-icon fa-pen-to-square color-sq-gold m-1 fa-xs sq-client--hide" onClick={enableEdit}></i>
                                 <i className="fa-solid sq-btn-icon fa-bars color-sq-light m-1 fa-xs"></i>
                             </div>
                         )

@@ -5,7 +5,7 @@ import Sidebar from './Sidebar';
 import ProjectBlueprint from '../components/ProjectBlueprint';
 const DashboardLayout = ({project, isConsultant}) => {
     // const api = global.config.API
-    console.log(project)
+
     return(
         <div class="sq-dashboard-portal">
             <div class="sq-body">
