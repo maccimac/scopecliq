@@ -6,20 +6,27 @@ import placeholder1 from '../assets/img/placeholder-1.png'
 import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
 
-export const ProjectBlueprint = (isConsultant=true, projectId=2) => {
+export const ProjectBlueprint = ({isConsultant, project}) => {
     const api = global.config.API
     const [milestones, set_milestones] = useState([])
 
-
-    const getMilestones = async() => {
-        const res = await axios.get(api+  '/milestones/project/'+2)
-        console.log(res.data)
+    const getMilestones = async(projectId) => {
+        const res = await axios.get(api+  '/milestones/project/'+ projectId )
+        console.log('ms', res)
         set_milestones(res.data)
     }
 
+    // useEffect(()=>{
+    //     getMilestones()
+    // }, [])
+
     useEffect(()=>{
-        getMilestones()
-    }, [])
+        console.log({project})
+        if(project){
+            getMilestones(project.id)    
+        }
+        
+    }, [project])
 
 
     return(

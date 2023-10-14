@@ -16,7 +16,7 @@ class ProjectsController extends Controller
         return $projects;
     }
 
-    public function fetchProjectById($project_id){
+    public function fetchById($project_id){
         $project = DB::table('projects')
             -> select('*')
             -> where('id', $project_id)

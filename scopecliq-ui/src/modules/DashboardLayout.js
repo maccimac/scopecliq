@@ -3,15 +3,21 @@ import { useState, useEffect } from "react";
 import NavBar from '../components/NavBar';
 import Sidebar from './Sidebar';
 import ProjectBlueprint from '../components/ProjectBlueprint';
-const DashboardLayout = ({children, consultant=true}) => {
+const DashboardLayout = ({project, isConsultant=true}) => {
     // const api = global.config.API
+    console.log(project)
     return(
         <div class="sq-dashboard-portal">
             <div class="sq-body">
                 <NavBar/>
-                {children}
                 <div class="sq-content h-100 ">
-                    {children ? (children) : (<ProjectBlueprint/>) }
+
+                    <ProjectBlueprint project={project}/>
+                {/* {children ? (children) : (
+                    (project && <ProjectBlueprint
+                        project={project}
+                    />
+                    )) } */}
                     
                 </div>
             </div>

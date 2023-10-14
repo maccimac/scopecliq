@@ -21,7 +21,7 @@ class ProjectsTableSeeder extends Seeder
                 'budget' => 88000,
                 'status' => 'pending',
                 'portal_domain' => 'waveko',
-                'portal_password' => 'aurella'
+                'portal_password' => 'beach'
             ],
             [
                 'client_id' => 2,

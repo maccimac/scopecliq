@@ -8,25 +8,14 @@ const ClientPortal = () => {
     const api = global.config.API
     const { domain } = useParams();
     const [project, set_project] = useState(null)
-    const [ passwordValid, set_passswordValid] = useState(false)
-
-    const projId = 2;
+    const [ passwordValid, set_passswordValid] = useState(true)
 
     const fetchProjectByDomain = async() =>{
         const res = await axios.get(api+ '/projects/portal/' + domain)
-        console.log(res)
+        console.log('proj', res.data)
         set_project(res.data)
         // setDeliverables(res.data)
         // updateMileStoneStatus(res.data)
-    }
-
-    const verifyPassword = async(string) =>{
-        if( !project || !string || !string.length) return;
-        if(string == project.portal_password){
-            set_passswordValid(true)
-        }
-        
-
     }
 
 
@@ -36,16 +25,16 @@ const ClientPortal = () => {
 
     return(
         <div className="sq-outter-frame">
-            {/* <DashboardLayout> */}
-            {/* { domain } */}
             
                 {passwordValid ?
-                (<DashboardLayout/>) : (<PortalLogin
+                (<DashboardLayout
+                    isConsultant={false}
                     project={project}
-                    verifyPassword={verifyPassword} 
+                />) : (<PortalLogin
+                    project={project}
+                    set_passswordValid={set_passswordValid}
                 />)}
                 
-            {/* </DashboardLayout> */}
         </div>
     )
 }
