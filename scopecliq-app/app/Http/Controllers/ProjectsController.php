@@ -20,8 +20,16 @@ class ProjectsController extends Controller
         $project = DB::table('projects')
             -> select('*')
             -> where('id', $project_id)
-            -> get();
+            -> first();
         return $project;
+    }
+
+    public function fetchByPortal($portal){
+        $projects = DB::table('projects')
+            -> select('*')
+            -> where('portal_domain', $portal)
+            -> first();
+        return $projects;
     }
 
     public function fetchProjectsByClient($client_id){
@@ -31,6 +39,9 @@ class ProjectsController extends Controller
             -> get();
         return $projects;
     }
+
+    
+
 
     public function fetchProjectsByConsultant($consultant_id){
 

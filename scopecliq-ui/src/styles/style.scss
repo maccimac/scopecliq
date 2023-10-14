@@ -20,14 +20,16 @@
 // @import './modules/login.scss';
 // @import './modules/map.scss';
 
-body{
+*{
     font-family: 'DM Sans', sans-serif;
+}
+body{
     line-height: 1.4;
     color: $sq-med;
     background-color:$sq-lightest;
     transition: all  0.4s ease;
-
 }
+
 
 .find-me{
     outline: 2px solid hotpink;

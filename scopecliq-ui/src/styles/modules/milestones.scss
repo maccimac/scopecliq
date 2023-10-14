@@ -67,15 +67,16 @@
                 display: none;
             }
             .description-edit{
-                font-size: 12px;
+                @extend .sq-textarea;
+                // font-size: 12px;
                 outline: none;
                 border: none;
                 width: 100%;
-                color: $sq-med;
+                // color: $sq-med;
                 margin: 0;
                 padding: 0;
                 background-color: transparent;
-                resize: none;
+                // resize: none;
                 overflow: hidden;
             }
         }

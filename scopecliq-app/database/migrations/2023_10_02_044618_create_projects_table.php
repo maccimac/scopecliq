@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('about');
             $table->decimal('budget');
             $table->string('status');
-            $table->string('portal_subdomain');
+            $table->string('portal_domain');
             $table->string('portal_password');
 
             $table->timestamps();

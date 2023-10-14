@@ -8,12 +8,13 @@ import placeholder3 from '../assets/img/placeholder-3.png'
 
 export const ProjectBlueprint = (isConsultant=true, projectId=2) => {
     const api = global.config.API
-    const [milestones, setMilestones] = useState([])
+    const [milestones, set_milestones] = useState([])
+
 
     const getMilestones = async() => {
         const res = await axios.get(api+  '/milestones/project/'+2)
         console.log(res.data)
-        setMilestones(res.data)
+        set_milestones(res.data)
     }
 
     useEffect(()=>{

@@ -20,7 +20,7 @@ class ProjectsTableSeeder extends Seeder
                 'about' => 'Design and build of resort villa',
                 'budget' => 88000,
                 'status' => 'pending',
-                'portal_subdomain' => 'waveko',
+                'portal_domain' => 'waveko',
                 'portal_password' => 'aurella'
             ],
             [
@@ -29,7 +29,7 @@ class ProjectsTableSeeder extends Seeder
                 'about' => 'Markekting package. Farm to table artisinal easy dining',
                 'budget' => 40600,
                 'status' => 'started',
-                'portal_subdomain' => 'siesta',
+                'portal_domain' => 'siesta',
                 'portal_password' => 'pizza'
             ],
             [
@@ -38,7 +38,7 @@ class ProjectsTableSeeder extends Seeder
                 'about' => 'Markating package. Local leathered goods',
                 'budget' => 8000,
                 'status' => 'pending',
-                'portal_subdomain' => 'lettered-leather',
+                'portal_domain' => 'lettered-leather',
                 'portal_password' => 'luna'
             ],
         ]);

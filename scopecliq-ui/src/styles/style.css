@@ -545,6 +545,34 @@ p.description {
   color: #fff;
 }
 
+.sq-btn, .sq-btn--green {
+  outline: 0;
+  border: 0;
+  height: 36px;
+  background-color: #5B79FC;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.sq-btn--green {
+  background-color: #27D39F;
+}
+
+.sq-textarea, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-input {
+  font-size: 12px;
+  outline: #CCCCCC;
+  border: none;
+  color: #777;
+  margin: 0;
+  padding: 8px;
+  resize: none;
+  overflow: hidden;
+}
+
 .sq-dashboard-portal .sq-navigation {
   position: fixed;
   width: 100%;
@@ -627,23 +655,23 @@ p.description {
   display: none;
 }
 .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit {
-  font-size: 12px;
   outline: none;
   border: none;
   width: 100%;
-  color: #777;
   margin: 0;
   padding: 0;
   background-color: transparent;
-  resize: none;
   overflow: hidden;
 }
 .sq-milestone .sq-deliverable .sq-btn-icon {
   cursor: pointer;
 }
 
-body {
+* {
   font-family: "DM Sans", sans-serif;
+}
+
+body {
   line-height: 1.4;
   color: #777;
   background-color: #F9F9F9;
