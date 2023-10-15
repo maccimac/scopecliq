@@ -125,6 +125,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                             updateMilestoneStatus={()=>{
                                 updateMileStoneStatus(deliverables)
                             }}
+                            fetchDeliverableByMilestone={fetchDeliverableByMilestone}
  
                         />
                         {!clientMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }

@@ -8,7 +8,8 @@ export const Deliverable = ({
     description, image, position,
     milestoneId,
     isNew=false, 
-    cancelNewDeliverable, saveAllPositions, updateMilestoneStatus
+    cancelNewDeliverable, saveAllPositions, updateMilestoneStatus,
+    fetchDeliverableByMilestone
 } ) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
@@ -92,6 +93,7 @@ export const Deliverable = ({
         finishEdit()
         saveAllPositions()
         updateMilestoneStatus()
+        fetchDeliverableByMilestone()
 
     }
 
@@ -146,7 +148,7 @@ export const Deliverable = ({
                         :(
                             <div className='d-flex mt-1 sq-client--hide'>
                                 <i className="fa-solid sq-btn-icon fa-pen-to-square color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
-                                <i className="fa-solid sq-btn-icon fa-bars color-sq-light m-1 fa-xs"></i>
+                                <i className="fa-solid sq-btn-icon fa-ellipsis-vertical color-sq-light m-1 fa-xs"></i>
                             </div>
                         )
 

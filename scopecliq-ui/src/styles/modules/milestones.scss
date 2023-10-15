@@ -2,6 +2,14 @@
     background-color: #f4f4f4;
     border: 1px solid $sq-lighter;
 
+    &:hover{
+        .sq-btn-add{
+            opacity: 0.33;
+            transition-duration: 1s;
+            transition-delay: 0.75s;
+        }
+    }
+
     &.sq-milestone--complete{
         .milestone-status{
             color: $sq-green;
@@ -26,11 +34,6 @@
         }
     }
 
-    &:hover{
-        .sq-btn-add{
-            opacity: 1;
-        }
-    }
 
    
 
@@ -44,9 +47,27 @@
             min-height: 120px;
         }
     }
+
+    .deliverable-set{
+        &:hover{
+            .sq-btn-add{
+                transition-delay: 0s !important ;
+                transition-duration: 0.3s;
+                opacity: 1;
+            }
+        }
+    }
+
+    .sq-btn-add:hover{
+        transition-delay: 0s !important ;
+        transition-duration: 0.3s;
+        opacity: 1;
+    }
     .sq-deliverable{
         z-index: 1;
         border: 1px solid transparent;
+
+    
         &.sq-deliverable--complete{
             p.description{
                 color: $sq-med-light;
@@ -76,7 +97,6 @@
                   }
             }
             
-
             animation: editing 2s ease infinite;
 
 
@@ -97,6 +117,7 @@
                 overflow: hidden;
             }
         }
+
 
         .sq-btn-icon{
             cursor: pointer;
