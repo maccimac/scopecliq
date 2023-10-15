@@ -27,8 +27,6 @@ const ClientPortal = () => {
     const fetchProjectByDomain = async() =>{
         const res = await axios.get(api+ '/projects/portal/' + domain)
         set_project(res.data)
-        // setDeliverables(res.data)
-        // updateMileStoneStatus(res.data)
     }
 
 

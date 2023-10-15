@@ -107,6 +107,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                 <span class="label">Deliverables: </span>
             </div>
             <div className='deliverables-list'>
+            {!clientMode && <BtnAdd cb={()=>{addNewDeliverable(-1)}}/> }
                 { deliverables.map( (d,i)=>(
                     <div class="deliverable-set" key={i}>
                         <Deliverable

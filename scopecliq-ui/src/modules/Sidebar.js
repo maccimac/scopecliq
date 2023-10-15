@@ -36,9 +36,9 @@ const Sidebar = () => {
                     ></button> */}
                 </div>
                 <div class="offcanvas-body">
-                    <div>
-                    I will not close if you click outside of me.
-                    </div>
+                    <h2>
+                        Notifications
+                    </h2>
                 </div>
                 </div>
   

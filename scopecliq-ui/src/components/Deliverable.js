@@ -144,8 +144,8 @@ export const Deliverable = ({
                             </div>
                         )
                         :(
-                            <div className='d-flex mt-1'>
-                                <i className="fa-solid sq-btn-icon fa-pen-to-square color-sq-gold m-1 fa-xs sq-client--hide" onClick={enableEdit}></i>
+                            <div className='d-flex mt-1 sq-client--hide'>
+                                <i className="fa-solid sq-btn-icon fa-pen-to-square color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
                                 <i className="fa-solid sq-btn-icon fa-bars color-sq-light m-1 fa-xs"></i>
                             </div>
                         )

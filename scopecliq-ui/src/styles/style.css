@@ -611,7 +611,7 @@ p.description {
   cursor: default;
 }
 .sq-milestone.sq-milestone--client-mode .sq-client--hide {
-  display: none;
+  display: none !important;
 }
 .sq-milestone:hover .sq-btn-add {
   opacity: 1;

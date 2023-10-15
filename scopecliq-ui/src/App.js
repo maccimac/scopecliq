@@ -16,8 +16,8 @@ const App = () => {
   return (
     <div className="scopecliq">
       <Routes>
-        <Route path="/" element={<ConsultantDashboard/>}/>
-        <Route path="/project/:domain" element={<ClientPortal/>}/>
+        <Route path="/dashboard/:projectId" element={<ConsultantDashboard/>}/>
+        <Route path="/portal/:domain" element={<ClientPortal/>}/>
       </Routes>
       
       {/* <Home/> */}
