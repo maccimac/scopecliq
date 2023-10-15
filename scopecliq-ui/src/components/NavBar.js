@@ -9,7 +9,7 @@ export const NavBar = () => {
     const clientMode = useSelector(isClient);
 
     return(
-        <div class="sq-navigation p-3 bg-sq-white">
+        <div class={`sq-navigation p-3  ${clientMode ? 'bg-sq-white' : 'bg-sq-lav-dark'}`}>
             <div class="d-flex flex-column col-lg-2 col-sm-4 col-6">
                 <img src={logo} class="w-auto mb-1"></img >
                 <span className={

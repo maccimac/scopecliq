@@ -55,7 +55,7 @@ const Sidebar = ({project}) => {
 
     return(
         <div className="sq-sidebar">
-            <div className="sq-btn btn-menu m-3" onClick={toggleOffcanvas}>
+            <div className="sq-btn btn-menu mt-4 me-3 bg-sq-green" onClick={toggleOffcanvas}>
                 <i className="fa-solid fa-bars"></i>
             </div>
             <div className={'offcanvas offcanvas-end ' + ( showOffcanvas ? 'show' : '')} data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel"
