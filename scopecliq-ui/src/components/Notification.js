@@ -4,7 +4,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 
 
-export const Notification =()=>{
+export const Notification =({_notification})=>{
 
     const api = global.config.API;
     const clientMode = useSelector(isClient);
@@ -12,39 +12,8 @@ export const Notification =()=>{
     const [attachmentType, set_attachmentType] = useState("deliverable")
     const [title, set_title] = useState("")
     const [body, set_body] = useState("")
-    const notifDeliverableComplete = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  3,
-        deliverable_id:  7,
-        type:  'STATUS_UPDATE',
-        status:  'COMPLETE',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
-    }
-
-    const notifInvoiceSent = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  null,
-        deliverable_id:  null,
-        type:  'INVOICE',
-        status:  'SENT',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
-    }
-    const notifItemChanged = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  null,
-        deliverable_id:  null,
-        type:  'CHANGE',
-        status:  'MADE',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
-    }
     
-    const [notification, set_notification] = useState(notifItemChanged)
+    const [notification, set_notification] = useState(_notification)
 
     const titleOpts = {
         'STATUS_UPDATE' : {

@@ -5,11 +5,45 @@ import { isClient} from '../store/user-store';
 
 import Notification from '../components/Notification';
 
-const Sidebar = () => {
+const Sidebar = ({project}) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
-
     const [showOffcanvas, setShowOffcanvas] = useState(false); // Set the initial state to true to show the Offcanvas
+
+    const notifDeliverableComplete = {
+        id: 1,
+        project_id:  2,
+        milestone_id:  3,
+        deliverable_id:  7,
+        type:  'STATUS_UPDATE',
+        status:  'COMPLETE',
+        description:  'Market, competition, and demography research',
+        additional_message:  'This is done, thanks for your help.',  
+    }
+
+    const notifInvoiceSent = {
+        id: 1,
+        project_id:  2,
+        milestone_id:  null,
+        deliverable_id:  null,
+        type:  'INVOICE',
+        status:  'SENT',
+        description:  'Market, competition, and demography research',
+        additional_message:  'This is done, thanks for your help.',  
+    }
+    const notifItemChanged = {
+        id: 1,
+        project_id:  2,
+        milestone_id:  null,
+        deliverable_id:  null,
+        type:  'CHANGE',
+        status:  'MADE',
+        description:  'Market, competition, and demography research',
+        additional_message:  'This is done, thanks for your help.',  
+    }
+
+
+    const [notifications, set_notifications] = useState([notifInvoiceSent, notifItemChanged, notifDeliverableComplete])
 
   const toggleOffcanvas = () => {
     setShowOffcanvas(!showOffcanvas);
@@ -45,7 +79,16 @@ const Sidebar = () => {
                             Notifications
                         </h2>
                         <div className='notification-list'>
-                            <Notification/>
+                            {
+                                notifications?.length 
+                                ?(
+                                    notifications.map((n,i)=>(
+                                        <Notification key="i" _notification={n}/>
+                                    ))
+                                ): "No new notifications"
+
+                            }
+                          
 
                         </div>
                     </div>
