@@ -15,7 +15,7 @@ $color-variables: (
   sq-lav-light-bright: $sq-lav-light-bright,
   sq-lav-mid: $sq-lav-mid,
   sq-green-light: $sq-green-light,
-  sq-greeen-mid: $sq-greeen-mid,
+  sq-green-mid: $sq-greeen-mid,
   sq-tomato: $sq-tomato,
   sq-tomato-light: $sq-tomato-light,
   sq-tomato-lightest: $sq-tomato-lightest,
@@ -29,14 +29,15 @@ $color-variables: (
 
 @each $variable-name, $color-value in $color-variables {
   .bg-#{$variable-name} {
-    background-color: $color-value;
+    background-color: $color-value !important;
   }
 
   .border-#{$variable-name} {
     border: 1px solid $color-value;
   }
 
-  .color-#{$variable-name} {
+  // .color-#{$variable-name}, 
+  .text-color-#{$variable-name} {
     color: $color-value !important;
   }
 }

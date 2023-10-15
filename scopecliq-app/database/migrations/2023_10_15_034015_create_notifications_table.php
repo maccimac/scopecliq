@@ -18,9 +18,9 @@ return new class extends Migration
             $table->integer('deliverable_id');
             $table->string('type'); 
                 /***
-                 * COMPLETION,
+                 * STATUS_UPDATE,
                  * CHANGE,
-                 *      CHANGE_APPROVED, CHANGE_DELIVERABLE_DENIED
+                 *      CHANGE_MADE, CHANGE_APPROVED, CHANGE_DELIVERABLE_DENIED
                  * INVOICE_SENT
                  * INVOICE_PAID,
                 ***/

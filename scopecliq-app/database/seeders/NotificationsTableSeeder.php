@@ -19,7 +19,7 @@ class NotificationsTableSeeder extends Seeder
             // $table->integer('deliverable_id');
             // $table->text('type'); 
             //     /***
-            //      * STATUS_CHANGE : COMPLETE, INCOMPLETE, CANCEL,
+            //      * STATUS_UPDATE : COMPLETE, INCOMPLETE, CANCEL,
             //      * ITEM_CHANGE : SENT, APPROVED, REJECTED,
             //      * INVOICE: SENT, PAID, VOID
             //     ***/
@@ -29,7 +29,7 @@ class NotificationsTableSeeder extends Seeder
                 'project_id' => 2,
                 'milestone_id' => 3,
                 'deliverable_id' => 7,
-                'type' => 'STATUS_CHANGE',
+                'type' => 'STATUS_UPDATE',
                 'status' => 'COMPLETE',
                 'description' => 'Market, competition, and demography research',
                 'additional_message' => 'This is done, thanks for your help.',  

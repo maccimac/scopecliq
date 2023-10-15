@@ -36,8 +36,8 @@ const PortalLogin = ({set_passswordValid, project}) => {
                 <input className="sq-textarea mb-2 me-2" type="password" value={passwordModel} onChange={e => {
                     set_passwordModel(e.target.value)
                 }}placeholder='Password'/>
-                <button className='sq-btn' onClick={submit}>Enter</button>
-                <dov className='color-sq-tomato font-size-10'>{passwordStatus}</dov>
+                <button className='sq-btn ' onClick={submit}>Enter</button>
+                <dov className='text-color-sq-tomato font-size-10'>{passwordStatus}</dov>
             </div>
 
         </div>

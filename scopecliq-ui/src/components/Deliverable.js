@@ -24,15 +24,15 @@ export const Deliverable = ({
     const statusClassNames = {
         COMPLETE: {
             outterClass: " sq-deliverable--complete bg-sq-lightest ",
-            icon: "fa-circle-check color-sq-green "
+            icon: "fa-circle-check text-color-sq-green "
         },
         INCOMPLETE: {
             outterClass: " sq-deliverable--incomplete bg-sq-lav-light border-sq-lav ",
-            icon: "fa-circle color-sq-lav"
+            icon: "fa-circle text-color-sq-lav"
         },
         CANCELLED: {
             outterClass: " sq-deliverable--cancelled bg-sq-light ",
-            icon: "fa-circle-xmark color-sq-med"
+            icon: "fa-circle-xmark text-color-sq-med"
         },
     }
     
@@ -133,22 +133,22 @@ export const Deliverable = ({
                     newMode 
                     ?(
                         <div className='d-flex mt-1 new-deliverable'>
-                            <i onClick={(e)=>{saveNewDeliverable(e.target.value)}} className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs "></i>
-                            <i onClick={cancelNewDeliverable} className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs "></i>
+                            <i onClick={(e)=>{saveNewDeliverable(e.target.value)}} className="fa-solid sq-btn-icon fa-save text-color-sq-green m-1 fa-xs "></i>
+                            <i onClick={cancelNewDeliverable} className="fa-solid sq-btn-icon fa-cancel text-color-sq-tomato-light m-1 fa-xs "></i>
                         </div>                  
                     )
                     :(
                         editMode
                         ?(
                             <div className='d-flex mt-1'>
-                                <i onClick={(e)=>{updateDescription(e.target.value)}} className="fa-solid sq-btn-icon fa-save color-sq-green m-1 fa-xs"></i>
-                                <i onClick={finishEdit} className="fa-solid sq-btn-icon fa-cancel color-sq-tomato-light m-1 fa-xs"></i>
+                                <i onClick={(e)=>{updateDescription(e.target.value)}} className="fa-solid sq-btn-icon fa-save text-color-sq-green m-1 fa-xs"></i>
+                                <i onClick={finishEdit} className="fa-solid sq-btn-icon fa-cancel text-color-sq-tomato-light m-1 fa-xs"></i>
                             </div>
                         )
                         :(
                             <div className='d-flex mt-1 sq-client--hide'>
-                                <i className="fa-solid sq-btn-icon fa-pen-to-square color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
-                                <i className="fa-solid sq-btn-icon fa-ellipsis-vertical color-sq-light m-1 fa-xs"></i>
+                                <i className="fa-solid sq-btn-icon fa-pen-to-square text-color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
+                                <i className="fa-solid sq-btn-icon fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"></i>
                             </div>
                         )
 

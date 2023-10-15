@@ -26,4 +26,12 @@
     // height: 0;
     // width: 100px;
     // height: 100px;
+    z-index: 10;
+    .offcanvas{
+        box-shadow: $sq-big-outter-shadow;
+        border: none;
+        border-left: none;
+
+    }
+
 }
