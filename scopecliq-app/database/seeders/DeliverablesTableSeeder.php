@@ -15,6 +15,8 @@ class DeliverablesTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('deliverables')->insert([
+
+            // SIESTA
             [
                 'project_id' => 2,
                 'milestone_id' => 1,
@@ -110,6 +112,54 @@ class DeliverablesTableSeeder extends Seeder
                 'milestone_id' => 4,
                 'position' => 2,
                 'description' => 'Google analytics setup',
+                'status' => 'INCOMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+
+            // WAVEKO
+
+            [
+                'project_id' => 1,
+                'milestone_id' => 5,
+                'position' => 0,
+                'description' => 'Survey and Planning',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 15, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 16, 6, 30, 0),
+            ],
+            [
+                'project_id' => 1,
+                'milestone_id' => 5,
+                'position' => 1,
+                'description' => 'Approval',
+                'status' => 'INCOMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 15, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 16, 6, 30, 0),
+            ],
+            [
+                'project_id' => 1,
+                'milestone_id' => 5,
+                'position' => 2,
+                'description' => 'Backend',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 15, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 16, 6, 30, 0),
+            ],
+            [
+                'project_id' => 1,
+                'milestone_id' => 6,
+                'position' => 0,
+                'description' => 'Brief',
+                'status' => 'INCOMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 15, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 16, 6, 30, 0),
+            ],
+            [
+                'project_id' => 1,
+                'milestone_id' => 6,
+                'position' => 1,
+                'description' => 'Study Concepts and Logo options',
                 'status' => 'INCOMPLETE',
                 'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
                 'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),

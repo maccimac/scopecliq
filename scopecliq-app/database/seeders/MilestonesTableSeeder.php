@@ -58,6 +58,7 @@ class MilestonesTableSeeder extends Seeder
                 'datetime_started' => null
             ],
 
+            // WAVEKO
             [
                 'project_id' => 1,
                 'position' => 0,
@@ -71,8 +72,19 @@ class MilestonesTableSeeder extends Seeder
             [
                 'project_id' => 1,
                 'position' => 1,
-                'name' => 'Digital Marketing Strategy and Setup',
+                'name' => 'Digital Marketing',
                 'description' => "Research. Marketing Plan. Corporate versus Personal Branding. Setup and Implementation.",
+                'budget_percentage'=> 25,
+                'status_completion' => 'PENDING',
+                'status_invoice' => null,
+                'datetime_started' => null
+            ],
+
+            [
+                'project_id' => 1,
+                'position' => 1,
+                'name' => 'On Field Marketing',
+                'description' => "Distribution of branding on the floor",
                 'budget_percentage'=> 25,
                 'status_completion' => 'PENDING',
                 'status_invoice' => null,
