@@ -74,6 +74,7 @@ Route::prefix('notifications')->group(function () {
 
     Route::get('/{id}', [NotificationsController::class, 'fetchNotificationById']);
     Route::get('/project/{project_id}', [NotificationsController::class, 'fetchNotificationsByProject']);
+    Route::post('/project/{project_id}/add', [NotificationsController::class, 'addNotificationToProject']);
     // Route::get('/milestone/{milestone_id}', [NotificationsController::class, 'fetchNotificationsByMilestone']);
     // Route::post('/update/{id}/status/{status}', [NotificationsController::class, 'updateNotificationStatus']);
     // Route::post('/update/{id}/position/{position}', [NotificationsController::class, 'updateNotificationPosition']);

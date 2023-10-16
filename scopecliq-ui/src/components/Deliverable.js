@@ -4,6 +4,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 
 export const Deliverable = ({
+    deliverable,
     deliverableId, status="COMPLETE", isConsultant,  
     description, image, position,
     milestoneId,
@@ -47,7 +48,24 @@ export const Deliverable = ({
             setStatusModel(status)
             resolveClassStyleByStatus(status)
             updateMilestoneStatus()
-        }      
+        }
+        
+        const payloadNotificaion = {
+            project_id: deliverable.project_id,
+            milesteone_id: deliverable.milesteone_id,
+            deliverable_id: deliverable.id,
+            description: deliverable.description,
+            type: "STATUS_UPDATE",
+            status,
+            extra: null
+        }
+        const res2 = await axios.post(`${api}/notifications/project/${deliverable.project_id}/add`, payloadNotificaion, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+        });
+        console.log(res2)
+
     } 
 
     const enableEdit = () => {

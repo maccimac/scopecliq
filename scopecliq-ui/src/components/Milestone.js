@@ -112,6 +112,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                     <div class="deliverable-set" key={i}>
                         <Deliverable
                             key={i}
+                            deliverable={d}
                             deliverableId={d.id}
                             status={d.status}
                             description={d.description}

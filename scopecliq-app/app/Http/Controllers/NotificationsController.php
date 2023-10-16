@@ -38,7 +38,7 @@ class NotificationsController extends Controller
 
     
     public function addNotificationToProject(Request $req, $project_id){
-        DB::table('notidication')
+        DB::table('notifications')
             ->insert([
             [   'deliverable_id' => $req->deliverable_id,
                 'project_id'=> $project_id,
