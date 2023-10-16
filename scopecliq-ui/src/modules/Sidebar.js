@@ -11,7 +11,7 @@ const Sidebar = () => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
     const aProject= useSelector(storeProject);
-    const [showOffcanvas, setShowOffcanvas] = useState(false); // Set the initial state to true to show the Offcanvas
+    const [showOffcanvas, setShowOffcanvas] = useState(true); // Set the initial state to true to show the Offcanvas
 
     const fetchNotificationsByProject = async() =>{
         const res = await axios.get(api+ '/notifications/project/' + aProject.id)
