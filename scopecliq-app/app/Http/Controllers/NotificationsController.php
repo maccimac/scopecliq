@@ -22,7 +22,7 @@ class NotificationsController extends Controller
         -> select('*')
         -> where('project_id', $project_id)
         -> where('read_at', null)
-        ->orderByDesc('created_at')
+        -> orderByDesc('created_at')
         -> get();
         return $notifications;
     }
@@ -47,6 +47,7 @@ class NotificationsController extends Controller
                 'status'=> $req->status,
                 'description' => $req->description,
                 'extra' => $req->extra,
+                'created_at' => now()
             ],
         ]);
     }

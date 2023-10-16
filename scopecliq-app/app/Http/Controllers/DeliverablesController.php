@@ -93,15 +93,20 @@ class DeliverablesController extends Controller
         ->limit(1)
         ->value('project_id');
 
-        DB::table('deliverables')
+        $newDeliverable = DB::table('deliverables')
             ->insert([
-            [
-                'project_id'=> $projId,
-                'milestone_id' => $milestone_id,
-                'position' => $lastPosition+1 || 0,
-                'status'=> 'INCOMPLETE',
-                'description' => $req->description,
-            ],
-        ]);
+                [
+                    'project_id'=> $projId,
+                    'milestone_id' => $milestone_id,
+                    'position' => $lastPosition+1 || 0,
+                    'status'=> 'INCOMPLETE',
+                    'description' => $req->description,
+                ],
+            ]);
+        $lastInsertId = DB::getPdo()->lastInsertId();
+        $deliverable = DB::table('deliverables')
+            -> where('id', $lastInsertId)
+            -> first();
+        return $deliverable;
     }
 }
