@@ -588,6 +588,9 @@ p.description {
   top: 0;
   left: 0;
 }
+.sq-dashboard-portal .sq-navigation .sq-logo {
+  max-width: 180px;
+}
 .sq-dashboard-portal .sq-body {
   padding-top: 90px;
   min-height: 100vh;
@@ -608,6 +611,20 @@ p.description {
   box-shadow: -12px 0px 12px 0px rgba(86, 92, 121, 0.12);
   border: none;
   border-left: none;
+}
+.sq-sidebar .offcanvas .offcanvas-header {
+  background: transparent;
+  position: absolute;
+  right: 0;
+}
+.sq-sidebar .offcanvas .offcanvas-body::-webkit-scrollbar {
+  transition: 1s all ease;
+  opacity: 0;
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+.sq-sidebar .offcanvas .offcanvas-body::-webkit-scrollbar-thumb {
+  border-right: 0.5rem solid #E5F4F0;
+  background-color: transparent;
 }
 
 .sq-milestone {
@@ -717,6 +734,18 @@ body {
   color: #777;
   background-color: #F9F9F9;
   transition: all 0.4s ease;
+}
+body::-webkit-scrollbar {
+  transition: 1s all ease;
+  opacity: 0;
+  background: transparent; /* Optional: just make scrollbar invisible */
+  height: 0.8rem;
+  width: 0.5rem;
+  border: 1px solid #E7E7E7;
+}
+body::-webkit-scrollbar-thumb {
+  border-top: 1px solid #ddd;
+  background-color: #EEF1FF;
 }
 
 .find-me {

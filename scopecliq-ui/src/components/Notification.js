@@ -22,7 +22,7 @@ export const Notification =({_notification, cb})=>{
     const titleOpts = {
         'STATUS_UPDATE' : {
             COMPLETE: `✅ ${attachmentType} has been completed`,
-            INCOMPLETE: `⚪️ Hmm.  A ${attachmentType} has been marked incompleted`,
+            INCOMPLETE: `⚪️ Hmm.  A ${attachmentType} has been marked incomplete`,
             CANCELLED: `❌  ${attachmentType} cancelled`,
             DELETED: ` 🗑  ${attachmentType} deleted`,
         },
@@ -33,6 +33,7 @@ export const Notification =({_notification, cb})=>{
         },
         'CHANGE':{
             'MADE': `✏️ ${attachmentType} has been changed`,
+            'CREATED': `✨ ${attachmentType} has been added`,
         }
     }
     const resolveTitle = () => {
@@ -60,7 +61,12 @@ export const Notification =({_notification, cb})=>{
         }
     }
     
-    const exit = () => {}
+    const markRead = async () => {
+        const res = await axios.post(`${api}/notifications/read/${notification.id}`)
+        console.log(res)
+        // cb.set_notifications([])
+        cb.fetchNotificationsByProject()
+    }
 
     useEffect(()=>{
         resolveTitle()
@@ -82,7 +88,7 @@ export const Notification =({_notification, cb})=>{
                     ${notification.type == 'CHANGE' && 'text-color-sq-gold-mid' }
             
                `}>{title}</div>
-                    <i class="btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" onClick={exit}></i>
+                    <i class="sq-btn bg-transparent m-0 btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" onClick={markRead}></i>
             </div>
             <div className='notification-body'>
                 <p>This status is for <strong>{notification.description}</strong>.</p>

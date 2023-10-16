@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient, setAsClient, setAsConsultant } from '../store/user-store';
+import { setProject } from '../store/project-store';
 
 
 import  DashboardLayout  from './../modules/DashboardLayout';
@@ -17,6 +18,7 @@ const ConsultantDashboard = () => {
     const fetchProjectById = async() =>{
         const res = await axios.get(api+ '/projects/' + projectId)
         set_project(res.data)
+        dispatch(setProject(res.data))
     }
 
 

@@ -10,12 +10,13 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient } from '../store/user-store';
 
 
-export const Milestone = ({isConsultant=true, milestoneId=1, position, title, description, image, fee}) => {
+export const Milestone = ({ milestone, milestoneId=1, position, title, description, image, fee}) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
 
     const [milestoneStatus, setMilestoneStatus] = useState('complete')
     const [deliverables, setDeliverables] = useState([])
+    const [editMode, set_editMode] = useState(false)
 
     const fetchDeliverableByMilestone = async() =>{
         const res = await axios.get(api+ '/deliverables/milestone/' + milestoneId)
@@ -74,6 +75,11 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
         fetchDeliverableByMilestone()
     }, [])
 
+    useEffect(()=>{
+        const isNewArr = deliverables.map(d => d.is_new);
+        set_editMode(isNewArr.includes(true))
+    }, [deliverables])
+
     return(
         <div class={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'}  sq-milestone col-1 col-sm-4 col-lg-3 rounded my-2 p-4 mx-2`} data-milestone-id={milestoneId}>
             <div class="sub mb-2 milestone-status">
@@ -107,17 +113,17 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                 <span class="label">Deliverables: </span>
             </div>
             <div className='deliverables-list'>
-            {!clientMode && <BtnAdd cb={()=>{addNewDeliverable(-1)}}/> }
+            {!clientMode &&!editMode && <BtnAdd cb={()=>{addNewDeliverable(-1)}}/> }
                 { deliverables.map( (d,i)=>(
                     <div class="deliverable-set" key={i}>
                         <Deliverable
-                            key={i}
+                            key={d.id}
                             deliverable={d}
                             deliverableId={d.id}
                             status={d.status}
                             description={d.description}
                             position={i}
-                            milestoneId={milestoneId}
+                            milestoneId={milestone.id}
                             isNew={d.is_new}
                             cancelNewDeliverable={()=>{
                                 cancelNewDeliverable(i)
@@ -127,25 +133,12 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                                 updateMileStoneStatus(deliverables)
                             }}
                             fetchDeliverableByMilestone={fetchDeliverableByMilestone}
+                            cb={{}}
  
                         />
-                        {!clientMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }
+                        {!clientMode && !editMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }
                     </div>
                 ))}
-                {/* <Deliverable
-                    status="INCOMPLETE"
-                    description="Complete deliverable"
-                />
-                <Deliverable
-                    status="COMPLETE"
-                    description="Complete deliverable. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
-                    image={placeholder2}
-                />
-                 <Deliverable
-                    status="CANCELLED"
-                    description="Complete deliverable. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
-                /> */}
-
             </div>
 
             

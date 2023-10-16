@@ -11,7 +11,7 @@ export const NavBar = () => {
     return(
         <div class={`sq-navigation p-3  ${clientMode ? 'bg-sq-white' : 'bg-sq-lav-dark'}`}>
             <div class="d-flex flex-column col-lg-2 col-sm-4 col-6">
-                <img src={logo} class="w-auto mb-1"></img >
+                <img src={logo} className="sq-logo w-auto mb-1"></img >
                 <span className={
                     `sub
                         ${clientMode ? 'text-color-sq-lav' : 'text-color-sq-green'}

@@ -14,15 +14,9 @@ const Sidebar = () => {
     const [showOffcanvas, setShowOffcanvas] = useState(false); // Set the initial state to true to show the Offcanvas
 
     const fetchNotificationsByProject = async() =>{
-        console.log('proj changes', aProject)
         const res = await axios.get(api+ '/notifications/project/' + aProject.id)
-        console.log(res)
         set_notifications(res.data)
     }
-
-    setTimeout(()=>{
-        console.log(aProject)
-    }, 1500)
 
     const notifDeliverableComplete = {
         id: 1,
@@ -60,6 +54,7 @@ const Sidebar = () => {
     const [notifications, set_notifications] = useState([])
 
   const toggleOffcanvas = () => {
+    fetchNotificationsByProject()
     setShowOffcanvas(!showOffcanvas);
   };
   const hideCanvas = () => {
@@ -76,7 +71,7 @@ const Sidebar = () => {
             <div className="sq-btn btn-menu mt-4 me-3 bg-sq-green" onClick={toggleOffcanvas}>
                 <i className="fa-solid fa-bars"></i>
             </div>
-            <div className={'offcanvas offcanvas-end ' + ( showOffcanvas ? 'show' : '')} data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel"
+            <div className={'offcanvas offcanvas-end ' + ( showOffcanvas ? 'show' : '')} data-bs-backdrop="static" tabIndex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel"
             //  onClick={hideCanvas}
             >
                 <div className="offcanvas-header">
@@ -89,15 +84,27 @@ const Sidebar = () => {
                 </div>
                 <div className="offcanvas-body">
                     <div>
-                        <h2>
-                            Notifications
-                        </h2>
+                        <div className='d-flex justify-content-between mb-4'>
+                            <h2>
+                                Notifications
+                            </h2>
+                            <button
+                                className='sq-btn bg-transparent'
+                                onClick={fetchNotificationsByProject}
+                            >
+                                <i className='fa fa-regular fa-solid fa-sync text-color-sq-gold-mid'/>
+                            </button>
+
+                        </div>
                         <div className='notification-list'>
                             {
                                 notifications?.length 
                                 ?(
                                     notifications.map((n,i)=>(
-                                        <Notification key="i" _notification={n}/>
+                                        <Notification key={n.id} _notification={n} cb={{
+                                            fetchNotificationsByProject,
+                                            set_notifications
+                                        }}/>
                                     ))
                                 ): "No new notifications"
 

@@ -7,14 +7,15 @@ import PortalLogin from '../modules/PortalLogin';
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient, setAsClient, setAsConsultant } from '../store/user-store';
 import { currentUser } from '../store/login-store';
-import { setProject} from '../store/project-store';
+import { storeProject, setProject} from '../store/project-store';
 
 const ClientPortal = () => {
     const api = global.config.API
 
     const dispatch = useDispatch()
-    // const curUser = useSelector(currentUser);
+
     const client = useSelector(isClient);
+    const _project = useSelector(storeProject);
 
 
     const { domain } = useParams();
@@ -24,9 +25,7 @@ const ClientPortal = () => {
 
     const fetchProjectByDomain = async() =>{
         const res = await axios.get(api+ '/projects/portal/' + domain)
-        const proj = res.data
-        console.log(res.data)
-        set_project(proj)
+        set_project(res.data)
         dispatch(setProject(res.data))
     }
 
@@ -41,8 +40,6 @@ const ClientPortal = () => {
             
                 {passwordValid ?
                 (<DashboardLayout
-                    isConsultant={false}
-                    project={project}
                 />) : (<PortalLogin
                     project={project}
                     set_passswordValid={set_passswordValid}
