@@ -83,6 +83,7 @@ export const Deliverable = ({
 
     const enableEdit = () => {
         // console.log(modeClient)
+        if(clientMode) return;
         setEditMode(true);
         setClassNameState(statusClassNames[statusModel].outterClass + ( ' sq-deliverable--edit '));
     } 

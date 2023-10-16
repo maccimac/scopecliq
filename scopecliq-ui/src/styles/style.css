@@ -565,6 +565,11 @@ p.description {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.15s all ease-in;
+}
+.sq-btn:hover, .sq-btn--green:hover {
+  font-size: 13px;
+  scale: 1.15;
 }
 
 .sq-btn--green {
