@@ -36,8 +36,20 @@ class NotificationsController extends Controller
         return $notification;
     }
 
-
-    // markaAsRead
+    
+    public function addNotificationToProject(Request $req, $project_id){
+        DB::table('notidication')
+            ->insert([
+            [   'deliverable_id' => $req->deliverable_id,
+                'project_id'=> $project_id,
+                'milestone_id' => $req->milestone_id,
+                'type'=> $req->type,
+                'status'=> $req->status,
+                'description' => $req->description,
+                'extra' => $req->extra,
+            ],
+        ]);
+    }
     
 
     

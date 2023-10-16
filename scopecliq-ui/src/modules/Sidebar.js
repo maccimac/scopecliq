@@ -13,14 +13,9 @@ const Sidebar = () => {
     const aProject= useSelector(storeProject);
     const [showOffcanvas, setShowOffcanvas] = useState(false); // Set the initial state to true to show the Offcanvas
 
-    // const [notifications, set_notifications]=useState([])
-
-
     const fetchNotificationsByProject = async() =>{
         console.log('proj changes', aProject)
         const res = await axios.get(api+ '/notifications/project/' + aProject.id)
-        // setDeliverables(res.data)
-        // updateMileStoneStatus(res.data)
         console.log(res)
         set_notifications(res.data)
     }
@@ -91,10 +86,6 @@ const Sidebar = () => {
                      <button  className="btn-close" onClick={hideCanvas}
                     ></button>
 
-                     {/* </button>
-                    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
-                    onClick={hideCanvas}
-                    ></button> */}
                 </div>
                 <div className="offcanvas-body">
                     <div>

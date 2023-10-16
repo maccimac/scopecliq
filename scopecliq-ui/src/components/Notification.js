@@ -5,7 +5,7 @@ import { isClient} from '../store/user-store';
 // import { _project, _setProject } from '../store/project-store';
 
 
-export const Notification =({_notification})=>{
+export const Notification =({_notification, cb})=>{
 
     const api = global.config.API;
     // const project = useSelector(_project);
@@ -14,6 +14,7 @@ export const Notification =({_notification})=>{
     const [attachmentType, set_attachmentType] = useState("deliverable")
     const [title, set_title] = useState("")
     const [body, set_body] = useState("")
+    const [cta, set_cta] = useState(null)
     
     const [notification, set_notification] = useState(_notification)
 
@@ -46,11 +47,24 @@ export const Notification =({_notification})=>{
         }
         set_title(titleOpts[notification.type][notification.status])
     }
+    const resolveCta = () => {
+        switch(notification.type){
+            case 'INVOICE':
+                set_cta({
+                    label: "label",
+                    action: ()=>{}
+                })
+                break;
+            default:
+                break;
+        }
+    }
     
     const exit = () => {}
 
     useEffect(()=>{
         resolveTitle()
+        resolveCta()
     }, [_notification])
     
     return(
@@ -73,16 +87,18 @@ export const Notification =({_notification})=>{
             <div className='notification-body'>
                 <p>This status is for <strong>{notification.description}</strong>.</p>
             </div>
-            <div className='notification-footer d-flex mt-3'>
-                <div className={`
-                    sq-btn
-                    ${notification.type == 'STATUS_UPDATE' && 'bg-sq-green' }
-                    ${notification.type == 'INVOICE' && 'bg-sq-lav' }
-                    ${notification.type == 'CHANGE' && 'bg-sq-gold' }
-               `}>
-                    Approve
-                </div>
-            </div>
+            {cta &&
+                (<div className='notification-footer d-flex mt-3'>
+                    <div className={`
+                        sq-btn
+                        ${notification.type == 'STATUS_UPDATE' && 'bg-sq-green' }
+                        ${notification.type == 'INVOICE' && 'bg-sq-lav' }
+                        ${notification.type == 'CHANGE' && 'bg-sq-gold' }
+                    `}>
+                        Approve
+                    </div>
+                </div>)
+            }
         </div>
     )
 }

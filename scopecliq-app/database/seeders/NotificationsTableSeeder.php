@@ -15,17 +15,7 @@ class NotificationsTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('notifications')->insert([
-            // $table->integer('project_id');
-            // $table->integer('milestone_id');
-            // $table->integer('deliverable_id');
-            // $table->text('type'); 
-            //     /***
-            //      * STATUS_UPDATE : COMPLETE, INCOMPLETE, CANCEL,
-            //      * ITEM_CHANGE : SENT, APPROVED, REJECTED,
-            //      * INVOICE: SENT, PAID, VOID
-            //     ***/
-            // $table->text('context');
-            // $table->text('additional_message');
+            
             [
                 'project_id' => 2,
                 'milestone_id' => 3,
@@ -33,7 +23,39 @@ class NotificationsTableSeeder extends Seeder
                 'type' => 'STATUS_UPDATE',
                 'status' => 'COMPLETE',
                 'description' => 'Market, competition, and demography research',
-                'additional_message' => 'This is done, thanks for your help.',
+                'extra' => 'This is done, thanks for your help.',
+                'created_at' => Carbon::yesterday()  
+            ],
+            [
+                'project_id' => 2,
+                'milestone_id' => 1,
+                'deliverable_id' => null,
+                'type' => 'INVOICE',
+                'status' => 'SENT',
+                'description' => 'Negotiation',
+                'extra' => null,
+                'created_at' => Carbon::yesterday()  
+            ],
+
+
+            [
+                'project_id' => 2,
+                'milestone_id' => 1,
+                'deliverable_id' => 2,
+                'type' => 'STATUS_UPDATE',
+                'status' => 'COMPLETE',
+                'description' => 'Moodboard',
+                'extra' => null,
+                'created_at' => Carbon::yesterday()  
+            ],
+            [
+                'project_id' => 2,
+                'milestone_id' => 2,
+                'deliverable_id' => 5,
+                'type' => 'STATUS_UPDATE',
+                'status' => 'INCOMPLETE',
+                'description' => 'Wireframe',
+                'extra' => 'Please recreate',
                 'created_at' => Carbon::yesterday()  
             ],
         ]);    

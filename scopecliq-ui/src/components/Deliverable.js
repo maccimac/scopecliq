@@ -111,7 +111,7 @@ export const Deliverable = ({
     }, position)
 
     return(
-        <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'}>
+        <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'} data-deliverable-id={deliverableId}>
             <div className='d-flex w-100'>
                 <div className={'status '} onClick={toggleComplete}>
                     <i className={statusIcon + ' fa-regular fa-md m-1 sq-btn-icon sq-client--curser-def' }></i>

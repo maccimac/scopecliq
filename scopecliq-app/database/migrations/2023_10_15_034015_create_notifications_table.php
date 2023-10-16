@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->integer('project_id');
-            $table->integer('milestone_id');
-            $table->integer('deliverable_id');
+            $table->integer('milestone_id')->nullable();
+            $table->integer('deliverable_id')->nullable();
             $table->string('type'); 
                 /***
                  * STATUS_UPDATE,
@@ -25,8 +25,8 @@ return new class extends Migration
                  * INVOICE_PAID,
                 ***/
             $table->string('status');
-            $table->text('description');
-            $table->text('additional_message');
+            $table->text('description')->nullable();
+            $table->text('extra')->nullable();
             $table->dateTime('read_at')->nullable();
             $table->timestamps();
         });

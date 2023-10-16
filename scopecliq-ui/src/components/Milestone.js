@@ -75,7 +75,7 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
     }, [])
 
     return(
-        <div class={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'}  sq-milestone col-1 col-sm-4 col-lg-3 rounded my-2 p-4 mx-2`}>
+        <div class={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'}  sq-milestone col-1 col-sm-4 col-lg-3 rounded my-2 p-4 mx-2`} data-milestone-id={milestoneId}>
             <div class="sub mb-2 milestone-status">
                 {milestoneStatus}
             </div>
