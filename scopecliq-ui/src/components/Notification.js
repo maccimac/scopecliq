@@ -2,18 +2,21 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
+// import { _project, _setProject } from '../store/project-store';
 
 
 export const Notification =({_notification})=>{
 
     const api = global.config.API;
-    const clientMode = useSelector(isClient);
+    // const project = useSelector(_project);
+    
 
     const [attachmentType, set_attachmentType] = useState("deliverable")
     const [title, set_title] = useState("")
     const [body, set_body] = useState("")
     
     const [notification, set_notification] = useState(_notification)
+
 
     const titleOpts = {
         'STATUS_UPDATE' : {
@@ -48,7 +51,7 @@ export const Notification =({_notification})=>{
 
     useEffect(()=>{
         resolveTitle()
-    }, [])
+    }, [_notification])
     
     return(
         <div className={

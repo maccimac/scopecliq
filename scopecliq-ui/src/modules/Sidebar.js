@@ -2,13 +2,32 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
+import { storeProject } from '../store/project-store';
+import { connect } from 'react-redux';
 
 import Notification from '../components/Notification';
 
-const Sidebar = ({project}) => {
+const Sidebar = () => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
+    const aProject= useSelector(storeProject);
     const [showOffcanvas, setShowOffcanvas] = useState(false); // Set the initial state to true to show the Offcanvas
+
+    // const [notifications, set_notifications]=useState([])
+
+
+    const fetchNotificationsByProject = async() =>{
+        console.log('proj changes', aProject)
+        const res = await axios.get(api+ '/notifications/project/' + aProject.id)
+        // setDeliverables(res.data)
+        // updateMileStoneStatus(res.data)
+        console.log(res)
+        set_notifications(res.data)
+    }
+
+    setTimeout(()=>{
+        console.log(aProject)
+    }, 1500)
 
     const notifDeliverableComplete = {
         id: 1,
@@ -43,7 +62,7 @@ const Sidebar = ({project}) => {
     }
 
 
-    const [notifications, set_notifications] = useState([notifInvoiceSent, notifItemChanged, notifDeliverableComplete])
+    const [notifications, set_notifications] = useState([])
 
   const toggleOffcanvas = () => {
     setShowOffcanvas(!showOffcanvas);
@@ -51,6 +70,10 @@ const Sidebar = ({project}) => {
   const hideCanvas = () => {
     setShowOffcanvas(false);
   };
+
+  useEffect(()=>{
+    fetchNotificationsByProject()
+  },[aProject])
 
 
     return(
@@ -99,5 +122,22 @@ const Sidebar = ({project}) => {
         </div>
     )
 }
-export default Sidebar;
+// export default Sidebar;
+
+// const mapStateToProps = (state) => ({
+//     sqproject: state.sqproject,
+//   });
+  
+//   const mapDispatchToProps = {
+//     _setProject,
+//   };
+  
+  export default Sidebar;
+  
+  
+  
+  
+  
+  
+  
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\MilestonesController;
 use App\Http\Controllers\DeliverablesController;
+use App\Http\Controllers\NotificationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,5 +65,20 @@ Route::prefix('deliverables')->group(function () {
     Route::post('/update/{id}/position/{position}', [DeliverablesController::class, 'updateDeliverablePosition']);
     Route::post('/add/milestone/{milestone_id}', [DeliverablesController::class, 'addDeliverableToMilestone']);
     Route::post('/edit/{id}', [DeliverablesController::class, 'editDeliverableById']);
+    
+});
+
+
+// NOTIFICATIONS
+Route::prefix('notifications')->group(function () {
+
+    Route::get('/{id}', [NotificationsController::class, 'fetchNotificationById']);
+    Route::get('/project/{project_id}', [NotificationsController::class, 'fetchNotificationsByProject']);
+    // Route::get('/milestone/{milestone_id}', [NotificationsController::class, 'fetchNotificationsByMilestone']);
+    // Route::post('/update/{id}/status/{status}', [NotificationsController::class, 'updateNotificationStatus']);
+    // Route::post('/update/{id}/position/{position}', [NotificationsController::class, 'updateNotificationPosition']);
+    // Route::post('/add/milestone/{milestone_id}', [NotificationsController::class, 'addNotificationToMilestone']);
+    // Route::post('/edit/{id}', [NotificationsController::class, 'editNotificationById']);
+    Route::post('/read/{id}', [NotificationsController::class, 'markNotificationAsRead']);
     
 });

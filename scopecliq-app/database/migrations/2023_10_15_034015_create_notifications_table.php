@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('status');
             $table->text('description');
             $table->text('additional_message');
-            $table->dateTime('datetime_read')->nullable();
+            $table->dateTime('read_at')->nullable();
             $table->timestamps();
         });
     }

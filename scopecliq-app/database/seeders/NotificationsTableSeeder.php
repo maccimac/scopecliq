@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class NotificationsTableSeeder extends Seeder
 {
@@ -32,7 +33,8 @@ class NotificationsTableSeeder extends Seeder
                 'type' => 'STATUS_UPDATE',
                 'status' => 'COMPLETE',
                 'description' => 'Market, competition, and demography research',
-                'additional_message' => 'This is done, thanks for your help.',  
+                'additional_message' => 'This is done, thanks for your help.',
+                'created_at' => Carbon::yesterday()  
             ],
         ]);    
     }
