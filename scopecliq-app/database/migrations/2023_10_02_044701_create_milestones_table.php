@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('milestones', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('project_id');
+            $table->foreignId('project_id')->constrained('projects');
             $table->integer('position');
             $table->string('name');
             $table->text('description');

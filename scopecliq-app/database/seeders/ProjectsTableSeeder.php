@@ -15,7 +15,7 @@ class ProjectsTableSeeder extends Seeder
     {
         DB::table('projects')->insert([
             [
-                'client_id' => 1,
+                'organization_id' => 1,
                 'name' => 'WaveKo Surf Lounge',
                 'about' => 'Design and build of resort villa',
                 'budget' => 88000,
@@ -24,7 +24,7 @@ class ProjectsTableSeeder extends Seeder
                 'portal_password' => 'beach'
             ],
             [
-                'client_id' => 2,
+                'organization_id' => 2,
                 'name' => 'Siesta Farm and Restaurant',
                 'about' => 'Markekting package. Farm to table artisinal easy dining',
                 'budget' => 40600,
@@ -33,7 +33,7 @@ class ProjectsTableSeeder extends Seeder
                 'portal_password' => 'pizza'
             ],
             [
-                'client_id' => 3,
+                'organization_id' => 3,
                 'name' => 'Lettered Leather',
                 'about' => 'Markating package. Local leathered goods',
                 'budget' => 8000,

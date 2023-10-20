@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->integer('project_id');
-            $table->integer('milestone_id')->nullable();
-            $table->integer('deliverable_id')->nullable();
+            $table->foreignId('project_id')->constrained('projects');
+            $table->bigInteger('milestone_id')->unsigned()->nullable();
+            $table->foreign('milestone_id')->references('id')->on('milestones');
+            $table->bigInteger('deliverable_id')->unsigned()->nullable();
+            $table->foreign('deliverable_id')->references('id')->on('deliverables');
             $table->string('type'); 
                 /***
                  * STATUS_UPDATE,
