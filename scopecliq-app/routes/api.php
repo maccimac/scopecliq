@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\MilestonesController;
 use App\Http\Controllers\DeliverablesController;
@@ -24,12 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// CLIENTS
-Route::prefix('clients')->group(function () {
+// Organizations
+Route::prefix('organizations')->group(function () {
 
-    Route::get('/', [ClientsController::class, 'fetchAllClients']);
-    Route::get('/{client_id}', [ClientsController::class, 'fetchClientById']);
-    Route::get('/consultant/{user_id}', [ClientsController::class, 'fetchClientsByConsultant']);
+    Route::get('/', [OrganizationsController::class, 'fetchAllOrganizations']);
+    Route::get('/{organization_id}', [OrganizationsController::class, 'fetchOrganizationById']);
 
 });
 
@@ -40,7 +39,7 @@ Route::prefix('projects')->group(function () {
     Route::get('/', [ProjectsController::class, 'fetchAllProjects']);
     Route::get('/{project_id}', [ProjectsController::class, 'fetchById']);
     Route::get('/portal/{portal}', [ProjectsController::class, 'fetchByPortal']);
-    Route::get('/client/{client_id}', [ProjectsController::class, 'fetchProjectsByClient']);
+    Route::get('/organization/{organization_id}', [ProjectsController::class, 'fetchProjectsByOrganization']);
     Route::get('/consultant/{consultant_id}', [ProjectsController::class, 'fetchProjectsByConsultant']);
 
 });

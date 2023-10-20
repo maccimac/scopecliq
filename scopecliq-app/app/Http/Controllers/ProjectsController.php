@@ -32,10 +32,10 @@ class ProjectsController extends Controller
         return $projects;
     }
 
-    public function fetchProjectsByClient($client_id){
+    public function fetchProjectsByOrganization($organization_id){
         $projects = DB::table('projects')
             -> select('*')
-            -> where('client_id', $client_id)
+            -> where('organization_id', $organization_id)
             -> get();
         return $projects;
     }
@@ -48,14 +48,14 @@ class ProjectsController extends Controller
         /*
             select * 
             from projects as p 
-            inner join clients as c 
-            on p.client_id = c.id
+            inner join organizations as c 
+            on p.organization_id = c.id
             where consultant_id = 1;
         */
 
         $projects = DB::table('projects')
         ->select('*')
-        ->join('clients', 'projects.client_id', '=', 'clients.id')
+        ->join('organizations', 'projects.organization_id', '=', 'organizations.id')
         ->where('consultant_id', '=', $consultant_id)
         ->get();
 
