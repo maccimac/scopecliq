@@ -34,7 +34,7 @@
     align-items: center;
     justify-content: center;
     transition: 0.15s all ease-in;
-    
+    text-decoration: none;
     // .sq-btn--icon{
     //     padding-left: 8px;
     //     padding-right: 8px;
@@ -44,7 +44,7 @@
     // }
     &:hover{
         font-size: 13px;
-        scale: 1.15;   
+        scale: 1.01;   
     }
 }
 
