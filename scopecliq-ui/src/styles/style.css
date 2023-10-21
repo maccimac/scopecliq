@@ -594,22 +594,23 @@ p.description {
   overflow: hidden;
 }
 
-.sq-dashboard-portal .sq-navigation {
+.sq-navigation {
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
 }
-.sq-dashboard-portal .sq-navigation .sq-logo {
+.sq-navigation .sq-logo {
   max-width: 180px;
 }
-.sq-dashboard-portal .sq-body {
+
+.sq-body {
   padding-top: 90px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-.sq-dashboard-portal .sq-body .sq-content {
+.sq-body .sq-content {
   flex-grow: 1;
 }
 

@@ -1,14 +1,14 @@
-.sq-dashboard-portal{
-    
-    .sq-navigation{
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        .sq-logo{
-            max-width: 180px;
-        }
+.sq-navigation{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    .sq-logo{
+        max-width: 180px;
     }
+}
+
+// .sq-dashboard-portal{
     .sq-body{
         padding-top: 90px;
         min-height: 100vh;
@@ -20,7 +20,7 @@
          
         }
     }
-}
+// }
 
 .sq-sidebar{
     position: fixed;

@@ -68,7 +68,14 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
     const saveAllPositions =  () =>{
         deliverables.map( async (d,i) =>{
             const res = await axios.post(api + `/deliverables/update/${d.id}/position/${i}`)
+            console.log(res)
+
+            // if(res.status == 200 && i == deliverables.length-1){
+            //     fetchDeliverableByMilestone()
+            // }
         })
+
+
     }
 
     useEffect(()=>{
@@ -115,14 +122,14 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
             <div className='deliverables-list'>
             {!clientMode &&!editMode && <BtnAdd cb={()=>{addNewDeliverable(-1)}}/> }
                 { deliverables.map( (d,i)=>(
-                    <div class="deliverable-set" key={i}>
+                    <div class="deliverable-set" key={d.id}>
                         <Deliverable
                             key={d.id}
                             deliverable={d}
                             deliverableId={d.id}
                             status={d.status}
                             description={d.description}
-                            position={i}
+                            position={d.position}
                             milestoneId={milestone.id}
                             isNew={d.is_new}
                             cancelNewDeliverable={()=>{
@@ -134,6 +141,7 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
                             }}
                             fetchDeliverableByMilestone={fetchDeliverableByMilestone}
                             cb={{}}
+                            index={i}
  
                         />
                         {!clientMode && !editMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }

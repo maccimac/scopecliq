@@ -11,7 +11,8 @@ export const Deliverable = ({
     milestoneId,
     isNew=false, 
     cancelNewDeliverable, saveAllPositions, updateMilestoneStatus,
-    fetchDeliverableByMilestone
+    fetchDeliverableByMilestone,
+    index
 } ) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
@@ -118,7 +119,9 @@ export const Deliverable = ({
 
     const saveNewDeliverable = async () => {
         const payload = {
-            description: descriptionModelEdit
+            // project_id: deliverable.project_id,
+            description: descriptionModelEdit,
+            position: index
         }
 
         const res = await axios.post(`${api}/deliverables/add/milestone/${milestoneId}`, payload, {
@@ -129,12 +132,10 @@ export const Deliverable = ({
 
         const newItem = res.data
 
-        console.log({res})
         setnNewMode(false)
         setEditMode(false)
         setDescriptionModel(descriptionModelEdit)
         finishEdit()
-        saveAllPositions()
         updateMilestoneStatus()
         createNotification({
             ...newItem,
@@ -142,6 +143,7 @@ export const Deliverable = ({
             status: "CREATED",
             extra: "A new deliverable has been added to the deliverable"
         })
+        saveAllPositions()        
         fetchDeliverableByMilestone()
 
     }
