@@ -53,6 +53,11 @@ class DeliverablesController extends Controller
             -> update([
                 'position'=> $position
             ]);
+        // $deliverable;
+
+        $deliverable = DB::table('deliverables')
+        -> where('id', $id)
+        -> first();
         return $deliverable;
     }
 
@@ -98,7 +103,7 @@ class DeliverablesController extends Controller
                 [
                     'project_id'=> $projId,
                     'milestone_id' => $milestone_id,
-                    'position' => $lastPosition+1 || 0,
+                    'position' => $req->position,
                     'status'=> 'INCOMPLETE',
                     'description' => $req->description,
                 ],
