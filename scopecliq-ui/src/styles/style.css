@@ -576,6 +576,12 @@ p.description {
   background-color: #27D39F;
 }
 
+.sq-btn-icon {
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
 .sq-textarea, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-input {
   font-size: 12px;
   outline: #CCCCCC;
@@ -720,9 +726,6 @@ p.description {
   padding: 0;
   background-color: transparent;
   overflow: hidden;
-}
-.sq-milestone .sq-deliverable .sq-btn-icon {
-  cursor: pointer;
 }
 
 .sq-notification .btn-notif-exit {

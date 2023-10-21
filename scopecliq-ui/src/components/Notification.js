@@ -94,7 +94,7 @@ export const Notification =({_notification, cb})=>{
                     ${notification.type == 'CHANGE' && 'text-color-sq-gold-mid' }
             
                `}>{title}</div>
-                    <i class="sq-btn bg-transparent m-0 btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" onClick={markRead}></i>
+                    <i class="sq-btn-icon bg-transparent m-0 btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" onClick={markRead}></i>
             </div>
             <div className='notification-body'>
                 <p>This status is for <strong>{notification.description}</strong>.</p>
@@ -106,7 +106,8 @@ export const Notification =({_notification, cb})=>{
                         ${notification.type == 'STATUS_UPDATE' && 'bg-sq-green' }
                         ${notification.type == 'INVOICE' && 'bg-sq-lav' }
                         ${notification.type == 'CHANGE' && 'bg-sq-gold' }
-                    `}>
+                    `}
+                    onClick={markRead}>
                         Approve
                     </div>
                 </div>)

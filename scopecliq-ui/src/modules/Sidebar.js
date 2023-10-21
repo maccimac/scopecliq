@@ -77,23 +77,33 @@ const Sidebar = () => {
                 <div className="offcanvas-header">
                     {/* <h5 className="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
                      */}
-                     <span></span>
+                     {/* <span></span>
                      <button  className="btn-close" onClick={hideCanvas}
-                    ></button>
+                    ></button> */}
 
                 </div>
                 <div className="offcanvas-body">
                     <div>
-                        <div className='d-flex justify-content-between mb-4'>
+                        <div className='d-flex justify-content-between mb-4 align-items-center'>
                             <h2>
                                 Notifications
                             </h2>
-                            <button
-                                className='sq-btn bg-transparent'
-                                onClick={fetchNotificationsByProject}
-                            >
-                                <i className='fa fa-regular fa-solid fa-sync text-color-sq-gold-mid'/>
-                            </button>
+                            <div className='d-flex'>
+                                <button
+                                    className='sq-btn-icon bg-transparent mr-2'
+                                    onClick={fetchNotificationsByProject}
+                                >
+                                    <i className='fa fa-regular fa-solid fa-sync text-color-sq-gold-mid'/>
+                                </button>
+
+                                <button
+                                    className='sq-btn-icon bg-transparent'
+                                    onClick={hideCanvas}
+                                >
+                                    <i className='fa fa-regular fa-solid fa-xmark text-color-sq-dark fa-xl'/>
+                                </button>
+                            </div>
+                          
 
                         </div>
                         <div className='notification-list'>
