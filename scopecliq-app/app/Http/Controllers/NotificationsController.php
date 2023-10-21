@@ -21,7 +21,18 @@ class NotificationsController extends Controller
         $notifications = DB::table('notifications')
         -> select('*')
         -> where('project_id', $project_id)
-        -> where('read_at', null)
+        -> where('client_read_at', null)
+        -> orderByDesc('created_at')
+        -> get();
+        return $notifications;
+    }
+
+    public function fetchNotificationsByProjectAsConsultant($project_id){
+        $notifications = DB::table('notifications')
+        -> select('*')
+        -> where('project_id', $project_id)
+        -> where('receiver_type', 1)
+        -> where('client_read_at', null)
         -> orderByDesc('created_at')
         -> get();
         return $notifications;
@@ -31,7 +42,7 @@ class NotificationsController extends Controller
         $notification = DB::table('notifications')
             -> where('id', $id)
             -> update([
-                'read_at'=> now()
+                'client_read_at'=> now()
             ]);
         return $notification;
     }

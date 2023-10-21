@@ -34,6 +34,12 @@ export const Notification =({_notification, cb})=>{
         'CHANGE':{
             'MADE': `✏️ ${attachmentType} has been changed`,
             'CREATED': `✨ ${attachmentType} has been added`,
+            /**
+             * MADE_APPROVED
+             * MADE_DECLINED
+             * CREATED_APPROVED
+             * CREATED_DECLINED
+             */
         }
     }
     const resolveTitle = () => {
