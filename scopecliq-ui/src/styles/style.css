@@ -1,289 +1,289 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;0,1000;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,1000&display=swap");
 .bg-sq-green {
-  background-color: #27D39F;
+  background-color: #27D39F !important;
 }
 
 .border-sq-green {
   border: 1px solid #27D39F;
 }
 
-.color-sq-green {
+.text-color-sq-green {
   color: #27D39F !important;
 }
 
 .bg-sq-lav {
-  background-color: #5B79FC;
+  background-color: #5B79FC !important;
 }
 
 .border-sq-lav {
   border: 1px solid #5B79FC;
 }
 
-.color-sq-lav {
+.text-color-sq-lav {
   color: #5B79FC !important;
 }
 
 .bg-sq-dark {
-  background-color: #4E4E4E;
+  background-color: #4E4E4E !important;
 }
 
 .border-sq-dark {
   border: 1px solid #4E4E4E;
 }
 
-.color-sq-dark {
+.text-color-sq-dark {
   color: #4E4E4E !important;
 }
 
 .bg-sq-med {
-  background-color: #777;
+  background-color: #777 !important;
 }
 
 .border-sq-med {
   border: 1px solid #777;
 }
 
-.color-sq-med {
+.text-color-sq-med {
   color: #777 !important;
 }
 
 .bg-sq-med-light {
-  background-color: #999999;
+  background-color: #999999 !important;
 }
 
 .border-sq-med-light {
   border: 1px solid #999999;
 }
 
-.color-sq-med-light {
+.text-color-sq-med-light {
   color: #999999 !important;
 }
 
 .bg-sq-light {
-  background-color: #CCCCCC;
+  background-color: #CCCCCC !important;
 }
 
 .border-sq-light {
   border: 1px solid #CCCCCC;
 }
 
-.color-sq-light {
+.text-color-sq-light {
   color: #CCCCCC !important;
 }
 
 .bg-sq-lightest {
-  background-color: #F9F9F9;
+  background-color: #F9F9F9 !important;
 }
 
 .border-sq-lightest {
   border: 1px solid #F9F9F9;
 }
 
-.color-sq-lightest {
+.text-color-sq-lightest {
   color: #F9F9F9 !important;
 }
 
 .bg-sq-lighter {
-  background-color: #E7E7E7;
+  background-color: #E7E7E7 !important;
 }
 
 .border-sq-lighter {
   border: 1px solid #E7E7E7;
 }
 
-.color-sq-lighter {
+.text-color-sq-lighter {
   color: #E7E7E7 !important;
 }
 
 .bg-sq-white {
-  background-color: #fff;
+  background-color: #fff !important;
 }
 
 .border-sq-white {
   border: 1px solid #fff;
 }
 
-.color-sq-white {
+.text-color-sq-white {
   color: #fff !important;
 }
 
 .bg-sq-lav-dark {
-  background-color: #565C79;
+  background-color: #565C79 !important;
 }
 
 .border-sq-lav-dark {
   border: 1px solid #565C79;
 }
 
-.color-sq-lav-dark {
+.text-color-sq-lav-dark {
   color: #565C79 !important;
 }
 
 .bg-sq-lav-muted {
-  background-color: #ACB1C6;
+  background-color: #ACB1C6 !important;
 }
 
 .border-sq-lav-muted {
   border: 1px solid #ACB1C6;
 }
 
-.color-sq-lav-muted {
+.text-color-sq-lav-muted {
   color: #ACB1C6 !important;
 }
 
 .bg-sq-lav-light {
-  background-color: #EEF1FF;
+  background-color: #EEF1FF !important;
 }
 
 .border-sq-lav-light {
   border: 1px solid #EEF1FF;
 }
 
-.color-sq-lav-light {
+.text-color-sq-lav-light {
   color: #EEF1FF !important;
 }
 
 .bg-sq-lav-light-bright {
-  background-color: #BBC7FD;
+  background-color: #BBC7FD !important;
 }
 
 .border-sq-lav-light-bright {
   border: 1px solid #BBC7FD;
 }
 
-.color-sq-lav-light-bright {
+.text-color-sq-lav-light-bright {
   color: #BBC7FD !important;
 }
 
 .bg-sq-lav-mid {
-  background-color: #4C68E5;
+  background-color: #4C68E5 !important;
 }
 
 .border-sq-lav-mid {
   border: 1px solid #4C68E5;
 }
 
-.color-sq-lav-mid {
+.text-color-sq-lav-mid {
   color: #4C68E5 !important;
 }
 
 .bg-sq-green-light {
-  background-color: #E5F4F0;
+  background-color: #E5F4F0 !important;
 }
 
 .border-sq-green-light {
   border: 1px solid #E5F4F0;
 }
 
-.color-sq-green-light {
+.text-color-sq-green-light {
   color: #E5F4F0 !important;
 }
 
-.bg-sq-greeen-mid {
-  background-color: #00B47E;
+.bg-sq-green-mid {
+  background-color: #00B47E !important;
 }
 
-.border-sq-greeen-mid {
+.border-sq-green-mid {
   border: 1px solid #00B47E;
 }
 
-.color-sq-greeen-mid {
+.text-color-sq-green-mid {
   color: #00B47E !important;
 }
 
 .bg-sq-tomato {
-  background-color: #FC5130;
+  background-color: #FC5130 !important;
 }
 
 .border-sq-tomato {
   border: 1px solid #FC5130;
 }
 
-.color-sq-tomato {
+.text-color-sq-tomato {
   color: #FC5130 !important;
 }
 
 .bg-sq-tomato-light {
-  background-color: #FD917C;
+  background-color: #FD917C !important;
 }
 
 .border-sq-tomato-light {
   border: 1px solid #FD917C;
 }
 
-.color-sq-tomato-light {
+.text-color-sq-tomato-light {
   color: #FD917C !important;
 }
 
 .bg-sq-tomato-lightest {
-  background-color: #FFF1EE;
+  background-color: #FFF1EE !important;
 }
 
 .border-sq-tomato-lightest {
   border: 1px solid #FFF1EE;
 }
 
-.color-sq-tomato-lightest {
+.text-color-sq-tomato-lightest {
   color: #FFF1EE !important;
 }
 
 .bg-sq-gold {
-  background-color: #FFBC42;
+  background-color: #FFBC42 !important;
 }
 
 .border-sq-gold {
   border: 1px solid #FFBC42;
 }
 
-.color-sq-gold {
+.text-color-sq-gold {
   color: #FFBC42 !important;
 }
 
 .bg-sq-gold-mid {
-  background-color: #F4A414;
+  background-color: #F4A414 !important;
 }
 
 .border-sq-gold-mid {
   border: 1px solid #F4A414;
 }
 
-.color-sq-gold-mid {
+.text-color-sq-gold-mid {
   color: #F4A414 !important;
 }
 
 .bg-sq-gold-light {
-  background-color: #F5C773;
+  background-color: #F5C773 !important;
 }
 
 .border-sq-gold-light {
   border: 1px solid #F5C773;
 }
 
-.color-sq-gold-light {
+.text-color-sq-gold-light {
   color: #F5C773 !important;
 }
 
 .bg-sq-gold-lighter {
-  background-color: #FAD99C;
+  background-color: #FAD99C !important;
 }
 
 .border-sq-gold-lighter {
   border: 1px solid #FAD99C;
 }
 
-.color-sq-gold-lighter {
+.text-color-sq-gold-lighter {
   color: #FAD99C !important;
 }
 
 .bg-sq-gold-lightest {
-  background-color: #FFF9EE;
+  background-color: #FFF9EE !important;
 }
 
 .border-sq-gold-lightest {
   border: 1px solid #FFF9EE;
 }
 
-.color-sq-gold-lightest {
+.text-color-sq-gold-lightest {
   color: #FFF9EE !important;
 }
 
@@ -297,7 +297,7 @@ h2 {
 
 p {
   margin-top: 2px;
-  font-size: 10px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 400;
   margin-bottom: 4px;
@@ -309,7 +309,7 @@ p.description {
 
 .sub {
   color: #ACB1C6;
-  font-size: 8px;
+  font-size: 8.5px;
   font-style: normal;
   font-weight: 700;
   letter-spacing: 2.56px;
@@ -317,7 +317,7 @@ p.description {
 }
 
 .label {
-  font-size: 10px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 400;
   color: #ACB1C6;
@@ -331,195 +331,203 @@ p.description {
 }
 
 .font-size-1 {
-  font-size: 1 !important;
+  font-size: 1px !important;
 }
 
 .font-size-2 {
-  font-size: 2 !important;
+  font-size: 2px !important;
 }
 
 .font-size-3 {
-  font-size: 3 !important;
+  font-size: 3px !important;
 }
 
 .font-size-4 {
-  font-size: 4 !important;
+  font-size: 4px !important;
 }
 
 .font-size-5 {
-  font-size: 5 !important;
+  font-size: 5px !important;
 }
 
 .font-size-6 {
-  font-size: 6 !important;
+  font-size: 6px !important;
 }
 
 .font-size-7 {
-  font-size: 7 !important;
+  font-size: 7px !important;
 }
 
 .font-size-8 {
-  font-size: 8 !important;
+  font-size: 8px !important;
 }
 
 .font-size-9 {
-  font-size: 9 !important;
+  font-size: 9px !important;
 }
 
 .font-size-10 {
-  font-size: 10 !important;
+  font-size: 10px !important;
 }
 
 .font-size-11 {
-  font-size: 11 !important;
+  font-size: 11px !important;
 }
 
 .font-size-12 {
-  font-size: 12 !important;
+  font-size: 12px !important;
 }
 
 .font-size-13 {
-  font-size: 13 !important;
+  font-size: 13px !important;
 }
 
 .font-size-14 {
-  font-size: 14 !important;
+  font-size: 14px !important;
 }
 
 .font-size-15 {
-  font-size: 15 !important;
+  font-size: 15px !important;
 }
 
 .font-size-16 {
-  font-size: 16 !important;
+  font-size: 16px !important;
 }
 
 .font-size-17 {
-  font-size: 17 !important;
+  font-size: 17px !important;
 }
 
 .font-size-18 {
-  font-size: 18 !important;
+  font-size: 18px !important;
 }
 
 .font-size-19 {
-  font-size: 19 !important;
+  font-size: 19px !important;
 }
 
 .font-size-20 {
-  font-size: 20 !important;
+  font-size: 20px !important;
 }
 
 .font-size-21 {
-  font-size: 21 !important;
+  font-size: 21px !important;
 }
 
 .font-size-22 {
-  font-size: 22 !important;
+  font-size: 22px !important;
 }
 
 .font-size-23 {
-  font-size: 23 !important;
+  font-size: 23px !important;
 }
 
 .font-size-24 {
-  font-size: 24 !important;
+  font-size: 24px !important;
 }
 
 .font-size-25 {
-  font-size: 25 !important;
+  font-size: 25px !important;
 }
 
 .font-size-26 {
-  font-size: 26 !important;
+  font-size: 26px !important;
 }
 
 .font-size-27 {
-  font-size: 27 !important;
+  font-size: 27px !important;
 }
 
 .font-size-28 {
-  font-size: 28 !important;
+  font-size: 28px !important;
 }
 
 .font-size-29 {
-  font-size: 29 !important;
+  font-size: 29px !important;
 }
 
 .font-size-30 {
-  font-size: 30 !important;
+  font-size: 30px !important;
 }
 
 .font-size-31 {
-  font-size: 31 !important;
+  font-size: 31px !important;
 }
 
 .font-size-32 {
-  font-size: 32 !important;
+  font-size: 32px !important;
 }
 
 .font-size-33 {
-  font-size: 33 !important;
+  font-size: 33px !important;
 }
 
 .font-size-34 {
-  font-size: 34 !important;
+  font-size: 34px !important;
 }
 
 .font-size-35 {
-  font-size: 35 !important;
+  font-size: 35px !important;
 }
 
 .font-size-36 {
-  font-size: 36 !important;
+  font-size: 36px !important;
 }
 
 .font-size-37 {
-  font-size: 37 !important;
+  font-size: 37px !important;
 }
 
 .font-size-38 {
-  font-size: 38 !important;
+  font-size: 38px !important;
 }
 
 .font-size-39 {
-  font-size: 39 !important;
+  font-size: 39px !important;
 }
 
 .font-size-40 {
-  font-size: 40 !important;
+  font-size: 40px !important;
 }
 
 .font-size-41 {
-  font-size: 41 !important;
+  font-size: 41px !important;
 }
 
 .font-size-42 {
-  font-size: 42 !important;
+  font-size: 42px !important;
 }
 
 .font-size-43 {
-  font-size: 43 !important;
+  font-size: 43px !important;
 }
 
 .font-size-44 {
-  font-size: 44 !important;
+  font-size: 44px !important;
 }
 
 .font-size-45 {
-  font-size: 45 !important;
+  font-size: 45px !important;
 }
 
 .font-size-46 {
-  font-size: 46 !important;
+  font-size: 46px !important;
 }
 
 .font-size-47 {
-  font-size: 47 !important;
+  font-size: 47px !important;
 }
 
 .font-size-48 {
-  font-size: 48 !important;
+  font-size: 48px !important;
+}
+
+.sq-outter-shadow {
+  box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
+}
+
+.sq-inner-shadow {
+  box-shadow: 0px 0px 12px 0px rgba(86, 92, 121, 0.18) inset;
 }
 
 .sq-btn-add {
@@ -538,26 +546,71 @@ p.description {
   box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
   transition: all 0.6s ease;
 }
-.sq-btn-add:hover {
-  opacity: 1;
-}
 .sq-btn-add i {
   color: #fff;
 }
 
-.sq-dashboard-portal .sq-navigation {
+.sq-btn, .sq-btn--green {
+  cursor: pointer;
+  outline: 0;
+  border: 0;
+  height: 36px;
+  background-color: #5B79FC;
+  font-size: 12px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s all ease-in;
+  text-decoration: none;
+}
+.sq-btn:hover, .sq-btn--green:hover {
+  font-size: 13px;
+  scale: 1.01;
+}
+
+.sq-btn--green {
+  background-color: #27D39F;
+}
+
+.sq-btn-icon {
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.sq-textarea, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-input {
+  font-size: 12px;
+  outline: #CCCCCC;
+  border: none;
+  color: #777;
+  margin: 0;
+  padding: 8px;
+  resize: none;
+  overflow: hidden;
+}
+
+.sq-navigation {
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
 }
-.sq-dashboard-portal .sq-body {
+.sq-navigation .sq-logo {
+  max-width: 180px;
+}
+
+.sq-body {
   padding-top: 90px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-.sq-dashboard-portal .sq-body .sq-content {
+.sq-body .sq-content {
   flex-grow: 1;
 }
 
@@ -565,11 +618,36 @@ p.description {
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 10;
+}
+.sq-sidebar .offcanvas {
+  box-shadow: -12px 0px 12px 0px rgba(86, 92, 121, 0.12);
+  border: none;
+  border-left: none;
+}
+.sq-sidebar .offcanvas .offcanvas-header {
+  background: transparent;
+  position: absolute;
+  right: 0;
+}
+.sq-sidebar .offcanvas .offcanvas-body::-webkit-scrollbar {
+  transition: 1s all ease;
+  opacity: 0;
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+.sq-sidebar .offcanvas .offcanvas-body::-webkit-scrollbar-thumb {
+  border-right: 0.5rem solid #E5F4F0;
+  background-color: transparent;
 }
 
 .sq-milestone {
   background-color: #f4f4f4;
   border: 1px solid #E7E7E7;
+}
+.sq-milestone:hover .sq-btn-add {
+  opacity: 0.33;
+  transition-duration: 1s;
+  transition-delay: 0.75s;
 }
 .sq-milestone.sq-milestone--complete .milestone-status {
   color: #27D39F;
@@ -582,6 +660,12 @@ p.description {
 .sq-milestone.sq-milestone--started .milestone-status {
   color: #5B79FC;
 }
+.sq-milestone.sq-milestone--client-mode .sq-client--curser-def {
+  cursor: default;
+}
+.sq-milestone.sq-milestone--client-mode .sq-client--hide {
+  display: none !important;
+}
 .sq-milestone .image {
   background-position: center;
   background-size: cover;
@@ -591,6 +675,16 @@ p.description {
 }
 .sq-milestone .image.image--small {
   min-height: 120px;
+}
+.sq-milestone .deliverable-set:hover .sq-btn-add {
+  transition-delay: 0s !important;
+  transition-duration: 0.3s;
+  opacity: 1;
+}
+.sq-milestone .sq-btn-add:hover {
+  transition-delay: 0s !important;
+  transition-duration: 0.3s;
+  opacity: 1;
 }
 .sq-milestone .sq-deliverable {
   z-index: 1;
@@ -627,27 +721,41 @@ p.description {
   display: none;
 }
 .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit {
-  font-size: 12px;
   outline: none;
   border: none;
   width: 100%;
-  color: #777;
   margin: 0;
   padding: 0;
   background-color: transparent;
-  resize: none;
   overflow: hidden;
 }
-.sq-milestone .sq-deliverable .sq-btn-icon {
-  cursor: pointer;
+
+.sq-notification .btn-notif-exit {
+  margin-top: -4px !important;
+  margin-right: -4px !important;
+}
+
+* {
+  font-family: "DM Sans", sans-serif;
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
   line-height: 1.4;
   color: #777;
   background-color: #F9F9F9;
   transition: all 0.4s ease;
+}
+body::-webkit-scrollbar {
+  transition: 1s all ease;
+  opacity: 0;
+  background: transparent; /* Optional: just make scrollbar invisible */
+  height: 0.8rem;
+  width: 0.5rem;
+  border: 1px solid #E7E7E7;
+}
+body::-webkit-scrollbar-thumb {
+  border-top: 1px solid #ddd;
+  background-color: #EEF1FF;
 }
 
 .find-me {

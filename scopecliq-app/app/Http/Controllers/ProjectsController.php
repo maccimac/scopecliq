@@ -16,35 +16,46 @@ class ProjectsController extends Controller
         return $projects;
     }
 
-    public function fetchProjectById($project_id){
+    public function fetchById($project_id){
         $project = DB::table('projects')
             -> select('*')
             -> where('id', $project_id)
-            -> get();
+            -> first();
         return $project;
     }
 
-    public function fetchProjectsByClient($client_id){
+    public function fetchByPortal($portal){
         $projects = DB::table('projects')
             -> select('*')
-            -> where('client_id', $client_id)
+            -> where('portal_domain', $portal)
+            -> first();
+        return $projects;
+    }
+
+    public function fetchProjectsByOrganization($organization_id){
+        $projects = DB::table('projects')
+            -> select('*')
+            -> where('organization_id', $organization_id)
             -> get();
         return $projects;
     }
+
+    
+
 
     public function fetchProjectsByConsultant($consultant_id){
 
         /*
             select * 
             from projects as p 
-            inner join clients as c 
-            on p.client_id = c.id
+            inner join organizations as c 
+            on p.organization_id = c.id
             where consultant_id = 1;
         */
 
         $projects = DB::table('projects')
         ->select('*')
-        ->join('clients', 'projects.client_id', '=', 'clients.id')
+        ->join('organizations', 'projects.organization_id', '=', 'organizations.id')
         ->where('consultant_id', '=', $consultant_id)
         ->get();
 

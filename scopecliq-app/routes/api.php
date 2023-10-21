@@ -3,10 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\MilestonesController;
 use App\Http\Controllers\DeliverablesController;
+use App\Http\Controllers\NotificationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// CLIENTS
-Route::prefix('clients')->group(function () {
+// Organizations
+Route::prefix('organizations')->group(function () {
 
-    Route::get('/', [ClientsController::class, 'fetchAllClients']);
-    Route::get('/{client_id}', [ClientsController::class, 'fetchClientById']);
-    Route::get('/consultant/{user_id}', [ClientsController::class, 'fetchClientsByConsultant']);
+    Route::get('/', [OrganizationsController::class, 'fetchAllOrganizations']);
+    Route::get('/{organization_id}', [OrganizationsController::class, 'fetchOrganizationById']);
 
 });
 
@@ -38,7 +38,8 @@ Route::prefix('projects')->group(function () {
 
     Route::get('/', [ProjectsController::class, 'fetchAllProjects']);
     Route::get('/{project_id}', [ProjectsController::class, 'fetchById']);
-    Route::get('/client/{client_id}', [ProjectsController::class, 'fetchProjectsByClient']);
+    Route::get('/portal/{portal}', [ProjectsController::class, 'fetchByPortal']);
+    Route::get('/organization/{organization_id}', [ProjectsController::class, 'fetchProjectsByOrganization']);
     Route::get('/consultant/{consultant_id}', [ProjectsController::class, 'fetchProjectsByConsultant']);
 
 });
@@ -63,5 +64,21 @@ Route::prefix('deliverables')->group(function () {
     Route::post('/update/{id}/position/{position}', [DeliverablesController::class, 'updateDeliverablePosition']);
     Route::post('/add/milestone/{milestone_id}', [DeliverablesController::class, 'addDeliverableToMilestone']);
     Route::post('/edit/{id}', [DeliverablesController::class, 'editDeliverableById']);
+    
+});
+
+
+// NOTIFICATIONS
+Route::prefix('notifications')->group(function () {
+
+    Route::get('/{id}', [NotificationsController::class, 'fetchNotificationById']);
+    Route::get('/project/{project_id}', [NotificationsController::class, 'fetchNotificationsByProject']);
+    Route::post('/project/{project_id}/add', [NotificationsController::class, 'addNotificationToProject']);
+    // Route::get('/milestone/{milestone_id}', [NotificationsController::class, 'fetchNotificationsByMilestone']);
+    // Route::post('/update/{id}/status/{status}', [NotificationsController::class, 'updateNotificationStatus']);
+    // Route::post('/update/{id}/position/{position}', [NotificationsController::class, 'updateNotificationPosition']);
+    // Route::post('/add/milestone/{milestone_id}', [NotificationsController::class, 'addNotificationToMilestone']);
+    // Route::post('/edit/{id}', [NotificationsController::class, 'editNotificationById']);
+    Route::post('/read/{id}', [NotificationsController::class, 'markNotificationAsRead']);
     
 });

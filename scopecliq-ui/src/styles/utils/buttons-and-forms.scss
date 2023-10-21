@@ -13,10 +13,61 @@
     cursor: pointer;
     box-shadow: $sq-outter-shadow;
     transition: all 0.6s ease;
-    &:hover{
-        opacity: 1;
-    }
     i{
         color: #fff;
     }
+}
+
+.sq-btn{
+    cursor: pointer;
+    outline: 0;
+    border: 0;
+    height: 36px;
+    background-color: $sq-lav;
+    font-size: 12px;
+    color: $sq-white;
+    font-weight: 700;
+    border-radius: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s all ease-in;
+    text-decoration: none;
+    // .sq-btn--icon{
+    //     padding-left: 8px;
+    //     padding-right: 8px;
+    //     &.sq-btn--icon-lg{
+
+    //     }
+    // }
+    &:hover{
+        font-size: 13px;
+        scale: 1.01;   
+    }
+}
+
+.sq-btn--green{
+   @extend .sq-btn;
+   background-color: $sq-green;
+}
+
+.sq-btn-icon{
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.sq-textarea, .sq-input{
+        font-size: 12px;
+        outline: $sq-light;
+        border: none;
+        // width: 100%;
+        color: $sq-med;
+        margin: 0;
+        padding: 8px;
+        // background-color: transparent;
+        resize: none;
+        overflow: hidden;
 }

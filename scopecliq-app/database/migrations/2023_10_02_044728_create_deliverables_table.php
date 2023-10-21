@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('deliverables', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('project_id');
-            $table->integer('milestone_id');
+            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('milestone_id')->constrained('milestones');
             $table->integer('position');
             $table->text('description');
             $table->string('status')->default('not_started');

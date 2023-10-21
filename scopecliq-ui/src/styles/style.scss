@@ -11,6 +11,7 @@
 
 @import './modules/main.scss';
 @import './modules/milestones.scss';
+@import './modules/notifications.scss';
 
 // @import './modules/navbar.scss';
 // @import './modules/home.scss';
@@ -20,14 +21,32 @@
 // @import './modules/login.scss';
 // @import './modules/map.scss';
 
-body{
+*{
     font-family: 'DM Sans', sans-serif;
+}
+body{
     line-height: 1.4;
     color: $sq-med;
     background-color:$sq-lightest;
     transition: all  0.4s ease;
-
+    &::-webkit-scrollbar {
+        transition: 1s all ease;
+        opacity: 0;
+        background: transparent;  /* Optional: just make scrollbar invisible */
+        height: 0.8rem;
+        width: 0.5rem;
+        border: 1px solid $sq-lighter;
+    }
+    &::-webkit-scrollbar-thumb {
+        // height: 1rem;
+        // border-bottom: 1rem solid $sq-lav-light-bright;
+        // border-right: 1rem solid $sq-lav-light-bright;
+        border-top: 1px solid #ddd;
+        background-color: $sq-lav-light;
+        
+    }
 }
+
 
 .find-me{
     outline: 2px solid hotpink;

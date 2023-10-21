@@ -2,6 +2,14 @@
     background-color: #f4f4f4;
     border: 1px solid $sq-lighter;
 
+    &:hover{
+        .sq-btn-add{
+            opacity: 0.33;
+            transition-duration: 1s;
+            transition-delay: 0.75s;
+        }
+    }
+
     &.sq-milestone--complete{
         .milestone-status{
             color: $sq-green;
@@ -17,6 +25,18 @@
         box-shadow: $sq-outter-shadow;
     }
 
+    &.sq-milestone--client-mode{
+        .sq-client--curser-def{
+            cursor: default;
+        }
+        .sq-client--hide{
+            display: none !important;
+        }
+    }
+
+
+   
+
     .image{
         background-position: center;
        background-size: cover;
@@ -27,9 +47,27 @@
             min-height: 120px;
         }
     }
+
+    .deliverable-set{
+        &:hover{
+            .sq-btn-add{
+                transition-delay: 0s !important ;
+                transition-duration: 0.3s;
+                opacity: 1;
+            }
+        }
+    }
+
+    .sq-btn-add:hover{
+        transition-delay: 0s !important ;
+        transition-duration: 0.3s;
+        opacity: 1;
+    }
     .sq-deliverable{
         z-index: 1;
         border: 1px solid transparent;
+
+    
         &.sq-deliverable--complete{
             p.description{
                 color: $sq-med-light;
@@ -59,7 +97,6 @@
                   }
             }
             
-
             animation: editing 2s ease infinite;
 
 
@@ -67,22 +104,22 @@
                 display: none;
             }
             .description-edit{
-                font-size: 12px;
+                @extend .sq-textarea;
+                // font-size: 12px;
                 outline: none;
                 border: none;
                 width: 100%;
-                color: $sq-med;
+                // color: $sq-med;
                 margin: 0;
                 padding: 0;
                 background-color: transparent;
-                resize: none;
+                // resize: none;
                 overflow: hidden;
             }
         }
 
-        .sq-btn-icon{
-            cursor: pointer;
-        }
+
+      
         
     }
 

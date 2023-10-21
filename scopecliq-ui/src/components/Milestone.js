@@ -6,16 +6,20 @@ import placeholder1 from '../assets/img/placeholder-1.png'
 import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
 import BtnAdd from './BtnAdd';
+import { useDispatch, useSelector} from 'react-redux';
+import { isClient } from '../store/user-store';
 
 
-export const Milestone = ({isConsultant=true, milestoneId=1, position, title, description, image, fee}) => {
+export const Milestone = ({ milestone, milestoneId=1, position, title, description, image, fee}) => {
     const api = global.config.API;
+    const clientMode = useSelector(isClient);
+
     const [milestoneStatus, setMilestoneStatus] = useState('complete')
     const [deliverables, setDeliverables] = useState([])
+    const [editMode, set_editMode] = useState(false)
 
     const fetchDeliverableByMilestone = async() =>{
         const res = await axios.get(api+ '/deliverables/milestone/' + milestoneId)
-        console.log(res.data)
         setDeliverables(res.data)
         updateMileStoneStatus(res.data)
     }
@@ -49,7 +53,6 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
         setDeliverables([])
         let deliverabesCopy = [...deliverables];
         deliverabesCopy.splice(index+1, 0, newDeliverable)
-        // console.log(deliverabesCopy)
         setTimeout(()=>{
             setDeliverables([...deliverabesCopy])
         }, 0)
@@ -58,7 +61,6 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
         setDeliverables([])
         let deliverabesCopy = [...deliverables];
         deliverabesCopy.splice(index, 1)
-        // console.log(deliverabesCopy)
         setTimeout(()=>{
             setDeliverables([...deliverabesCopy])
         }, 0)
@@ -67,15 +69,26 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
         deliverables.map( async (d,i) =>{
             const res = await axios.post(api + `/deliverables/update/${d.id}/position/${i}`)
             console.log(res)
+
+            // if(res.status == 200 && i == deliverables.length-1){
+            //     fetchDeliverableByMilestone()
+            // }
         })
+
+
     }
 
     useEffect(()=>{
         fetchDeliverableByMilestone()
     }, [])
 
+    useEffect(()=>{
+        const isNewArr = deliverables.map(d => d.is_new);
+        set_editMode(isNewArr.includes(true))
+    }, [deliverables])
+
     return(
-        <div class={`sq-milestone--${milestoneStatus} sq-milestone col-1 col-sm-4 col-lg-3 rounded bg-sq-lightest my-2 p-4 mx-2`}>
+        <div class={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'}  sq-milestone col-1 col-sm-4 col-lg-3 rounded my-2 p-4 mx-2`} data-milestone-id={milestoneId}>
             <div class="sub mb-2 milestone-status">
                 {milestoneStatus}
             </div>
@@ -107,15 +120,17 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                 <span class="label">Deliverables: </span>
             </div>
             <div className='deliverables-list'>
+            {!clientMode &&!editMode && <BtnAdd cb={()=>{addNewDeliverable(-1)}}/> }
                 { deliverables.map( (d,i)=>(
-                    <div class="deliverable-set" key={i}>
+                    <div class="deliverable-set" key={d.id}>
                         <Deliverable
-                            key={i}
+                            key={d.id}
+                            deliverable={d}
                             deliverableId={d.id}
                             status={d.status}
                             description={d.description}
-                            position={i}
-                            milestoneId={milestoneId}
+                            position={d.position}
+                            milestoneId={milestone.id}
                             isNew={d.is_new}
                             cancelNewDeliverable={()=>{
                                 cancelNewDeliverable(i)
@@ -124,25 +139,14 @@ export const Milestone = ({isConsultant=true, milestoneId=1, position, title, de
                             updateMilestoneStatus={()=>{
                                 updateMileStoneStatus(deliverables)
                             }}
+                            fetchDeliverableByMilestone={fetchDeliverableByMilestone}
+                            cb={{}}
+                            index={i}
  
                         />
-                        <BtnAdd cb={()=>{addNewDeliverable(i)}}/>
+                        {!clientMode && !editMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }
                     </div>
                 ))}
-                {/* <Deliverable
-                    status="INCOMPLETE"
-                    description="Complete deliverable"
-                />
-                <Deliverable
-                    status="COMPLETE"
-                    description="Complete deliverable. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
-                    image={placeholder2}
-                />
-                 <Deliverable
-                    status="CANCELLED"
-                    description="Complete deliverable. incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
-                /> */}
-
             </div>
 
             
