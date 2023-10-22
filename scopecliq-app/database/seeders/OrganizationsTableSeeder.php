@@ -36,7 +36,6 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_email' => 'angela@office.com',
                 'contact_about' => 'Accounts Manager',
                 'contact_number' => '+63 234 567 8901',
-                 
             ],
         ]);    
     }

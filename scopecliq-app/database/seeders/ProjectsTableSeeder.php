@@ -15,18 +15,19 @@ class ProjectsTableSeeder extends Seeder
     public function run(): void
     {
 
-        $termsPlaceholder = "Text Content - All content material (copy, product images and details, etc)  is to be provided by the client. Should more content be needed, we can arrange for Content Creation to complete missing pieces of the website. (*See add-ons)
+        $termsPlaceholder = 
+"Text Content - All content material (copy, product images and details, etc)  is to be provided by the client. Should more content be needed, we can arrange for Content Creation to complete missing pieces of the website. (*See add-ons)
 
-        Images - We primarily use images provided by clients. Additionally, we are free to use CC0 License images (a.k.a. Free License Images ) available online.
-    
-        Requests and revisions - Realistically, revisions are always part of any design process which is why revision rounds are allotted to the project. Once designs are approved and implemented on the website and/or when allotted revisions are exhausted, additional requests will be billed separately at  regular hourly rate. Itemized invoice of revision work order will be issued for your approval before we proceed.
-    
-        What is minor and major revision? Moving photos and text around the page and changing colors mean we are doing layout changes and that's a major revision. However, changing a short text phrase here and there is a minor revision.
-            3 revisions max for homepage
-            2 revisions max for template-pages
-            1 revision per regular page
+Images - We primarily use images provided by clients. Additionally, we are free to use CC0 License images (a.k.a. Free License Images ) available online.
 
-        Technical Support and Website Care - Technical support and minor troubleshooting. Should you need substantial amount of regular posting of products and other content, feel free to check the addons.";
+Requests and revisions - Realistically, revisions are always part of any design process which is why revision rounds are allotted to the project. Once designs are approved and implemented on the website and/or when allotted revisions are exhausted, additional requests will be billed separately at  regular hourly rate. Itemized invoice of revision work order will be issued for your approval before we proceed.
+
+What is minor and major revision? Moving photos and text around the page and changing colors mean we are doing layout changes and that's a major revision. However, changing a short text phrase here and there is a minor revision.
+    3 revisions max for homepage
+    2 revisions max for template-pages
+    1 revision per regular page
+
+Technical Support and Website Care - Technical support and minor troubleshooting. Should you need substantial amount of regular posting of products and other content, feel free to check the addons.";
 
         DB::table('projects')->insert([
             [

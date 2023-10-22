@@ -21,12 +21,12 @@ const DashboardHomeLayout = ({
             <div class="sq-body container-fluid px-0">
                 <NavBar/>
                 <div className="sq-content row mh-100">
-                    <div class="col-md-4 mh-100">
+                    <div class="col-md-3 mh-100">
                         <DashboardHomeSidebar className="w-100 h-100"/>
                     </div>
-                    <div className='col-md-8 py-4'>
-                        <div>
-                            <div className='d-flex justify-content-between'>
+                    <div className='col-md-9 py-4'>
+                        <div className='pe-4'>
+                            <div className='d-flex justify-content-between mb-4'>
                                 <div>
                                     <h2>🔨 Dive in existing projects </h2>
                                     {/* <div>Sort by most recent</div> */}
@@ -44,6 +44,7 @@ const DashboardHomeLayout = ({
                                     <div className="col-md-6">
                                     <ProjectCard
                                         key={p.id}
+                                        collapsed
                                         project={p}
                                     />
                                     </div>

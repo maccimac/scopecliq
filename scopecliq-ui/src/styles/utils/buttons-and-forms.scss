@@ -50,12 +50,30 @@
 
 .sq-link{
     font-size: 12px;
-    text-decoration: underline;
     font-weight: 700;
     color: $sq-lav;
     background-color: transparent;
     outline: none;
-    border: none
+    border: none;
+    transition: 0.6s all ease-in-out;
+    padding-bottom: 4px;
+    height: auto;
+    border-bottom: 2px solid transparent;  
+    cursor: pointer;
+    &:hover{
+      border-color: $sq-lav  
+    }
+    &.text-color-sq-green{
+        &:hover{
+            border-color: $sq-green  
+          }
+    }
+
+    &.text-color-sq-med{
+        &:hover{
+            border-color: $sq-med  
+          }
+    }
 }
 
 .sq-btn--green{
