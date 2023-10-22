@@ -7,17 +7,12 @@ import { connect } from 'react-redux';
 
 import Notification from '../../components/Notification';
 
-const DashboardHomeSidebar = () => {
+const DashboardHomeSidebar = ({className, project}) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
     // const aProject= useSelector(storeProject);
 
-  
 
-    
-
-
- 
 
   useEffect(()=>{
     // fetch all projects
@@ -26,9 +21,9 @@ const DashboardHomeSidebar = () => {
 
 
     return(
-        <div className="sq-sidebar">
+        <div className={'sq-sidebar ' + className}>
+         Sidebar
 
-  
   
         </div>
     )

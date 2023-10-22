@@ -12,25 +12,22 @@ const DashboardHome = () => {
     const api = global.config.API
     const dispatch = useDispatch();
 
-    const [project, set_project] = useState(null)
-    const { projectId } = useParams();
+    const [projects, set_projects] = useState(null)
 
-    const fetchProjectById = async() =>{
-        const res = await axios.get(api+ '/projects/' + projectId)
-        set_project(res.data)
-        dispatch(setProject(res.data))
+    const fetchAllProjects = async() =>{
+        const res = await axios.get(api+ '/projects')
+        set_projects(res.data)
     }
-
 
     useEffect(()=>{
         dispatch(setAsConsultant)
-        fetchProjectById()
+        fetchAllProjects()
     }, [])
 
 
     return(
         <div class="sq-outter-frame">
-            {project && <DashboardHomeLayout/>}
+            {projects && <DashboardHomeLayout projects={projects}/>}
             
         </div>
     )

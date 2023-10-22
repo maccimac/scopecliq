@@ -20,7 +20,7 @@ const ClientPortal = () => {
 
     const { domain } = useParams();
     const [project, set_project] = useState(null)
-    const [ passwordValid, set_passswordValid] = useState(false)
+    const [ passwordValid, set_passswordValid] = useState(true)
 
 
     const fetchProjectByDomain = async() =>{

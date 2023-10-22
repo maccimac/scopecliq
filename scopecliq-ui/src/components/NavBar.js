@@ -10,9 +10,13 @@ export const NavBar = () => {
     const clientMode = useSelector(isClient);
 
     return(
-        <div class={`sq-navigation p-3 d-flex align-items-center  ${clientMode ? 'bg-sq-white' : 'bg-sq-lav-dark'}`}>
-            <div class="d-flex flex-column col-lg-2 col-sm-4 col-6">
-                <img src={logo} className="sq-logo w-auto mb-1"></img >
+        <div class={`
+            sq-navigation p-3 d-flex align-items-center justify-content-between
+            ${clientMode ? 'bg-sq-white' : 'bg-sq-lav-dark'}
+        `
+        }>
+            <div class="d-flex col-lg-4 col-sm-4 col-6 align-items-center">
+                <img src={logo} className="sq-logo w-auto mb-1 me-3"></img >
                 <span className={
                     `sub
                         ${clientMode ? 'text-color-sq-lav' : 'text-color-sq-green'}
@@ -21,11 +25,7 @@ export const NavBar = () => {
             </div>
 
             <div className='d-flex'>
-                {/* { clientMode 
-                ? <a href="/dashboard/2" className='sq-btn'>Visit Consultant Dashboard</a>
-                : <a href="/portal/siesta" className='sq-btn'>Visit Client Portal</a>
-                }
-                 */}
+               Some stuff
             </div>
             
         </div>

@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Organizations
+// ORGANIZATIONS
 Route::prefix('organizations')->group(function () {
 
     Route::get('/', [OrganizationsController::class, 'fetchAllOrganizations']);

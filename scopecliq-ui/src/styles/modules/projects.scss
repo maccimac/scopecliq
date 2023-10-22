@@ -1,0 +1,39 @@
+.sq-project-card{
+    background-color: $sq-white;
+    box-shadow: $sq-floating-shadow;
+
+    &.sq-project-card--dark{
+        background-color: $sq-lav-dark;
+        color: $sq-lightest;
+        .text-head{
+            color: $sq-white;
+        }
+        .sq-textarea, .sq-input{
+            background-color: $sq-light;
+        }
+    }
+
+    .project-body{
+        font-size: 11px;
+    }
+    
+    .text-prop{
+        color: $sq-lav-muted
+    }
+    .text-head{
+        color: $sq-dark;
+        font-weight: 700;
+    }
+
+    .sq-grid{
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+        margin-bottom: 4px;
+    }
+    .sq-textarea.sq-textarea--terms{
+        height: 160px;
+        resize: vertical;
+        overflow: scroll-y;
+        font-size: 9px;
+    }
+}

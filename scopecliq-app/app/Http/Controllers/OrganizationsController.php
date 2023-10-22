@@ -5,21 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ClientsController extends Controller
+class OrganizationsController extends Controller
 {
     //
-    public function fetchAllClients(){
+    public function fetchAllOrganizations(){
         $clients = DB::table('organizations')
             -> select('*')
             -> get();
         return $clients;
     }
 
-    public function fetchClientById($client_id){
+    public function fetchOrganizationById($organization_id){
         $clients = DB::table('organizations')
             -> select('*')
-            -> where('id', $id)
-            -> get();
+            -> where('id', $organization_id)
+            -> first();
         return $clients;
     }
 

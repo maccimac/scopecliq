@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('portal_domain');
             $table->string('portal_password');
+            $table->text('terms')->nullable();
 
             $table->timestamps();
         });

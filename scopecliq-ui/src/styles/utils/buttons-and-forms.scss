@@ -48,6 +48,16 @@
     }
 }
 
+.sq-link{
+    font-size: 12px;
+    text-decoration: underline;
+    font-weight: 700;
+    color: $sq-lav;
+    background-color: transparent;
+    outline: none;
+    border: none
+}
+
 .sq-btn--green{
    @extend .sq-btn;
    background-color: $sq-green;

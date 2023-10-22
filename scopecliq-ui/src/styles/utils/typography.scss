@@ -5,6 +5,12 @@ h2{
     font-weight: 500;
     line-height: normal;
 }
+h3{
+    font-size: 24px;
+    font-weight: 700;
+    color: $sq-black;
+
+}
 
 p{
     margin-top: 2px;
@@ -18,9 +24,14 @@ p{
     }
 }
 
+a{
+    text-decoration: none;
+}
+
 .sub{
+    margin-top: 4px;
     color: $sq-lav-muted;
-    font-size: 8.5px;
+    font-size: 9px;
     font-style: normal;
     font-weight: 700;
     letter-spacing: 2.56px;

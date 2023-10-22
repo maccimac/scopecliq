@@ -1,6 +1,7 @@
 .sq-milestone{
     background-color: #f4f4f4;
     border: 1px solid $sq-lighter;
+    min-width: 320px;
 
     &:hover{
         .sq-btn-add{

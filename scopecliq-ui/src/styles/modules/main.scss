@@ -1,24 +1,65 @@
+$nav-height: 48;
+$proj-header-height: 0;
+$sidebar-offset-width: 320;
+$scrollbar-width: 17;
+
 .sq-navigation{
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
+    background-color: $sq-white;
+    height: #{$nav-height}px;
+    z-index: 1;
     .sq-logo{
-        max-width: 180px;
+        max-width: 148px;
     }
 }
 
-
 .sq-body{
-    padding-top: 90px;
+    padding-top: #{$nav-height}px;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    
+
     .sq-content{
         flex-grow: 1;
         
     }
+}
+
+.sq-dashboard-portal{
+    &:has(.sq-sidebar-offcanvas--open){
+        .sq-navigation{
+            max-width: calc(100% - #{$sidebar-offset-width}px);
+            padding-right: 16px !important;
+        }
+        .project-blueprint-holder{
+            position: relative;
+            margin-right: #{$sidebar-offset-width - $scrollbar-width}px;        
+        }
+    }
+    .sq-navigation{
+        padding-right: 96px !important;
+    }
+    .project-header{
+        align-items: center;
+        height: auto;
+    }
+    .project-blueprint-holder{
+        overflow: auto;
+        max-height: calc(100vh - #{$nav-height + $proj-header-height}px);
+    }
+}
+
+.sq-project-blueprint{
+    width: fit-content;
+    display: flex;
+    padding-right: 32px;
+}
+
+
+.sq-sidebar{
+    background-color: $sq-lav-dark;
+    box-shadow: $sq-big-outter-shadow;
 }
 
 .sq-sidebar-offcanvas{
@@ -30,22 +71,54 @@
         box-shadow: $sq-big-outter-shadow;
         border: none;
         border-left: none;
+        width: #{$sidebar-offset-width}px;
         .offcanvas-header{
             background: transparent;
             position: absolute;
             right: 0;
         }
         .offcanvas-body{
+            &--PROJECT_DETAILS{
+                background-color: $sq-lav-dark;
+            }
             &::-webkit-scrollbar {
-                transition: 1s all ease;
-                opacity: 0;
-                background: transparent;  /* Optional: just make scrollbar invisible */
+                display: none;
             }
-            &::-webkit-scrollbar-thumb {
-                border-right: 0.5rem solid $sq-green-light;
-                background-color: transparent;
-                
+            // &::-webkit-scrollbar {
+            //     transition: 1s all ease;
+            //     opacity: 0;
+            //     background: transparent;  /* Optional: just make scrollbar invisible */
+            // }
+            // &::-webkit-scrollbar-thumb {
+            //     border-right: 0.5rem solid $sq-green-light;
+            //     background-color: transparent;
+            // }
+        }
+        .mode-notifications{
+            margin-bottom: 320px;
+           
+            .notification-list{
+               
+
             }
+            .sq-project-card{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                padding-bottom: 48px;
+                margin-bottom: -8px !important;
+                h3{
+                    font-size: 16px;
+                }
+               
+            }
+        }
+        .mode-project-details{
+            // background-color: $sq-lav-dark;
+            .sq-project-card{
+                box-shadow: none;
+            }
+
         }
     }
 

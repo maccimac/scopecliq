@@ -23,7 +23,7 @@ export const ProjectBlueprint = ({isConsultant, project}) => {
 
 
     return(
-        <div class="sq-project-blueprint px-4 d-flex bg-sq-lightest">
+        <div class="sq-project-blueprint">
             { milestones.map( (m,i)=>(
                  <Milestone
                     key={m.id}
@@ -37,9 +37,6 @@ export const ProjectBlueprint = ({isConsultant, project}) => {
                     isConsultant={isConsultant}
                  />
              ))}
-            <div class="col-6">
-
-            </div>
         </div>
     )
 }
