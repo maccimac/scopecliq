@@ -51,7 +51,7 @@ $scrollbar-width: 17;
 }
 
 .sq-dashboard-home{
-    .project-organization h2{
+    .sq-sidebar .project-organization h2{
         font-size: 24px;
     }
 }
@@ -65,9 +65,9 @@ $scrollbar-width: 17;
 
 
 .sq-sidebar{
-    min-height: 10vh;
-    background-color: $sq-lav-dark;
-    box-shadow: $sq-big-outter-shadow;
+    min-height: 100vh;   
+    background-color: $sq-lav-light;
+    box-shadow: $sq-big-outter-shadow-right;
 }
 
 .sq-sidebar-offcanvas{

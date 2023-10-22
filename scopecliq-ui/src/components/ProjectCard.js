@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
+import {OrganizationCard} from './OrganizationCard'
 
 export const ProjectCard = ({
     project,
@@ -35,7 +36,7 @@ export const ProjectCard = ({
     return(
         <div className={`
             sq-project-card p-3 rounded mb-4
-            ${dark && 'sq-project-card--dark'}
+            ${dark && 'dark'}
             ${full && 'sq-project-card--full'}
         `}>
             {full && (<div className='project-title me-3'>
@@ -64,34 +65,16 @@ export const ProjectCard = ({
                     <div>$ {project.budget}</div>
                 </div>
                 
-                <div className='sq-grid'>
+                {isCollapsed && (<div className='sq-grid'>
                     <div className='text-prop'>Client</div>
                     <div>
-                    <strong>{organization.contact_name}</strong>, {organization.contact_about}
+                    <strong>{organization.contact_name}</strong>, {organization.organization_name}
                     </div>
-                </div>
+                </div>)}
 
                 {!isCollapsed && (<div className='more-details'>
-                    <div className='project-client my-5'>
-                        <h2 className='text-head mb-3'>Client</h2>
-                        <div className='project-client'>
-                            <div className='sq-grid'>
-                                <span className='text-prop'>Name</span>
-                                <span>
-                                    <strong>{organization.contact_name}</strong>, {organization.contact_about}
-                                </span> 
-                            </div>
-                            
-                            <div className='sq-grid'>
-                                <span className='text-prop'>Email</span>
-                                <span>{organization.contact_email}</span> 
-                            </div>
-                            <div className='sq-grid'>
-                                <span className='text-prop'>Phone</span>
-                                <span>{organization.contact_number}</span> 
-                            </div>
-                        </div>
-                    </div>
+                    <OrganizationCard className="mt-3" organization={organization}/>
+
                     {full && (
                     <div>
                         <div className='project-portal my-5'>

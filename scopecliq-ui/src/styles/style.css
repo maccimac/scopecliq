@@ -681,7 +681,7 @@ a {
   max-height: calc(100vh - 48px);
 }
 
-.sq-dashboard-home .project-organization h2 {
+.sq-dashboard-home .sq-sidebar .project-organization h2 {
   font-size: 24px;
 }
 
@@ -693,9 +693,9 @@ a {
 }
 
 .sq-sidebar {
-  min-height: 10vh;
-  background-color: #565C79;
-  box-shadow: -12px 0px 12px 0px rgba(86, 92, 121, 0.12);
+  min-height: 100vh;
+  background-color: #EEF1FF;
+  box-shadow: 12px 0px 12px 0px rgba(86, 92, 121, 0.16);
 }
 
 .sq-sidebar-offcanvas {
@@ -705,7 +705,7 @@ a {
   z-index: 10;
 }
 .sq-sidebar-offcanvas .offcanvas {
-  box-shadow: -12px 0px 12px 0px rgba(86, 92, 121, 0.12);
+  box-shadow: -12px 0px 12px 0px rgba(86, 92, 121, 0.16);
   border: none;
   border-left: none;
   width: 320px;
@@ -724,17 +724,17 @@ a {
 .sq-sidebar-offcanvas .offcanvas .mode-notifications {
   margin-bottom: 320px;
 }
-.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card {
+.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card {
   position: absolute;
   bottom: 0;
   width: 100%;
   padding-bottom: 48px;
   margin-bottom: -8px !important;
 }
-.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card h3 {
+.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card h3, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card h3 {
   font-size: 16px;
 }
-.sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-project-card {
+.sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-organization-card {
   box-shadow: none;
 }
 
@@ -839,14 +839,14 @@ a {
   box-shadow: 6px 10px 16px 8px rgba(86, 92, 121, 0.12);
   font-size: 11px;
 }
-.sq-project-card.sq-project-card--dark, .sq-project-card.sq-organization-card--dark, .sq-organization-card.sq-project-card--dark, .sq-organization-card.sq-organization-card--dark {
+.sq-project-card.dark, .dark.sq-organization-card {
   background-color: #565C79;
   color: #F9F9F9;
 }
-.sq-project-card.sq-project-card--dark .text-head, .sq-project-card.sq-organization-card--dark .text-head, .sq-organization-card.sq-project-card--dark .text-head, .sq-organization-card.sq-organization-card--dark .text-head {
+.sq-project-card.dark .text-head, .dark.sq-organization-card .text-head {
   color: #fff;
 }
-.sq-project-card.sq-project-card--dark .sq-textarea, .sq-project-card.sq-project-card--dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card.sq-project-card--dark .description-edit, .sq-project-card.sq-project-card--dark .sq-input, .sq-project-card.sq-organization-card--dark .sq-textarea, .sq-project-card.sq-organization-card--dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card.sq-organization-card--dark .description-edit, .sq-project-card.sq-organization-card--dark .sq-input, .sq-organization-card.sq-project-card--dark .sq-textarea, .sq-organization-card.sq-project-card--dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card.sq-project-card--dark .description-edit, .sq-organization-card.sq-project-card--dark .sq-input, .sq-organization-card.sq-organization-card--dark .sq-textarea, .sq-organization-card.sq-organization-card--dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card.sq-organization-card--dark .description-edit, .sq-organization-card.sq-organization-card--dark .sq-input {
+.sq-project-card.dark .sq-textarea, .dark.sq-organization-card .sq-textarea, .sq-project-card.dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card.dark .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card .description-edit, .sq-project-card.dark .sq-input, .dark.sq-organization-card .sq-input {
   background-color: #CCCCCC;
 }
 .sq-project-card .text-prop, .sq-organization-card .text-prop {
@@ -861,11 +861,16 @@ a {
   grid-template-columns: 2fr 5fr;
   margin-bottom: 4px;
 }
-.sq-project-card .sq-textarea.sq-textarea--terms, .sq-project-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card .sq-textarea--terms.description-edit, .sq-organization-card .sq-textarea.sq-textarea--terms, .sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card .sq-textarea--terms.description-edit {
+.sq-project-card .sq-textarea.sq-textarea--terms, .sq-organization-card .sq-textarea.sq-textarea--terms, .sq-project-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card .sq-textarea--terms.description-edit {
   height: 160px;
   resize: vertical;
   overflow: scroll-y;
   font-size: 9px;
+}
+
+.sq-organization-card {
+  background-color: transparent;
+  box-shadow: none;
 }
 
 * {

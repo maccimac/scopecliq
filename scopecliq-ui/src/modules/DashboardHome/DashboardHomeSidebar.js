@@ -32,7 +32,7 @@ const DashboardHomeSidebar = ({className, project}) => {
 
     return(
         <div className={'sq-sidebar mt-5 ' + className}>
-          <div className='your-organization my-2 p-3'>
+          <div className='your-organization my-2 p-4 pb-5 bg-sq-lav-dark'>
             <h2 className='text-color-sq-lav-muted my-3'>Your Organization</h2>
             {organization && (
                 <OrganizationCard dark organization={organization}/>

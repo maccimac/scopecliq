@@ -6,14 +6,16 @@ import { isClient} from '../store/user-store';
 
 export const OrganizationCard = ({
     organization,
-    dark=false
+    dark=false,
+    className
 
 }) => {
     const api = global.config.API;
     return(
         <div className={`
             sq-organization-card
-            ${dark && 'sq-organization-card--dark'}
+            ${dark && 'dark'}
+            ${className}
         `} >
             <div className='project-organization'>
                 <h2 className='text-head mb-3'>{organization.organization_name}</h2>

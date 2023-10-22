@@ -1,9 +1,10 @@
-.sq-project-card, .sq-organization-card{
+
+.sq-project-card{
     background-color: $sq-white;
     box-shadow: $sq-floating-shadow;
     font-size: 11px;
 
-    &.sq-project-card--dark, &.sq-organization-card--dark{
+    &.dark{
         background-color: $sq-lav-dark;
         color: $sq-lightest;
         .text-head{
@@ -33,4 +34,10 @@
         overflow: scroll-y;
         font-size: 9px;
     }
+}
+
+.sq-organization-card{
+    @extend .sq-project-card;
+    background-color: transparent;
+    box-shadow: none;
 }
