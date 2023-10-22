@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->string('about');
-            $table->string('contact_number');
-            $table->string('organization_name');
+            // $table->string('about');
+            // $table->string('contact_number');
+            // $table->string('organization_name');
             
             $table->timestamps();
         });
