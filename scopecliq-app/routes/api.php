@@ -37,6 +37,7 @@ Route::prefix('organizations')->group(function () {
 
     Route::get('/', [OrganizationsController::class, 'fetchAllOrganizations']);
     Route::get('/{organization_id}', [OrganizationsController::class, 'fetchOrganizationById']);
+    Route::get('/consultant/{user_id}', [OrganizationsController::class, 'fetchOrganizationByConsultantId']);
 
 });
 

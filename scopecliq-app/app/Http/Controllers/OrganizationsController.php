@@ -23,4 +23,12 @@ class OrganizationsController extends Controller
         return $clients;
     }
 
+    public function fetchOrganizationByConsultantId($user_id){
+        $clients = DB::table('organizations')
+            -> select('*')
+            -> where('consultant_user_id', $user_id)
+            -> first();
+        return $clients;
+    }
+
 }

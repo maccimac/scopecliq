@@ -42,7 +42,7 @@ class OrganizationsTableSeeder extends Seeder
             ],
 
             [
-                'organization_name' => 'Douglas Alexei',
+                'organization_name' => 'Douglas Devs',
                 'contact_name' => 'Douglas Antonov',
                 'contact_email' => 'doug@douglasdevs.io',
                 'contact_about' => 'Founder',
