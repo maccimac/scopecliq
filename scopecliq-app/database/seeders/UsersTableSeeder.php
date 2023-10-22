@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UserTableSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
 
             [
                 'name' => 'Margaret McMoo' ,
-                'email' => 'web@webcrafterinc.com.com',
+                'email' => 'web@webcrafterinc.com',
                 'password' => '$2y$10$zv21Uy3QzuImfvsZVsSWc.IFML8whlaXdOSudPjKGn7vzgWTpSdPS', // scopecliq_v1
                  
             ],

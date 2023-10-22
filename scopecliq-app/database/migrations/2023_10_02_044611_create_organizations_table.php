@@ -21,10 +21,9 @@ return new class extends Migration
             $table->text('contact_about');
             $table->string('organization_logo')->nullable();
 
-            $table->integer('is_consultant')->default(false);
+            // $table->boolean('is_consultant')->default(false);
             $table->bigInteger('consultant_user_id')->unsigned()->nullable();
-            $table->foreign('consultant_user_id')->references('id')->on('users');
-            
+            $table->foreign('consultant_user_id')->references('id')->on('users')->onDelete('set null'); // Set the onDelete action
             $table->timestamps();
         });
     }

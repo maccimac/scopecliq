@@ -20,6 +20,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_email' => 'rizalk@estilodecada.ca',
                 'contact_about' => 'Head Contractor at Estilo Decada',
                 'contact_number' => '+1 234 567 8901',
+                'consultant_user_id'=> null
                  
             ],
             [
@@ -28,6 +29,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_email' => 'director@juliastudios.com',
                 'contact_about' => 'Julia Studios est 1992',
                 'contact_number' => '+63 234 567 8901',
+                'consultant_user_id'=> null
                 
             ],
             [
@@ -36,6 +38,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_email' => 'angela@office.com',
                 'contact_about' => 'Accounts Manager',
                 'contact_number' => '+63 234 567 8901',
+                'consultant_user_id'=> null
             ],
 
             [
@@ -44,7 +47,6 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_email' => 'doug@douglasdevs.io',
                 'contact_about' => 'Founder',
                 'contact_number' => '+63 234 567 8901',
-                'is_consultant'=>true,
                 'consultant_user_id'=> 1
             ],
         ]);    
