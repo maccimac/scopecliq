@@ -50,14 +50,22 @@ $scrollbar-width: 17;
     }
 }
 
+.sq-dashboard-home{
+    .project-organization h2{
+        font-size: 24px;
+    }
+}
+
 .sq-project-blueprint{
     width: fit-content;
     display: flex;
     padding-right: 32px;
+    min-height: calc(100vh - #{$nav-height}px);
 }
 
 
 .sq-sidebar{
+    min-height: 10vh;
     background-color: $sq-lav-dark;
     box-shadow: $sq-big-outter-shadow;
 }

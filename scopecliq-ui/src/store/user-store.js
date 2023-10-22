@@ -16,6 +16,6 @@ const userSlice = createSlice({
 })
 export const isClient = (state) =>  state.user.isClient;
 // export const isLoggedIn = (state) => state.login.isLoggedIn
-// export const currentUser = (state) => state.login.user
+export const currentUser = (state) => state.login.user
 export const { setAsConsultant, setAsClient } = userSlice.actions
 export default userSlice.reducer

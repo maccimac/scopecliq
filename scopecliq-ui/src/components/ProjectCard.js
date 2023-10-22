@@ -61,7 +61,7 @@ export const ProjectCard = ({
                 </div>
                 <div className='sq-grid'>
                     <div className='text-prop'>Total budget</div>
-                    <div>{project.budget}</div>
+                    <div>$ {project.budget}</div>
                 </div>
                 
                 <div className='sq-grid'>
