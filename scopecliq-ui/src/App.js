@@ -20,6 +20,8 @@ const App = () => {
         <Route path="/dashboard/:projectId" element={<ConsultantDashboard/>}/>
         <Route path="/dashboard" element={<DashboardHome/>}/>
         <Route path="/portal/:domain" element={<ClientPortal/>}/>
+
+        <Route path="/test" element={<Home/>}/>
       </Routes>
       
       {/* <Home/> */}
