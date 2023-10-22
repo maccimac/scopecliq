@@ -21,12 +21,11 @@ export const NavBar = () => {
             </div>
 
             <div className='d-flex'>
-                { clientMode 
+                {/* { clientMode 
                 ? <a href="/dashboard/2" className='sq-btn'>Visit Consultant Dashboard</a>
                 : <a href="/portal/siesta" className='sq-btn'>Visit Client Portal</a>
                 }
-                
-
+                 */}
             </div>
             
         </div>

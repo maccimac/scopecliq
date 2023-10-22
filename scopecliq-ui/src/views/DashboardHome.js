@@ -6,9 +6,9 @@ import { isClient, setAsClient, setAsConsultant } from '../store/user-store';
 import { setProject } from '../store/project-store';
 
 
-import  DashboardLayout  from '../modules/DashboardPortalLayout';
+import  DashboardHomeLayout  from '../modules/DashboardHome/DashboardHomeLayout';
 
-const ConsultantDashboard = () => {
+const DashboardHome = () => {
     const api = global.config.API
     const dispatch = useDispatch();
 
@@ -30,10 +30,10 @@ const ConsultantDashboard = () => {
 
     return(
         <div class="sq-outter-frame">
-            {project && <DashboardLayout isConsultant={true}/>}
+            {project && <DashboardHomeLayout/>}
             
         </div>
     )
 }
-export default ConsultantDashboard;
+export default DashboardHome;
 

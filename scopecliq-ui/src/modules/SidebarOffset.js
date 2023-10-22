@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 
 import Notification from '../components/Notification';
 
-const Sidebar = () => {
+const SidebarOffset = () => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
     const aProject= useSelector(storeProject);
-    const [showOffcanvas, setShowOffcanvas] = useState(true); // Set the initial state to true to show the Offcanvas
+    const [showOffcanvas, setShowOffcanvas] = useState(clientMode); // Set the initial state to true to show the Offcanvas
 
     const fetchNotificationsByProject = async() =>{
         const res = await axios.get(api+ '/notifications/project/' + aProject.id)
@@ -67,7 +67,7 @@ const Sidebar = () => {
 
 
     return(
-        <div className="sq-sidebar">
+        <div className="sq-sidebar-offcanvas">
             <div className="sq-btn btn-menu mt-4 me-3 bg-sq-green" onClick={toggleOffcanvas}>
                 <i className="fa-solid fa-bars"></i>
             </div>
@@ -130,17 +130,9 @@ const Sidebar = () => {
         </div>
     )
 }
-// export default Sidebar;
 
-// const mapStateToProps = (state) => ({
-//     sqproject: state.sqproject,
-//   });
   
-//   const mapDispatchToProps = {
-//     _setProject,
-//   };
-  
-  export default Sidebar;
+  export default SidebarOffset;
   
   
   

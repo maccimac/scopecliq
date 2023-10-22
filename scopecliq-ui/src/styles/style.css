@@ -614,28 +614,28 @@ p.description {
   flex-grow: 1;
 }
 
-.sq-sidebar {
+.sq-sidebar-offcanvas {
   position: fixed;
   top: 0;
   right: 0;
   z-index: 10;
 }
-.sq-sidebar .offcanvas {
+.sq-sidebar-offcanvas .offcanvas {
   box-shadow: -12px 0px 12px 0px rgba(86, 92, 121, 0.12);
   border: none;
   border-left: none;
 }
-.sq-sidebar .offcanvas .offcanvas-header {
+.sq-sidebar-offcanvas .offcanvas .offcanvas-header {
   background: transparent;
   position: absolute;
   right: 0;
 }
-.sq-sidebar .offcanvas .offcanvas-body::-webkit-scrollbar {
+.sq-sidebar-offcanvas .offcanvas .offcanvas-body::-webkit-scrollbar {
   transition: 1s all ease;
   opacity: 0;
   background: transparent; /* Optional: just make scrollbar invisible */
 }
-.sq-sidebar .offcanvas .offcanvas-body::-webkit-scrollbar-thumb {
+.sq-sidebar-offcanvas .offcanvas .offcanvas-body::-webkit-scrollbar-thumb {
   border-right: 0.5rem solid #E5F4F0;
   background-color: transparent;
 }

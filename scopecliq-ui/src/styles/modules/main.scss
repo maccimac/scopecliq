@@ -8,28 +8,23 @@
     }
 }
 
-// .sq-dashboard-portal{
-    .sq-body{
-        padding-top: 90px;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        
-        .sq-content{
-            flex-grow: 1;
-         
-        }
-    }
-// }
 
-.sq-sidebar{
+.sq-body{
+    padding-top: 90px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    .sq-content{
+        flex-grow: 1;
+        
+    }
+}
+
+.sq-sidebar-offcanvas{
     position: fixed;
     top:0;
     right: 0;
-    // width: 0;
-    // height: 0;
-    // width: 100px;
-    // height: 100px;
     z-index: 10;
     .offcanvas{
         box-shadow: $sq-big-outter-shadow;

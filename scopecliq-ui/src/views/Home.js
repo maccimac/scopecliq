@@ -27,16 +27,6 @@ const Home = () => {
     }
 
     const updateDeliverableStatus = async() => {
-        // const payloadStatus = {
-        //     status: "updated"
-        // }
-
-        // const res = await axios.post(`${api}/deliverables/update/1`, payloadStatus, {
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        // });
-        // console.log(res)
 
         const res = await axios.post(`${api}/deliverables/update/1/status/not_started`)
         console.log(res)
@@ -45,7 +35,6 @@ const Home = () => {
 
     const editDeliverable = async(deliverable) => {
         const payloadStatus = {
-            // ...deliverable,
             description: deliverable.description + " (Edited)",
         }
 

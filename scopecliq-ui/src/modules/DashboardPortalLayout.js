@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import NavBar from '../components/NavBar';
-import Sidebar from './Sidebar';
+import SidebarOffset from './SidebarOffset';
 import ProjectBlueprint from '../components/ProjectBlueprint';
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
@@ -26,7 +26,7 @@ const DashboardLayout = () => {
                     <ProjectBlueprint project={project}/>
                 </div>
             </div>
-                <Sidebar/>
+            <SidebarOffset/>
         </div>
     )
 }
