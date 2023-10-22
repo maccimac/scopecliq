@@ -37,6 +37,16 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_about' => 'Accounts Manager',
                 'contact_number' => '+63 234 567 8901',
             ],
+
+            [
+                'organization_name' => 'Douglas Alexei',
+                'contact_name' => 'Douglas Antonov',
+                'contact_email' => 'doug@douglasdevs.io',
+                'contact_about' => 'Founder',
+                'contact_number' => '+63 234 567 8901',
+                'is_consultant'=>true,
+                'consultant_user_id'=> 1
+            ],
         ]);    
     }
 }

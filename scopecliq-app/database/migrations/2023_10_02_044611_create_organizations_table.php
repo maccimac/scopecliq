@@ -24,7 +24,6 @@ return new class extends Migration
             $table->integer('is_consultant')->default(false);
             $table->bigInteger('consultant_user_id')->unsigned()->nullable();
             $table->foreign('consultant_user_id')->references('id')->on('users');
-
             
             $table->timestamps();
         });
