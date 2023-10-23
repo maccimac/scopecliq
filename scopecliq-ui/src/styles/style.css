@@ -836,7 +836,7 @@ a {
 
 .sq-project-card, .sq-organization-card {
   background-color: #fff;
-  box-shadow: 6px 10px 16px 8px rgba(86, 92, 121, 0.12);
+  box-shadow: 6px 6px 16px 6px rgba(86, 92, 121, 0.08);
   font-size: 11px;
 }
 .sq-project-card.dark, .dark.sq-organization-card {

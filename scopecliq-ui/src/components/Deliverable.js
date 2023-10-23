@@ -6,23 +6,25 @@ import { storeProject} from '../store/project-store';
 
 export const Deliverable = ({
     deliverable,
-    deliverableId, status="COMPLETE", isConsultant,  
-    description, image, position,
-    milestoneId,
-    isNew=false, 
-    cancelNewDeliverable, saveAllPositions, updateMilestoneStatus,
-    fetchDeliverableByMilestone,
+    // deliverableId, status="COMPLETE", isConsultant,  
+    // description,  position, 
+    // image,
+    // milestoneId,
+    // isNew=false, 
+    cb,
+    cancelNewDeliverable, updateMilestoneStatus,
+    // fetchDeliverableByMilestone,  saveAllPositions,
     index
 } ) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
     const project = useSelector(storeProject);
 
-    const [editMode, setEditMode]  = useState(isNew);
-    const [newMode, setnNewMode]  = useState(isNew);
-    const [statusModel, setStatusModel]  = useState(status);
-    const [descriptionModel, setDescriptionModel]  = useState(description);
-    const [descriptionModelEdit, setDescriptionModelEdit]  = useState(description);
+    const [editMode, setEditMode]  = useState(deliverable.is_new);
+    const [newMode, setnNewMode]  = useState(deliverable.is_new);
+    const [statusModel, setStatusModel]  = useState(deliverable.status);
+    const [descriptionModel, setDescriptionModel]  = useState(deliverable.description);
+    const [descriptionModelEdit, setDescriptionModelEdit]  = useState(deliverable.description);
 
     const statusClassNames = {
         COMPLETE: {
@@ -45,7 +47,7 @@ export const Deliverable = ({
     const toggleComplete = async () => {
         if (clientMode) return;
         const status = (statusModel == 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
-        const res = await axios.post(api + `/deliverables/update/${deliverableId}/status/${status}`)
+        const res = await axios.post(api + `/deliverables/update/${deliverable.id}/status/${status}`)
         if(res.status == 200){
             setStatusModel(status)
             resolveClassStyleByStatus(status)
@@ -98,7 +100,7 @@ export const Deliverable = ({
         const payloadDesc = {
             description: descriptionModelEdit
         }
-        const res = await axios.post(`${api}/deliverables/edit/${deliverableId}`, payloadDesc, {
+        const res = await axios.post(`${api}/deliverables/edit/${deliverable.id}`, payloadDesc, {
             headers: {
               "Content-Type": "application/json",
             },
@@ -119,12 +121,11 @@ export const Deliverable = ({
 
     const saveNewDeliverable = async () => {
         const payload = {
-            // project_id: deliverable.project_id,
             description: descriptionModelEdit,
             position: index
         }
 
-        const res = await axios.post(`${api}/deliverables/add/milestone/${milestoneId}`, payload, {
+        const res = await axios.post(`${api}/deliverables/add/milestone/${deliverable.milestone_id}`, payload, {
             headers: {
               "Content-Type": "application/json",
             },
@@ -143,8 +144,8 @@ export const Deliverable = ({
             status: "CREATED",
             extra: "A new deliverable has been added to the deliverable"
         })
-        saveAllPositions()        
-        fetchDeliverableByMilestone()
+        cb.saveAllPositions()        
+        cb.fetchDeliverableByMilestone()
 
     }
 
@@ -154,15 +155,17 @@ export const Deliverable = ({
     }
 
     useEffect(()=>{
-        resolveClassStyleByStatus(status);
+        resolveClassStyleByStatus(deliverable.status);
     }, [])
     
     useEffect(()=>{
-        resolveClassStyleByStatus(status);
-    }, [position])
+        resolveClassStyleByStatus(deliverable.status);
+    },
+    //  [position]
+    [deliverable.position] )
 
     return(
-        <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'} data-deliverable-id={deliverableId}>
+        <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'} data-deliverable-id={deliverable.id}>
             <div className='d-flex w-100'>
                 <div className={'status '} onClick={toggleComplete}>
                     <i className={statusIcon + ' fa-regular fa-md m-1 sq-btn-icon sq-client--curser-def' }></i>
@@ -210,10 +213,10 @@ export const Deliverable = ({
                 
             </div>
             {
-                image && (
+                deliverable.image && (
                     <div className='my-2 ms-2 px-3'>
                         <div className='rounded image image--small w-100' style={{
-                            backgroundImage: `url(${image})`
+                            backgroundImage: `url(${deliverable.image})`
                             }}>
                         </div>
                     </div>

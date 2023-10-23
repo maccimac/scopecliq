@@ -28,11 +28,11 @@ export const ProjectBlueprint = ({isConsultant, project}) => {
                  <Milestone
                     key={m.id}
                     milestone={m}
-                    title={m.name}
-                    description={m.description}
-                    position={m.position}
-                    fee={m.budget_percentage}
-                    milestoneId={m.id} 
+                    // title={m.name}
+                    // description={m.description}
+                    // position={m.position}
+                    // fee={m.budget_percentage}
+                    // milestoneId={m.id} 
                     projectId={m.project_id}
                     isConsultant={isConsultant}
                  />

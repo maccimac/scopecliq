@@ -42,7 +42,7 @@ const DashboardHomeLayout = ({
                                 </div>
 
                                 <div className='me-2'>
-                                    <h2>
+                                    <h2 className='sq-link font-size-18'>
                                         🚀 Start a new project
                                     </h2>
 

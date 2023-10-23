@@ -10,7 +10,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient } from '../store/user-store';
 
 
-export const Milestone = ({ milestone, milestoneId=1, position, title, description, image, fee}) => {
+export const Milestone = ({ milestone, image, fee}) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
 
@@ -19,7 +19,7 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
     const [editMode, set_editMode] = useState(false)
 
     const fetchDeliverableByMilestone = async() =>{
-        const res = await axios.get(api+ '/deliverables/milestone/' + milestoneId)
+        const res = await axios.get(api+ '/deliverables/milestone/' + milestone.id)
         setDeliverables(res.data)
         updateMileStoneStatus(res.data)
     }
@@ -48,7 +48,7 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
             position: 0,
             status: "INCOMPLETE",
             is_new: true,
-            milestone_id: milestoneId,
+            milestone_id: milestone.id,
         }
         setDeliverables([])
         let deliverabesCopy = [...deliverables];
@@ -69,10 +69,6 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
         deliverables.map( async (d,i) =>{
             const res = await axios.post(api + `/deliverables/update/${d.id}/position/${i}`)
             console.log(res)
-
-            // if(res.status == 200 && i == deliverables.length-1){
-            //     fetchDeliverableByMilestone()
-            // }
         })
 
 
@@ -88,22 +84,22 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
     }, [deliverables])
 
     return(
-        <div class={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'} sq-milestone rounded my-2 p-4 mx-2`} data-milestone-id={milestoneId}>
-            <div class="sub mb-2 milestone-status">
+        <div className={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'} sq-milestone rounded my-2 p-4 mx-2`} data-milestone-id={milestone}>
+            <div className="sub mb-2 milestone-status">
                 {milestoneStatus}
             </div>
             <div className='mb-2'>
-                    <span className="label">Milestone {position+1}: &nbsp;</span>
-                    <span className="title">{title}</span>
+                    <span className="label">Milestone {milestone.position+1}: &nbsp;</span>
+                    <span className="title">{milestone.name}</span>
             </div>
             <div className='mb-2'>
-                <p>{description}
+                <p>{milestone.description}
                 </p>                
             </div>
             <div className='mb-2'>
                     <p>
                         <span className="label">Fee: &nbsp;</span>
-                        {fee}% of budget
+                        {milestone.budget_percentage}% of budget
                     </p>
             </div>
             {image && (
@@ -117,32 +113,26 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
             
             <hr/>
             <div className='mb-2'>
-                <span class="label">Deliverables: </span>
+                <span className="label">Deliverables: </span>
             </div>
             <div className='deliverables-list'>
             {!clientMode &&!editMode && <BtnAdd cb={()=>{addNewDeliverable(-1)}}/> }
                 { deliverables.map( (d,i)=>(
-                    <div class="deliverable-set" key={d.id}>
+                    <div className="deliverable-set" key={d.id}>
                         <Deliverable
                             key={d.id}
                             deliverable={d}
-                            deliverableId={d.id}
-                            status={d.status}
-                            description={d.description}
-                            position={d.position}
-                            milestoneId={milestone.id}
-                            isNew={d.is_new}
+                            index={i}
+                            cb={
+                                {saveAllPositions,
+                                fetchDeliverableByMilestone,}
+                            }
                             cancelNewDeliverable={()=>{
                                 cancelNewDeliverable(i)
                             }}
-                            saveAllPositions={saveAllPositions}
                             updateMilestoneStatus={()=>{
                                 updateMileStoneStatus(deliverables)
                             }}
-                            fetchDeliverableByMilestone={fetchDeliverableByMilestone}
-                            cb={{}}
-                            index={i}
- 
                         />
                         {!clientMode && !editMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }
                     </div>
