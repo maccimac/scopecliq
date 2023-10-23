@@ -58,20 +58,28 @@ class MilestonesController extends Controller
                 'position' => $lastPosition+1,
                 'name' => $req->name,
                 'description' => $req->description,
+                'budget_percentage' => $req->budget_percentage,
                 'status_completion' => null,
                 'status_invoice' => null,
                 'datetime_started' => null,
             ],
         ]);
-
-        
-        // $deliverable = DB::table('deliverables')
-        //     -> where('id', $id)
-        //     -> update([
-        //         'status'=> $req->status
-        //     ]);
-        // return $deliverable;
-
-        
     }
+
+    public function updateMilestoneById (Request $req, $milestone_id) {
+
+        $data = [
+            'name' => $req->name,
+            'description' => $req->description,
+            'budget_percentage' => $req->budget_percentage,
+        ];
+
+        $milestone = DB::table('milestones')
+            -> where('id', $milestone_id)
+            -> update( $data );
+        return $milestone;
+    }
+
+   
+   
 }

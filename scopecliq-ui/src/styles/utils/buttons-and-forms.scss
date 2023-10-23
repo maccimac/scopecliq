@@ -103,6 +103,7 @@
         outline: 1px solid $sq-lighter;
         border-radius: 4px;
         box-shadow: $sq-inner-shadow;
+        min-width: 60px;
         &::placeholder{
             color: $sq-med-light;
         }

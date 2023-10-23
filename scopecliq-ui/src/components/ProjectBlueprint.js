@@ -5,19 +5,24 @@ import Milestone from './Milestone';
 import placeholder1 from '../assets/img/placeholder-1.png'
 import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
+import { useDispatch, useSelector} from 'react-redux';
+import { isClient} from '../store/user-store';
+import { storeProject} from '../store/project-store';
 
-export const ProjectBlueprint = ({isConsultant, project}) => {
+
+export const ProjectBlueprint = ({isConsultant}) => {
     const api = global.config.API
     const [milestones, set_milestones] = useState([])
+    const project = useSelector(storeProject)
 
-    const getMilestones = async(projectId) => {
-        const res = await axios.get(api+  '/milestones/project/'+ projectId )
+    const getMilestones = async() => {
+        const res = await axios.get(api+  '/milestones/project/'+ project.id )
         set_milestones(res.data)
     }
 
     useEffect(()=>{
         if(project){
-            getMilestones(project.id)    
+            getMilestones()    
         }        
     }, [project])
 
@@ -33,8 +38,8 @@ export const ProjectBlueprint = ({isConsultant, project}) => {
                     // position={m.position}
                     // fee={m.budget_percentage}
                     // milestoneId={m.id} 
-                    projectId={m.project_id}
-                    isConsultant={isConsultant}
+                    cb={{getMilestones
+                    }}
                  />
              ))}
         </div>

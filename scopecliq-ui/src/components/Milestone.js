@@ -11,7 +11,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient } from '../store/user-store';
 
 
-export const Milestone = ({ milestone, image, fee}) => {
+export const Milestone = ({ milestone, image, cb}) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
 
@@ -94,7 +94,7 @@ export const Milestone = ({ milestone, image, fee}) => {
                 {milestoneStatus}
             </div>
             <div></div>
-            <MilestoneCard milestone={milestone}/>
+            <MilestoneCard milestone={milestone} cb={{getMilestones: cb.getMilestones }}/>
             {/* <div className='mb-2'>
                     <span className="label">Milestone {milestone.position+1}: &nbsp;</span>
                     <span className="title">{milestone.name}</span>

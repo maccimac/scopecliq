@@ -60,6 +60,7 @@ Route::prefix('milestones')->group(function () {
     Route::get('/project/{project_id}', [MilestonesController::class, 'fetchMilestonesByProject']);
     Route::get('/last-position/{project_id}', [MilestonesController::class, 'getLastPositionByProject']);
     Route::post('/add/{project_id}', [MilestonesController::class, 'addMilestoneToProject']);
+    Route::post('/update/{milestone_id}', [MilestonesController::class, 'updateMilestoneById']);
 });
 
 
