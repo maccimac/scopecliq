@@ -21,15 +21,20 @@ export const Milestone = ({ milestone, image, fee}) => {
     const fetchDeliverableByMilestone = async() =>{
         const res = await axios.get(api+ '/deliverables/milestone/' + milestone.id)
         setDeliverables(res.data)
-        updateMileStoneStatus(res.data)
+        // setTimeout(()=>{
+        //     updateMilestoneStatus()
+        // },100)
+        
     }
-    const updateMileStoneStatus = (arr) => {
+    const updateMilestoneStatus = () => {
+        // console.log('updateMilestoneStatus')
         let statArr = []
-        arr.forEach(d => {
+        deliverables.forEach(d => {
             statArr.push(d.status)
         });
+        console.log(statArr)
         if (!statArr.length){
-            setMilestoneStatus('PENDING');
+            setMilestoneStatus('pending');
             return;
         }
         if(statArr.includes('INCOMPLETE')){
@@ -38,6 +43,9 @@ export const Milestone = ({ milestone, image, fee}) => {
             }else{
                 setMilestoneStatus('pending')
             }
+        }else{
+            setMilestoneStatus('complete')
+            
         }
     }
 
@@ -81,6 +89,7 @@ export const Milestone = ({ milestone, image, fee}) => {
     useEffect(()=>{
         const isNewArr = deliverables.map(d => d.is_new);
         set_editMode(isNewArr.includes(true))
+        updateMilestoneStatus()
     }, [deliverables])
 
     return(
@@ -123,15 +132,13 @@ export const Milestone = ({ milestone, image, fee}) => {
                             key={d.id}
                             deliverable={d}
                             index={i}
-                            cb={
-                                {saveAllPositions,
-                                fetchDeliverableByMilestone,}
-                            }
+                            cb={{
+                                saveAllPositions,
+                                fetchDeliverableByMilestone,
+                                // updateMilestoneStatus
+                            }}
                             cancelNewDeliverable={()=>{
                                 cancelNewDeliverable(i)
-                            }}
-                            updateMilestoneStatus={()=>{
-                                updateMileStoneStatus(deliverables)
                             }}
                         />
                         {!clientMode && !editMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }

@@ -6,14 +6,9 @@ import { storeProject} from '../store/project-store';
 
 export const Deliverable = ({
     deliverable,
-    // deliverableId, status="COMPLETE", isConsultant,  
-    // description,  position, 
-    // image,
-    // milestoneId,
-    // isNew=false, 
     cb,
-    cancelNewDeliverable, updateMilestoneStatus,
-    // fetchDeliverableByMilestone,  saveAllPositions,
+    cancelNewDeliverable, 
+    // updateMilestoneStatus,
     index
 } ) => {
     const api = global.config.API;
@@ -51,14 +46,11 @@ export const Deliverable = ({
         if(res.status == 200){
             setStatusModel(status)
             resolveClassStyleByStatus(status)
-            updateMilestoneStatus()
+            cb.fetchDeliverableByMilestone()
+            // cb.updateMilestoneStatus()
         }
         
         const payloadNotification = {
-            // project_id: deliverable.project_id,
-            // milesteone_id: deliverable.milesteone_id,
-            // deliverable_id: deliverable.id,
-            // description: deliverable.description,
             type: "STATUS_UPDATE",
             status,
         }
@@ -132,21 +124,21 @@ export const Deliverable = ({
         });
 
         const newItem = res.data
-
-        setnNewMode(false)
-        setEditMode(false)
-        setDescriptionModel(descriptionModelEdit)
-        finishEdit()
-        updateMilestoneStatus()
-        createNotification({
-            ...newItem,
-            type: "CHANGE",
-            status: "CREATED",
-            extra: "A new deliverable has been added to the deliverable"
-        })
-        cb.saveAllPositions()        
-        cb.fetchDeliverableByMilestone()
-
+        if(res.status==200){
+            setnNewMode(false)
+            setEditMode(false)
+            setDescriptionModel(descriptionModelEdit)
+            finishEdit()
+            // updateMilestoneStatus()
+            createNotification({
+                ...newItem,
+                type: "CHANGE",
+                status: "CREATED",
+                extra: "A new deliverable has been added to the deliverable"
+            })
+            cb.saveAllPositions()        
+            cb.fetchDeliverableByMilestone()
+        }
     }
 
     const resolveClassStyleByStatus = (statusModel) =>{
@@ -155,14 +147,17 @@ export const Deliverable = ({
     }
 
     useEffect(()=>{
-        resolveClassStyleByStatus(deliverable.status);
+        resolveClassStyleByStatus(statusModel);
     }, [])
     
     useEffect(()=>{
-        resolveClassStyleByStatus(deliverable.status);
+        resolveClassStyleByStatus(statusModel);
     },
     //  [position]
     [deliverable.position] )
+
+    // useEffect(()=>{
+    //     updateMilestoneStatus()}, [statusModel])
 
     return(
         <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'} data-deliverable-id={deliverable.id}>
