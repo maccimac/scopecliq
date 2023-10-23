@@ -1,8 +1,10 @@
+import * as React from 'react';
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
+import Menu from '@mui/material/Menu';
 
 export const Deliverable = ({
     deliverable,
@@ -19,6 +21,16 @@ export const Deliverable = ({
     const [statusModel, setStatusModel]  = useState(deliverable.status);
     const [descriptionModel, setDescriptionModel]  = useState(deliverable.description);
     const [descriptionModelEdit, setDescriptionModelEdit]  = useState(deliverable.description);
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handelMenuClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
 
     const statusClassNames = {
         COMPLETE: {
@@ -127,11 +139,15 @@ export const Deliverable = ({
             cb.fetchDeliverableByMilestone()
         }
     }
-
     const resolveClassStyleByStatus = (statusModel) =>{
         setClassNameState(statusClassNames[statusModel].outterClass + (editMode && ' sq-deliverable--edit '));
         setStatusIcon(statusClassNames[statusModel].icon);
     }
+
+
+  
+
+
 
     useEffect(()=>{
         resolveClassStyleByStatus(statusModel);
@@ -142,13 +158,13 @@ export const Deliverable = ({
     },[deliverable] )
 
     return(
-        <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'} data-deliverable-id={deliverable.id}>
+        <div className={ classNameState + ' sq-deliverable rounded py-2 px-2 mb-2'} data-deliverable-id={deliverable.id}>
             <div className='d-flex w-100'>
-                <div className={'status '} onClick={toggleComplete}>
-                    <i className={statusIcon + ' fa-regular fa-md m-1 sq-btn-icon sq-client--curser-def' }></i>
+                <div className='status sq-btn-icon no-hover pt-1' onClick={toggleComplete}>
+                    <i className={statusIcon + ' fa-regular fa-md m-1 cursor-pointer sq-client--curser-def' }></i>
                 </div>
                 
-                <div className="ms-1 flex-fill">
+                <div className="ms-1 mt-1 flex-fill">
                     <p onClick={enableEdit} className='description w-100'>{descriptionModel}</p>
                     {editMode && (
                         <textarea placeholder="Type a description" className='description-edit' rows="4" 
@@ -165,22 +181,63 @@ export const Deliverable = ({
                     newMode 
                     ?(
                         <div className='d-flex mt-1 new-deliverable'>
-                            <i onClick={(e)=>{saveNewDeliverable(e.target.value)}} className="fa-solid sq-btn-icon fa-save text-color-sq-green m-1 fa-xs "></i>
-                            <i onClick={cancelNewDeliverable} className="fa-solid sq-btn-icon fa-cancel text-color-sq-tomato-light m-1 fa-xs "></i>
+                            <div onClick={(e)=>{saveNewDeliverable(e.target.value)}} className='sq-btn-icon'>
+                                <i  className="fa-solid  fa-save text-color-sq-green m-1 fa-xs "></i>
+                            </div>
+                            <div onClick={cancelNewDeliverable} className='sq-btn-icon'>
+                                <i  className="fa-solid fa-cancel text-color-sq-tomato-light m-1 fa-xs "></i>
+                            </div>
+                            
                         </div>                  
                     )
                     :(
                         editMode
                         ?(
                             <div className='d-flex mt-1'>
-                                <i onClick={(e)=>{updateDescription(e.target.value)}} className="fa-solid sq-btn-icon fa-save text-color-sq-green m-1 fa-xs"></i>
-                                <i onClick={finishEdit} className="fa-solid sq-btn-icon fa-cancel text-color-sq-tomato-light m-1 fa-xs"></i>
+                                <div className="sq-btn-icon" onClick={(e)=>{updateDescription(e.target.value)}}>
+                                    <i  className="fa-solid  fa-save text-color-sq-green m-1 fa-xs"></i>
+                                </div>
+                                <div className="sq-btn-icon"  onClick={finishEdit}>
+                                    <i className="fa-solid  fa-cancel text-color-sq-tomato-light m-1 fa-xs"></i>
+                                </div>
                             </div>
                         )
                         :(
-                            <div className='d-flex mt-1 sq-client--hide'>
-                                <i className="fa-solid sq-btn-icon fa-pen-to-square text-color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
-                                <i className="fa-solid sq-btn-icon fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"></i>
+                            <div className='d-flex sq-client--hide'>
+                                <div className='sq-btn-icon'  onClick={enableEdit}>
+                                    <i className="fa-solid fa-regular fa-pen-to-square text-color-sq-gold m-1 fa-xs"></i>
+                                </div>
+                                <div className='sq-btn-icon'  onClick={handelMenuClick}>
+                                    <i className="fa-solid fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"
+                                        id="demo-positioned-button"
+                                        aria-controls={open ? 'demo-positioned-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                    ></i>
+                                </div>
+                               
+                                <Menu
+                                    id="demo-positioned-menu"
+                                    aria-labelledby="demo-positioned-button"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleMenuClose}
+                                    anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                    }}
+                                    transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                    }}
+                                    className='sq-menu'
+                                >
+                                    <div onClick={handleMenuClose}>
+                                        <div className="sq-menu-item" >Complete with message</div>
+                                        <div className="sq-menu-item" >Cancel deliverable</div>
+                                        <div className="sq-menu-item" >Delete deliverable</div>
+                                    </div>
+                                </Menu>
                             </div>
                         )
 

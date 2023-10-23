@@ -601,7 +601,7 @@ small {
   scale: 1.01;
 }
 
-.sq-link {
+.sq-link, .sq-menu .sq-menu-item {
   font-size: 12px;
   font-weight: 700;
   color: #5B79FC;
@@ -614,13 +614,13 @@ small {
   border-bottom: 2px solid transparent;
   cursor: pointer;
 }
-.sq-link:hover {
+.sq-link:hover, .sq-menu .sq-menu-item:hover {
   border-color: #5B79FC;
 }
-.sq-link.text-color-sq-green:hover {
+.sq-link.text-color-sq-green:hover, .sq-menu .text-color-sq-green.sq-menu-item:hover {
   border-color: #27D39F;
 }
-.sq-link.text-color-sq-med:hover {
+.sq-link.text-color-sq-med:hover, .sq-menu .text-color-sq-med.sq-menu-item:hover {
   border-color: #777;
 }
 
@@ -628,10 +628,24 @@ small {
   background-color: #27D39F;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .sq-btn-icon {
   cursor: pointer;
   outline: none;
   border: none;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.sq-btn-icon:not(.no-hover):hover {
+  transition: all 0.3s ease-in;
+  background-color: rgba(93, 107, 188, 0.07);
 }
 
 .sq-textarea, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-input {
@@ -652,6 +666,21 @@ small {
 }
 .sq-textarea:focus, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit:focus, .sq-input:focus {
   color: #333;
+}
+
+.sq-menu .MuiPaper-elevation {
+  box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
+}
+.sq-menu .MuiMenu-list {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.sq-menu .sq-menu-item {
+  border-bottom: none;
+  padding: 12px 8px;
+}
+.sq-menu .sq-menu-item:hover {
+  background-color: #E7E7E7;
 }
 
 .sq-navigation {
@@ -838,6 +867,7 @@ small {
   border: none;
   width: 100%;
   margin: 0;
+  margin-top: 2px;
   padding: 0;
   background-color: transparent;
   overflow: hidden;

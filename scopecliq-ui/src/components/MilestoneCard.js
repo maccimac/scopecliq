@@ -4,6 +4,7 @@ import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
+import Menu from '@mui/material/Menu';
 
 export const MilestoneCard = ({
     milestone,
@@ -13,11 +14,22 @@ export const MilestoneCard = ({
 }) => {
     const api = global.config.API;
     const project = useSelector(storeProject);
+    const clientMode = useSelector(isClient)
 
     const [editMode, setEditMode] = useState(false);
     const [modelName, set_modelName] = useState(milestone.name)
     const [modelDescription, set_modelDescription] = useState(milestone.description)
     const [modelPercentage, set_modePercentage] = useState(milestone.budget_percentage)
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handelMenuClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
 
     const addMilestone = async () =>{
         const payloadDesc = {
@@ -60,12 +72,59 @@ export const MilestoneCard = ({
         <div className='sq-milestone-card'>
             {!editMode 
             ?(
-            <div className='milestone-display' onClick={()=>{setEditMode(true)}} >
+            <div className='milestone-display' 
+                onClick={()=>{
+                    !clientMode && setEditMode(true)
+            }} >
                 <div className='d-flex justify-content-between'>
-                 <div className="sub mb-2 milestone-status">
+                    <div className="sub mb-2 milestone-status">
                         {milestoneStatus}
                     </div>
-                    <div><i onClick={()=>{setEditMode(true)}} className="fa-solid sq-btn-icon fa-pen-to-square text-color-sq-gold m-1 fa-xs"></i></div>
+                    <div className='d-flex'>
+                        {clientMode 
+                        ?(
+                            <div>
+                                <div className='sq-btn-icon' onClick={handelMenuClick}>
+                                <i className="fa-solid fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"
+                                    id="demo-positioned-button"
+                                    aria-controls={open ? 'demo-positioned-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                ></i>
+                                </div>      
+                                <Menu
+                                    id="demo-positioned-menu"
+                                    aria-labelledby="demo-positioned-button"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleMenuClose}
+                                    anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                    }}
+                                    transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                    }}
+                                    className='sq-menu'
+                                >
+                                    <div onClick={handleMenuClose}>
+                                        <div className="sq-menu-item">I have a question</div>
+                                    </div>
+                                </Menu>
+                            </div>
+                        )
+                        :( <div className='sq-btn-icon'>
+                                <i onClick={()=>{setEditMode(true)}} className="fa-solid  fa-pen-to-square text-color-sq-gold m-1 fa-xs"></i>
+                            </div>
+                        ) }
+                       
+                        
+                    </div>    
+
+                    
+
+                   
                 </div>
                 <div className='mb-2'>
                     <span className="label">Milestone {milestone.position+1}: &nbsp;</span>
@@ -118,9 +177,10 @@ export const MilestoneCard = ({
                         <br/>
                         <small>&nbsp; ${} of Project Budget</small>
                      </div>
-                     {/* <div onClick={updateMilestone} className='sq-btn bg-sq-gold-mid text-center'>Update</div>    */}
                      <span className="sq-link" onClick={()=>{setEditMode(false)}} >Cancel</span>  
-                     <div onClick={addMilestone} className='sq-btn bg-sq-gold-mid text-center'>Add</div> 
+                     <div onClick={updateMilestone} className='sq-btn bg-sq-gold-mid text-center'>Update</div>   
+                    
+                     {/* <div onClick={addMilestone} className='sq-btn bg-sq-gold-mid text-center'>Add</div>  */}
                 </div>
                 {/* <div className='my-4'>
                     <div className='sq-btn bg-sq-gold-mid'>Save Milestone</div>

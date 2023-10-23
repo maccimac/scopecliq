@@ -81,10 +81,24 @@
    background-color: $sq-green;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 .sq-btn-icon{
     cursor: pointer;
     outline: none;
     border: none;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    &:not(.no-hover):hover{
+        transition: all 0.3s ease-in;
+        background-color: $sq-lav-mid-trans;
+    }
 }
 .sq-input-group{
     // .label{
@@ -110,4 +124,23 @@
         &:focus{
             color: $sq-black;
         }
+}
+
+.sq-menu{
+    .MuiPaper-elevation{
+        box-shadow: $sq-outter-shadow;
+    }
+    .MuiMenu-list{
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .sq-menu-item{
+        @extend .sq-link;
+        border-bottom: none;
+        padding: 12px 8px;
+        &:hover{
+            background-color: $sq-lighter;
+        }
+    }
+   
 }
