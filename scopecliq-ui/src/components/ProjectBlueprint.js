@@ -33,13 +33,8 @@ export const ProjectBlueprint = ({isConsultant}) => {
                  <Milestone
                     key={m.id}
                     milestone={m}
-                    // title={m.name}
-                    // description={m.description}
-                    // position={m.position}
-                    // fee={m.budget_percentage}
-                    // milestoneId={m.id} 
-                    cb={{getMilestones
-                    }}
+                    cb={{getMilestones}}
+                    index={i}
                  />
              ))}
         </div>

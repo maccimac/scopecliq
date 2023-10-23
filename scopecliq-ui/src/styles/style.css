@@ -634,11 +634,6 @@ small {
   border: none;
 }
 
-.sq-input-group .label {
-  font-size: 10px;
-  font-weight: 500;
-}
-
 .sq-textarea, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-input {
   font-size: 12px;
   border: none;

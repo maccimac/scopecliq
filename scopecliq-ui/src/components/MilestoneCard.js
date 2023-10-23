@@ -7,11 +7,9 @@ import { storeProject} from '../store/project-store';
 
 export const MilestoneCard = ({
     milestone,
-    cb
-    // dark=false,
-    // className
-
-
+    cb,
+    milestoneStatus="",
+    index
 }) => {
     const api = global.config.API;
     const project = useSelector(storeProject);
@@ -62,11 +60,17 @@ export const MilestoneCard = ({
         <div className='sq-milestone-card'>
             {!editMode 
             ?(
-            <div className='milestone-display'>
+            <div className='milestone-display' onClick={()=>{setEditMode(true)}} >
+                <div className='d-flex justify-content-between'>
+                 <div className="sub mb-2 milestone-status">
+                        {milestoneStatus}
+                    </div>
+                    <div><i onClick={()=>{setEditMode(true)}} className="fa-solid sq-btn-icon fa-pen-to-square text-color-sq-gold m-1 fa-xs"></i></div>
+                </div>
                 <div className='mb-2'>
                     <span className="label">Milestone {milestone.position+1}: &nbsp;</span>
                     <span className="title">{milestone.name}</span>
-                    <i onClick={()=>{setEditMode(true)}} className="fa-solid sq-btn-icon fa-pencil text-color-sq-gold m-1 fa-xs"></i>
+                    
                 </div>
                 <div className='mb-2'>
                     <p>{milestone.description}
@@ -81,6 +85,7 @@ export const MilestoneCard = ({
             </div>
             ) : (
             <div className='milestone-edit'>
+                {/* <span className="label">Milestone {index+1}</span> */}
                 <div class="sq-input-group mb-2">
                     <div className='label'>Milestone Name</div>
                     <input className='sq-input w-100' 
@@ -113,7 +118,8 @@ export const MilestoneCard = ({
                         <br/>
                         <small>&nbsp; ${} of Project Budget</small>
                      </div>
-                     <div onClick={updateMilestone} className='sq-btn bg-sq-gold-mid text-center'>Update</div>   
+                     {/* <div onClick={updateMilestone} className='sq-btn bg-sq-gold-mid text-center'>Update</div>    */}
+                     <span className="sq-link" onClick={()=>{setEditMode(false)}} >Cancel</span>  
                      <div onClick={addMilestone} className='sq-btn bg-sq-gold-mid text-center'>Add</div> 
                 </div>
                 {/* <div className='my-4'>

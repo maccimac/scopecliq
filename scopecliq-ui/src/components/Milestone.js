@@ -11,7 +11,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient } from '../store/user-store';
 
 
-export const Milestone = ({ milestone, image, cb}) => {
+export const Milestone = ({ milestone, index, image, cb}) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
 
@@ -90,25 +90,15 @@ export const Milestone = ({ milestone, image, cb}) => {
 
     return(
         <div className={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'} sq-milestone rounded my-2 p-4 mx-2`} data-milestone-id={milestone}>
-            <div className="sub mb-2 milestone-status">
-                {milestoneStatus}
-            </div>
-            <div></div>
-            <MilestoneCard milestone={milestone} cb={{getMilestones: cb.getMilestones }}/>
-            {/* <div className='mb-2'>
-                    <span className="label">Milestone {milestone.position+1}: &nbsp;</span>
-                    <span className="title">{milestone.name}</span>
-            </div>
-            <div className='mb-2'>
-                <p>{milestone.description}
-                </p>                
-            </div>
-            <div className='mb-2'>
-                    <p>
-                        <span className="label">Fee: &nbsp;</span>
-                        {milestone.budget_percentage}% of budget
-                    </p>
-            </div> */}
+           
+            <MilestoneCard
+                key={milestone.id}
+                milestoneStatus={milestoneStatus} 
+                milestone={milestone} 
+                cb={{getMilestones: cb.getMilestones }}
+                index={index}
+            />
+           
             {image && (
                 <div className='mb-2'>
                 <div className='rounded image image--med w-100 p-4' style={{
