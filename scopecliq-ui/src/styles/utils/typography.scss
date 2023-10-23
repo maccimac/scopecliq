@@ -50,6 +50,11 @@ a{
     font-weight: 700;
 }
 
+small{
+    font-size: 8px;
+    color: $sq-med-light;
+}
+
 @for $i from 1 through 48 {
     .font-size-#{$i} {
         font-size: #{$i}px !important;

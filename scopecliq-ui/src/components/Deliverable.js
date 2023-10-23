@@ -8,7 +8,6 @@ export const Deliverable = ({
     deliverable,
     cb,
     cancelNewDeliverable, 
-    // updateMilestoneStatus,
     index
 } ) => {
     const api = global.config.API;
@@ -41,15 +40,13 @@ export const Deliverable = ({
 
     const toggleComplete = async () => {
         if (clientMode) return;
-        const status = (statusModel == 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
+        const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
         const res = await axios.post(api + `/deliverables/update/${deliverable.id}/status/${status}`)
-        if(res.status == 200){
+        if(res.status === 200){
             setStatusModel(status)
             resolveClassStyleByStatus(status)
             cb.fetchDeliverableByMilestone()
-            // cb.updateMilestoneStatus()
         }
-        
         const payloadNotification = {
             type: "STATUS_UPDATE",
             status,
@@ -58,8 +55,7 @@ export const Deliverable = ({
     } 
 
     const createNotification = async (_payload) =>{
-        const status = (statusModel == 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
-
+        const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
         const payload = {
             ...deliverable,
             read_at: null,
@@ -67,7 +63,7 @@ export const Deliverable = ({
             status,
             ..._payload,
         }
-        const res2 = await axios.post(`${api}/notifications/project/${project.id}/add`, payload, {
+        await axios.post(`${api}/notifications/project/${project.id}/add`, payload, {
             headers: {
               "Content-Type": "application/json",
             },
@@ -77,17 +73,14 @@ export const Deliverable = ({
     }
 
     const enableEdit = () => {
-        // console.log(modeClient)
         if(clientMode) return;
         setEditMode(true);
         setClassNameState(statusClassNames[statusModel].outterClass + ( ' sq-deliverable--edit '));
     } 
-    
     const finishEdit = () => {
         setEditMode(false);
         setClassNameState(statusClassNames[statusModel].outterClass);
     } 
-
     const updateDescription = async () =>{
         const payloadDesc = {
             description: descriptionModelEdit
@@ -97,17 +90,14 @@ export const Deliverable = ({
               "Content-Type": "application/json",
             },
         });
-        if(res.status==200){
+        if(res.status===200){
             setDescriptionModel(descriptionModelEdit)
         }
-
         createNotification({
             type: "CHANGE",
             status: "MADE",
             extra: "The description has been changes"
-        })
-
-     
+        })     
         finishEdit()
     }
 
@@ -116,20 +106,17 @@ export const Deliverable = ({
             description: descriptionModelEdit,
             position: index
         }
-
         const res = await axios.post(`${api}/deliverables/add/milestone/${deliverable.milestone_id}`, payload, {
             headers: {
               "Content-Type": "application/json",
             },
         });
-
         const newItem = res.data
-        if(res.status==200){
+        if(res.status===200){
             setnNewMode(false)
             setEditMode(false)
             setDescriptionModel(descriptionModelEdit)
             finishEdit()
-            // updateMilestoneStatus()
             createNotification({
                 ...newItem,
                 type: "CHANGE",
@@ -152,12 +139,7 @@ export const Deliverable = ({
     
     useEffect(()=>{
         resolveClassStyleByStatus(statusModel);
-    },
-    //  [position]
-    [deliverable.position] )
-
-    // useEffect(()=>{
-    //     updateMilestoneStatus()}, [statusModel])
+    },[deliverable] )
 
     return(
         <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'} data-deliverable-id={deliverable.id}>
@@ -173,7 +155,8 @@ export const Deliverable = ({
                             onChange={(e)=>{
                                 setDescriptionModelEdit(e.target.value)
                             }}
-                        cols="100">{descriptionModel}</textarea>
+                            value={descriptionModelEdit}
+                            cols="100"></textarea>
                     )}
                     
                 </div>

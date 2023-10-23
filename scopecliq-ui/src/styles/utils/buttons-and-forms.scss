@@ -86,16 +86,27 @@
     outline: none;
     border: none;
 }
-
+.sq-input-group{
+    .label{
+        font-size: 10px;
+        font-weight: 500;
+    }
+}
 .sq-textarea, .sq-input{
         font-size: 12px;
-        outline: $sq-light;
         border: none;
-        // width: 100%;
         color: $sq-med;
         margin: 0;
         padding: 8px;
-        // background-color: transparent;
         resize: none;
         overflow: hidden;
+        outline: 1px solid $sq-lighter;
+        border-radius: 4px;
+        box-shadow: $sq-inner-shadow;
+        &::placeholder{
+            color: $sq-med-light;
+        }
+        &:focus{
+            color: $sq-black;
+        }
 }

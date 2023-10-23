@@ -91,14 +91,14 @@
                   border-color: $sq-light;
                 }
                 50% {
-                  border-color: $sq-gold-lighter;
+                  border-color: $sq-lav-light-bright;
                 }
                 100% {
                     border-color:  $sq-light;
                   }
             }
             
-            animation: editing 2s ease infinite;
+            animation: editing 1.2s ease infinite;
 
 
             p.description{
@@ -116,6 +116,7 @@
                 background-color: transparent;
                 // resize: none;
                 overflow: hidden;
+                box-shadow: none;
             }
         }
 

@@ -62,11 +62,8 @@ const DashboardHomeLayout = ({
                             </div>
                          </div>   
                     </div>
-                    
-                    {/* <ProjectBlueprint project={project}/> */}
                 </div>
             </div>
-                {/* <Sidebar/> */}
         </div>
     )
 }

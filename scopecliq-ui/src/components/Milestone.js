@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import Deliverable from './Deliverable';
+import MilestoneCard from './MilestoneCard';
 
 import placeholder1 from '../assets/img/placeholder-1.png'
 import placeholder2 from '../assets/img/placeholder-2.png'
@@ -21,18 +22,13 @@ export const Milestone = ({ milestone, image, fee}) => {
     const fetchDeliverableByMilestone = async() =>{
         const res = await axios.get(api+ '/deliverables/milestone/' + milestone.id)
         setDeliverables(res.data)
-        // setTimeout(()=>{
-        //     updateMilestoneStatus()
-        // },100)
         
     }
     const updateMilestoneStatus = () => {
-        // console.log('updateMilestoneStatus')
         let statArr = []
         deliverables.forEach(d => {
             statArr.push(d.status)
         });
-        console.log(statArr)
         if (!statArr.length){
             setMilestoneStatus('pending');
             return;
@@ -97,7 +93,9 @@ export const Milestone = ({ milestone, image, fee}) => {
             <div className="sub mb-2 milestone-status">
                 {milestoneStatus}
             </div>
-            <div className='mb-2'>
+            <div></div>
+            <MilestoneCard milestone={milestone}/>
+            {/* <div className='mb-2'>
                     <span className="label">Milestone {milestone.position+1}: &nbsp;</span>
                     <span className="title">{milestone.name}</span>
             </div>
@@ -110,7 +108,7 @@ export const Milestone = ({ milestone, image, fee}) => {
                         <span className="label">Fee: &nbsp;</span>
                         {milestone.budget_percentage}% of budget
                     </p>
-            </div>
+            </div> */}
             {image && (
                 <div className='mb-2'>
                 <div className='rounded image image--med w-100 p-4' style={{

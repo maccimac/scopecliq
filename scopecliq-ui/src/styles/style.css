@@ -353,6 +353,11 @@ a {
   font-weight: 700;
 }
 
+small {
+  font-size: 8px;
+  color: #999999;
+}
+
 .font-size-1 {
   font-size: 1px !important;
 }
@@ -629,15 +634,28 @@ a {
   border: none;
 }
 
+.sq-input-group .label {
+  font-size: 10px;
+  font-weight: 500;
+}
+
 .sq-textarea, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-input {
   font-size: 12px;
-  outline: #CCCCCC;
   border: none;
   color: #777;
   margin: 0;
   padding: 8px;
   resize: none;
   overflow: hidden;
+  outline: 1px solid #E7E7E7;
+  border-radius: 4px;
+  box-shadow: 0px 0px 12px 0px rgba(86, 92, 121, 0.18) inset;
+}
+.sq-textarea::placeholder, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit::placeholder, .sq-input::placeholder {
+  color: #999999;
+}
+.sq-textarea:focus, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit:focus, .sq-input:focus {
+  color: #333;
 }
 
 .sq-navigation {
@@ -803,14 +821,14 @@ a {
 .sq-milestone .sq-deliverable.sq-deliverable--edit {
   border: 1px solid auto;
   box-shadow: 0px 0px 12px 0px rgba(86, 92, 121, 0.18) inset;
-  animation: editing 2s ease infinite;
+  animation: editing 1.2s ease infinite;
 }
 @keyframes editing {
   0% {
     border-color: #CCCCCC;
   }
   50% {
-    border-color: #FAD99C;
+    border-color: #BBC7FD;
   }
   100% {
     border-color: #CCCCCC;
@@ -827,6 +845,7 @@ a {
   padding: 0;
   background-color: transparent;
   overflow: hidden;
+  box-shadow: none;
 }
 
 .sq-notification .btn-notif-exit {
