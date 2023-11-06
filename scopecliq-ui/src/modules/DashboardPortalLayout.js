@@ -10,12 +10,14 @@ import NavBar from '../components/NavBar';
 import SidebarOffset from './SidebarOffset';
 import ProjectBlueprint from '../components/ProjectBlueprint';
 import { useDispatch, useSelector} from 'react-redux';
+import ProjectEdit from './ProjectEdit';
 
 
 const DashboardLayout = () => {
     const api = global.config.API
     const clientMode = useSelector(isClient)
     const project=(useSelector(storeProject))
+    console.log(project)
 
     return(
         <div class="sq-dashboard-portal">
@@ -34,10 +36,13 @@ const DashboardLayout = () => {
                                 </strong>   
                             )}
                             <h2 className='mt-2'>Your Project Blueprint: &nbsp;
-                                <strong className='text-color-sq-lav-dark'>{project.name}</strong>
+                                <strong className='text-color-sq-lav-dark'>{project && project.name}</strong>
                             </h2>
                         </div>
-                        <ProjectBlueprint project={project}/>
+                        {
+                            project && (<ProjectBlueprint project={project}/>)
+                        }
+                        
                     </div>
                 </div>
             </div>

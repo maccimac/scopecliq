@@ -18,6 +18,7 @@ const ConsultantDashboard = () => {
     const fetchProjectById = async() =>{
         const res = await axios.get(api+ '/projects/' + projectId)
         set_project(res.data)
+        console.log(res.data)
         dispatch(setProject(res.data))
     }
 

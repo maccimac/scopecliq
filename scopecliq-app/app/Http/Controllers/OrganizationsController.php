@@ -31,4 +31,37 @@ class OrganizationsController extends Controller
         return $clients;
     }
 
+
+    public function addOrganization(Request $req, $user_id) {
+        $newOrg = DB::table('organizations')
+            ->insert([
+            
+                'organization_name' => $req->organization_name,
+                'contact_name' => $req->contact_name,
+                'contact_email' => $req->contact_email,
+                'contact_about' => $req->contact_about,
+                'contact_number' => $req->contact_number,
+                'consultant_user_id' => $user_id,
+            
+        ]);
+        return $newOrg;
+        
+    }
+
+    public function updateOrganizationById (Request $req, $organization_id) {
+
+        $data =  [
+            'organization_name' => $req->organization_name,
+            'contact_name' => $req->contact_name,
+            'contact_email' => $req->contact_email,
+            'contact_about' => $req->contact_about,
+            'contact_number' => $req->contact_number,
+        ];
+
+        $milestone = DB::table('organization')
+            -> where('id', $organization_id)
+            -> update( $data );
+        return $milestone;
+    }
+
 }

@@ -11,6 +11,7 @@ export const OrganizationCard = ({
 
 }) => {
     const api = global.config.API;
+
     return(
         <div className={`
             ${dark && 'dark'}

@@ -2,10 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const projectSlice = createSlice({
   name: 'project',
-  initialState: {
-    project: null,
-    // isConsultant: false,
-  },
+  initialState: null,
   reducers: {
     setProject(state, action){
       return action.payload

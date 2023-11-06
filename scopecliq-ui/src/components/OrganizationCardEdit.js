@@ -7,7 +7,8 @@ import { isClient} from '../store/user-store';
 export const OrganizationCardEdit = ({
     organization,
     dark=false,
-    className
+    className,
+    cb
 
 }) => {
     const api = global.config.API;
@@ -15,7 +16,24 @@ export const OrganizationCardEdit = ({
     const [modelContactName, set_modelContactName] = useState('')
     const [modelContactEmail,  set_modelContactEmail] = useState('')
     const [modelContactAbout, set_modelContactAbout] = useState('')
-    const [ modelContactPhone, set_modelContactPhone] = useState('')
+    const [ modelContactNumber, set_modelContactNumber] = useState('')
+
+    useEffect(()=>{
+        cb.set_organization({
+            organization_name: modelOrganizationName,
+            contact_name: modelContactName,
+            contact_email: modelContactEmail,
+            contact_number: modelContactNumber,
+            contact_about: modelContactAbout,
+        })
+
+    }, [
+        modelOrganizationName,
+        modelContactName,
+        modelContactEmail,
+        modelContactNumber,
+        modelContactAbout
+    ])
 
 
     return(
@@ -58,11 +76,11 @@ export const OrganizationCardEdit = ({
                                 placeholder='Contact Email'
                     ></input>
                     <input className='sq-input w-100 mb-2' 
-                            value={modelContactPhone} 
+                            value={modelContactNumber} 
                             onChange={(e)=>{
-                                set_modelContactPhone(e.target.value)
+                                set_modelContactNumber(e.target.value)
                             }}
-                            placeholder='Contact Phone'
+                            placeholder='Contact Number'
                     ></input>
                 </div>
                 
