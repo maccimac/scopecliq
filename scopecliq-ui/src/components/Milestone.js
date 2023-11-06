@@ -98,7 +98,11 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
                 key={milestone.id}
                 milestoneStatus={milestoneStatus} 
                 milestone={milestone} 
-                cb={{getMilestones: cb.getMilestones, updateMilestonesPositions: cb.updateMilestonesPositions }}
+                cb={{
+                    getMilestones: cb.getMilestones, 
+                    updateMilestonesPositions: cb.updateMilestonesPositions, 
+                    removeMilestoneWithoutId: cb.removeMilestoneWithoutId
+                }}
                 index={index}
                 edit={!milestone.id}
             />

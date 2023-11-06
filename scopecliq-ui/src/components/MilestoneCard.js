@@ -5,6 +5,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
 import Menu from '@mui/material/Menu';
+import Snackbar from '@mui/material/Snackbar';
 
 export const MilestoneCard = ({
     milestone,
@@ -23,8 +24,15 @@ export const MilestoneCard = ({
     const [modelPercentage, set_modePercentage] = useState(milestone.budget_percentage)
 
     const [anchorEl, setAnchorEl] = useState(null);
+
+
+    const [snackbar, set_snackbar]  = useState({
+        open: true,
+        message: ""
+    })
     const open = Boolean(anchorEl);
     const handelMenuClick = (event) => {
+        event.preventDefault()
         setAnchorEl(event.currentTarget);
     };
     const handleMenuClose = () => {
@@ -52,7 +60,6 @@ export const MilestoneCard = ({
 
     const updateMilestone = async () =>{
         const payloadDesc = {
-
             ...milestone,
             name: modelName,
             description: modelDescription,
@@ -69,15 +76,40 @@ export const MilestoneCard = ({
         }
     }
 
+    const deleteMilestone = async() =>{
+        handleMenuClose()
+        try{
+            const res = await axios.post(`${api}/milestones/delete/${milestone.id}`, {}, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            console.log({res})
+            if(res.data.status=='successs'){
+                cb.getMilestones()
+            }else{
+                set_snackbar({
+                    open: true,
+                    message: "Milestone does not exist"
+                })
+            }
+
+        }catch(e){
+            console.log(e)
+            set_snackbar({
+                open: true,
+                message: "Milestone must be empty of deliverables"
+            })
+        }
+        
+    }
+
 
     return(
         <div className='sq-milestone-card'>
             {!editMode 
             ?(
-            <div className='milestone-display' 
-                onClick={()=>{
-                    !clientMode && setEditMode(true)
-            }} >
+            <div className='milestone-display'>
                 <div className='d-flex justify-content-between'>
                     <div className="sub mb-2 milestone-status">
                         {milestoneStatus}
@@ -87,12 +119,12 @@ export const MilestoneCard = ({
                         ?(
                             <div>
                                 <div className='sq-btn-icon' onClick={handelMenuClick}>
-                                <i className="fa-solid fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"
-                                    id="demo-positioned-button"
-                                    aria-controls={open ? 'demo-positioned-menu' : undefined}
-                                    aria-haspopup="true"
-                                    aria-expanded={open ? 'true' : undefined}
-                                ></i>
+                                    <i className="fa-solid fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"
+                                        id="demo-positioned-button"
+                                        aria-controls={open ? 'demo-positioned-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                    ></i>
                                 </div>      
                                 <Menu
                                     id="demo-positioned-menu"
@@ -116,32 +148,71 @@ export const MilestoneCard = ({
                                 </Menu>
                             </div>
                         )
-                        :( <div className='sq-btn-icon'>
-                                <i onClick={()=>{setEditMode(true)}} className="fa-solid  fa-pen-to-square text-color-sq-gold m-1 fa-xs"></i>
+                        :( <div className='d-flex'>
+                        
+                                <div className='sq-btn-icon'>
+                                    <i onClick={()=>{setEditMode(true)}} className="fa-solid  fa-pen-to-square text-color-sq-gold m-1 fa-xs"></i>
+                                </div>
+
+                                {milestone.id && (<div className='sq-btn-icon'  onClick={(evt)=>{
+                                    handelMenuClick(evt)
+                                    }}>
+                                    <i className="fa-solid fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"
+                                        id="demo-positioned-button"
+                                        aria-controls={open ? 'demo-positioned-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                    ></i>
+                                </div>)}
+                               
+                                <Menu
+                                    id="demo-positioned-menu"
+                                    aria-labelledby="demo-positioned-button"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleMenuClose}
+                                    anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                    }}
+                                    transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                    }}
+                                    className='sq-menu'
+                                >
+                                    <div onClick={deleteMilestone}>
+                                        <div className="sq-menu-item" >Delete milestone</div>
+                                    </div>
+                                </Menu>
+
                             </div>
+
+
+
                         ) }
                        
                         
                     </div>    
-
-                    
-
-                   
                 </div>
-                <div className='mb-2'>
-                    <span className="label">Milestone {index+1}: &nbsp;</span>
-                    <span className="title">{milestone.name}</span>
-                    
-                </div>
-                <div className='mb-2'>
-                    <p>{milestone.description}
-                    </p>                
-                </div>
-                <div className='mb-2'>
-                        <p>
-                            <span className="label">Fee: &nbsp;</span>
-                            {milestone.budget_percentage}% of budget
-                        </p>
+                <div onClick={()=>{
+                    !clientMode && setEditMode(true)
+                }} >
+                    <div className='mb-2'>
+                        <span className="label">Milestone {index+1}: &nbsp;</span>
+                        <span className="title">{milestone.name}</span>
+                        
+                    </div>
+                    <div className='mb-2'>
+                        <p>{milestone.description}
+                        </p>                
+                    </div>
+                    <div className='mb-2'>
+                            <p>
+                                <span className="label">Fee: &nbsp;</span>
+                                {milestone.budget_percentage}% of budget
+                            </p>
+                    </div>
                 </div>
             </div>
             ) : (
@@ -179,20 +250,28 @@ export const MilestoneCard = ({
                         <br/>
                         <small>&nbsp; ${} of Project Budget</small>
                      </div>
-                     <span className="sq-link" onClick={()=>{setEditMode(false)}} >Cancel</span>  
+                     
                      {
                         milestone && milestone.id 
-                        ? ( <div onClick={updateMilestone} className='sq-btn bg-sq-gold-mid text-center'>Update</div>   
+                        ? ( 
+                            <div className='d-flex align-items-center'>
+                                 <span className="sq-link me-2" onClick={()=>{setEditMode(false)}} >Cancel</span> 
+                        
+                                <div onClick={updateMilestone} className='sq-btn bg-sq-gold-mid text-center'>Update</div>
+                            </div>   
                         )
-                        :( <div onClick={addMilestone} className='sq-btn bg-sq-gold-mid text-center'>Add</div>   
+                        :( 
+                            <div className='d-flex align-items-center'>
+                                 <span className="sq-link me-2" onClick={cb.removeMilestoneWithoutId} >Cancel</span> 
+                                <div onClick={addMilestone} className='sq-btn bg-sq-gold-mid text-center'>Add</div>   
+                            </div>
                         )  
                      }
                     
                 </div>
 
             </div>
-            )}
-        
+            )}        
         </div>
 
     )

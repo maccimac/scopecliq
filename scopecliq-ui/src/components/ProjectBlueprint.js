@@ -45,6 +45,14 @@ export const ProjectBlueprint = ({isConsultant}) => {
         ])
     }
 
+    const removeMilestoneWithoutId = () => {
+        let milestoneArrCopy = milestones;
+        milestoneArrCopy = milestoneArrCopy.filter((m,i)=>(m.id > 0))
+        set_milestones([
+            ...milestoneArrCopy
+        ])
+    }
+
     const updateMilestonesPositions = async () =>{
 
         [...milestones].map((m, i)=>{
@@ -75,7 +83,7 @@ export const ProjectBlueprint = ({isConsultant}) => {
                     <Milestone
                         key={m.id}
                         milestone={m}
-                        cb={{getMilestones, updateMilestonesPositions}}
+                        cb={{getMilestones, updateMilestonesPositions, removeMilestoneWithoutId}}
                         index={i}
                         edit={true}
                     />

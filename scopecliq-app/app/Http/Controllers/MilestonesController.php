@@ -26,6 +26,35 @@ class MilestonesController extends Controller
         return $projects;
     }
 
+
+    public function deleteMilestoneById($milestone_id){
+
+        $deliverablesCount = DB::table('deliverables')
+            ->where('milestone_id', $milestone_id)
+            ->count();
+
+        if($deliverablesCount > 0){
+            throw new \Exception("Cannot delete milestone with deliverables. Delete deliverables first.");
+        }
+
+        $deleted = DB::table('milestones')
+            ->where('id', $milestone_id)
+            ->delete();
+
+        if ($deleted) {
+            // Optionally, you can return a success message or a response here
+            return [
+                'status' => 'success',
+                'message' => "Milestone with ID $milestone_id has been deleted."
+            ];
+        } else {
+            return [
+                'status' => "fail",
+                'message' => "Milestone with ID $milestone_id not found."
+            ];
+        }
+    }
+
     static public function getLastPositionByProject($project_id){
         
         /*

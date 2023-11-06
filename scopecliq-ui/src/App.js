@@ -3,7 +3,7 @@ import './styles/style.css';
 
 
 import { Routes, Route, Navigate } from "react-router-dom";
-// import React, { useState } from "react";
+import Snackbar from '@mui/material/Snackbar';
 
 import Home from './views/Home.js';
 import ConsultantDashboard from './views/ConsultantDashboard.js';
@@ -13,6 +13,10 @@ import ClientPortal from './views/ClientPortal';
 
 
 const App = () => {  
+  const snackbar = {
+    open: true,
+    message: "hello"
+  }
   return (
     <div className="scopecliq">
       <Routes>
@@ -25,6 +29,13 @@ const App = () => {
       </Routes>
       
       {/* <Home/> */}
+
+      <Snackbar
+                    open={snackbar.open}
+                >
+                    <div>{snackbar.message}</div>
+            </Snackbar>
+
     </div>
   );
 }

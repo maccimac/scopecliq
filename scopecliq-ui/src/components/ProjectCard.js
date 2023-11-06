@@ -33,8 +33,10 @@ export const ProjectCard = ({
     useEffect(()=>{
         fetchOrganizationById()
       },[project])
+    
     return(
-        <div className={`
+    <div>
+        { project?.id && project?.organization_id &&  (<div className={`
             sq-project-card p-3 rounded mb-4
             ${dark && 'dark'}
             ${full && 'sq-project-card--full'}
@@ -135,8 +137,10 @@ export const ProjectCard = ({
             </div>
 
 
-        </div>
+        </div>)}
+    </div>
     )
+    
 }
 
 export default ProjectCard;
