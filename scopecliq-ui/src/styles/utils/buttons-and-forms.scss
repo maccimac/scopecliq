@@ -16,6 +16,24 @@
     i{
         color: #fff;
     }
+    &.sq-btn-add--milestone{
+        opacity: 0.2;
+        min-height: 48px;
+        min-width: 48px;
+        background-color: $sq-gold-light;
+        &:hover{
+            opacity: 1;
+        }
+
+    }
+}
+.sq-btn-add__holder{
+    width: 20px;
+    display: flex;
+    align-items: center;
+    .sq-btn-add--milestone{
+        margin-left: -12px;
+    }
 }
 
 .sq-btn{

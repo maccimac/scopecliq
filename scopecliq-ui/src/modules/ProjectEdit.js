@@ -112,7 +112,7 @@ export const ProjectEdit = (isConsultant=true) => {
 
     return(
         <div className='project-edit'>
-            <div className='d-flex'>
+            <div className=''>
                 <div className='organization mb-4 w-100 me-4'>
                 
                     <h2>

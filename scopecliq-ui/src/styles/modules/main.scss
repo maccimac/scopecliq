@@ -131,3 +131,29 @@ $scrollbar-width: 17;
     }
 
 }
+
+.sq-modal-new-project{
+
+    .sq-modal-new-project__modal{
+        margin: 16px;
+        min-width: 480px;
+        // margin-top: 60px;
+        height: 640px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            transition: 1s all ease;
+            opacity: 0;
+            height: 0.8rem;
+            width: 0.5rem;
+        }
+        &::-webkit-scrollbar-thumb {
+            height: 1rem;
+            background-color: $sq-lightest-trans;
+            border-radius: 8px;
+        }
+
+        .project-edit{
+            padding: 16px;
+        }
+    }
+}

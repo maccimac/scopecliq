@@ -577,6 +577,24 @@ small {
 .sq-btn-add i {
   color: #fff;
 }
+.sq-btn-add.sq-btn-add--milestone {
+  opacity: 0.2;
+  min-height: 48px;
+  min-width: 48px;
+  background-color: #F5C773;
+}
+.sq-btn-add.sq-btn-add--milestone:hover {
+  opacity: 1;
+}
+
+.sq-btn-add__holder {
+  width: 20px;
+  display: flex;
+  align-items: center;
+}
+.sq-btn-add__holder .sq-btn-add--milestone {
+  margin-left: -12px;
+}
 
 .sq-btn, .sq-btn--green {
   cursor: pointer;
@@ -786,6 +804,27 @@ small {
 }
 .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-organization-card {
   box-shadow: none;
+}
+
+.sq-modal-new-project .sq-modal-new-project__modal {
+  margin: 16px;
+  min-width: 480px;
+  height: 640px;
+  overflow-y: scroll;
+}
+.sq-modal-new-project .sq-modal-new-project__modal::-webkit-scrollbar {
+  transition: 1s all ease;
+  opacity: 0;
+  height: 0.8rem;
+  width: 0.5rem;
+}
+.sq-modal-new-project .sq-modal-new-project__modal::-webkit-scrollbar-thumb {
+  height: 1rem;
+  background-color: rgba(249, 249, 249, 0.4);
+  border-radius: 8px;
+}
+.sq-modal-new-project .sq-modal-new-project__modal .project-edit {
+  padding: 16px;
 }
 
 .sq-milestone {

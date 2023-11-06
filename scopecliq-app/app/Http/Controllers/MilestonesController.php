@@ -13,6 +13,7 @@ class MilestonesController extends Controller
         $projects = DB::table('milestones')
             -> select('*')
             -> where('project_id', $project_id)
+            ->  orderBy('position')
             -> get();
         return $projects;
     }
@@ -67,7 +68,6 @@ class MilestonesController extends Controller
     }
 
     public function updateMilestoneById (Request $req, $milestone_id) {
-
         $data = [
             'name' => $req->name,
             'description' => $req->description,
@@ -80,6 +80,19 @@ class MilestonesController extends Controller
         return $milestone;
     }
 
-   
+    public function updateMilestonePositionById (Request $req, $milestone_id, $position) {
+        $data = [
+            'position' => $position
+            // 'name' => $req->name,
+            // 'description' => $req->description,
+            // 'budget_percentage' => $req->budget_percentage,
+        ];
+
+        $milestone = DB::table('milestones')
+            -> where('id', $milestone_id)
+            -> update( $data );
+        return $milestone;
+    }
+
    
 }

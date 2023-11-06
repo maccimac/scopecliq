@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('organization_id')->constrained('organizations');
             $table->string('name');
             $table->text('about');
-            $table->decimal('budget');
+            $table->decimal('budget', 20, 2);
             $table->string('status');
             $table->string('portal_domain');
             $table->string('portal_password');

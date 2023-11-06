@@ -24,7 +24,6 @@ const DashboardHomeLayout = ({
         set_modalCreateOpen('false')
     }
 
-    
 
     return(
         <div class="sq-dashboard-home">
@@ -73,10 +72,11 @@ const DashboardHomeLayout = ({
                     open={modelCreateOpen} 
                      aria-labelledby="modal-modal-title"
                      aria-describedby="modal-modal-description"
+                     className=''
                 >
-                    <div className='d-flex  align-items-center justify-content-center h-100'>
+                    <div className='sq-modal-new-project d-flex align-items-center justify-content-center h-100'>
                         
-                        <div className="bg-sq-lav-dark my-auto p-2 rounded">
+                        <div className="sq-modal-new-project__modal bg-sq-lav-dark my-auto p-2 rounded">
                             <div className='d-flex justify-content-end'>
                                 <button
                                 className='sq-btn-icon bg-transparent'

@@ -10,13 +10,14 @@ export const MilestoneCard = ({
     milestone,
     cb,
     milestoneStatus="",
-    index
+    index,
+    edit
 }) => {
     const api = global.config.API;
     const project = useSelector(storeProject);
     const clientMode = useSelector(isClient)
 
-    const [editMode, setEditMode] = useState(false);
+    const [editMode, setEditMode] = useState(edit);
     const [modelName, set_modelName] = useState(milestone.name)
     const [modelDescription, set_modelDescription] = useState(milestone.description)
     const [modelPercentage, set_modePercentage] = useState(milestone.budget_percentage)
@@ -44,6 +45,7 @@ export const MilestoneCard = ({
             },
         });
         if(res.status===200){
+            cb.updateMilestonesPositions()
             cb.getMilestones()
         }
     }
@@ -127,7 +129,7 @@ export const MilestoneCard = ({
                    
                 </div>
                 <div className='mb-2'>
-                    <span className="label">Milestone {milestone.position+1}: &nbsp;</span>
+                    <span className="label">Milestone {index+1}: &nbsp;</span>
                     <span className="title">{milestone.name}</span>
                     
                 </div>
@@ -178,14 +180,15 @@ export const MilestoneCard = ({
                         <small>&nbsp; ${} of Project Budget</small>
                      </div>
                      <span className="sq-link" onClick={()=>{setEditMode(false)}} >Cancel</span>  
-                     <div onClick={updateMilestone} className='sq-btn bg-sq-gold-mid text-center'>Update</div>   
+                     {
+                        milestone && milestone.id 
+                        ? ( <div onClick={updateMilestone} className='sq-btn bg-sq-gold-mid text-center'>Update</div>   
+                        )
+                        :( <div onClick={addMilestone} className='sq-btn bg-sq-gold-mid text-center'>Add</div>   
+                        )  
+                     }
                     
-                     {/* <div onClick={addMilestone} className='sq-btn bg-sq-gold-mid text-center'>Add</div>  */}
                 </div>
-                {/* <div className='my-4'>
-                    <div className='sq-btn bg-sq-gold-mid'>Save Milestone</div>
-                </div>     */}
-                
 
             </div>
             )}

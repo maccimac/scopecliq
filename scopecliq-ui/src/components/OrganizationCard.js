@@ -14,6 +14,7 @@ export const OrganizationCard = ({
 
     return(
         <div className={`
+            sq-organization-card
             ${dark && 'dark'}
             ${className}
         `} >

@@ -11,13 +11,14 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient } from '../store/user-store';
 
 
-export const Milestone = ({ milestone, index, image, cb}) => {
+export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
 
     const [milestoneStatus, setMilestoneStatus] = useState('complete')
     const [deliverables, setDeliverables] = useState([])
-    const [editMode, set_editMode] = useState(false)
+    const [editMode, set_editMode] = useState(edit)
+
 
     const fetchDeliverableByMilestone = async() =>{
         const res = await axios.get(api+ '/deliverables/milestone/' + milestone.id)
@@ -61,6 +62,8 @@ export const Milestone = ({ milestone, index, image, cb}) => {
             setDeliverables([...deliverabesCopy])
         }, 0)
     }
+
+
     const cancelNewDeliverable = (index) => {
         setDeliverables([])
         let deliverabesCopy = [...deliverables];
@@ -95,8 +98,9 @@ export const Milestone = ({ milestone, index, image, cb}) => {
                 key={milestone.id}
                 milestoneStatus={milestoneStatus} 
                 milestone={milestone} 
-                cb={{getMilestones: cb.getMilestones }}
+                cb={{getMilestones: cb.getMilestones, updateMilestonesPositions: cb.updateMilestonesPositions }}
                 index={index}
+                edit={!milestone.id}
             />
            
             {image && (
@@ -109,12 +113,15 @@ export const Milestone = ({ milestone, index, image, cb}) => {
             )}
             
             <hr/>
-            <div className='mb-2'>
-                <span className="label">Deliverables: </span>
-            </div>
+            {milestone.id && (
+                <div className='mb-2'>
+                    <span className="label">Deliverables: </span>
+                </div>
+            ) }
+            
             <div className='deliverables-list'>
             {!clientMode &&!editMode && <BtnAdd cb={()=>{addNewDeliverable(-1)}}/> }
-                { deliverables.map( (d,i)=>(
+                { milestone.id && deliverables.map( (d,i)=>(
                     <div className="deliverable-set" key={d.id}>
                         <Deliverable
                             key={d.id}

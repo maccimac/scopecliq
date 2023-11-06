@@ -53,6 +53,7 @@ Route::prefix('projects')->group(function () {
     Route::get('/organization/{organization_id}', [ProjectsController::class, 'fetchProjectsByOrganization']);
     Route::get('/consultant/{consultant_id}', [ProjectsController::class, 'fetchProjectsByConsultant']);
     Route::post('/add/{organization_id}', [ProjectsController::class, 'addProject']);
+    
 
 });
 
@@ -64,6 +65,7 @@ Route::prefix('milestones')->group(function () {
     Route::get('/last-position/{project_id}', [MilestonesController::class, 'getLastPositionByProject']);
     Route::post('/add/{project_id}', [MilestonesController::class, 'addMilestoneToProject']);
     Route::post('/update/{milestone_id}', [MilestonesController::class, 'updateMilestoneById']);
+    Route::post('/update-position/{milestone_id}/{position_id}', [MilestonesController::class, 'updateMilestonePositionById']);    
 });
 
 
