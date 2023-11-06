@@ -1,10 +1,12 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
-import NavBar from '../../components/NavBar';
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../../store/user-store';
 import { storeProject} from '../../store/project-store';
 import { currentUserId} from '../../store/user-store';
+import Modal from '@mui/material/Modal';
+import NavBar from '../../components/NavBar';
+import ProjectEdit from '../ProjectEdit';
 
 
 import DashboardHomeSidebar from './DashboardHomeSidebar';
@@ -12,18 +14,17 @@ import {ProjectCard} from '../../components/ProjectCard'
 
 
 const DashboardHomeLayout = ({
-    projects=[],
-    
+    projects=[]
 }) => {
     const api = global.config.API
     const project=(useSelector(storeProject))
+    const [modelCreateOpen, set_modalCreateOpen] = useState(true)
 
-    // const [yourOrg, set_yourOrg] = useState(null)
+    function modalCreateOnClose(){
+        set_modalCreateOpen('false')
+    }
 
-    // const fetchConsultantOrg = async() =>{
-    //     const res = await axios.get(api+ '/organizations/consultant/'+userId)
-    //     set_yourOrg(res.data)
-    // }
+    
 
     return(
         <div class="sq-dashboard-home">
@@ -41,10 +42,15 @@ const DashboardHomeLayout = ({
                                     {/* <div>Sort by most recent</div> */}
                                 </div>
 
-                                <div className='me-2'>
-                                    <h2 className='sq-link font-size-18'>
+                                <div 
+                                    className='sq-btn  sq-btn-outline d-flex align-items-center me-2'
+                                    onClick={()=>{
+                                        set_modalCreateOpen(true)
+                                    }}
+                                >
+                                    <span className='font-size-18 text-color-sq-lav'>
                                         🚀 Start a new project
-                                    </h2>
+                                    </span>
 
                                 </div>
                             </div>
@@ -63,6 +69,30 @@ const DashboardHomeLayout = ({
                          </div>   
                     </div>
                 </div>
+                <Modal 
+                    open={modelCreateOpen} 
+                     aria-labelledby="modal-modal-title"
+                     aria-describedby="modal-modal-description"
+                >
+                    <div className='d-flex  align-items-center justify-content-center h-100'>
+                        
+                        <div className="w-50 bg-sq-lav-dark my-auto p-2 rounded">
+                            <div className='d-flex justify-content-end'>
+                                <button
+                                className='sq-btn-icon bg-transparent'
+                                onClick={()=>{set_modalCreateOpen(false)}}
+                                >
+                                    <i className='fa fa-regular fa-solid fa-xmark text-color-sq-white fa-xl'/>
+                                </button>
+                            </div>
+                            <div>
+                                <ProjectEdit/>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </Modal>
             </div>
         </div>
     )

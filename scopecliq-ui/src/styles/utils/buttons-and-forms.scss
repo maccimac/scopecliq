@@ -46,6 +46,10 @@
         font-size: 13px;
         scale: 1.01;   
     }
+    &.sq-btn-outline{
+        background-color: transparent;
+        outline: 1px solid $sq-lav;
+    }
 }
 
 .sq-link{

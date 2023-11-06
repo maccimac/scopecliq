@@ -34,7 +34,7 @@ const DashboardHome = () => {
 
 
     return(
-        <div class="sq-outter-frame">
+        <div className="sq-outter-frame">
             {projects && <DashboardHomeLayout 
                 projects={projects}
                 yourOrg={yourOrg}    

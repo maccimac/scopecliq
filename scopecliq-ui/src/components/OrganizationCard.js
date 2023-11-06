@@ -13,7 +13,6 @@ export const OrganizationCard = ({
     const api = global.config.API;
     return(
         <div className={`
-            sq-organization-card
             ${dark && 'dark'}
             ${className}
         `} >

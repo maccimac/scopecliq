@@ -600,6 +600,10 @@ small {
   font-size: 13px;
   scale: 1.01;
 }
+.sq-btn.sq-btn-outline, .sq-btn-outline.sq-btn--green {
+  background-color: transparent;
+  outline: 1px solid #5B79FC;
+}
 
 .sq-link, .sq-menu .sq-menu-item {
   font-size: 12px;
@@ -892,7 +896,7 @@ small {
   color: #fff;
 }
 .sq-project-card.dark .sq-textarea, .dark.sq-organization-card .sq-textarea, .sq-project-card.dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card.dark .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card .description-edit, .sq-project-card.dark .sq-input, .dark.sq-organization-card .sq-input {
-  background-color: #CCCCCC;
+  background-color: #E7E7E7;
 }
 .sq-project-card .text-prop, .sq-organization-card .text-prop {
   color: #ACB1C6;
