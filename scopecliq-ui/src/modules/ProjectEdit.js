@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
+import {useNavigate} from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 import { currentUserId } from '../store/login-store';
 
@@ -7,6 +8,8 @@ import OrganizationCardEdit from '../components/OrganizationCardEdit';
 
 export const ProjectEdit = (isConsultant=true) => {
     const api = global.config.API
+    const navigate = useNavigate()
+
     const userId = useSelector(currentUserId)
 
     const [organizationId, set_organizationId] = useState(0)
@@ -26,8 +29,6 @@ export const ProjectEdit = (isConsultant=true) => {
     const [modelProjectDomain, set_modelProjectDomain] = useState('')
     const [modelProjectPassword, set_modelProjectPassword] = useState('')
     const [modelProjectTerms, set_modelProjectTerms] = useState('')
-
-
   
 
     const fetchAllOrganizations = async() =>{
@@ -49,18 +50,38 @@ export const ProjectEdit = (isConsultant=true) => {
         set_organization(org)
     }
 
-    const createProject = async () =>{
+    const createProjectFull = async () =>{
     
-        if(!organization.id){
+        if(organizationId==0){
             const res = await axios.post(`${api}/organizations/add/${userId}`, organization, {
                 headers: {
                   "Content-Type": "application/json",
                 },
             });
-            console.log(res)
+            set_organization({
+                ...organization,
+                organization_id: res.data
+            })
+            set_organizationId(res.data)
+            console.log('no org', res)
+            if(res){
+                createProject(res.data)
+            }
+        }else{
+            console.log('existing org')
+            createProject(organizationId)
         }
 
-        
+    }
+
+    const createProject = async(orgId) =>{
+        const res = await axios.post(`${api}/projects/add/${orgId}`, project, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+        });
+        console.log(res.data)
+        navigate(`/dashboard/${res.data}`)
     }
 
     useEffect(()=>
@@ -90,123 +111,120 @@ export const ProjectEdit = (isConsultant=true) => {
 
 
     return(
-        <div>
-            <div className='organization mb-4'>
-               
-                <h2>
-                    Client  {organization && organization.organization_name}
-                </h2>
-                <div className='sub mb-2'>Existing Organization</div>
-                <select 
-                    class="form-select sq-input form-select-sm" 
-                    aria-label=".form-select-sm example"
-                    value={organizationId}
-                    onChange={(e)=>{onOrganizationChange(e)
-                    }}
-                    
-                >
-                    {organizations.map((o, i)=>(
-                        <option 
-                            key={o.id} value={o.id}
-                        >
-                            {o.organization_name}
-                        </option>
-                    ))}
-        
-                </select>
-            {organizationId==0 && (
-                  <OrganizationCardEdit
-                    dark
-                    className="mt-2"
-                    cb={{set_organization}}
-              />
-
-            )}
-
-            </div>
-
-            <div className='project'>
-                <h2>
-                    Project
-                </h2>
-                {/* <div className='sub mb-2'>Existing Organization</div> */}
-
-                <div className='label'>
-                    General Details
-                </div>
-                <input className='sq-input w-100 mb-2 mb-2' 
-                    value={modelProjectName} 
-                    onChange={(e)=>{
-                        set_modelProjectName(e.target.value)
-                    }}
-                    placeholder='Project Name'
-                ></input>
-                <textarea placeholder="About the Project" className='sq-textarea w-100' rows="4" 
-                    onChange={(e)=>{
-                        set_modelProjectAbout(e.target.value)
-                    }}
-                    value={modelProjectAbout}
-                    cols="100"
-                ></textarea>
-                <div className='sq-input w-100 mb-2 bg-sq-white text-color-sq-mid '>
-                    $ <input type="number" className='border-0 outline-0' 
-                    value={modelProjectBudget} 
-                    onChange={(e)=>{
-                        set_modelProjectBudget(e.target.value)
-                    }}
-                    placeholder='Project Budget'
-                ></input>
-                </div>
+        <div className='project-edit'>
+            <div className='d-flex'>
+                <div className='organization mb-4 w-100 me-4'>
                 
-                <div className='label'>
-                    Portal information
-                </div>
-                <div className='d-flex'>
-                    <div
-                        className='sq-input d-flex align-items-center
-                            mb-2 w-100 
-                            bg-sq-white text-color-sq-mid 
-                            font-size-12 me-2'
+                    <h2>
+                        Client  {organization && organization.organization_name}
+                    </h2>
+                    <div className='sub mb-2'>Existing Organization</div>
+                    <select 
+                        class="form-select sq-input form-select-sm" 
+                        aria-label=".form-select-sm example"
+                        value={organizationId}
+                        onChange={(e)=>{onOrganizationChange(e)
+                        }}
+                        
                     >
-                        http://scopecliq.com/client/ 
-                        <input className='border-0 outline-0 text-color-sq-lav-mid' 
-                            value={modelProjectDomain} 
+                        {organizations.map((o, i)=>(
+                            <option 
+                                key={o.id} value={o.id}
+                            >
+                                {o.organization_name}
+                            </option>
+                        ))}
+            
+                    </select>
+                        {organizationId==0 && (
+                                <OrganizationCardEdit
+                                dark
+                                className="mt-2"
+                                cb={{set_organization}}
+                            />
+
+                        )}
+                </div>
+
+                <div className='project w-100'>
+                    <h2>
+                        Project
+                    </h2>
+                    {/* <div className='sub mb-2'>Existing Organization</div> */}
+
+                    <div className='label'>
+                        General Details
+                    </div>
+                    <input className='sq-input w-100 mb-2 mb-2' 
+                        value={modelProjectName} 
+                        onChange={(e)=>{
+                            set_modelProjectName(e.target.value)
+                        }}
+                        placeholder='Project Name'
+                    ></input>
+                    <textarea placeholder="About the Project" className='sq-textarea w-100' rows="4" 
+                        onChange={(e)=>{
+                            set_modelProjectAbout(e.target.value)
+                        }}
+                        value={modelProjectAbout}
+                        cols="100"
+                    ></textarea>
+                    <div className='sq-input d-flex w-100 mb-2 bg-sq-white text-color-sq-mid '>
+                        <span>$</span> <input type="number" className='border-0 outline-0'
+                        style={{flexGrow: 1}} 
+                        value={modelProjectBudget} 
+                        onChange={(e)=>{
+                            set_modelProjectBudget(e.target.value)
+                        }}
+                        placeholder='Project Budget'
+                    ></input>
+                    </div>
+                    
+                    <div className='label'>
+                        Portal information
+                    </div>
+                    <div className='d-flex'>
+                        <div
+                            className='sq-input d-flex align-items-center
+                                mb-2 w-100 
+                                bg-sq-white text-color-sq-mid 
+                                font-size-12 me-2'
+                        >
+                            http://scopecliq.com/client/ 
+                            <input className='border-0 outline-0 text-color-sq-lav-mid' 
+                                value={modelProjectDomain} 
+                                onChange={(e)=>{
+                                    set_modelProjectDomain(e.target.value)
+                                }}
+                                placeholder='Portal Domain'
+                            ></input>
+                        </div>
+                        <input className='sq-input w-100 mb-2' 
+                            value={modelProjectPassword} 
                             onChange={(e)=>{
-                                set_modelProjectDomain(e.target.value)
+                                set_modelProjectPassword(e.target.value)
                             }}
-                            placeholder='Portal Domain'
+                            placeholder='Portal Password'
                         ></input>
                     </div>
-                    <input className='sq-input w-100 mb-2' 
-                        value={modelProjectPassword} 
+
+                    <div className='label'>
+                        Terms
+                    </div>
+                    
+                    <textarea placeholder="Terms and Conditions" className='sq-textarea w-100' rows="4" 
                         onChange={(e)=>{
-                            set_modelProjectPassword(e.target.value)
+                            set_modelProjectTerms(e.target.value)
                         }}
-                        placeholder='Portal Password'
-                    ></input>
+                        value={modelProjectTerms}
+                        cols="100"
+                    ></textarea>
                 </div>
-
-                <div className='label'>
-                    Terms
-                </div>
-                
-                <textarea placeholder="Terms and Conditions" className='sq-textarea w-100' rows="4" 
-                    onChange={(e)=>{
-                        set_modelProjectTerms(e.target.value)
-                    }}
-                    value={modelProjectTerms}
-                    cols="100"
-                ></textarea>
-
-       
-
-
-
             </div>
+      
 
-
-            <div>
-                <button className='sq-btn' onClick={createProject}>
+            <div className='d-flex justify-content-end'>
+                <button className='sq-btn' onClick={createProjectFull}>
                     Add
                 </button>
             </div>

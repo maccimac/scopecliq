@@ -33,9 +33,8 @@ class OrganizationsController extends Controller
 
 
     public function addOrganization(Request $req, $user_id) {
-        $newOrg = DB::table('organizations')
-            ->insert([
-            
+        $newOrgId = DB::table('organizations')
+            ->insertGetId([
                 'organization_name' => $req->organization_name,
                 'contact_name' => $req->contact_name,
                 'contact_email' => $req->contact_email,
@@ -44,7 +43,7 @@ class OrganizationsController extends Controller
                 'consultant_user_id' => $user_id,
             
         ]);
-        return $newOrg;
+        return $newOrgId;
         
     }
 

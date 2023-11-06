@@ -52,6 +52,7 @@ Route::prefix('projects')->group(function () {
     Route::get('/portal/{portal}', [ProjectsController::class, 'fetchByPortal']);
     Route::get('/organization/{organization_id}', [ProjectsController::class, 'fetchProjectsByOrganization']);
     Route::get('/consultant/{consultant_id}', [ProjectsController::class, 'fetchProjectsByConsultant']);
+    Route::post('/add/{organization_id}', [ProjectsController::class, 'addProject']);
 
 });
 

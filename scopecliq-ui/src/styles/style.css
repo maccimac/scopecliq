@@ -671,6 +671,9 @@ small {
 .sq-textarea:focus, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit:focus, .sq-input:focus {
   color: #333;
 }
+.sq-textarea:focus, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit:focus, .sq-textarea input:focus, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit input:focus, .sq-input:focus, .sq-input input:focus {
+  outline: none;
+}
 
 .sq-menu .MuiPaper-elevation {
   box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);

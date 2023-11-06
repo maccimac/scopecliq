@@ -18,7 +18,7 @@ const DashboardHomeLayout = ({
 }) => {
     const api = global.config.API
     const project=(useSelector(storeProject))
-    const [modelCreateOpen, set_modalCreateOpen] = useState(true)
+    const [modelCreateOpen, set_modalCreateOpen] = useState(false)
 
     function modalCreateOnClose(){
         set_modalCreateOpen('false')
@@ -76,7 +76,7 @@ const DashboardHomeLayout = ({
                 >
                     <div className='d-flex  align-items-center justify-content-center h-100'>
                         
-                        <div className="w-50 bg-sq-lav-dark my-auto p-2 rounded">
+                        <div className="bg-sq-lav-dark my-auto p-2 rounded">
                             <div className='d-flex justify-content-end'>
                                 <button
                                 className='sq-btn-icon bg-transparent'
