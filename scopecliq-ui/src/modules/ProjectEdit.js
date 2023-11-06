@@ -18,6 +18,18 @@ export const ProjectEdit = (isConsultant=true) => {
     ])
     const [organization, set_organization] = useState(null)
 
+
+    const [project, set_project] = useState(null)
+    const [modelProjectName, set_modelProjectName] = useState('')
+    const [modelProjectAbout, set_modelProjectAbout] = useState('')
+    const [modelProjectBudget, set_modelProjectBudget] = useState(null)
+    const [modelProjectDomain, set_modelProjectDomain] = useState('')
+    const [modelProjectPassword, set_modelProjectPassword] = useState('')
+    const [modelProjectTerms, set_modelProjectTerms] = useState('')
+
+
+  
+
     const fetchAllOrganizations = async() =>{
         const res = await axios.get(api+ '/organizations')
         console.log(res.data)
@@ -38,20 +50,43 @@ export const ProjectEdit = (isConsultant=true) => {
     }
 
     const createProject = async () =>{
-        console.log({organization})
+    
+        if(!organization.id){
+            const res = await axios.post(`${api}/organizations/add/${userId}`, organization, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            console.log(res)
+        }
 
-        const res = await axios.post(`${api}/organizations/add/${userId}`, organization, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-        });
-        console.log(res)
+        
     }
 
     useEffect(()=>
     {
         fetchAllOrganizations()
     }, [])
+
+    useEffect(()=>{
+        set_project({
+            organization_id: organization ? organization.id : null,
+            name: modelProjectName,
+            about: modelProjectAbout,
+            budget: modelProjectBudget,
+            portal_domain: modelProjectDomain,
+            portal_password: modelProjectPassword,
+            terms: modelProjectTerms,
+        })
+
+    }, [
+        modelProjectName,
+        modelProjectAbout,
+        modelProjectBudget,
+        modelProjectDomain,
+        modelProjectPassword,
+        modelProjectTerms,
+    ])
 
 
     return(
@@ -92,9 +127,80 @@ export const ProjectEdit = (isConsultant=true) => {
 
             <div className='project'>
                 <h2>
-                    Project Details
+                    Project
                 </h2>
-                <div className='sub mb-2'>Existing Organization</div>
+                {/* <div className='sub mb-2'>Existing Organization</div> */}
+
+                <div className='label'>
+                    General Details
+                </div>
+                <input className='sq-input w-100 mb-2 mb-2' 
+                    value={modelProjectName} 
+                    onChange={(e)=>{
+                        set_modelProjectName(e.target.value)
+                    }}
+                    placeholder='Project Name'
+                ></input>
+                <textarea placeholder="About the Project" className='sq-textarea w-100' rows="4" 
+                    onChange={(e)=>{
+                        set_modelProjectAbout(e.target.value)
+                    }}
+                    value={modelProjectAbout}
+                    cols="100"
+                ></textarea>
+                <div className='sq-input w-100 mb-2 bg-sq-white text-color-sq-mid '>
+                    $ <input type="number" className='border-0 outline-0' 
+                    value={modelProjectBudget} 
+                    onChange={(e)=>{
+                        set_modelProjectBudget(e.target.value)
+                    }}
+                    placeholder='Project Budget'
+                ></input>
+                </div>
+                
+                <div className='label'>
+                    Portal information
+                </div>
+                <div className='d-flex'>
+                    <div
+                        className='sq-input d-flex align-items-center
+                            mb-2 w-100 
+                            bg-sq-white text-color-sq-mid 
+                            font-size-12 me-2'
+                    >
+                        http://scopecliq.com/client/ 
+                        <input className='border-0 outline-0 text-color-sq-lav-mid' 
+                            value={modelProjectDomain} 
+                            onChange={(e)=>{
+                                set_modelProjectDomain(e.target.value)
+                            }}
+                            placeholder='Portal Domain'
+                        ></input>
+                    </div>
+                    <input className='sq-input w-100 mb-2' 
+                        value={modelProjectPassword} 
+                        onChange={(e)=>{
+                            set_modelProjectPassword(e.target.value)
+                        }}
+                        placeholder='Portal Password'
+                    ></input>
+                </div>
+
+                <div className='label'>
+                    Terms
+                </div>
+                
+                <textarea placeholder="Terms and Conditions" className='sq-textarea w-100' rows="4" 
+                    onChange={(e)=>{
+                        set_modelProjectTerms(e.target.value)
+                    }}
+                    value={modelProjectTerms}
+                    cols="100"
+                ></textarea>
+
+       
+
+
 
             </div>
 
