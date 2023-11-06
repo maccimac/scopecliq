@@ -4,6 +4,8 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../../store/user-store';
 import { storeProject} from '../../store/project-store';
 import { currentUserId} from '../../store/user-store';
+import { showSnackbarMessage} from '../../store/snackbar-store';
+
 import Modal from '@mui/material/Modal';
 import NavBar from '../../components/NavBar';
 import ProjectEdit from '../ProjectEdit';
@@ -17,11 +19,14 @@ const DashboardHomeLayout = ({
     projects=[]
 }) => {
     const api = global.config.API
+    const dispatch = useDispatch();
     const project=(useSelector(storeProject))
     const [modelCreateOpen, set_modalCreateOpen] = useState(false)
 
     function modalCreateOnClose(){
         set_modalCreateOpen('false')
+        dispatch(showSnackbarMessage("Milestone updated"))
+        
     }
 
 

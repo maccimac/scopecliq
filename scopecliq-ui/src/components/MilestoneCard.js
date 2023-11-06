@@ -4,8 +4,8 @@ import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
+import { showSnackbarMessage} from '../store/snackbar-store';
 import Menu from '@mui/material/Menu';
-import Snackbar from '@mui/material/Snackbar';
 
 export const MilestoneCard = ({
     milestone,
@@ -15,6 +15,7 @@ export const MilestoneCard = ({
     edit
 }) => {
     const api = global.config.API;
+    const dispatch = useDispatch();
     const project = useSelector(storeProject);
     const clientMode = useSelector(isClient)
 
@@ -26,10 +27,6 @@ export const MilestoneCard = ({
     const [anchorEl, setAnchorEl] = useState(null);
 
 
-    const [snackbar, set_snackbar]  = useState({
-        open: true,
-        message: ""
-    })
     const open = Boolean(anchorEl);
     const handelMenuClick = (event) => {
         event.preventDefault()
@@ -47,15 +44,23 @@ export const MilestoneCard = ({
             description: modelDescription,
             budget_percentage: modelPercentage
         }
-        const res = await axios.post(`${api}/milestones/add/${project.id}`, payloadDesc, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-        });
-        if(res.status===200){
-            cb.updateMilestonesPositions()
-            cb.getMilestones()
+        try{
+            const res = await axios.post(`${api}/milestones/add/${project.id}`, payloadDesc, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            if(res.status===200){
+                cb.updateMilestonesPositions()
+                cb.getMilestones()
+            }
+        }catch(e){
+            console.log(e)
+            dispatch(showSnackbarMessage(
+                e.response.data.message
+            ))
         }
+
     }
 
     const updateMilestone = async () =>{
@@ -73,6 +78,7 @@ export const MilestoneCard = ({
         if(res.status===200){
             setEditMode(false)
             cb.getMilestones()
+            dispatch(showSnackbarMessage("Milestone updated"))
         }
     }
 
@@ -85,24 +91,19 @@ export const MilestoneCard = ({
                 },
             });
             console.log({res})
-            if(res.data.status=='successs'){
+            if(res.data.status == 'successs'){
                 cb.getMilestones()
             }else{
-                set_snackbar({
-                    open: true,
-                    message: "Milestone does not exist"
-                })
+                dispatch(showSnackbarMessage("Milestone does not exist"))
             }
 
         }catch(e){
             console.log(e)
-            set_snackbar({
-                open: true,
-                message: "Milestone must be empty of deliverables"
-            })
+            dispatch(showSnackbarMessage("Delete Deliverables to delete the Milestone"))
         }
         
     }
+
 
 
     return(
