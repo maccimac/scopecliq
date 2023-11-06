@@ -18,6 +18,8 @@ export const OrganizationCardEdit = ({
     const [modelContactAbout, set_modelContactAbout] = useState('')
     const [ modelContactNumber, set_modelContactNumber] = useState('')
 
+    
+
     useEffect(()=>{
         cb.set_organization({
             organization_name: modelOrganizationName,

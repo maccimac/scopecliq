@@ -143,12 +143,16 @@
         &::placeholder{
             color: $sq-med-light;
         }
-        &:focus{
-            color: $sq-black;
-        }
+        // &:focus{
+        //     color: $sq-black;
+        //     font-weight: 600;
+        // }
 
         &:focus, input:focus{
             outline: none;
+            color: $sq-black;
+            font-weight: 600;
+            
         }
 }
 

@@ -8,6 +8,7 @@ import OrganizationCardEdit from '../components/OrganizationCardEdit';
 
 export const ProjectEdit = (isConsultant=true) => {
     const api = global.config.API
+    const origin = window.location.origin;
     const navigate = useNavigate()
 
     const userId = useSelector(currentUserId)
@@ -20,7 +21,6 @@ export const ProjectEdit = (isConsultant=true) => {
         }
     ])
     const [organization, set_organization] = useState(null)
-
 
     const [project, set_project] = useState(null)
     const [modelProjectName, set_modelProjectName] = useState('')
@@ -186,12 +186,13 @@ export const ProjectEdit = (isConsultant=true) => {
                     <div className='d-flex'>
                         <div
                             className='sq-input d-flex align-items-center
-                                mb-2 w-100 
+                                mb-2 w-75 
                                 bg-sq-white text-color-sq-mid 
                                 font-size-12 me-2'
                         >
-                            http://scopecliq.com/client/ 
-                            <input className='border-0 outline-0 text-color-sq-lav-mid' 
+                            <span className='text-color-sq-light'>{origin}/portal/</span>
+                             
+                            <input className='border-0 outline-0 text-color-sq-lav-dark' 
                                 value={modelProjectDomain} 
                                 onChange={(e)=>{
                                     set_modelProjectDomain(e.target.value)
@@ -199,7 +200,7 @@ export const ProjectEdit = (isConsultant=true) => {
                                 placeholder='Portal Domain'
                             ></input>
                         </div>
-                        <input className='sq-input w-100 mb-2' 
+                        <input className='sq-input w-25 mb-2' 
                             value={modelProjectPassword} 
                             onChange={(e)=>{
                                 set_modelProjectPassword(e.target.value)

@@ -686,11 +686,10 @@ small {
 .sq-textarea::placeholder, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit::placeholder, .sq-input::placeholder {
   color: #999999;
 }
-.sq-textarea:focus, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit:focus, .sq-input:focus {
-  color: #333;
-}
 .sq-textarea:focus, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit:focus, .sq-textarea input:focus, .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit input:focus, .sq-input:focus, .sq-input input:focus {
   outline: none;
+  color: #333;
+  font-weight: 600;
 }
 
 .sq-menu .MuiPaper-elevation {
