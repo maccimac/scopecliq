@@ -7,6 +7,7 @@ use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\MilestonesController;
 use App\Http\Controllers\DeliverablesController;
+use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\UserController;
 
@@ -85,6 +86,12 @@ Route::prefix('deliverables')->group(function () {
     
 });
 
+// INVOICES
+Route::prefix('invoices')->group(function () {
+
+    Route::get('/{id}', [InvoicesController::class, 'fetchInvoiceById']);
+    Route::get('/project/{project_id}', [InvoicesController::class, 'fetchInvoicesByProject']);
+});
 
 // NOTIFICATIONS
 Route::prefix('notifications')->group(function () {
