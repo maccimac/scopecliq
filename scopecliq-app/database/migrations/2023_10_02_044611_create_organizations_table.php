@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('contact_email')->unique();
             $table->text('contact_about');
             $table->string('organization_logo')->nullable();
+            $table->text('organization_address')->nullable();
 
             // $table->boolean('is_consultant')->default(false);
             $table->bigInteger('consultant_user_id')->unsigned()->nullable();
