@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('milestone_id')->constrained('milestones');
             $table->decimal('total', 20, 2);
+            $table->dateTime('datetime_generated');
             $table->dateTime('datetime_paid')->nullable();
             $table->dateTime('datetime_void')->nullable();
             $table->text('notes')->nullable();

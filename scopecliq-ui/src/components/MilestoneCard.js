@@ -190,6 +190,9 @@ export const MilestoneCard = ({
                                     }}
                                     className='sq-menu'
                                 >
+                                    {milestoneStatus == 'complete' && (<div onClick={handleMenuClose}>
+                                        <div className="sq-menu-item" >Generate and send invoice</div>
+                                    </div>)}
                                     <div onClick={deleteMilestone}>
                                         <div className="sq-menu-item" >Delete milestone</div>
                                     </div>
