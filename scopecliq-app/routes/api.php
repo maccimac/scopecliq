@@ -81,6 +81,7 @@ Route::prefix('deliverables')->group(function () {
     Route::post('/update/{id}/position/{position}', [DeliverablesController::class, 'updateDeliverablePosition']);
     Route::post('/add/milestone/{milestone_id}', [DeliverablesController::class, 'addDeliverableToMilestone']);
     Route::post('/edit/{id}', [DeliverablesController::class, 'editDeliverableById']);
+    Route::post('/delete/{id}', [DeliverablesController::class, 'deleteDeliverableById']);
     
 });
 
