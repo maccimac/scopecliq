@@ -10,7 +10,7 @@ import Home from './views/Home.js';
 import ConsultantDashboard from './views/ConsultantDashboard.js';
 import DashboardHome from './views/DashboardHome.js';
 import ClientPortal from './views/ClientPortal';
-
+import Invoice from './components/Invoice';
 
 import { storeSnackbar, resetSnackbarMessage } from './store/snackbar-store';
 import { useEffect } from 'react';
@@ -37,7 +37,7 @@ const App = () => {
         <Route path="/dashboard/:projectId" element={<ConsultantDashboard/>}/>
         <Route path="/dashboard" element={<DashboardHome/>}/>
         <Route path="/portal/:domain" element={<ClientPortal/>}/>
-
+        <Route path="/invoice/:invoiceId" element={<Invoice/>}/>
         <Route path="/test" element={<Home/>}/>
       </Routes>
       

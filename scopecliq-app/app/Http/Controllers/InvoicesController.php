@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InvoicesController extends Controller
 {
@@ -69,7 +70,7 @@ class InvoicesController extends Controller
     }
 
     public function fetchInvoiceByInvoiceId($invoice_id){
-        $invoice = DB::table('invoice')
+        $invoice = DB::table('invoices')
             -> select('*')
             -> where('id', $invoice_id)
             -> first();
@@ -78,7 +79,7 @@ class InvoicesController extends Controller
 
 
     public function fetchInvoiceByMilestoneId($milestone_id){
-        $invoice = DB::table('invoice')
+        $invoice = DB::table('invoices')
             -> select('*')
             -> where('milestone_id', $milestone_id)
             -> first();
