@@ -55,11 +55,14 @@ class InvoicesController extends Controller
                 'i.datetime_paid',
                 'i.datetime_void',
                 'i.notes',
+                'm.name',
                 'm.position',
+                'm.budget_percentage',
                 'p.about',
+                'p.budget',
                 'o.organization_name',
                 'o.organization_address',
-                'o.contact_name'
+                'o.contact_name',
             )
             ->join('milestones as m', 'i.milestone_id', '=', 'm.id')
             ->join('projects as p', 'i.project_id', '=', 'p.id')
@@ -85,4 +88,22 @@ class InvoicesController extends Controller
             -> first();
         return $invoice;
     }
+
+    public function addInvoiceOfMilestone(Request $req) {
+        $newId = DB::table('invoices')
+            ->insertGetId([
+            'project_id' => $req->$project_id,
+            'milestone_id' => $req->$milestone_id,
+            'total' => $req->total,
+            'description' => $req->description,
+            'notes' => $req->notes,
+            'datetime_generated' => now(),
+            'created_at'=>now()
+            ]);
+
+        return $newId;
+    }
+
+    // mark as paid
+    // mark as void
 }
