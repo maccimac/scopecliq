@@ -50,15 +50,16 @@ export const MilestoneCard = ({
                   "Content-Type": "application/json",
                 },
             });
+            console.log(res)
             if(res.status===200){
-                cb.updateMilestonesPositions()
-                cb.getMilestones()
+                cb.updateMilestonesPositions(res.data)
             }
         }catch(e){
             console.log(e)
-            dispatch(showSnackbarMessage(
-                e.response.data.message
-            ))
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: e.response.data.message
+            }))
         }
 
     }
@@ -78,7 +79,7 @@ export const MilestoneCard = ({
         if(res.status===200){
             setEditMode(false)
             cb.getMilestones()
-            dispatch(showSnackbarMessage("Milestone updated"))
+            dispatch(showSnackbarMessage({message: "Milestone updated"}))
         }
     }
 
@@ -94,12 +95,19 @@ export const MilestoneCard = ({
             if(res.data.status == 'successs'){
                 cb.getMilestones()
             }else{
-                dispatch(showSnackbarMessage("Milestone does not exist"))
+                cb.getMilestones()
+                dispatch(showSnackbarMessage({
+                    status: 'error',
+                    message: "Milestone does not exist"
+                }))
             }
 
         }catch(e){
             console.log(e)
-            dispatch(showSnackbarMessage("Delete Deliverables to delete the Milestone"))
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message 
+            }))
         }
         
     }

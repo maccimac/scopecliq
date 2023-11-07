@@ -44,7 +44,12 @@ const App = () => {
       {/* <Home/> */}
 
       <Snackbar open={snackbar.show}>
-        <div className='bg-sq-gold-mid sq-outter-shadow border-sq-light px-3 py-2 rounded text-color-sq-white font-size-14'>{snackbar.message}</div>
+        <div className={`
+          sq-outter-shadow border-sq-light px-3 py-2 rounded text-color-sq-white font-size-14
+          ${!snackbar.status && ' bg-sq-gold-mid  '}
+          ${snackbar.status == 'error' && ' bg-sq-tomato-light '}
+          `
+      }>{snackbar.message}</div>
       </Snackbar>
 
     </div>

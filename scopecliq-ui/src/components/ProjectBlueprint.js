@@ -53,15 +53,22 @@ export const ProjectBlueprint = ({isConsultant}) => {
         ])
     }
 
-    const updateMilestonesPositions = async () =>{
+    const updateMilestonesPositions = async (newId) =>{
 
         [...milestones].map((m, i)=>{
+            console.log(m)
             if(m.id){
                 const res = axios.post(`${api}/milestones/update-position/${m.id}/${i}`);
-                set_milestones(res.data)
+                // set_milestones(res.data)
+            }else{
+                const res = axios.post(`${api}/milestones/update-position/${newId}/${i}`);
             }
+
+            if(i == milestones.length-1){
+                getMilestones()
+            }
+            
         })
-        getMilestones();
     } 
 
     useEffect(()=>{

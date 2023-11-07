@@ -24,9 +24,7 @@ const DashboardHomeLayout = ({
     const [modelCreateOpen, set_modalCreateOpen] = useState(false)
 
     function modalCreateOnClose(){
-        set_modalCreateOpen('false')
-        dispatch(showSnackbarMessage("Milestone updated"))
-        
+        set_modalCreateOpen('false')        
     }
 
 

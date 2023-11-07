@@ -81,19 +81,19 @@ class MilestonesController extends Controller
         // get last position
         $lastPosition = $this -> getLastPositionByProject($project_id);
 
-        DB::table('milestones')
-            ->insert([
-            [
-                'project_id' => $project_id,
-                'position' => $lastPosition+1,
-                'name' => $req->name,
-                'description' => $req->description,
-                'budget_percentage' => $req->budget_percentage,
-                'status_completion' => null,
-                'status_invoice' => null,
-                'datetime_started' => null,
-            ],
-        ]);
+        $newId = DB::table('milestones')
+            ->insertGetId([
+            'project_id' => $project_id,
+            'position' => $lastPosition+1,
+            'name' => $req->name,
+            'description' => $req->description,
+            'budget_percentage' => $req->budget_percentage,
+            'status_completion' => null,
+            'status_invoice' => null,
+            'datetime_started' => null,
+            ]);
+
+        return $newId;
     }
 
     public function updateMilestoneById (Request $req, $milestone_id) {

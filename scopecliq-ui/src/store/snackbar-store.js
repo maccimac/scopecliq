@@ -5,6 +5,7 @@ const snackbarSlice = createSlice({
   initialState: {
       snackbarActive: {
         show: false,
+        status: null,
         message: ""
       }
       
@@ -14,7 +15,8 @@ const snackbarSlice = createSlice({
       console.log({action, state})
       state.snackbarActive = {
         show: true,
-        message: action.payload 
+        status: action.payload.status,
+        message: action.payload.message 
       };  
 
       
@@ -22,6 +24,7 @@ const snackbarSlice = createSlice({
     resetSnackbarMessage(state){
       state.snackbarActive = {
         show: false,
+        status: null,
         message: ""
       }  
 
