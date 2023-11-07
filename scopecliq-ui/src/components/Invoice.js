@@ -7,24 +7,32 @@ import { useState, useEffect } from "react";
 import NavBar from '../components/NavBar';
 import { storeProject} from '../store/project-store';
 import { useDispatch, useSelector} from 'react-redux';
-import { setAsClient} from '../store/user-store';
+import { currentUserId } from '../store/login-store';
 
 
 const Invoice = () => {
     const api = global.config.API
-    const { invoiceId } = useParams();
+    const { milestoneId } = useParams();
+    const userId = useSelector(currentUserId)
 
     const dispatch = useDispatch()
     const project = useSelector(storeProject)
     const [invoice, set_invoice] = useState(null)
+    const [consultant, set_consultant] = useState(null)
     
     const getInvoiceDetails = async () =>{
         try{
-            const res = await axios.post(`${api}/invoices/${invoiceId}`)
+            const res = await axios.post(`${api}/invoices/milestone/${milestoneId}`)
+            console.log(res.data)
             set_invoice(res.data)
         }catch(e){
             console.log(e)
         }
+    }
+
+    const fetchConsultant = async() =>{
+        const res = await axios.get(api+ '/organizations/consultant/'+userId)
+        set_consultant(res.data)
     }
 
     const parseDateTime = (str) => {
@@ -53,11 +61,12 @@ const Invoice = () => {
           
     useEffect(()=>{
         getInvoiceDetails()
+        fetchConsultant()
     }, [])
 
     return(
         <div className="sq-invoice border-sq-light p-4 m-4 rounded">
-            {invoice && (
+            {invoice ? (
             <div>
                 <div className="d-flex justify-content-between">
                     <div>
@@ -80,8 +89,6 @@ const Invoice = () => {
                             Expand &nbsp; <i className='fa-solid fa-regular fa-chevron-up'></i>
                         </span>
                     </div>
-
-
 
                 </div>
                 <hr/>
@@ -136,9 +143,51 @@ const Invoice = () => {
                         </div>)}
 
                     </div>
-                </div>    
-            </div>            
-            )}
+                </div>
+
+                <hr/>
+
+                <div className='d-flex font-size-12'>
+                    <div className='me-4'>
+                        <div>
+                            <span className='label'>To: &nbsp;</span>
+                            {invoice.organization_name}
+                        </div>
+                        <div>
+                            {invoice.organization_address}
+                        </div>
+                    </div>
+                        {consultant && (
+                            <div>
+                        <div>
+                            <span className='label'>From: &nbsp;</span>
+                            {consultant.organization_name}
+                        </div>
+                        <div>
+                            {consultant.organization_address}
+                        </div>
+                        </div>)}
+                    </div>
+                    {invoice.notes && 
+                    (<div>
+                        <hr/>
+                        <span className='label'>Notes: &nbsp;</span> {invoice.notes}
+                    </div>)}
+
+                    <hr/>
+                    <div className='d-flex align-items-center'>
+                        <div className='sq-btn bg-sq-green me-2'>
+                            Mark as paid
+                         </div>
+                         <div className='sq-link'>
+                            Resend invoice
+                        </div>   
+                    </div>
+                </div>            
+            )
+        : <div>
+            No invoice for this milestone
+        </div>}
         </div>
     )
 }

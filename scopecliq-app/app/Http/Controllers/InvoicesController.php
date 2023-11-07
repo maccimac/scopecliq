@@ -44,7 +44,7 @@ class InvoicesController extends Controller
     }
 
 
-    public function fetchInvoiceByInvoiceIdFull($invoice_id){
+    public function fetchInvoiceByMilestoneIdFull($milestone_id){
         $invoice = DB::table('invoices as i')
             ->select(
                 'i.id',
@@ -67,7 +67,7 @@ class InvoicesController extends Controller
             ->join('milestones as m', 'i.milestone_id', '=', 'm.id')
             ->join('projects as p', 'i.project_id', '=', 'p.id')
             ->join('organizations as o', 'p.organization_id', '=', 'o.id')
-            ->where('i.id', $invoice_id)
+            ->where('i.milestone_id', $milestone_id)
             ->first();
         return $invoice;
     }

@@ -2,11 +2,8 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../../store/user-store';
-// import { storeProject } from '../../store/project-store';
 import { currentUserId } from '../../store/login-store';
-// import { connect } from 'react-redux';
 
-// import Notification from '../../components/Notification';
 import OrganizationCard from '../../components/OrganizationCard';
 
 const DashboardHomeSidebar = ({className, project}) => {

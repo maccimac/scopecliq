@@ -90,7 +90,7 @@ Route::prefix('deliverables')->group(function () {
 Route::prefix('invoices')->group(function () {
 
     Route::get('/{id}', [InvoicesController::class, 'fetchInvoiceByInvoiceId']);
-    Route::post('/{id}', [InvoicesController::class, 'fetchInvoiceByInvoiceIdFull']);
+    Route::post('/milestone/{milestone_id}', [InvoicesController::class, 'fetchInvoiceByMilestoneIdFull']);
     Route::get('/project/{project_id}', [InvoicesController::class, 'fetchInvoicesByProject']);
 });
 

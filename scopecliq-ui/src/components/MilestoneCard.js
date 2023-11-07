@@ -35,6 +35,11 @@ export const MilestoneCard = ({
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+    const goToInvoice = () =>{
+
+
+
+    }
 
 
     const addMilestone = async () =>{
@@ -108,10 +113,8 @@ export const MilestoneCard = ({
                 status: 'error',
                 message: e.response.data.message 
             }))
-        }
-        
+        }        
     }
-
 
 
     return(
@@ -190,9 +193,17 @@ export const MilestoneCard = ({
                                     }}
                                     className='sq-menu'
                                 >
-                                    {milestoneStatus == 'complete' && (<div onClick={handleMenuClose}>
-                                        <div className="sq-menu-item" >Generate and send invoice</div>
-                                    </div>)}
+                                    {milestoneStatus == 'complete' && (
+                                    <div>
+                                        <div onClick={handleMenuClose}>
+                                            <div className="sq-menu-item" >Generate and send invoice</div>
+                                        </div>
+                                        <Link to={"/invoice/" + milestone.id} className='sq-menu-item w-100'>
+                                            Go to invoice
+                                        </Link>
+                                        
+                                    </div>
+                                    )}
                                     <div onClick={deleteMilestone}>
                                         <div className="sq-menu-item" >Delete milestone</div>
                                     </div>
