@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import {useNavigate} from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 import { currentUserId } from '../store/login-store';
+import { showSnackbarMessage } from '../store/snackbar-store';
 
 import OrganizationCardEdit from '../components/OrganizationCardEdit';
 
 export const ProjectEdit = (isConsultant=true) => {
     const api = global.config.API
+    const dispatch = useDispatch()
     const origin = window.location.origin;
     const navigate = useNavigate()
 
@@ -53,19 +55,26 @@ export const ProjectEdit = (isConsultant=true) => {
     const createProjectFull = async () =>{
     
         if(organizationId==0){
-            const res = await axios.post(`${api}/organizations/add/${userId}`, organization, {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-            });
-            set_organization({
-                ...organization,
-                organization_id: res.data
-            })
-            set_organizationId(res.data)
-            console.log('no org', res)
-            if(res){
-                createProject(res.data)
+            try{
+                const res = await axios.post(`${api}/organizations/add/${userId}`, organization, {
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                });
+                set_organization({
+                    ...organization,
+                    organization_id: res.data
+                })
+                set_organizationId(res.data)
+                console.log('no org', res)
+                if(res){
+                    createProject(res.data)
+                }
+            }catch(e){
+                dispatch(showSnackbarMessage({
+                    status: 'error',
+                    message: e.response.data.message
+                }))
             }
         }else{
             console.log('existing org')
@@ -75,13 +84,21 @@ export const ProjectEdit = (isConsultant=true) => {
     }
 
     const createProject = async(orgId) =>{
-        const res = await axios.post(`${api}/projects/add/${orgId}`, project, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-        });
-        console.log(res.data)
-        navigate(`/dashboard/${res.data}`)
+        try{
+            const res = await axios.post(`${api}/projects/add/${orgId}`, project, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            console.log(res.data)
+            navigate(`/dashboard/${res.data}`)
+        }catch(e){
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message
+            })) 
+        }
+        
     }
 
     useEffect(()=>

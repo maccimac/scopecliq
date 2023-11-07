@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
+import { showSnackbarMessage} from '../store/snackbar-store';
 import Menu from '@mui/material/Menu';
 
 
@@ -14,6 +15,7 @@ export const Deliverable = ({
     index
 } ) => {
     const api = global.config.API;
+    const dispatch = useDispatch();
     const clientMode = useSelector(isClient);
     const project = useSelector(storeProject);
 
@@ -94,6 +96,7 @@ export const Deliverable = ({
         setEditMode(false);
         setClassNameState(statusClassNames[statusModel].outterClass);
     } 
+
     const updateDescription = async () =>{
         const payloadDesc = {
             description: descriptionModelEdit
@@ -139,6 +142,29 @@ export const Deliverable = ({
             cb.saveAllPositions()        
             cb.fetchDeliverableByMilestone()
         }
+    }
+
+    const deleteDeliverable = async () => {
+        try{
+            const res = await axios.post(`${api}/deliverables/delete/${deliverable.id}`, {}, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            if(res.status == 200){
+                dispatch(showSnackbarMessage({
+                    message: "Deliverable  deleted"
+                }))            
+                cb.fetchDeliverableByMilestone()
+                cb.saveAllPositions()
+            }    
+        }catch(e){
+
+        }
+        
+
+        
+
     }
     const resolveClassStyleByStatus = (statusModel) =>{
         setClassNameState(statusClassNames[statusModel].outterClass + (editMode && ' sq-deliverable--edit '));
@@ -233,10 +259,10 @@ export const Deliverable = ({
                                     }}
                                     className='sq-menu'
                                 >
-                                    <div onClick={handleMenuClose}>
-                                        <div className="sq-menu-item" >Complete with message</div>
-                                        <div className="sq-menu-item" >Cancel deliverable</div>
-                                        <div className="sq-menu-item" >Delete deliverable</div>
+                                    <div >
+                                        {/* <div onClick={handleMenuClose} className="sq-menu-item" >Complete with message</div>
+                                        <div onClick={handleMenuClose} className="sq-menu-item" >Cancel deliverable</div> */}
+                                        <div onClick={deleteDeliverable} className="sq-menu-item" >Delete deliverable</div>
                                     </div>
                                 </Menu>
                             </div>

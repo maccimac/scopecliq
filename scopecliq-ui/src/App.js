@@ -25,7 +25,7 @@ const App = () => {
     if(snackbar.show){
       setTimeout(()=>{
         dispatch(resetSnackbarMessage())
-      }, 3000)  
+      }, 5000)  
     }
       }, [snackbar])
 
