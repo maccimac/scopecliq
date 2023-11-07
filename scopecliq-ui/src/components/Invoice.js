@@ -19,6 +19,17 @@ const Invoice = () => {
     const project = useSelector(storeProject)
     const [invoice, set_invoice] = useState(null)
     const [consultant, set_consultant] = useState(null)
+
+
+    const markAsPaid = async () =>{
+        try{
+            const res = await axios.post(`${api}/invoices/mark-paid/${invoice.id}`)
+            console.log(res.data)
+            getInvoiceDetails()
+        }catch(e){
+            console.log(e)
+        }
+    }
     
     const getInvoiceDetails = async () =>{
         try{
@@ -176,12 +187,12 @@ const Invoice = () => {
 
                     <hr/>
                     <div className='d-flex align-items-center'>
-                        <div className='sq-btn bg-sq-green me-2'>
+                        {invoice.datetime_paid ? (<div className='sq-btn bg-sq-green me-2' onClick={markAsPaid}>
                             Mark as paid
-                         </div>
-                         <div className='sq-link'>
+                         </div>): (<div className='sq-link'>
                             Resend invoice
-                        </div>   
+                        </div>   ) }
+                         
                     </div>
                 </div>            
             )

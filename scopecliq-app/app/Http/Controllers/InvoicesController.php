@@ -105,5 +105,14 @@ class InvoicesController extends Controller
     }
 
     // mark as paid
+    public function markInvoicePaid($id) {
+
+        $invoice = DB::table('invoices')
+            -> where('id', $id)
+            -> update([
+                'datetime_paid'=> now()
+            ]);
+        return $invoice;
+    }
     // mark as void
 }
