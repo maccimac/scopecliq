@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
@@ -16,6 +16,7 @@ export const MilestoneCard = ({
 }) => {
     const api = global.config.API;
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const project = useSelector(storeProject);
     const clientMode = useSelector(isClient)
 
@@ -35,9 +36,28 @@ export const MilestoneCard = ({
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
-    const goToInvoice = () =>{
+    
+    const generateInvoice = async() => {
+        try{
+            const payload = {
+                milestone_id: milestone.id
+            }
+            const res = await axios.post(`${api}/invoices/create`, payload, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            if(res.data){
+                navigate(`/invoice/${milestone.id}`)
+            }
 
-
+        }catch(e){
+            console.log(e)
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: e.response.data.message
+            }))
+        }
 
     }
 
@@ -195,7 +215,7 @@ export const MilestoneCard = ({
                                 >
                                     {milestoneStatus == 'complete' && (
                                     <div>
-                                        <div onClick={handleMenuClose}>
+                                        <div onClick={generateInvoice}>
                                             <div className="sq-menu-item" >Generate and send invoice</div>
                                         </div>
                                         <Link to={"/invoice/" + milestone.id} className='sq-menu-item w-100'>

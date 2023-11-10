@@ -36,6 +36,8 @@ const Invoice = () => {
             const res = await axios.post(`${api}/invoices/milestone/${milestoneId}`)
             console.log(res.data)
             set_invoice(res.data)
+
+
         }catch(e){
             console.log(e)
         }
@@ -67,7 +69,8 @@ const Invoice = () => {
       }
 
     const parseAmount = (num) => {
-        return num.toLocaleString('en-US'); 
+        // return (num).toLocaleString('en-US'); 
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
           
     useEffect(()=>{
@@ -117,7 +120,7 @@ const Invoice = () => {
                                 Total: &nbsp;
                             </span>
                             <span className='text-color-sq-green'>
-                                ${parseAmount(invoice.total)}
+                                $ {parseAmount(invoice.total)}
                             </span>
                         </div>
 
@@ -126,7 +129,7 @@ const Invoice = () => {
                                 Fee: &nbsp;
                             </span>
                             <span className=''>
-                                {invoice.budget_percentage}% of ${invoice.budget}
+                                {invoice.budget_percentage}% of $ {parseAmount(invoice.budget)}
                             </span>
                         </div>
 
@@ -187,11 +190,16 @@ const Invoice = () => {
 
                     <hr/>
                     <div className='d-flex align-items-center'>
-                        {invoice.datetime_paid ? (<div className='sq-btn bg-sq-green me-2' onClick={markAsPaid}>
-                            Mark as paid
-                         </div>): (<div className='sq-link'>
-                            Resend invoice
-                        </div>   ) }
+                        {!invoice.datetime_paid && (
+                        <>
+                            <div className='sq-btn bg-sq-green me-2' onClick={markAsPaid}>
+                                Mark as paid
+                            </div>
+                            <div className='sq-link'>
+                                Resend invoice
+                            </div>
+                         </>)}
+                         
                          
                     </div>
                 </div>            

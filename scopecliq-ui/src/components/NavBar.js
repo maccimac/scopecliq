@@ -5,7 +5,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { Link } from "react-router-dom";
 
-export const NavBar = () => {
+export const NavBar = ({children}) => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
 
@@ -25,7 +25,7 @@ export const NavBar = () => {
             </div>
 
             <div className='d-flex'>
-               Some stuff
+               {children}
             </div>
             
         </div>

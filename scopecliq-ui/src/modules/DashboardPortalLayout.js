@@ -22,7 +22,9 @@ const DashboardLayout = () => {
     return(
         <div class="sq-dashboard-portal">
             <div class="sq-body">
-                <NavBar/>
+                <NavBar>
+                    <div className='sq-link'>Your Invoices</div>
+                </NavBar>
                 <div class="sq-content h-100">
                     
                     <div className='project-blueprint-holder'>
@@ -40,7 +42,7 @@ const DashboardLayout = () => {
                             </h2>
                         </div>
                         {
-                            project && (<ProjectBlueprint project={project}/>)
+                            project ? (<ProjectBlueprint project={project}/>) : "Loading..."
                         }
                         
                     </div>

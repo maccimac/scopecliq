@@ -14,6 +14,7 @@ export const ProjectBlueprint = ({isConsultant}) => {
     const api = global.config.API
     const [milestones, set_milestones] = useState([])
     const project = useSelector(storeProject)
+    const clientMode  = useSelector(isClient)
 
     const emptyMilestone = {
         'project_id' : project.id,
@@ -79,13 +80,14 @@ export const ProjectBlueprint = ({isConsultant}) => {
 
 
     return(
-        <div className="sq-project-blueprint d-flex">
+        <>
+        {project && (<div className="sq-project-blueprint d-flex">
             <div className='mt-5 sq-btn-add__holder'>
                 <div className="sq-btn-add sq-btn-add--milestone"  onClick={addMilestone}>
                         <i className="fa-solid fa-plus"></i>
                 </div>
             </div>
-            { milestones?.length && milestones.map( (m,i)=>(
+            { milestones && milestones.length && milestones.map( (m,i)=>(
                 <div className='d-flex'>
                     <Milestone
                         key={m.id}
@@ -94,15 +96,20 @@ export const ProjectBlueprint = ({isConsultant}) => {
                         index={i}
                         edit={true}
                     />
-                    <div className='mt-5 sq-btn-add__holder' onClick={()=>{addMilestone(i+1)}}>
-                        <div className="sq-btn-add sq-btn-add--milestone" >
-                                <i className="fa-solid fa-plus"></i>
-                        </div>
-                    </div>
+                    {
+                        isClient && (
+                            <div className='mt-5 sq-btn-add__holder' onClick={()=>{addMilestone(i+1)}}>
+                                <div className="sq-btn-add sq-btn-add--milestone" >
+                                        <i className="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                        )
+                    }
                     
                  </div>
              ))}
-        </div>
+        </div>)}
+        </>
     )
 }
 

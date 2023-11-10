@@ -89,19 +89,38 @@ class InvoicesController extends Controller
         return $invoice;
     }
 
-    public function addInvoiceOfMilestone(Request $req) {
+    public function createInvoiceOfMilestone(Request $req) {
+
+        $exists = $this->fetchInvoiceByInvoiceId($req->milestone_id);
+        if($exists){
+            throw new \Exception('Invoice of this item exists already');
+        }
+
+        $milestone = DB::table('milestones')
+            -> select('*')
+            -> where('id', $req->milestone_id)
+            -> first();
+        
+        $project = DB::table('projects')
+        -> select('*')
+        -> where('id', $milestone->project_id)
+        -> first();
+
         $newId = DB::table('invoices')
             ->insertGetId([
-            'project_id' => $req->$project_id,
-            'milestone_id' => $req->$milestone_id,
-            'total' => $req->total,
-            'description' => $req->description,
-            'notes' => $req->notes,
+            'project_id' => $milestone->project_id,
+            'milestone_id' => $req->milestone_id,
+            'total' => ($milestone->budget_percentage * $project->budget),
+            'notes' => null,
             'datetime_generated' => now(),
             'created_at'=>now()
             ]);
+        
+        // notification
 
         return $newId;
+
+        
     }
 
     // mark as paid
