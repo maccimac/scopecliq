@@ -22,19 +22,23 @@ $scrollbar-width: 17;
 
     .sq-content{
         flex-grow: 1;
-        
+        width: 100%;
+        max-width: 100%;
+        transition: none;
     }
 }
 
 .sq-dashboard-portal{
     &:has(.sq-sidebar-offcanvas--open){
-        .sq-navigation{
+        .sq-navigation, .sq-content{
+            // width: 100%;
             max-width: calc(100% - #{$sidebar-offset-width}px);
-            padding-right: 16px !important;
+            // padding-right: 16px !important;
+            
         }
         .project-blueprint-holder{
             position: relative;
-            margin-right: #{$sidebar-offset-width - $scrollbar-width}px;        
+            // margin-right: #{$sidebar-offset-width - $scrollbar-width}px;        
         }
     }
     .sq-navigation{
@@ -80,6 +84,7 @@ $scrollbar-width: 17;
         border: none;
         border-left: none;
         width: #{$sidebar-offset-width}px;
+        transition: none;
         .offcanvas-header{
             background: transparent;
             position: absolute;

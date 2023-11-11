@@ -16,6 +16,7 @@ const SidebarOffset = () => {
     const [showOffcanvas, setShowOffcanvas] = useState(clientMode); // Set the initial state to true to show the Offcanvas
 
     const fetchNotificationsByProject = async() =>{
+        if(!project) return
         const res = await axios.get(api+ '/notifications/project/' + project.id)
         set_notifications(res.data)
     }
@@ -138,7 +139,7 @@ const SidebarOffset = () => {
                             </div>
                         </div>
                         <div>
-                            <ProjectCard 
+                            {project && <ProjectCard 
                                 project={project}
                                 collapsed
                                 dark
@@ -152,7 +153,7 @@ const SidebarOffset = () => {
                                     </button>
                                 </div>
                                
-                            </ProjectCard>
+                            </ProjectCard>}
                         </div>
                     </div>)}
 
@@ -169,7 +170,7 @@ const SidebarOffset = () => {
                                 </button>
                             </div>
 
-                            <ProjectCard 
+                            {project && (<ProjectCard 
                                 project={project}
                                 full
                                 dark
@@ -180,7 +181,7 @@ const SidebarOffset = () => {
                                     </div>
                                     
                                 </div>
-                            </ProjectCard>
+                            </ProjectCard>)}
                         </div>
                     )}
                     

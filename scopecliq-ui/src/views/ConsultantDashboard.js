@@ -6,7 +6,7 @@ import { isClient, setAsClient, setAsConsultant } from '../store/user-store';
 import { setProject } from '../store/project-store';
 
 
-import  DashboardLayout  from '../modules/DashboardPortalLayout';
+import  DashboardPortalLayout  from '../modules/DashboardPortalLayout';
 
 const ConsultantDashboard = () => {
     const api = global.config.API
@@ -18,7 +18,6 @@ const ConsultantDashboard = () => {
     const fetchProjectById = async() =>{
         const res = await axios.get(api+ '/projects/' + projectId)
         set_project(res.data)
-        console.log(res.data)
         dispatch(setProject(res.data))
     }
 
@@ -31,7 +30,7 @@ const ConsultantDashboard = () => {
 
     return(
         <div class="sq-outter-frame">
-            {project && <DashboardLayout isConsultant={true}/>}
+            {project && <DashboardPortalLayout isConsultant={true}/>}
             
         </div>
     )

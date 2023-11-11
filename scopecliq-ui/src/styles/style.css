@@ -299,6 +299,10 @@
   color: #FFF9EE !important;
 }
 
+hr {
+  border-color: #CCCCCC;
+}
+
 h2 {
   color: #ACB1C6;
   font-size: 18px;
@@ -727,15 +731,16 @@ small {
 }
 .sq-body .sq-content {
   flex-grow: 1;
+  width: 100%;
+  max-width: 100%;
+  transition: none;
 }
 
-.sq-dashboard-portal:has(.sq-sidebar-offcanvas--open) .sq-navigation {
+.sq-dashboard-portal:has(.sq-sidebar-offcanvas--open) .sq-navigation, .sq-dashboard-portal:has(.sq-sidebar-offcanvas--open) .sq-content {
   max-width: calc(100% - 320px);
-  padding-right: 16px !important;
 }
 .sq-dashboard-portal:has(.sq-sidebar-offcanvas--open) .project-blueprint-holder {
   position: relative;
-  margin-right: 303px;
 }
 .sq-dashboard-portal .sq-navigation {
   padding-right: 96px !important;
@@ -777,6 +782,7 @@ small {
   border: none;
   border-left: none;
   width: 320px;
+  transition: none;
 }
 .sq-sidebar-offcanvas .offcanvas .offcanvas-header {
   background: transparent;
@@ -962,6 +968,12 @@ small {
 .sq-organization-card {
   background-color: transparent;
   box-shadow: none;
+}
+
+.sq-invoice {
+  max-width: 640px;
+  background-color: #fff;
+  box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
 }
 
 * {

@@ -31,9 +31,7 @@ const DashboardHomeLayout = ({
     return(
         <div class="sq-dashboard-home">
             <div class="container-fluid px-0">
-                <NavBar>
-                    <div className="sq-link">Client's Invoices</div>
-                </NavBar>
+                <NavBar/>
                 <div className="sq-content row mh-100">
                     <div class="col-md-3 mh-100">
                         <DashboardHomeSidebar className="w-100 h-100"/>

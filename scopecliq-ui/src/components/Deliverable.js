@@ -159,6 +159,10 @@ export const Deliverable = ({
                 cb.saveAllPositions()
             }    
         }catch(e){
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message 
+            }))
 
         }
         

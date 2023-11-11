@@ -30,6 +30,11 @@ export const ProjectCard = ({
         set_organization(res.data)
     }
 
+    // const goToInvoice = (milestoneId) =>{
+    //     dispatch(setProject(null))
+
+    // }
+
     useEffect(()=>{
         fetchOrganizationById()
       },[project])
@@ -129,10 +134,15 @@ export const ProjectCard = ({
                             &nbsp; <i className='fa-solid fa-regular fa-chevron-up'></i>
                         </span>
                     }
-                    
-                    <Link to={"/dashboard/" + project.id} className='sq-btn sq-btn--green'>
-                        Go to project
-                    </Link>
+                    <div className='d-flex align-items-center '>
+                        {!isCollapsed && (<Link to={"/dashboard/" + project.id + "/invoices"} className='sq-link text-color-sq-green me-3'>
+                            View invoices
+                        </Link>)}
+
+                        <Link to={"/dashboard/" + project.id } className='sq-btn sq-btn--green'>
+                            Go to project
+                        </Link>
+                    </div>
                 </div>)}
             </div>
 

@@ -8,10 +8,12 @@ import placeholder3 from '../assets/img/placeholder-3.png'
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
+import { showSnackbarMessage } from '../store/snackbar-store';
 
 
 export const ProjectBlueprint = ({isConsultant}) => {
     const api = global.config.API
+    const dispatch = useDispatch();
     const [milestones, set_milestones] = useState([])
     const project = useSelector(storeProject)
     const clientMode  = useSelector(isClient)
@@ -28,12 +30,21 @@ export const ProjectBlueprint = ({isConsultant}) => {
     }
 
     const getMilestones = async() => {
-        const res = await axios.get(api+  '/milestones/project/'+ project.id )
-        set_milestones(res.data)
-        console.log(res.data)
-        if(!res.data.length){
-            set_milestones([emptyMilestone])
+        try{
+            const res = await axios.get(api+  '/milestones/project/'+ project.id )
+            set_milestones(res.data)
+            console.log(res.data)
+            if(!res.data.length){
+                set_milestones([emptyMilestone])
+            }
+
+        }catch(e){
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message 
+            }))
         }
+        
     }
 
   

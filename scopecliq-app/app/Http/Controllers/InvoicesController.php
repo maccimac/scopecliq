@@ -21,8 +21,9 @@ class InvoicesController extends Controller
                 'm.position',
             )
             ->join('milestones as m', 'i.milestone_id', '=', 'm.id')
-            ->where('project_id', $project_id)
+            ->where('i.project_id', $project_id)
             ->get();
+
         return $invoices;
 
         // select i.id, i.total, i.project_id, i.milestone_id, i.datetime_generated, i.datetime_paid, i.datetime_void, i.notes, m.position from invoices as i inner join milestones as m on i.milestone_id = m.id;
@@ -63,6 +64,8 @@ class InvoicesController extends Controller
                 'o.organization_name',
                 'o.organization_address',
                 'o.contact_name',
+                'o.contact_email',
+                'o.contact_number'
             )
             ->join('milestones as m', 'i.milestone_id', '=', 'm.id')
             ->join('projects as p', 'i.project_id', '=', 'p.id')

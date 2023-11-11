@@ -13,7 +13,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import ProjectEdit from './ProjectEdit';
 
 
-const DashboardLayout = () => {
+const DashboardPortalLayout = () => {
     const api = global.config.API
     const clientMode = useSelector(isClient)
     const project=(useSelector(storeProject))
@@ -23,7 +23,9 @@ const DashboardLayout = () => {
         <div class="sq-dashboard-portal">
             <div class="sq-body">
                 <NavBar>
-                    <div className='sq-link'>Your Invoices</div>
+                    <Link to={
+                                clientMode ? `/portal/${project?.portal_domain}/invoices` : `/dashboard/${project?.id}/invoices`
+                                } className='sq-link'><i class="fa-solid fa-receipt me-1"></i> Your Invoices</Link>
                 </NavBar>
                 <div class="sq-content h-100">
                     
@@ -53,4 +55,4 @@ const DashboardLayout = () => {
     )
 }
 
-export default DashboardLayout;
+export default DashboardPortalLayout;
