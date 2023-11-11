@@ -10,6 +10,7 @@ use App\Http\Controllers\DeliverablesController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnalyticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,5 +110,10 @@ Route::prefix('notifications')->group(function () {
     // Route::post('/add/milestone/{milestone_id}', [NotificationsController::class, 'addNotificationToMilestone']);
     // Route::post('/edit/{id}', [NotificationsController::class, 'editNotificationById']);
     Route::post('/read/{id}', [NotificationsController::class, 'markNotificationAsRead']);
-    
+});
+
+// ANALYTICS
+
+Route::prefix('analytics')->group(function () {
+    Route::get('/project/{project_id}/progress', [AnalyticsController::class, 'fetchProgressPercentByProject']);
 });
