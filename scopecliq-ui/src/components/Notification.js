@@ -2,13 +2,15 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
+import { Navigate, Link, useNavigate } from "react-router-dom"
+
 // import { _project, _setProject } from '../store/project-store';
 
 
 export const Notification =({_notification, cb})=>{
 
     const api = global.config.API;
-    // const project = useSelector(_project);
+    const navigate = useNavigate();
     
 
     const [attachmentType, set_attachmentType] = useState("deliverable")
@@ -58,8 +60,10 @@ export const Notification =({_notification, cb})=>{
         switch(notification.type){
             case 'INVOICE':
                 set_cta({
-                    label: "label",
-                    action: ()=>{}
+                    label: "Go to invoice",
+                    action: ()=>{
+                        navigate('/invoice/' + notification.milestone_id)
+                    }
                 })
                 break;
             default:
@@ -99,6 +103,8 @@ export const Notification =({_notification, cb})=>{
             <div className='notification-body'>
                 <p>This status is for <strong>{notification.description}</strong>.</p>
             </div>
+
+
             {cta &&
                 (<div className='notification-footer d-flex mt-3'>
                     <div className={`
@@ -107,8 +113,8 @@ export const Notification =({_notification, cb})=>{
                         ${notification.type == 'INVOICE' && 'bg-sq-lav' }
                         ${notification.type == 'CHANGE' && 'bg-sq-gold' }
                     `}
-                    onClick={markRead}>
-                        Approve
+                    onClick={cta.action}>
+                        {cta.label}
                     </div>
                 </div>)
             }

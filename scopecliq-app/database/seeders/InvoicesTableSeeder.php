@@ -34,7 +34,7 @@ class InvoicesTableSeeder extends Seeder
             // WAVEKO
             [
                 'project_id' => 1,
-                'milestone_id' => 3,
+                'milestone_id' => 5,
                 'total'=> 44000.00,
                 'datetime_generated' => Carbon::create(2023, 6, 12, 14, 30, 0),
                 'datetime_paid' => null,

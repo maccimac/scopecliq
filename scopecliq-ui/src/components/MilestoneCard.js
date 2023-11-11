@@ -158,7 +158,6 @@ export const MilestoneCard = ({
                             </div>
                         )
                         :( <div className='d-flex'>
-                        
                                 <div className='sq-btn-icon'>
                                     <i onClick={()=>{setEditMode(true)}} className="fa-solid  fa-pen-to-square text-color-sq-gold m-1 fa-xs"></i>
                                 </div>

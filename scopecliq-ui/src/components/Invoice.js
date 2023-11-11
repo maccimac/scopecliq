@@ -46,6 +46,7 @@ const Invoice = ({
     const getInvoiceDetails = async () =>{
         try{
             const res = await axios.post(`${api}/invoices/milestone/${milestoneId}`)
+            console.log(res)
             set_invoice(res.data)
 
         }catch(e){
@@ -95,7 +96,7 @@ const Invoice = ({
     return(
         <>
         {invoice && paramMilestoneId && (   
-            <div className='font-size-11 m-4s'>
+            <div className='font-size-11 m-4'>
                 <Link to={
                     clientMode ? `/portal/${invoice.portal_domain}` : `/dashboard/${invoice.project_id}`
                     } className='sq-link text-color-sq-med pb-0'>
@@ -110,6 +111,7 @@ const Invoice = ({
                 <div className="d-flex align-items-end justify-content-between">
                     <div>
                         <div>
+                            {paramMilestoneId && (<div className='sub mb-1'>{invoice.project_name}</div>)}
                             <span className='label'>
                                 Milestone {invoice.position + 1}: &nbsp;
                             </span>

@@ -58,7 +58,7 @@ class DeliverablesTableSeeder extends Seeder
                 'milestone_id' => 2,
                 'position' => 3,
                 'description' => 'Cancelled deliverable',
-                'status' => 'CANCELLED',
+                'status' => 'COMPLETE',
                 'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
                 'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
             ],

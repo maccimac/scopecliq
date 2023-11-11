@@ -59,6 +59,7 @@ class InvoicesController extends Controller
                 'm.name',
                 'm.position',
                 'm.budget_percentage',
+                'p.name as project_name',
                 'p.about',
                 'p.budget',
                 'p.portal_domain',
@@ -68,7 +69,7 @@ class InvoicesController extends Controller
                 'o.contact_email',
                 'o.contact_number'
             )
-            ->join('milestones as m', 'i.milestone_id', '=', 'm.id')
+            ->join('milestones as m', 'm.id', '=', 'i.milestone_id')
             ->join('projects as p', 'i.project_id', '=', 'p.id')
             ->join('organizations as o', 'p.organization_id', '=', 'o.id')
             ->where('i.milestone_id', $milestone_id)
@@ -120,7 +121,19 @@ class InvoicesController extends Controller
             'created_at'=>now()
             ]);
         
-        // notification
+        
+        DB::table('notifications')
+        ->insert([
+            [   'deliverable_id' => null,
+                'project_id'=> $milestone->project_id,
+                'milestone_id' => $req->milestone_id,
+                'type'=> 'INVOICE',
+                'status'=> 'SENT',
+                'description' => "Invoice has been created for $milestone->name",
+                'extra' => null,
+                'created_at' => now()
+            ],
+        ]);
 
         return $newId;
 
@@ -132,9 +145,27 @@ class InvoicesController extends Controller
 
         $invoice = DB::table('invoices')
             -> where('id', $id)
-            -> update([
-                'datetime_paid'=> now()
-            ]);
+            ->first();
+        
+        DB::table('invoices')
+        -> where('id', $id)
+        -> update([
+            'datetime_paid'=> now()
+        ]);
+
+        DB::table('notifications')
+        ->insert([
+            [   'deliverable_id' => null,
+                'project_id'=> $invoice->project_id,
+                'milestone_id' => $invoice->milestone_id,
+                'type'=> 'INVOICE',
+                'status'=> 'PAID',
+                'description' => "Invoice has been paid for invoice #$invoice->id",
+                'extra' => "Payment date: $invoice->datetime_paid",
+                'created_at' => now()
+            ],
+        ]);
+
         return $invoice;
     }
     // mark as void
