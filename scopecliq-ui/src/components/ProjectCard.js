@@ -15,14 +15,13 @@ export const ProjectCard = ({
 }) => {
     const api = global.config.API;
     // const clientMode = useSelector(isClient);
-
-
     const origin = window.location.origin;
 
     const [organization, set_organization] = useState({
         name: ''
     })
-    const [isCollapsed, set_isCollapsed] = useState(collapsed);  
+    const [isCollapsed, set_isCollapsed] = useState(collapsed); 
+    const [progress, set_progress] = useState(0);
 
     const fetchOrganizationById = async () => {
         if(!project.organization_id) return;
@@ -30,13 +29,67 @@ export const ProjectCard = ({
         set_organization(res.data)
     }
 
-    // const goToInvoice = (milestoneId) =>{
-    //     dispatch(setProject(null))
+    const fetchProgressByProjectId = async() => {
+        try{
+            const res = await axios.get(`${api}/analytics/project/${project.id}/progress`);
+            if(res.data){
+                const progressNum = res.data;
+                const inPercent = parseFloat((100*progressNum).toFixed(0));
+                set_progress(inPercent)
+            }
+        }catch(e){
+            console.log(e)
+        }
+    }
 
-    // }
+    const parseAmount = (num) => {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
+
+    const resolveStatus = (progress) =>{
+        if(progress==0){
+            return (
+                <div className='d-flex w-100 justify-content-between sub '>
+                    <div>
+                        Not started
+                    </div>
+                    <div>
+                        {progress}%
+                    </div>
+                </div>
+            )
+        }else if(progress == 100){
+            return (
+                <div className='d-flex w-100 justify-content-between sub text-color-sq-green'>
+                    <div>
+                        Complete
+                    </div>
+                    <div>
+                    {progress}%
+                    </div>
+                </div>
+            )
+            
+
+        }else{
+            return (
+                <div className='d-flex w-100 justify-content-between sub text-color-sq-lav'>
+                    <div>
+                        Ongoing
+                    </div>
+                    <div>
+                    {progress}%
+                    </div>
+                </div>
+            )
+        }
+
+    }
 
     useEffect(()=>{
         fetchOrganizationById()
+        fetchProgressByProjectId()
       },[project])
     
     return(
@@ -50,14 +103,7 @@ export const ProjectCard = ({
                     <h3 className='text-head'>{project.name}</h3>
                 </div>)}
             <div className='project-header-stats d-flex justify-content-between mb-3'>
-                <div>
-                    <div className='sub mb-1'>
-                        Not started
-                    </div>
-                </div>
-                <div className='sub'>
-                  100%
-                </div>
+                {resolveStatus(progress)}
             </div>
             {!full && (<div className='project-title'>
                     <h3 className='text-head'>{project.name}</h3>
@@ -69,7 +115,7 @@ export const ProjectCard = ({
                 </div>
                 <div className='sq-grid'>
                     <div className='text-prop'>Total budget</div>
-                    <div>$ {project.budget}</div>
+                    <div>${parseAmount(project.budget)}</div>
                 </div>
                 
                 {isCollapsed && (<div className='sq-grid'>
