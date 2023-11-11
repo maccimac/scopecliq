@@ -90,11 +90,11 @@ export const ProjectBlueprint = ({isConsultant}) => {
     return(
         <>
         {project && (<div className="sq-project-blueprint d-flex">
-            <div className='mt-5 sq-btn-add__holder'>
+            {!clientMode && (<div className='mt-5 sq-btn-add__holder'>
                 <div className="sq-btn-add sq-btn-add--milestone"  onClick={addMilestone}>
                         <i className="fa-solid fa-plus"></i>
                 </div>
-            </div>
+            </div>)}
             { milestones && milestones.length && milestones.map( (m,i)=>(
                 <div className='d-flex' key={m.id}>
                     <Milestone
@@ -104,7 +104,7 @@ export const ProjectBlueprint = ({isConsultant}) => {
                         edit={true}
                     />
                     {
-                        isClient && (
+                        !clientMode && (
                             <div className='mt-5 sq-btn-add__holder' onClick={()=>{addMilestone(i+1)}}>
                                 <div className="sq-btn-add sq-btn-add--milestone" >
                                         <i className="fa-solid fa-plus"></i>

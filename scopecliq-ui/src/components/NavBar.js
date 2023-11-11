@@ -16,7 +16,9 @@ export const NavBar = ({children}) => {
         `
         }>
             <div class="d-flex col-lg-4 col-sm-4 col-6 align-items-center">
-                <img src={logo} className="sq-logo w-auto mb-1 me-3"></img >
+                <Link to="/">
+                    <img src={logo} className="sq-logo w-auto mb-1 me-3"></img >
+                </Link>
                 <span className={
                     `sub
                         ${clientMode ? 'text-color-sq-lav' : 'text-color-sq-green'}

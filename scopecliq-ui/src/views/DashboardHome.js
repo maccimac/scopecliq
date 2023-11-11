@@ -27,7 +27,7 @@ const DashboardHome = () => {
     }
 
     useEffect(()=>{
-        dispatch(setAsConsultant)
+        dispatch(setAsConsultant())
         fetchAllProjects()
         fetchConsultantOrg();
     }, [])
