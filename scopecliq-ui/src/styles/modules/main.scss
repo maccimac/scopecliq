@@ -1,57 +1,164 @@
+$nav-height: 48;
+$proj-header-height: 0;
+$sidebar-offset-width: 320;
+$scrollbar-width: 17;
+
 .sq-navigation{
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
+    background-color: $sq-white;
+    height: #{$nav-height}px;
+    z-index: 1;
     .sq-logo{
-        max-width: 180px;
+        max-width: 148px;
     }
 }
 
-// .sq-dashboard-portal{
-    .sq-body{
-        padding-top: 90px;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        
-        .sq-content{
-            flex-grow: 1;
-         
+.sq-body{
+    padding-top: #{$nav-height}px;
+    min-height: 100vh;
+
+    .sq-content{
+        flex-grow: 1;
+        width: 100%;
+        max-width: 100%;
+        transition: none;
+    }
+}
+
+.sq-dashboard-portal{
+    &:has(.sq-sidebar-offcanvas--open){
+        .sq-navigation, .sq-content{
+            // width: 100%;
+            max-width: calc(100% - #{$sidebar-offset-width}px);
+            // padding-right: 16px !important;
+            
+        }
+        .project-blueprint-holder{
+            position: relative;
+            // margin-right: #{$sidebar-offset-width - $scrollbar-width}px;        
         }
     }
-// }
+    .sq-navigation{
+        padding-right: 96px !important;
+    }
+    .project-header{
+        align-items: center;
+        height: auto;
+    }
+    .project-blueprint-holder{
+        overflow: auto;
+        max-height: calc(100vh - #{$nav-height + $proj-header-height}px);
+    }
+}
+
+.sq-dashboard-home{
+    .sq-sidebar .project-organization h2{
+        font-size: 24px;
+    }
+}
+
+.sq-project-blueprint{
+    width: fit-content;
+    display: flex;
+    padding-right: 32px;
+    min-height: calc(100vh - #{$nav-height}px);
+}
+
 
 .sq-sidebar{
+    min-height: 100vh;   
+    background-color: $sq-lav-light;
+    box-shadow: $sq-big-outter-shadow-right;
+}
+
+.sq-sidebar-offcanvas{
     position: fixed;
     top:0;
     right: 0;
-    // width: 0;
-    // height: 0;
-    // width: 100px;
-    // height: 100px;
     z-index: 10;
     .offcanvas{
         box-shadow: $sq-big-outter-shadow;
         border: none;
         border-left: none;
+        width: #{$sidebar-offset-width}px;
+        transition: none;
         .offcanvas-header{
             background: transparent;
             position: absolute;
             right: 0;
         }
         .offcanvas-body{
+            &--PROJECT_DETAILS{
+                background-color: $sq-lav-dark;
+            }
             &::-webkit-scrollbar {
-                transition: 1s all ease;
-                opacity: 0;
-                background: transparent;  /* Optional: just make scrollbar invisible */
+                display: none;
             }
-            &::-webkit-scrollbar-thumb {
-                border-right: 0.5rem solid $sq-green-light;
-                background-color: transparent;
-                
+            // &::-webkit-scrollbar {
+            //     transition: 1s all ease;
+            //     opacity: 0;
+            //     background: transparent;  /* Optional: just make scrollbar invisible */
+            // }
+            // &::-webkit-scrollbar-thumb {
+            //     border-right: 0.5rem solid $sq-green-light;
+            //     background-color: transparent;
+            // }
+        }
+        .mode-notifications{
+            margin-bottom: 320px;
+           
+            .notification-list{
+               
+
             }
+            .sq-project-card{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                padding-bottom: 48px;
+                margin-bottom: -8px !important;
+                h3{
+                    font-size: 16px;
+                }
+               
+            }
+        }
+        .mode-project-details{
+            // background-color: $sq-lav-dark;
+            .sq-project-card{
+                box-shadow: none;
+            }
+
         }
     }
 
+}
+
+.sq-modal-new-project{
+
+    .sq-modal-new-project__modal{
+        margin: 16px;
+        min-width: 480px;
+        // margin-top: 60px;
+        height: 640px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+            transition: 1s all ease;
+            opacity: 0;
+            height: 0.8rem;
+            width: 0.5rem;
+        }
+        &::-webkit-scrollbar-thumb {
+            height: 1rem;
+            background-color: $sq-lightest-trans;
+            border-radius: 8px;
+        }
+
+        .project-edit{
+            padding: 16px;
+        }
+    }
 }

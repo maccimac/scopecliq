@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained('projects');
             $table->integer('position');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('budget_percentage');
             $table->string('status_completion')->nullable();
             $table->string('status_invoice')->nullable();

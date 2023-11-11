@@ -1,19 +1,16 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import NavBar from '../components/NavBar';
-// import { useDispatch, useSelector} from 'react-redux';
-// import { isClient, setAsClient, setAsConsultant } from '../store/user-store';
-// import { currentUser } from '../store/login-store';
-// import { storeProject, setProject} from '../store/project-store';
-// import ProjectBlueprint from '../components/ProjectBlueprint';
-import { useDispatch} from 'react-redux';
+import { storeProject} from '../store/project-store';
+import { useDispatch, useSelector} from 'react-redux';
 import { setAsClient} from '../store/user-store';
 
 
-const PortalLogin = ({set_passswordValid, project}) => {
+const PortalLogin = ({set_passswordValid}) => {
     const api = global.config.API
     
     const dispatch = useDispatch()
+    const project = useSelector(storeProject)
 
 
     const [passwordModel, set_passwordModel] = useState("")

@@ -1,28 +1,39 @@
+import * as React from 'react';
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
+import { showSnackbarMessage} from '../store/snackbar-store';
+import Menu from '@mui/material/Menu';
+
 
 export const Deliverable = ({
     deliverable,
-    deliverableId, status="COMPLETE", isConsultant,  
-    description, image, position,
-    milestoneId,
-    isNew=false, 
-    cancelNewDeliverable, saveAllPositions, updateMilestoneStatus,
-    fetchDeliverableByMilestone,
+    cb,
+    cancelNewDeliverable, 
     index
 } ) => {
     const api = global.config.API;
+    const dispatch = useDispatch();
     const clientMode = useSelector(isClient);
     const project = useSelector(storeProject);
 
-    const [editMode, setEditMode]  = useState(isNew);
-    const [newMode, setnNewMode]  = useState(isNew);
-    const [statusModel, setStatusModel]  = useState(status);
-    const [descriptionModel, setDescriptionModel]  = useState(description);
-    const [descriptionModelEdit, setDescriptionModelEdit]  = useState(description);
+    const [editMode, setEditMode]  = useState(deliverable.is_new);
+    const [newMode, setnNewMode]  = useState(deliverable.is_new);
+    const [statusModel, setStatusModel]  = useState(deliverable.status);
+    const [descriptionModel, setDescriptionModel]  = useState(deliverable.description);
+    const [descriptionModelEdit, setDescriptionModelEdit]  = useState(deliverable.description);
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handelMenuClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
 
     const statusClassNames = {
         COMPLETE: {
@@ -44,19 +55,14 @@ export const Deliverable = ({
 
     const toggleComplete = async () => {
         if (clientMode) return;
-        const status = (statusModel == 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
-        const res = await axios.post(api + `/deliverables/update/${deliverableId}/status/${status}`)
-        if(res.status == 200){
+        const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
+        const res = await axios.post(api + `/deliverables/update/${deliverable.id}/status/${status}`)
+        if(res.status === 200){
             setStatusModel(status)
             resolveClassStyleByStatus(status)
-            updateMilestoneStatus()
+            cb.fetchDeliverableByMilestone()
         }
-        
         const payloadNotification = {
-            // project_id: deliverable.project_id,
-            // milesteone_id: deliverable.milesteone_id,
-            // deliverable_id: deliverable.id,
-            // description: deliverable.description,
             type: "STATUS_UPDATE",
             status,
         }
@@ -64,8 +70,7 @@ export const Deliverable = ({
     } 
 
     const createNotification = async (_payload) =>{
-        const status = (statusModel == 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
-
+        const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
         const payload = {
             ...deliverable,
             read_at: null,
@@ -73,7 +78,7 @@ export const Deliverable = ({
             status,
             ..._payload,
         }
-        const res2 = await axios.post(`${api}/notifications/project/${project.id}/add`, payload, {
+        await axios.post(`${api}/notifications/project/${project.id}/add`, payload, {
             headers: {
               "Content-Type": "application/json",
             },
@@ -83,12 +88,10 @@ export const Deliverable = ({
     }
 
     const enableEdit = () => {
-        // console.log(modeClient)
         if(clientMode) return;
         setEditMode(true);
         setClassNameState(statusClassNames[statusModel].outterClass + ( ' sq-deliverable--edit '));
     } 
-    
     const finishEdit = () => {
         setEditMode(false);
         setClassNameState(statusClassNames[statusModel].outterClass);
@@ -98,84 +101,109 @@ export const Deliverable = ({
         const payloadDesc = {
             description: descriptionModelEdit
         }
-        const res = await axios.post(`${api}/deliverables/edit/${deliverableId}`, payloadDesc, {
+        const res = await axios.post(`${api}/deliverables/edit/${deliverable.id}`, payloadDesc, {
             headers: {
               "Content-Type": "application/json",
             },
         });
-        if(res.status==200){
+        if(res.status===200){
             setDescriptionModel(descriptionModelEdit)
         }
-
         createNotification({
             type: "CHANGE",
             status: "MADE",
             extra: "The description has been changes"
-        })
-
-     
+        })     
         finishEdit()
     }
 
     const saveNewDeliverable = async () => {
         const payload = {
-            // project_id: deliverable.project_id,
             description: descriptionModelEdit,
             position: index
         }
-
-        const res = await axios.post(`${api}/deliverables/add/milestone/${milestoneId}`, payload, {
+        const res = await axios.post(`${api}/deliverables/add/milestone/${deliverable.milestone_id}`, payload, {
             headers: {
               "Content-Type": "application/json",
             },
         });
-
         const newItem = res.data
-
-        setnNewMode(false)
-        setEditMode(false)
-        setDescriptionModel(descriptionModelEdit)
-        finishEdit()
-        updateMilestoneStatus()
-        createNotification({
-            ...newItem,
-            type: "CHANGE",
-            status: "CREATED",
-            extra: "A new deliverable has been added to the deliverable"
-        })
-        saveAllPositions()        
-        fetchDeliverableByMilestone()
-
+        if(res.status===200){
+            setnNewMode(false)
+            setEditMode(false)
+            setDescriptionModel(descriptionModelEdit)
+            finishEdit()
+            createNotification({
+                ...newItem,
+                type: "CHANGE",
+                status: "CREATED",
+                extra: "A new deliverable has been added to the deliverable"
+            })
+            cb.saveAllPositions()        
+            cb.fetchDeliverableByMilestone()
+        }
     }
 
+    const deleteDeliverable = async () => {
+        try{
+            const res = await axios.post(`${api}/deliverables/delete/${deliverable.id}`, {}, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            if(res.status == 200){
+                dispatch(showSnackbarMessage({
+                    message: "Deliverable  deleted"
+                }))            
+                cb.fetchDeliverableByMilestone()
+                cb.saveAllPositions()
+            }    
+        }catch(e){
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message 
+            }))
+
+        }
+        
+
+        
+
+    }
     const resolveClassStyleByStatus = (statusModel) =>{
         setClassNameState(statusClassNames[statusModel].outterClass + (editMode && ' sq-deliverable--edit '));
         setStatusIcon(statusClassNames[statusModel].icon);
     }
 
+
+  
+
+
+
     useEffect(()=>{
-        resolveClassStyleByStatus(status);
+        resolveClassStyleByStatus(statusModel);
     }, [])
     
     useEffect(()=>{
-        resolveClassStyleByStatus(status);
-    }, [position])
+        resolveClassStyleByStatus(statusModel);
+    },[deliverable] )
 
     return(
-        <div className={ classNameState + ' sq-deliverable rounded py-3 px-2 mb-2'} data-deliverable-id={deliverableId}>
+        <div className={ classNameState + ' sq-deliverable rounded py-2 px-2 mb-2'} data-deliverable-id={deliverable.id}>
             <div className='d-flex w-100'>
-                <div className={'status '} onClick={toggleComplete}>
-                    <i className={statusIcon + ' fa-regular fa-md m-1 sq-btn-icon sq-client--curser-def' }></i>
+                <div className='status sq-btn-icon no-hover pt-1' onClick={toggleComplete}>
+                    <i className={statusIcon + ' fa-regular fa-md m-1 cursor-pointer sq-client--curser-def' }></i>
                 </div>
                 
-                <div className="ms-1 flex-fill">
+                <div className="ms-1 mt-1 flex-fill">
                     <p onClick={enableEdit} className='description w-100'>{descriptionModel}</p>
                     {editMode && (
                         <textarea placeholder="Type a description" className='description-edit' rows="4" 
                             onChange={(e)=>{
                                 setDescriptionModelEdit(e.target.value)
                             }}
-                        cols="100">{descriptionModel}</textarea>
+                            value={descriptionModelEdit}
+                            cols="100"></textarea>
                     )}
                     
                 </div>
@@ -184,22 +212,63 @@ export const Deliverable = ({
                     newMode 
                     ?(
                         <div className='d-flex mt-1 new-deliverable'>
-                            <i onClick={(e)=>{saveNewDeliverable(e.target.value)}} className="fa-solid sq-btn-icon fa-save text-color-sq-green m-1 fa-xs "></i>
-                            <i onClick={cancelNewDeliverable} className="fa-solid sq-btn-icon fa-cancel text-color-sq-tomato-light m-1 fa-xs "></i>
+                            <div onClick={(e)=>{saveNewDeliverable(e.target.value)}} className='sq-btn-icon'>
+                                <i  className="fa-solid  fa-save text-color-sq-green m-1 fa-xs "></i>
+                            </div>
+                            <div onClick={cancelNewDeliverable} className='sq-btn-icon'>
+                                <i  className="fa-solid fa-cancel text-color-sq-tomato-light m-1 fa-xs "></i>
+                            </div>
+                            
                         </div>                  
                     )
                     :(
                         editMode
                         ?(
                             <div className='d-flex mt-1'>
-                                <i onClick={(e)=>{updateDescription(e.target.value)}} className="fa-solid sq-btn-icon fa-save text-color-sq-green m-1 fa-xs"></i>
-                                <i onClick={finishEdit} className="fa-solid sq-btn-icon fa-cancel text-color-sq-tomato-light m-1 fa-xs"></i>
+                                <div className="sq-btn-icon" onClick={(e)=>{updateDescription(e.target.value)}}>
+                                    <i  className="fa-solid  fa-save text-color-sq-green m-1 fa-xs"></i>
+                                </div>
+                                <div className="sq-btn-icon"  onClick={finishEdit}>
+                                    <i className="fa-solid  fa-cancel text-color-sq-tomato-light m-1 fa-xs"></i>
+                                </div>
                             </div>
                         )
                         :(
-                            <div className='d-flex mt-1 sq-client--hide'>
-                                <i className="fa-solid sq-btn-icon fa-pen-to-square text-color-sq-gold m-1 fa-xs" onClick={enableEdit}></i>
-                                <i className="fa-solid sq-btn-icon fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"></i>
+                            <div className='d-flex sq-client--hide'>
+                                <div className='sq-btn-icon'  onClick={enableEdit}>
+                                    <i className="fa-solid fa-regular fa-pen-to-square text-color-sq-gold m-1 fa-xs"></i>
+                                </div>
+                                <div className='sq-btn-icon'  onClick={handelMenuClick}>
+                                    <i className="fa-solid fa-ellipsis-vertical text-color-sq-light m-1 fa-xs"
+                                        id="demo-positioned-button"
+                                        aria-controls={open ? 'demo-positioned-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                    ></i>
+                                </div>
+                               
+                                <Menu
+                                    id="demo-positioned-menu"
+                                    aria-labelledby="demo-positioned-button"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleMenuClose}
+                                    anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                    }}
+                                    transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                    }}
+                                    className='sq-menu'
+                                >
+                                    <div >
+                                        {/* <div onClick={handleMenuClose} className="sq-menu-item" >Complete with message</div>
+                                        <div onClick={handleMenuClose} className="sq-menu-item" >Cancel deliverable</div> */}
+                                        <div onClick={deleteDeliverable} className="sq-menu-item" >Delete deliverable</div>
+                                    </div>
+                                </Menu>
                             </div>
                         )
 
@@ -210,10 +279,10 @@ export const Deliverable = ({
                 
             </div>
             {
-                image && (
+                deliverable.image && (
                     <div className='my-2 ms-2 px-3'>
                         <div className='rounded image image--small w-100' style={{
-                            backgroundImage: `url(${image})`
+                            backgroundImage: `url(${deliverable.image})`
                             }}>
                         </div>
                     </div>

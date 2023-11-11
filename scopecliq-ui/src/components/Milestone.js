@@ -1,35 +1,52 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector} from 'react-redux';
+import { Navigate, Link, useNavigate } from "react-router-dom"
+
 import Deliverable from './Deliverable';
+import MilestoneCard from './MilestoneCard';
 
 import placeholder1 from '../assets/img/placeholder-1.png'
 import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
 import BtnAdd from './BtnAdd';
-import { useDispatch, useSelector} from 'react-redux';
+
 import { isClient } from '../store/user-store';
+import { showSnackbarMessage } from '../store/snackbar-store';
 
 
-export const Milestone = ({ milestone, milestoneId=1, position, title, description, image, fee}) => {
+export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
     const api = global.config.API;
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const clientMode = useSelector(isClient);
 
     const [milestoneStatus, setMilestoneStatus] = useState('complete')
     const [deliverables, setDeliverables] = useState([])
-    const [editMode, set_editMode] = useState(false)
+    const [editMode, set_editMode] = useState(edit)
+    const [invoice, set_invoice] = useState(true)
+
 
     const fetchDeliverableByMilestone = async() =>{
-        const res = await axios.get(api+ '/deliverables/milestone/' + milestoneId)
-        setDeliverables(res.data)
-        updateMileStoneStatus(res.data)
+        try{
+            const res = await axios.get(api+ '/deliverables/milestone/' + milestone.id)
+            setDeliverables(res.data)
+        }catch(e){
+            console.log(e)
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message 
+            }))
+        }
     }
-    const updateMileStoneStatus = (arr) => {
+
+    const updateMilestoneStatus = () => {
         let statArr = []
-        arr.forEach(d => {
+        deliverables.forEach(d => {
             statArr.push(d.status)
         });
         if (!statArr.length){
-            setMilestoneStatus('PENDING');
+            setMilestoneStatus('pending');
             return;
         }
         if(statArr.includes('INCOMPLETE')){
@@ -38,8 +55,49 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
             }else{
                 setMilestoneStatus('pending')
             }
+        }else{
+            setMilestoneStatus('complete')
+            
         }
     }
+
+    const checkInvoiceStatus = async () =>{
+        try{
+            const res = await axios.post(`${api}/invoices/milestone/${milestone.id}`)
+            set_invoice(res.data)
+        }catch(e){
+            console.log(e)
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message 
+            }))
+        }
+    }
+
+    const generateInvoice = async() => {
+        try{
+            const payload = {
+                milestone_id: milestone.id
+            }
+            const res = await axios.post(`${api}/invoices/create`, payload, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            });
+            if(res.data){
+                navigate(`/invoice/${milestone.id}`)
+            }
+
+        }catch(e){
+            console.log(e)
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: e.response.data.message
+            }))
+        }
+
+    }
+
 
     const addNewDeliverable =(index)=> {
         const newDeliverable = {
@@ -48,7 +106,7 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
             position: 0,
             status: "INCOMPLETE",
             is_new: true,
-            milestone_id: milestoneId,
+            milestone_id: milestone.id,
         }
         setDeliverables([])
         let deliverabesCopy = [...deliverables];
@@ -57,6 +115,8 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
             setDeliverables([...deliverabesCopy])
         }, 0)
     }
+
+
     const cancelNewDeliverable = (index) => {
         setDeliverables([])
         let deliverabesCopy = [...deliverables];
@@ -69,10 +129,6 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
         deliverables.map( async (d,i) =>{
             const res = await axios.post(api + `/deliverables/update/${d.id}/position/${i}`)
             console.log(res)
-
-            // if(res.status == 200 && i == deliverables.length-1){
-            //     fetchDeliverableByMilestone()
-            // }
         })
 
 
@@ -80,32 +136,44 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
 
     useEffect(()=>{
         fetchDeliverableByMilestone()
+        checkInvoiceStatus()
     }, [])
 
     useEffect(()=>{
         const isNewArr = deliverables.map(d => d.is_new);
         set_editMode(isNewArr.includes(true))
+        updateMilestoneStatus()
+        checkInvoiceStatus()
     }, [deliverables])
 
     return(
-        <div class={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'}  sq-milestone col-1 col-sm-4 col-lg-3 rounded my-2 p-4 mx-2`} data-milestone-id={milestoneId}>
-            <div class="sub mb-2 milestone-status">
-                {milestoneStatus}
-            </div>
-            <div className='mb-2'>
-                    <span className="label">Milestone {position+1}: &nbsp;</span>
-                    <span className="title">{title}</span>
-            </div>
-            <div className='mb-2'>
-                <p>{description}
-                </p>                
-            </div>
-            <div className='mb-2'>
+        <div className={`sq-milestone--${milestoneStatus} ${clientMode && 'sq-milestone--client-mode'} sq-milestone rounded my-2 p-4 mx-2`} data-milestone-id={milestone}>
+           
+            <MilestoneCard
+                key={milestone.id}
+                milestoneStatus={milestoneStatus} 
+                milestone={milestone} 
+                cb={{
+                    getMilestones: cb.getMilestones, 
+                    updateMilestonesPositions: cb.updateMilestonesPositions, 
+                    removeMilestoneWithoutId: cb.removeMilestoneWithoutId
+                }}
+                index={index}
+                edit={!milestone.id}
+            />
+
+            {!invoice && !clientMode && milestoneStatus==='complete' && (
+                <div>
+                    <hr/>
                     <p>
-                        <span className="label">Fee: &nbsp;</span>
-                        {fee}% of budget
+                        Congratulations! You have just completed this milestone...
                     </p>
-            </div>
+                    <div className='sq-btn sq-btn--green' onClick={generateInvoice}>
+                        Generate and send an invoice
+                    </div>
+                </div>
+            )}
+           
             {image && (
                 <div className='mb-2'>
                 <div className='rounded image image--med w-100 p-4' style={{
@@ -116,33 +184,28 @@ export const Milestone = ({ milestone, milestoneId=1, position, title, descripti
             )}
             
             <hr/>
-            <div className='mb-2'>
-                <span class="label">Deliverables: </span>
-            </div>
+            {milestone.id && (
+                <div className='mb-2'>
+                    <span className="label">Deliverables: </span>
+                </div>
+            ) }
+            
             <div className='deliverables-list'>
             {!clientMode &&!editMode && <BtnAdd cb={()=>{addNewDeliverable(-1)}}/> }
-                { deliverables.map( (d,i)=>(
-                    <div class="deliverable-set" key={d.id}>
+                { milestone.id && deliverables.map( (d,i)=>(
+                    <div className="deliverable-set" key={d.id}>
                         <Deliverable
                             key={d.id}
                             deliverable={d}
-                            deliverableId={d.id}
-                            status={d.status}
-                            description={d.description}
-                            position={d.position}
-                            milestoneId={milestone.id}
-                            isNew={d.is_new}
+                            index={i}
+                            cb={{
+                                saveAllPositions,
+                                fetchDeliverableByMilestone,
+                                // updateMilestoneStatus
+                            }}
                             cancelNewDeliverable={()=>{
                                 cancelNewDeliverable(i)
                             }}
-                            saveAllPositions={saveAllPositions}
-                            updateMilestoneStatus={()=>{
-                                updateMileStoneStatus(deliverables)
-                            }}
-                            fetchDeliverableByMilestone={fetchDeliverableByMilestone}
-                            cb={{}}
-                            index={i}
- 
                         />
                         {!clientMode && !editMode && <BtnAdd cb={()=>{addNewDeliverable(i)}}/> }
                     </div>

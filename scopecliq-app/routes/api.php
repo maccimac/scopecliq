@@ -7,7 +7,10 @@ use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\MilestonesController;
 use App\Http\Controllers\DeliverablesController;
+use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnalyticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +23,25 @@ use App\Http\Controllers\NotificationsController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// USERS
+Route::prefix('user')->group(function () {
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
+
 });
 
-// Organizations
+// ORGANIZATIONS
 Route::prefix('organizations')->group(function () {
 
     Route::get('/', [OrganizationsController::class, 'fetchAllOrganizations']);
     Route::get('/{organization_id}', [OrganizationsController::class, 'fetchOrganizationById']);
+    Route::get('/consultant/{user_id}', [OrganizationsController::class, 'fetchOrganizationByConsultantId']);
+    Route::post('/add/{user_id}', [OrganizationsController::class, 'addOrganization']);
+    Route::post('/update/{organization_id}', [OrganizationsController::class, 'updateOrganizationById']);
 
 });
 
@@ -41,6 +54,8 @@ Route::prefix('projects')->group(function () {
     Route::get('/portal/{portal}', [ProjectsController::class, 'fetchByPortal']);
     Route::get('/organization/{organization_id}', [ProjectsController::class, 'fetchProjectsByOrganization']);
     Route::get('/consultant/{consultant_id}', [ProjectsController::class, 'fetchProjectsByConsultant']);
+    Route::post('/add/{organization_id}', [ProjectsController::class, 'addProject']);
+    
 
 });
 
@@ -51,6 +66,10 @@ Route::prefix('milestones')->group(function () {
     Route::get('/project/{project_id}', [MilestonesController::class, 'fetchMilestonesByProject']);
     Route::get('/last-position/{project_id}', [MilestonesController::class, 'getLastPositionByProject']);
     Route::post('/add/{project_id}', [MilestonesController::class, 'addMilestoneToProject']);
+    Route::post('/update/{milestone_id}', [MilestonesController::class, 'updateMilestoneById']);
+    Route::post('/update-position/{milestone_id}/{position_id}', [MilestonesController::class, 'updateMilestonePositionById']);
+    Route::post('/delete/{milestone_id}', [MilestonesController::class, 'deleteMilestoneById']);    
+
 });
 
 
@@ -64,9 +83,20 @@ Route::prefix('deliverables')->group(function () {
     Route::post('/update/{id}/position/{position}', [DeliverablesController::class, 'updateDeliverablePosition']);
     Route::post('/add/milestone/{milestone_id}', [DeliverablesController::class, 'addDeliverableToMilestone']);
     Route::post('/edit/{id}', [DeliverablesController::class, 'editDeliverableById']);
+    Route::post('/delete/{id}', [DeliverablesController::class, 'deleteDeliverableById']);
     
 });
 
+// INVOICES
+Route::prefix('invoices')->group(function () {
+
+    Route::get('/{id}', [InvoicesController::class, 'fetchInvoiceByInvoiceId']);
+    Route::post('/milestone/{milestone_id}', [InvoicesController::class, 'fetchInvoiceByMilestoneIdFull']);
+    Route::get('/project/{project_id}', [InvoicesController::class, 'fetchInvoicesByProject']);
+    Route::post('/mark-paid/{id}', [InvoicesController::class, 'markInvoicePaid']);
+    Route::post('/create', [InvoicesController::class, 'createInvoiceOfMilestone']);
+    
+});
 
 // NOTIFICATIONS
 Route::prefix('notifications')->group(function () {
@@ -80,5 +110,10 @@ Route::prefix('notifications')->group(function () {
     // Route::post('/add/milestone/{milestone_id}', [NotificationsController::class, 'addNotificationToMilestone']);
     // Route::post('/edit/{id}', [NotificationsController::class, 'editNotificationById']);
     Route::post('/read/{id}', [NotificationsController::class, 'markNotificationAsRead']);
-    
+});
+
+// ANALYTICS
+
+Route::prefix('analytics')->group(function () {
+    Route::get('/project/{project_id}/progress', [AnalyticsController::class, 'fetchProgressPercentByProject']);
 });

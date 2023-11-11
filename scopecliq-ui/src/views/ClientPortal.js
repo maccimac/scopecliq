@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import  DashboardLayout  from '../modules/DashboardLayout';
+import  DashboardLayout  from '../modules/DashboardPortalLayout';
 import PortalLogin from '../modules/PortalLogin';
 
 import { useDispatch, useSelector} from 'react-redux';
@@ -41,7 +41,6 @@ const ClientPortal = () => {
                 {passwordValid ?
                 (<DashboardLayout
                 />) : (<PortalLogin
-                    project={project}
                     set_passswordValid={set_passswordValid}
                 />)}
                 

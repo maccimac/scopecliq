@@ -7,13 +7,18 @@ $sq-light: #CCCCCC;
 $sq-lighter: #E7E7E7;
 $sq-lightest-alt: #f4f4f4;
 $sq-lightest: #F9F9F9;
+$sq-lightest-trans: rgba(249,249,249, 0.4);
 $sq-white: #fff;
+$sq-black: #333;
+$sq-mid-trans: rgba(119,119,119,0.07);
 
 $sq-lav-dark: #565C79;
 $sq-lav-muted: #ACB1C6;
 $sq-lav-light: #EEF1FF;
 $sq-lav-light-bright: #BBC7FD;
-$sq-lav-mid: #4C68E5;
+$sq-lav-mid: #5D6BA8; // #4C68E5;
+$sq-lav-mid-trans: rgba(93,107,188, 0.07);
+
 
 $sq-green-light: #E5F4F0;
 $sq-greeen-mid: #00B47E;
@@ -28,8 +33,8 @@ $sq-gold-light: #F5C773;
 $sq-gold-lighter: #FAD99C;
 $sq-gold-lightest: #FFF9EE;
 
-
-
 $sq-outter-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
 $sq-inner-shadow: 0px 0px 12px 0px rgba(86, 92, 121, 0.18) inset;
-$sq-big-outter-shadow:  -12px 0px 12px 0px rgba(86, 92, 121, 0.12);
+$sq-big-outter-shadow:  -12px 0px 12px 0px rgba(86, 92, 121, 0.16);
+$sq-big-outter-shadow-right:  12px 0px 12px 0px rgba(86, 92, 121, 0.16);
+$sq-floating-shadow:  6px 6px 16px 6px rgba(86, 92, 121, 0.08);

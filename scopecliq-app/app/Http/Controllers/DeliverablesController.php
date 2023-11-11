@@ -46,6 +46,13 @@ class DeliverablesController extends Controller
         return $deliverable;
     }
 
+    public function deleteDeliverableById($id) {
+
+        $deliverable = DB::table('deliverables')
+            -> where('id', $id)
+            -> delete();
+    }
+
     public function updateDeliverablePosition($id, $position) {
 
         $deliverable = DB::table('deliverables')

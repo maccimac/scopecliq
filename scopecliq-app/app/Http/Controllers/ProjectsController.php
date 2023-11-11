@@ -41,8 +41,6 @@ class ProjectsController extends Controller
     }
 
     
-
-
     public function fetchProjectsByConsultant($consultant_id){
 
         /*
@@ -60,5 +58,22 @@ class ProjectsController extends Controller
         ->get();
 
         return $projects;
+    }
+
+    public function addProject(Request $req, $organization_id) {
+        $newProjId = DB::table('projects')
+            ->insertGetId([
+                'organization_id' => $organization_id,
+                'name' => $req->name,
+                'budget' => $req->budget,
+                'about' => $req->about,
+                'status' => 'pending',
+                'portal_domain' => $req->portal_domain,
+                'portal_password' => $req->portal_password,
+                'terms' => $req->terms,
+            
+        ]);
+
+        return $newProjId;
     }
 }
