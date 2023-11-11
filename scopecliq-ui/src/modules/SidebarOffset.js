@@ -74,7 +74,7 @@ const SidebarOffset = () => {
         sq-sidebar-offcanvas
         ${showOffcanvas && 'sq-sidebar-offcanvas--open'}
         `}>
-            <div className="sq-btn btn-menu mt-2 me-2 bg-sq-green" onClick={toggleOffcanvas}>
+            <div className="sq-btn btn-menu mt-2 me-2 bg-sq-lav-dark" onClick={toggleOffcanvas}>
                 <i className="fa-solid fa-bars"></i>
             </div>
             <div className={'offcanvas offcanvas-end ' + ( showOffcanvas ? 'show' : '')} data-bs-backdrop="static" tabIndex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel"

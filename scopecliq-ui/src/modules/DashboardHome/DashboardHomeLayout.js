@@ -58,12 +58,11 @@ const DashboardHomeLayout = ({
                             </div>
                             <div className='row'>
                                 {projects.map(p => (
-                                    <div className="col-md-6">
-                                    <ProjectCard
-                                        key={p.id}
-                                        collapsed
-                                        project={p}
-                                    />
+                                    <div className="col-md-6" key={p.id}>
+                                        <ProjectCard  
+                                            collapsed
+                                            project={p}
+                                        />
                                     </div>
                                 ))}
 

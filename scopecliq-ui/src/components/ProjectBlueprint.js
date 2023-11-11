@@ -44,10 +44,7 @@ export const ProjectBlueprint = ({isConsultant}) => {
                 message: e.response.data.message 
             }))
         }
-        
     }
-
-  
 
     const addMilestone  = (position=0) => {
         let milestoneArrCopy = milestones;
@@ -99,9 +96,8 @@ export const ProjectBlueprint = ({isConsultant}) => {
                 </div>
             </div>
             { milestones && milestones.length && milestones.map( (m,i)=>(
-                <div className='d-flex'>
+                <div className='d-flex' key={m.id}>
                     <Milestone
-                        key={m.id}
                         milestone={m}
                         cb={{getMilestones, updateMilestonesPositions, removeMilestoneWithoutId}}
                         index={i}

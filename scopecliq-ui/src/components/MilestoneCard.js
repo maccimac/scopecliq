@@ -37,29 +37,6 @@ export const MilestoneCard = ({
         setAnchorEl(null);
     };
     
-    const generateInvoice = async() => {
-        try{
-            const payload = {
-                milestone_id: milestone.id
-            }
-            const res = await axios.post(`${api}/invoices/create`, payload, {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-            });
-            if(res.data){
-                navigate(`/invoice/${milestone.id}`)
-            }
-
-        }catch(e){
-            console.log(e)
-            dispatch(showSnackbarMessage({
-                status: "error",
-                message: e.response.data.message
-            }))
-        }
-
-    }
 
 
     const addMilestone = async () =>{
@@ -214,15 +191,9 @@ export const MilestoneCard = ({
                                     className='sq-menu'
                                 >
                                     {milestoneStatus == 'complete' && (
-                                    <div>
-                                        <div onClick={generateInvoice}>
-                                            <div className="sq-menu-item" >Generate and send invoice</div>
-                                        </div>
-                                        <Link to={"/invoice/" + milestone.id} className='sq-menu-item w-100'>
+                                        <Link to={"/invoice/" + milestone.id} className='sq-menu-item d-flex w-100'>
                                             Go to invoice
                                         </Link>
-                                        
-                                    </div>
                                     )}
                                     <div onClick={deleteMilestone}>
                                         <div className="sq-menu-item" >Delete milestone</div>

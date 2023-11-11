@@ -10,7 +10,7 @@ export const NavBar = ({children}) => {
     const clientMode = useSelector(isClient);
 
     return(
-        <div class={`
+        <div className={`
             sq-navigation p-3 d-flex align-items-center justify-content-between
             ${clientMode ? 'bg-sq-white' : 'bg-sq-lav-dark'}
         `

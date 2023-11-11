@@ -2,13 +2,14 @@ import axios from 'axios'
 
 import { DateTime } from 'luxon';
 
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import NavBar from '../components/NavBar';
 import { storeProject} from '../store/project-store';
 import { useDispatch, useSelector} from 'react-redux';
 import { currentUserId } from '../store/login-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
+import { isClient } from '../store/user-store';
 
 
 const Invoice = ({
@@ -23,6 +24,7 @@ const Invoice = ({
 
     const dispatch = useDispatch()
     const project = useSelector(storeProject)
+    const clientMode = useSelector(isClient)
     const [invoice, set_invoice] = useState(null)
     const [consultant, set_consultant] = useState(null)
     const [isCollapsed, set_isCollapsed] = useState(propMilestoneId)
@@ -45,7 +47,6 @@ const Invoice = ({
         try{
             const res = await axios.post(`${api}/invoices/milestone/${milestoneId}`)
             set_invoice(res.data)
-            console.log('inv', res.data)
 
         }catch(e){
             console.log(e)
@@ -92,6 +93,17 @@ const Invoice = ({
     }, [])
 
     return(
+        <>
+        {invoice && paramMilestoneId && (   
+            <div className='font-size-11 m-4s'>
+                <Link to={
+                    clientMode ? `/portal/${invoice.portal_domain}` : `/dashboard/${invoice.project_id}`
+                    } className='sq-link text-color-sq-med pb-0'>
+                    <i class="fa-solid fa-regular fa-arrow-left me-2 fa-xs"/>
+                    Back to Project
+                </Link>
+            </div>   )}
+        
         <div className="sq-invoice border-sq-light p-3 m-4 rounded">
             {invoice ? (
             <div>
@@ -265,6 +277,7 @@ const Invoice = ({
                 
             </div>}
         </div>
+        </>
     )
 }
 export default Invoice;

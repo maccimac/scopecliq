@@ -23,9 +23,16 @@ const DashboardPortalLayout = () => {
         <div class="sq-dashboard-portal">
             <div class="sq-body">
                 <NavBar>
-                    <Link to={
-                                clientMode ? `/portal/${project?.portal_domain}/invoices` : `/dashboard/${project?.id}/invoices`
-                                } className='sq-link'><i class="fa-solid fa-receipt me-1"></i> Your Invoices</Link>
+                    <Link 
+                        to={
+                            clientMode ? `/portal/${project?.portal_domain}/invoices` : `/dashboard/${project?.id}/invoices`
+                        } 
+                        className='d-inline sq-link text-color-sq-green'
+                    >
+                         <i class="fa-solid fa-receipt me-1"></i> Your Invoices
+                    </Link>
+                    
+                   
                 </NavBar>
                 <div class="sq-content h-100">
                     
@@ -33,7 +40,7 @@ const DashboardPortalLayout = () => {
                         <div className='project-header pt-2 my px-3'>
                             {!clientMode && (
                                 <strong className='font-size-11'>
-                                    <Link to="/dashboard" className='sq-link text-color-sq-med pb-0'>
+                                    <Link to="/dashboard" className='sq-link text-color-sq-black pb-0'>
                                         <i class="fa-solid fa-regular fa-arrow-left me-2 fa-xs"/>
                                         Back to dashboard
                                     </Link>

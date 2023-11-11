@@ -61,6 +61,7 @@ class InvoicesController extends Controller
                 'm.budget_percentage',
                 'p.about',
                 'p.budget',
+                'p.portal_domain',
                 'o.organization_name',
                 'o.organization_address',
                 'o.contact_name',
@@ -94,7 +95,7 @@ class InvoicesController extends Controller
 
     public function createInvoiceOfMilestone(Request $req) {
 
-        $exists = $this->fetchInvoiceByInvoiceId($req->milestone_id);
+        $exists = $this->fetchInvoiceByMilestoneId($req->milestone_id);
         if($exists){
             throw new \Exception('Invoice of this item exists already');
         }
