@@ -4,6 +4,7 @@ import './styles/style.css';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 
+
 import Snackbar from '@mui/material/Snackbar';
 
 import Home from './views/Home.js';
@@ -13,10 +14,8 @@ import ClientPortal from './views/ClientPortal';
 import InvoiceList from './views/InvoiceList';
 import Invoice from './components/Invoice';
 
-
 import { storeSnackbar, resetSnackbarMessage } from './store/snackbar-store';
 import { useEffect } from 'react';
-
 
 
 const App = () => {  
