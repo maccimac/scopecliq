@@ -18,6 +18,8 @@ class InvoicesController extends Controller
                 'i.datetime_paid',
                 'i.datetime_void',
                 'i.notes',
+                'i.payment_id',
+                'i.payment_id',
                 'm.position',
             )
             ->join('milestones as m', 'i.milestone_id', '=', 'm.id')
@@ -56,6 +58,7 @@ class InvoicesController extends Controller
                 'i.datetime_paid',
                 'i.datetime_void',
                 'i.notes',
+                'i.payment_id',
                 'm.name',
                 'm.position',
                 'm.budget_percentage',
@@ -141,7 +144,7 @@ class InvoicesController extends Controller
     }
 
     // mark as paid
-    public function markInvoicePaid($id, Request $req) {
+    public function payInvoice($id, Request $req) {
 
         $invoice = DB::table('invoices')
             -> where('id', $id)
@@ -150,7 +153,10 @@ class InvoicesController extends Controller
         DB::table('invoices')
         -> where('id', $id)
         -> update([
-            'datetime_paid'=> now()
+            'datetime_paid'=> now(),
+            'payment_id' => $req->payment_id,
+            'payment_method' => $req->payment_method,
+            'payment_client_secret' => $req->payment_client_secret
         ]);
 
         DB::table('notifications')

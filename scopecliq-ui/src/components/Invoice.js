@@ -49,9 +49,11 @@ const Invoice = ({
     const [showCheckout, setShowCheckout] = useState(false)
 
     const fetchPaymentIntent = async () =>{
+        if(invoice.datetime_paid) return
+        if(!invoice?.total || invoice?.total <= 0) return
         try{
             const paymentIntent = await stripe.paymentIntents.create({
-                amount: 100,
+                amount: parseInt(invoice.total),
                 currency: "cad",
                 // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
                 automatic_payment_methods: {
@@ -78,6 +80,33 @@ const Invoice = ({
     const markAsPaid = async () =>{
         try{
             const res = await axios.post(`${api}/invoices/mark-paid/${invoice.id}`)
+            getInvoiceDetails()
+        }catch(e){
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message 
+            }))
+        }
+    }
+
+
+    const payInvoice = async (paymentIntent) =>{
+        if(!paymentIntent || paymentIntent.status !== "succeeded") return
+        const payload = {
+            id: invoice.id,
+            payment_id: paymentIntent.id,
+            payment_method: paymentIntent.payment_method,
+            paymen_client_secret: paymentIntent.client_secret
+        }
+        try{
+            const res = await axios.post(`${api}/invoices/pay/${invoice.id}`, payload, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+        })
+            dispatch(showSnackbarMessage({
+                message: "Payment successful" 
+            }))
             getInvoiceDetails()
         }catch(e){
             dispatch(showSnackbarMessage({
@@ -135,10 +164,13 @@ const Invoice = ({
         if(!initLoad){
             getInvoiceDetails()
             fetchConsultant()
-            fetchPaymentIntent()
             initLoad = true
         }
     }, [])
+    useEffect(()=>{
+
+        fetchPaymentIntent()
+    }, [invoice])
 
     return(
         <>
@@ -186,10 +218,13 @@ const Invoice = ({
 
                     <div className='d-flex font-size-12'>
                         <div className='font-size-12 me-5'>
-                                    <span className='label'>
-                                        Invoice #
-                                    </span>
-                                    00{invoice.id}
+                            <div className='mb-1'>
+                                <span className='label'>
+                                    Invoice #
+                                </span>
+                                00{invoice.id}
+                            </div>
+                            
                         </div>
                         <div className='me-5'>
                             <div className='mb-1'>
@@ -213,6 +248,7 @@ const Invoice = ({
                         </div>
 
                         <div>
+                            
                             <div className='mb-1'>
                                 <span className='label'>
                                     Billing Date: &nbsp;
@@ -238,6 +274,20 @@ const Invoice = ({
                     
                     {!isCollapsed && (<>
                         <hr/>
+
+                        {
+                        invoice.payment_id && (
+                                <div className='d-flex font-size-12 my-3'>
+                                    <span className='label'>
+                                        Payment Transaction #
+                                    </span>
+                                    <span className='text-uppercase'>
+                                        {invoice.payment_id}
+                                    </span>
+                                    
+                                </div>
+                            )
+                        }   
 
                         <div className='d-flex font-size-12'>
                             <div className='me-4'>
@@ -292,7 +342,7 @@ const Invoice = ({
                                         Mark as paid
                                     </div>
                                     <div className='sq-link'>
-                                        Resend invoice
+                                        Resend invoice notification
                                     </div>
                                 </div>
                             )
@@ -347,10 +397,38 @@ const Invoice = ({
                     onClose={()=>{
                         setShowCheckout(false)
                     }}
-                    className='d-flex align-center fill-width justify-items-center find-me'
+                    className='d-flex align-items-center fill-width justify-item-center outline-none border-none'
                 >
-                    <div className='d-flex fill-height align-center p-4 justify-items-center fill-width find-me w-100 mx-auto'>
-                        <CheckoutForm clientSecret={paymentIntent.client_secret} paymentIntent={paymentIntent}/>
+                    <div className='d-inline-flex fill-height align-center p-5 justify-content-center w-100 mx-auto outline-none border-none'>
+                        <div className='sq-checkout__modal rounded p-4 sq-outter-shadow'>
+                            <div className='d-flex justify-content-end'>
+                                    <button
+                                        className='sq-btn-icon bg-transparent'
+                                        onClick={()=>{
+                                            setShowCheckout(false)
+                                        }}
+                                    >
+                                        <i className='fa fa-regular fa-solid fa-xmark text-color-sq-dark fa-xl'/>
+                                    </button>
+                            </div>
+                            <div className='mt-4'>
+                                
+                                        You are paying <strong>${parseAmount(invoice.total)}</strong> for <strong>Invoice #00{invoice.id}</strong>
+                            </div>
+                            <hr className='mb-4'/>
+                            <CheckoutForm 
+                                clientSecret={paymentIntent.client_secret} 
+                                paymentIntent={paymentIntent}
+                                invoice={invoice}
+                                cb={{
+                                    payInvoice,
+                                    close: ()=>{
+                                        setShowCheckout(false)
+                                    }
+                                }}
+                            />
+                        </div>
+                        
                     </div>
                 </Modal>
             )}

@@ -562,6 +562,14 @@ small {
   box-shadow: 0px 0px 12px 0px rgba(86, 92, 121, 0.18) inset;
 }
 
+.outline-none, .outline-0 {
+  outline: none;
+}
+
+.border-none, .border-0 {
+  border: none;
+}
+
 .sq-btn-add {
   height: 36px;
   width: 36px;
@@ -976,7 +984,8 @@ small {
   box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
 }
 
-.sq-checkout {
+.sq-checkout__modal {
+  max-width: 640px;
   background-color: #fff;
 }
 
@@ -1006,6 +1015,10 @@ body::-webkit-scrollbar-thumb {
 
 .find-me {
   outline: 2px solid hotpink;
+}
+
+.find-me-border {
+  border: 2px solid hotpink;
 }
 
 .find-me-2 {

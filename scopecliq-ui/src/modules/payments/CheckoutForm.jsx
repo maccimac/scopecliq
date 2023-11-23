@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory ,useLocation } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux';
+// import { showSnackbarMessage} from './/store/snackbar-store';
+import showSnackbarMessage from './../../store/snackbar-store'
 
 import {
   PaymentElement,
@@ -9,12 +12,15 @@ import {
 
 export default function CheckoutForm({
   clientSecret,
+  cb,
+  invoice
   // paymentIntent
 }) {
   const stripe = useStripe();
   const elements = useElements();
   const origin = window.location.origin;
   const location = useLocation()
+  const dispatch = useDispatch()
 
   console.log({location})
 
@@ -69,31 +75,42 @@ export default function CheckoutForm({
 
     setIsLoading(true);
 
-    const res = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: origin + location.pathname,
-        // redirect: 'if_required'
-      },
-      handleActions: false, 
-    });
+    try{
 
-    console.log({res})
+      const res = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          // Make sure to change this to your payment completion page
+          return_url: origin + location.pathname,
+          // redirect: 'if_required'
+        },
+        handleActions: false, 
+      });
+    
 
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
-    if (res.error?.type === "card_error" || res.error?.type === "validation_error") {
-      setMessage(res.error.message);
-    } else {
-      // setMessage("An unexpected error occurred.");
+      // This point will only be reached if there is an immediate error when
+      // confirming the payment. Otherwise, your customer will be redirected to
+      // your `return_url`. For some payment methods like iDEAL, your customer will
+      // be redirected to an intermediate site first to authorize the payment, then
+      // redirected to the `return_url`.
+      if (res.error?.type === "card_error" || res.error?.type === "validation_error") {
+        setMessage(res.error.message);
+      } else {
+        if (res.paymentIntent.status==="succeeded"){
+          cb.payInvoice(res.paymentIntent)
+          cb.close()
+        }
+      }
 
-      // mark as paid
-      
+    } catch (e){
+      console.log(e)
+      dispatch(showSnackbarMessage({
+        status: 'error',
+        message: e.response.data.message 
+    }))
     }
+
+
 
     setIsLoading(false);
   };
@@ -103,22 +120,28 @@ export default function CheckoutForm({
   }
 
   return (
-    <div className="sq-checkout p-4 rounded">
+    <div className="sq-checkout">
 
-        <div>
-          Fake details: 
-          Mastercard	5555555555554444
+        <div className="font-size-10 text-color-sq-med-light mb-2">
+          <strong>Test Card Number:</strong> 5555555555554444
         </div>
        <form id="payment-form" onSubmit={handleSubmit}>
 
         <PaymentElement id="payment-element" options={paymentElementOptions} />
-        <button disabled={isLoading || !stripe || !elements} id="submit">
+
+        <button 
+          className={`sq-btn mt-3
+            ${isLoading && '  bg-color-sq-light'}
+          `} 
+          disabled={isLoading || !stripe || !elements} 
+          id="submit"
+        >
           <span id="button-text">
-            {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+            {isLoading ? "Processing..." : "Pay now"}
           </span>
         </button>
         {/* Show any error or success messages */}
-        {message && <div id="payment-message">{message}</div>}
+        {/* {message && <div id="payment-message">{message}</div>} */}
         </form>
 
     </div>
