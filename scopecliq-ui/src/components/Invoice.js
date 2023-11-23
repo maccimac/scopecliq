@@ -1,13 +1,9 @@
 import axios from 'axios'
-// import stripe from 'stripe'
 
 import { DateTime } from 'luxon';
 
 import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
-
-import NavBar from '../components/NavBar';
-import CheckoutForm from '../modules/payments/CheckoutForm';
 
 import { storeProject} from '../store/project-store';
 import { useDispatch, useSelector} from 'react-redux';
@@ -15,9 +11,12 @@ import { currentUserId } from '../store/login-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 import { isClient } from '../store/user-store';
 
-
 import {Elements, useStripe} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
+
+
+import CheckoutForm from '../modules/payments/CheckoutForm';
+import Modal from '@mui/material/Modal';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -32,8 +31,8 @@ const Invoice = ({
 }) => {
     const api = global.config.API
     const { paramMilestoneId } = useParams();
+    let initLoad = false
     const userId = useSelector(currentUserId)
-
     const milestoneId = paramMilestoneId || propMilestoneId;
 
     const dispatch = useDispatch()
@@ -45,10 +44,9 @@ const Invoice = ({
 
     const [clientSecret, setClientSecret] = useState("");
     const [paymentIntent, setPaymentIntent] = useState(null)
-    const [options, setOptions]=useState({
+    const [options, setOptions]=useState({})
 
-    })
-
+    const [showCheckout, setShowCheckout] = useState(false)
 
     const fetchPaymentIntent = async () =>{
         try{
@@ -76,11 +74,6 @@ const Invoice = ({
           
     }
 
-   
-    // const options = {
-    // clientSecret,
-    // appearance,
-    // };
 
     const markAsPaid = async () =>{
         try{
@@ -139,9 +132,12 @@ const Invoice = ({
     }
           
     useEffect(()=>{
-        getInvoiceDetails()
-        fetchConsultant()
-        fetchPaymentIntent()
+        if(!initLoad){
+            getInvoiceDetails()
+            fetchConsultant()
+            fetchPaymentIntent()
+            initLoad = true
+        }
     }, [])
 
     return(
@@ -278,18 +274,29 @@ const Invoice = ({
                     </>)}
                     <hr/>
                     <div className='d-flex justify-content-between align-items-center'>
-                        {!invoice.datetime_paid && (<>    
-                        
-                        <div className='d-flex align-items-center'>
+                        {!invoice.datetime_paid && (
+                            clientMode ? (
+                                <div className='d-flex align-items-center'>
                             
-                                <div className='sq-btn bg-sq-green me-2' onClick={markAsPaid}>
-                                    Mark as paid
+                                    <div className='sq-btn bg-sq-green me-2' onClick={()=>{
+                                        setShowCheckout(true)
+                                    }}>
+                                        Pay Invoice
+                                    </div>
                                 </div>
-                                <div className='sq-link'>
-                                    Resend invoice
+                            )
+                            : ( 
+                                <div className='d-flex align-items-center'>
+                                
+                                    <div className='sq-btn bg-sq-green me-2' onClick={markAsPaid}>
+                                        Mark as paid
+                                    </div>
+                                    <div className='sq-link'>
+                                        Resend invoice
+                                    </div>
                                 </div>
-                        </div>
-                        </>)}
+                            )
+                        )}
                         <div></div>
                         {propMilestoneId && (
                             <div className='align-self-end' onClick={()=>{
@@ -333,13 +340,23 @@ const Invoice = ({
                     
                 </div>}
             </div>
+            {
+                clientSecret !== "" && showCheckout && (
+                <Modal
+                    open={showCheckout}
+                    onClose={()=>{
+                        setShowCheckout(false)
+                    }}
+                    className='d-flex align-center fill-width justify-items-center find-me'
+                >
+                    <div className='d-flex fill-height align-center p-4 justify-items-center fill-width find-me w-100 mx-auto'>
+                        <CheckoutForm clientSecret={paymentIntent.client_secret} paymentIntent={paymentIntent}/>
+                    </div>
+                </Modal>
+            )}
+            
 
-            {/* { 
-                clientSecret!== "" &&
-                <CheckoutForm clientSecret={paymentIntent.client_secret} paymentIntent={paymentIntent}/>
-            } */}
-
-            <CheckoutForm clientSecret={paymentIntent.client_secret} paymentIntent={paymentIntent}/>
+            
         </Elements>
         
         }
