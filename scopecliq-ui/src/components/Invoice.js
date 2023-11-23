@@ -49,8 +49,8 @@ const Invoice = ({
     const [showCheckout, setShowCheckout] = useState(false)
 
     const fetchPaymentIntent = async () =>{
-        if(invoice.datetime_paid) return
         if(!invoice?.total || invoice?.total <= 0) return
+         if(invoice?.datetime_paid) return
         try{
             const paymentIntent = await stripe.paymentIntents.create({
                 amount: parseInt(invoice.total),
@@ -174,8 +174,7 @@ const Invoice = ({
 
     return(
         <>
-        {clientSecret!== "" &&
-        <Elements stripe={stripePromise} options={options}>
+        
       
             {invoice && paramMilestoneId && (   
                 <div className='font-size-11 m-4'>
@@ -209,10 +208,18 @@ const Invoice = ({
                                 ${ invoice.datetime_void && 'bg-sq-med' }
                                 
                             `}>
-                                { (!invoice.datetime_paid && !invoice.datetime_void) && 'Invoice Sent' }
-                                { invoice.datetime_paid && 'Invoice Paid'}
-                                { invoice.datetime_void && 'Invoice Void' }
-                        </div>
+                                {
+                                    parseInt(invoice.budget_percentage) === 0 ? 'No Payment Required'
+                                    :
+                                    (<>                                        { !invoice.datetime_paid && !invoice.datetime_void && 'Invoice Sent' }
+                                        { invoice.datetime_paid && 'Invoice Paid'}
+                                        { invoice.datetime_void && 'Invoice Void' }
+                                        </>
+                                    )
+                                    
+                                }
+                                </div>
+                              
                     </div>
                     <hr/>
 
@@ -324,7 +331,7 @@ const Invoice = ({
                     </>)}
                     <hr/>
                     <div className='d-flex justify-content-between align-items-center'>
-                        {!invoice.datetime_paid && (
+                        {!invoice.datetime_paid && clientSecret && (
                             clientMode ? (
                                 <div className='d-flex align-items-center'>
                             
@@ -392,6 +399,7 @@ const Invoice = ({
             </div>
             {
                 clientSecret !== "" && showCheckout && (
+                <Elements stripe={stripePromise} options={options}>
                 <Modal
                     open={showCheckout}
                     onClose={()=>{
@@ -431,13 +439,8 @@ const Invoice = ({
                         
                     </div>
                 </Modal>
+                </Elements>
             )}
-            
-
-            
-        </Elements>
-        
-        }
         </>
         
     )
