@@ -1,22 +1,20 @@
 import axios from 'axios'
 
-import { DateTime } from 'luxon';
-
 import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector} from 'react-redux';
 
 import { storeProject} from '../store/project-store';
-import { useDispatch, useSelector} from 'react-redux';
 import { currentUserId } from '../store/login-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 import { isClient } from '../store/user-store';
 
-import {Elements, useStripe} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-
-
 import CheckoutForm from '../modules/payments/CheckoutForm';
 import Modal from '@mui/material/Modal';
+
+import { DateTime } from 'luxon';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.

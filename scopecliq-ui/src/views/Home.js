@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { showSnackbarMessage } from '../store/snackbar-store';
 import { setUserId, setLogin } from '../store/login-store';
+import OrganizationCardEdit from './../components/OrganizationCardEdit'
+import Modal from '@mui/material/Modal';
 import logo from '../assets/img/sq-logo.svg'
 import splash from '../assets/img/splash.png'
-import NavBar from '../components/NavBar';
 
 const Home = () => {
     const api = global.config.API
@@ -16,6 +17,10 @@ const Home = () => {
     const [modelPassword, set_modelPassword] = useState('')
     const [modelPasswordVerify, set_modelPasswordVerify] = useState('')
     const [modeRegister, set_modeRegister]=useState(false)
+
+    const [showCreateOrg, set_showCreateOrg] = useState(false)
+
+    const [organization, set_organization] = useState(null)
 
    
     const login =  async() => {
@@ -38,12 +43,8 @@ const Home = () => {
             console.log(response); // Log the response data
 
             if(response.data.status === 'success'){
-
                 dispatch(setUserId(response.data.user_id))
-                dispatch(setLogin(true))
                 navigate('/dashboard/')
-
-
             }
             // You can perform actions based on the response here, e.g., redirect on success
     
@@ -73,12 +74,43 @@ const Home = () => {
 
      }
 
+     const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
+
+     const initRegister = async() => {
+        
+        if(!validateEmail(modelEmail)){
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: "Email is invalid"
+            }))
+            return;
+        }
+
+        if(modelPassword !== modelPasswordVerify){
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: "Password verification does not match"
+            }))
+            return;
+        }
+        
+        set_showCreateOrg(true)
+     }
+
+
      const register =  async() => {
+
+
         try {
             const response = await axios.post(api+ '/user/register', {
-                // name: 'admin',
-                email: 'admin@scopecliq.com',
-                password: 'scopecliq'
+                email: modelEmail,
+                password: modelPassword
             }, {
                 headers: {
                     "Content-Type": "application/json",
@@ -86,9 +118,26 @@ const Home = () => {
             });
     
             console.log(response.data); // Log the response data
+            if(response?.data?.status==='success'){
+                
+                const userId = response.data.user_id
+                dispatch(setUserId(userId))
+
+                dispatch(showSnackbarMessage({
+                    message: "Account created"
+                }))
+                await createOrganization(userId)
+            }
             // You can perform actions based on the response here, e.g., redirect on success
     
         } catch (error) {
+
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: error.message || error.response.message
+            }))
+
+
             if (error.response) {
                 // The request was made, but the server responded with an error status
                 console.error(error.response.data);
@@ -104,7 +153,27 @@ const Home = () => {
         }
      }
 
-     const createOrganization = () => {
+     const createOrganization = async (userId) => {
+        try{
+            const res = await axios.post(`${api}/organizations/add/${userId}`, organization, {
+                headers: {
+                "Content-Type": "application/json",
+                },
+            });
+            set_organization({
+                ...organization,
+                organization_id: res.data
+            })
+            dispatch(showSnackbarMessage({
+                message: "Organization created. Navigating to your dashboard."
+            }))
+            navigate("/dashboard")
+        }catch(e){
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message
+            }))
+        }
 
      }
 
@@ -184,7 +253,7 @@ const Home = () => {
                             </div>
                             :
                             <div className='d-flex align-items-center'>
-                                <button className='sq-btn me-2' onClick={register}>
+                                <button className='sq-btn me-2' onClick={initRegister}>
                                     Register
                                 </button>
                                 <p>
@@ -205,6 +274,52 @@ const Home = () => {
                     </div>
 
                 </div>
+
+                <Modal
+                    open={showCreateOrg}
+                    onClose={()=>{
+                        set_showCreateOrg(false)
+                    }}
+                    className='d-flex align-items-center fill-width justify-content-center outline-none border-none'
+                >
+                    <div className='outline-none border-none'>
+                        <div className='bg-sq-white rounded p-4'>
+                            <div className='d-flex justify-content-space-between'>
+                                <h3 className='me-4'>
+                                    Create your organization to continue
+                                </h3>
+                                <div>
+                                    <button
+                                            className='sq-btn-icon bg-transparent'
+                                            onClick={()=>{
+                                                set_showCreateOrg(false)
+                                            }}
+                                        >
+                                            <i className='fa fa-regular fa-solid fa-xmark text-color-sq-dark fa-xl'/>
+                                        </button>
+                                </div>
+                            </div>
+                            
+                            <OrganizationCardEdit
+                                cb={{
+                                    set_organization
+                                }}
+                                organization={{
+                                    contact_email: modelEmail
+                                }}
+                            />
+
+                            <div className='d-flex'>
+                                <button className='sq-btn' onClick={register}>
+                                    Register as Consultant
+                                </button>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+
+                </Modal>
 
 
                

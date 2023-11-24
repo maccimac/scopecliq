@@ -21,14 +21,23 @@ export const OrganizationCardEdit = ({
     
 
     useEffect(()=>{
-        cb.set_organization({
-            organization_name: modelOrganizationName,
-            contact_name: modelContactName,
-            contact_email: modelContactEmail,
-            contact_number: modelContactNumber,
-            contact_about: modelContactAbout,
-        })
 
+        if(cb?.set_organization){
+            cb.set_organization({
+                organization_name: modelOrganizationName,
+                contact_name: modelContactName,
+                contact_email: modelContactEmail,
+                contact_number: modelContactNumber,
+                contact_about: modelContactAbout,
+            })
+        }
+
+        if(
+            organization.contact_email
+        ){
+            set_modelContactEmail(organization.contact_email)
+        }
+    
     }, [
         modelOrganizationName,
         modelContactName,
@@ -44,7 +53,7 @@ export const OrganizationCardEdit = ({
             ${dark && 'dark'}
             ${className}
         `} >
-        <div class="sq-input-group mb-2">
+        <div className="sq-input-group mb-2">
             
             <div>
                 <hr/>

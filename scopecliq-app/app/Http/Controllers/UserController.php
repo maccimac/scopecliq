@@ -45,6 +45,10 @@ class UserController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
-        return response()->json(['message' => 'Registration successful', 'user_id' => $user->id]);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Registration successful', 
+            'user_id' => $user->id
+        ]);
     }
 }
