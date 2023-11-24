@@ -1,11 +1,17 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { showSnackbarMessage } from '../store/snackbar-store';
+import { setUserId, setLogin } from '../store/login-store';
 import logo from '../assets/img/sq-logo.svg'
 import splash from '../assets/img/splash.png'
 import NavBar from '../components/NavBar';
 
 const Home = () => {
     const api = global.config.API
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [modelEmail,  set_modelEmail] = useState('')
     const [modelPassword, set_modelPassword] = useState('')
     const [modelPasswordVerify, set_modelPasswordVerify] = useState('')
@@ -15,8 +21,64 @@ const Home = () => {
     const login =  async() => {
         try {
             const response = await axios.post(api+ '/user/login', {
-                email: modelEmail,
-                password: modelPassword
+                // email: 'doug@douglasdevs.com',
+                // password: 'pass1234'
+
+                email: 'web@webcrafterinc.com',
+                password: 'scopecliq_v1'
+
+                // email: modelEmail,
+                // password: modelPassword
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+    
+            console.log(response); // Log the response data
+
+            if(response.data.status === 'success'){
+
+                dispatch(setUserId(response.data.user_id))
+                dispatch(setLogin(true))
+                navigate('/dashboard/')
+
+
+            }
+            // You can perform actions based on the response here, e.g., redirect on success
+    
+        } catch (error) {
+            console.log(error)
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: error.message || error.response.message
+            }))
+
+            if (error.response) {
+                // The request was made, but the server responded with an error status
+                console.error(error.response.data);
+                console.error(error.response.status);
+                console.error(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an error
+                console.error('Error', error.message);
+            }
+        }
+     }
+
+     const findOrganization = () =>{
+
+     }
+
+     const register =  async() => {
+        try {
+            const response = await axios.post(api+ '/user/register', {
+                // name: 'admin',
+                email: 'admin@scopecliq.com',
+                password: 'scopecliq'
             }, {
                 headers: {
                     "Content-Type": "application/json",
@@ -42,35 +104,8 @@ const Home = () => {
         }
      }
 
-     const register =  async() => {
-        try {
-            const response = await axios.post(api+ '/user/register', {
-                name: 'admin',
-                email: 'admin@douglasdevs.com',
-                password: 'scopecliq_v1'
-            }, {
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-    
-            console.log(response.data); // Log the response data
-            // You can perform actions based on the response here, e.g., redirect on success
-    
-        } catch (error) {
-            if (error.response) {
-                // The request was made, but the server responded with an error status
-                console.error(error.response.data);
-                console.error(error.response.status);
-                console.error(error.response.headers);
-            } else if (error.request) {
-                // The request was made but no response was received
-                console.error(error.request);
-            } else {
-                // Something happened in setting up the request that triggered an error
-                console.error('Error', error.message);
-            }
-        }
+     const createOrganization = () => {
+
      }
 
 

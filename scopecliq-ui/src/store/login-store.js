@@ -4,7 +4,7 @@ const loginSlice = createSlice({
   name: 'login',
   initialState: {
     isLoggedIn: false,
-    userId: 1,
+    userId: null,
     user: {
       // email: "julia@gmail.com",
       // firstname: "Julia",

@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { isClient} from '../../store/user-store';
 import { storeProject} from '../../store/project-store';
-import { currentUserId} from '../../store/user-store';
+import { currentUserId} from '../../store/login-store';
 import { showSnackbarMessage} from '../../store/snackbar-store';
 
 import Modal from '@mui/material/Modal';
@@ -20,12 +21,20 @@ const DashboardHomeLayout = ({
 }) => {
     const api = global.config.API
     const dispatch = useDispatch();
-    const project=(useSelector(storeProject))
+    const navigate = useNavigate();
+    const project= useSelector(storeProject)
+    const userId=useSelector(currentUserId)
     const [modelCreateOpen, set_modalCreateOpen] = useState(false)
 
     function modalCreateOnClose(){
         set_modalCreateOpen('false')        
     }
+
+    useEffect(()=>{
+        if(!userId){
+            navigate("/")
+        }
+    },[])
 
 
     return(

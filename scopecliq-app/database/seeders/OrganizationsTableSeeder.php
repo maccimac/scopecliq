@@ -39,7 +39,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_name' => 'Angela Sharma',
                 'contact_email' => 'angela@office.com',
                 'contact_about' => 'Accounts Manager',
-                'contact_number' => '+63 234 567 8901',
+                'contact_number' => '+1 234 567 8901',
                 'organization_address' => '2945 Jacklin Rd #406, Victoria, British Columbia, V9B 5E3, Canada',
                 'consultant_user_id'=> null
             ],
@@ -52,6 +52,17 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_number' => '+63 234 567 8901',
                 'organization_address' => '700 Royal Ave, New Westminster, BC V3M 5Z5',
                 'consultant_user_id'=> 1
+            ],
+
+
+            [
+                'organization_name' => 'Webcrafter Inc',
+                'contact_name' => 'Emmanuelle McRunners',
+                'contact_email' => 'web@webcrafterinc.com',
+                'contact_about' => 'Director',
+                'contact_number' => '+1 001 002 3456',
+                'organization_address' => '700 Royal Ave, New Westminster, BC V3M 5Z5',
+                'consultant_user_id'=> 2
             ],
         ]);    
     }

@@ -38,6 +38,7 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'status' => 'pending',
                 'portal_domain' => 'waveko',
                 'portal_password' => 'beach',
+                'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
             [
@@ -48,6 +49,7 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'status' => 'started',
                 'portal_domain' => 'siesta',
                 'portal_password' => 'pizza',
+                'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
             [
@@ -58,6 +60,7 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'status' => 'pending',
                 'portal_domain' => 'lettered-leather',
                 'portal_password' => 'luna',
+                'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
         ]);

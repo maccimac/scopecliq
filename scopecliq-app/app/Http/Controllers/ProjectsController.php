@@ -16,6 +16,14 @@ class ProjectsController extends Controller
         return $projects;
     }
 
+
+    public function fetchAllProjectsByConsultantUserId($user_id){
+        $projects = DB::table('projects')
+            -> select('*')
+            ->  where('consultant_user_id', $user_id)
+            -> get();
+        return $projects;
+    }
     public function fetchById($project_id){
         $project = DB::table('projects')
             -> select('*')
@@ -71,6 +79,7 @@ class ProjectsController extends Controller
                 'portal_domain' => $req->portal_domain,
                 'portal_password' => $req->portal_password,
                 'terms' => $req->terms,
+                'consultant_user_id'=>$req->consultant_user_id
             
         ]);
 

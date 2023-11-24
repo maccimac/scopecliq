@@ -306,7 +306,8 @@ hr {
 h1 {
   color: #333;
   font-size: 48px;
-  font-weight: 600;
+  font-weight: 800;
+  letter-spacing: -1px;
 }
 
 h2 {

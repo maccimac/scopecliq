@@ -115,6 +115,7 @@ export const ProjectEdit = (isConsultant=true) => {
             portal_domain: modelProjectDomain,
             portal_password: modelProjectPassword,
             terms: modelProjectTerms,
+            consultant_user_id: userId,
         })
 
     }, [

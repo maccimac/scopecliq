@@ -16,11 +16,15 @@ class UserController extends Controller
             $user = auth()->user();
             return response()->json([
                 'message' => 'Login successful',
+                'status'=>'success',
                 'user_id' => $user->id
             ]);
         } else {
             // Authentication failed
-            return response()->json(['message' => 'Login failed'], 401); // You can adjust the status code as needed.
+            return response()->json([
+                'message' => 'Login failed',
+                'status' => 'error'
+            ], 401); // You can adjust the status code as needed.
         }
     }
 
@@ -30,13 +34,13 @@ class UserController extends Controller
         // Create a new user, validate input, and save to the database.
 
         $this->validate($request, [
-            'name' => 'required|string|max:255',
+            // 'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8',
         ]);
 
         $user = new User;
-        $user->name = $request->input('name');
+        // $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->save();
