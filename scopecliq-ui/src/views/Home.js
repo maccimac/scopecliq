@@ -1,44 +1,22 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
+import logo from '../assets/img/sq-logo.svg'
+import splash from '../assets/img/splash.png'
+import NavBar from '../components/NavBar';
 
 const Home = () => {
     const api = global.config.API
-    // const apiOrigin = global.config.API_ORIGIN
-    const projId = 2;
+    const [modelEmail,  set_modelEmail] = useState('')
+    const [modelPassword, set_modelPassword] = useState('')
+    const [modelPasswordVerify, set_modelPasswordVerify] = useState('')
+    const [modeRegister, set_modeRegister]=useState(false)
 
-    const [clients, setClients] = useState([])
-    const [deliverables, setDeliverables] = useState([])
-    const [milestones, setMilestones] = useState([])
-
-    const [title, setTitle] = useState("milestoneTitle")
-
-    const getClients = async() =>{
-            const res = await axios.get(api+'/clients')
-            console.log(res.data)
-            setClients(res.data)
-            // const json = await res.json()
-            // console.log(json.data)
-            // setClients(res.json().data)
-    }
-
-    const getDeliverables = async() =>{
-        const res = await axios.get(api+'/deliverables/project/'+ projId)
-        console.log(res.data)
-        setDeliverables(res.data)
-    }
-
-    const updateDeliverableStatus = async() => {
-
-        const res = await axios.post(`${api}/deliverables/update/1/status/not_started`)
-        console.log(res)
-
-    }
-    
+   
     const login =  async() => {
         try {
             const response = await axios.post(api+ '/user/login', {
-                email: 'doug@douglasdevs.com',
-                password: 'pass1234'
+                email: modelEmail,
+                password: modelPassword
             }, {
                 headers: {
                     "Content-Type": "application/json",
@@ -96,110 +74,109 @@ const Home = () => {
      }
 
 
-    const editDeliverable = async(deliverable) => {
-        const payloadStatus = {
-            description: deliverable.description + " (Edited)",
-        }
-
-        const res = await axios.post(`${api}/deliverables/edit/${deliverable.id}`, payloadStatus, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-        });
-        console.log(res)
-        getDeliverables()
-    }
-
-    const addDeliverable = async(milestoneId) =>{
-
-        const payloadStatus = {
-            description: "New deliverable"
-        }
-
-        const res = await axios.post(`${api}/deliverables/add/milestone/${milestoneId}`, payloadStatus, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-        });
-        console.log(res)
-
-        getDeliverables()
-
-    }
-
-    const addMilestone = async() => {
-        const payloadStatus = {
-            name: title,
-            description: "new desc"
-        }
-        const res = await axios.post(`${api}/milestones/add/${projId}`, payloadStatus, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-        });
-        console.log(res)
-        setTitle('')
-        getMilestones()
-
-    }
-
-    const getMilestones = async() => {
-        const res = await axios.get(api+'/milestones/project/'+projId)
-        console.log(res.data)
-        setMilestones(res.data)
-    }
 
     useEffect(()=>{
-        // getClients()
-        // console.log({clients})
-        // updateDeliverableStatus();
-        // getDeliverables();
-        
-        // getMilestones();
+
     }, [])
 
 
     return (
-        <div>
-            <div>ScopeCliq</div>
-            <button onClick={login}>
-                Login
-            </button>
-            <button onClick={register}>
-                register
-            </button>
-            {clients.length && clients.map(
-                (c) => (
-                    <div>
-                        {c.name}
-                    </div>   
+        <div className='sq-home'>
+                <div className='p-4 sq-navigation container-fluid bg-transparent'>
+                    <div className='col-md-2'>
+                        <img src={logo} className="sq-logo-md w-auto mb-1 me-3"></img >
+                    </div>
 
-                )
-            )}
-            <br/>
-            {deliverables.length && deliverables.map(
-                (d) => (
-                    <div>
-                        {d.description} / {d.status} / {d.milestone_id } /<button onClick={()=>{editDeliverable(d)}}>Edit</button>
-                    </div>   
-                )
-            )}
+                </div>
+                {/* <NavBar/> */}
+                <div className='sq-body container align-items-center d-flex'>
+                    <div className='col-sm-12 col-md-6 mb-5'>
+                        <h1 className='mb-3'>
+                            Freelancing Toolkit for Emerging Businesses
+                        </h1>
+                        <h2 className='text-color-sq-med mb-5'>
+                            ScopeCliq is a straightforward freelancing management software that allows Clients to review project status overview real-time from a Client Portal.
+                        </h2>
+                        <div>
+                            <h3 className='text-color-sq-med-light'>
+                                {modeRegister ? 'Register' : 'Login'}
+                            </h3>
+                            <div className=''>
+                                <input className='sq-input w-75 mb-2 me-2' 
+                                            value={modelEmail} 
+                                            onChange={(e)=>{
+                                                set_modelEmail(e.target.value)
+                                            }}
+                                            placeholder='Email'
+                                ></input>
+                                <br/>
+                                <input type="password" className='sq-input w-75 mb-2' 
+                                        value={modelPassword} 
+                                        onChange={(e)=>{
+                                            set_modelPassword(e.target.value)
+                                        }}
+                                        placeholder='Password'
+                                ></input>
+                                <br/>
+                                {
+                                    modeRegister &&
+                                    <input type="password" className='sq-input w-75 mb-2' 
+                                        value={modelPasswordVerify} 
+                                        onChange={(e)=>{
+                                            set_modelPasswordVerify(e.target.value)
+                                        }}
+                                            placeholder='Verify Password'
+                                    ></input>
+                                }
 
-            <br/>
+                            </div>
+                        </div>
+                        {
+                            !modeRegister ?
+                            <div className='d-flex align-items-center'>
+                                <button className='sq-btn me-2' onClick={login}>
+                                    Login
+                                </button>
+                                <p>
+                                    No account yet? &nbsp; 
+                                    <a className='sq-link' onClick={()=>{
+                                        set_modeRegister(true)
+                                    }}>
+                                        Register
+                                    </a>
+                                </p>
+                                
+                            </div>
+                            :
+                            <div className='d-flex align-items-center'>
+                                <button className='sq-btn me-2' onClick={register}>
+                                    Register
+                                </button>
+                                <p>
+                                    Already have an account? &nbsp;
+                                    <a className='sq-link' onClick={()=>{
+                                    set_modeRegister(false)
+                                }}>
+                                    Login
+                                </a>
+                                </p>
+                                
+                        </div>
+                        }
+                      
+                    </div>
+                    <div className='col-sm-12 col-md-6 d-flex align-items-center text-center p-3'>
+                        <img src={splash} className="w-100 mt-5"></img >
+                    </div>
 
-            {milestones.length && milestones.map(
-                (m, i) => (
-                    <div>
-                        {m.name} / {m.description} / <button onClick={()=>{addDeliverable(m.id)}}>Add deliverable to milestone</button>
-                    </div>   
+                </div>
 
 
-                )
-            )}
+               
 
-            <input value={title} onChange={evt => setTitle(evt.target.value)}></input>
-            <button onClick={addMilestone}>add milestone</button>
-    </div>    
+          
+             
+        </div>    
     )
     
 }

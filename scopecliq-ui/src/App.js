@@ -8,6 +8,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import Snackbar from '@mui/material/Snackbar';
 
 import Home from './views/Home.js';
+import Tests from './views/Tests.js';
 import ConsultantDashboard from './views/ConsultantDashboard.js';
 import DashboardHome from './views/DashboardHome.js';
 import ClientPortal from './views/ClientPortal';
@@ -34,7 +35,9 @@ const App = () => {
   return (
     <div className="scopecliq">
       <Routes>
-        <Route path="/" element={<Navigate replace to='/dashboard' />}/>
+      <Route path="/" element={<Home/>}/>
+        {/* If logged in
+        <Route path="/" element={<Navigate replace to='/dashboard' />}/> */}
         <Route path="/dashboard/:projectId" element={<ConsultantDashboard/>}/>
         <Route path="/dashboard" element={<DashboardHome/>}/>
         <Route path="/portal/:domain" element={<ClientPortal/>}/>

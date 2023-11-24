@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
-import logo from '../assets/img/logo@2x.png'
+import logo from '../assets/img/sq-logo.svg'
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/user-store';
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ export const NavBar = ({children}) => {
         }>
             <div class="d-flex col-lg-4 col-sm-4 col-6 align-items-center">
                 <Link to="/">
-                    <img src={logo} className="sq-logo w-auto mb-1 me-3"></img >
+                    <img src={logo} className="sq-logo-sm w-auto mb-1 me-3"></img >
                 </Link>
                 <span className={
                     `sub

@@ -11,9 +11,14 @@ $scrollbar-width: 17;
     background-color: $sq-white;
     height: #{$nav-height}px;
     z-index: 1;
-    .sq-logo{
-        max-width: 148px;
-    }
+}
+
+.sq-logo-sm{
+    max-width: 148px;
+}
+
+.sq-logo-md{
+    max-width: 240px;
 }
 
 .sq-body{

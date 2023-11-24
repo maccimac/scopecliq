@@ -303,6 +303,12 @@ hr {
   border-color: #CCCCCC;
 }
 
+h1 {
+  color: #333;
+  font-size: 48px;
+  font-weight: 600;
+}
+
 h2 {
   color: #ACB1C6;
   font-size: 18px;
@@ -729,8 +735,13 @@ small {
   height: 48px;
   z-index: 1;
 }
-.sq-navigation .sq-logo {
+
+.sq-logo-sm {
   max-width: 148px;
+}
+
+.sq-logo-md {
+  max-width: 240px;
 }
 
 .sq-body {
