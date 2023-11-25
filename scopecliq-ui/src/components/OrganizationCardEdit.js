@@ -33,7 +33,7 @@ export const OrganizationCardEdit = ({
         }
 
         if(
-            organization.contact_email
+            organization?.organization.contact_email
         ){
             set_modelContactEmail(organization.contact_email)
         }
