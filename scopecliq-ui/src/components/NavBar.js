@@ -15,7 +15,7 @@ export const NavBar = ({children}) => {
             ${clientMode ? 'bg-sq-white' : 'bg-sq-lav-dark'}
         `
         }>
-            <div class="d-flex col-lg-4 col-sm-4 col-6 align-items-center">
+            <div className="d-flex col-lg-4 col-sm-4 col-6 align-items-center">
                 <Link to="/">
                     <img src={logo} className="sq-logo-sm w-auto mb-1 me-3"></img >
                 </Link>

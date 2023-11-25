@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.e261bd9b.css",
-    "main.js": "/static/js/main.99e393fd.js",
-    "static/media/placeholder-2.png": "/static/media/placeholder-2.6d28cfa2395d97eec196.png",
-    "static/media/placeholder-1.png": "/static/media/placeholder-1.acd54b08795de5c4d2ef.png",
-    "static/media/splash.png": "/static/media/splash.3b8e6484338b08871f4b.png",
-    "static/media/placeholder-3.png": "/static/media/placeholder-3.e9b96cf19a0feacab3cd.png",
-    "static/media/sq-logo.svg": "/static/media/sq-logo.6b74f05d9fc2f4142ef0ce9c8923ac22.svg",
-    "index.html": "/index.html",
-    "main.e261bd9b.css.map": "/static/css/main.e261bd9b.css.map",
-    "main.99e393fd.js.map": "/static/js/main.99e393fd.js.map"
+    "main.css": "/scopecliq/scopecliq-ui/build/static/css/main.e261bd9b.css",
+    "main.js": "/scopecliq/scopecliq-ui/build/static/js/main.75fa05ff.js",
+    "static/media/placeholder-2.png": "/scopecliq/scopecliq-ui/build/static/media/placeholder-2.6d28cfa2395d97eec196.png",
+    "static/media/placeholder-1.png": "/scopecliq/scopecliq-ui/build/static/media/placeholder-1.acd54b08795de5c4d2ef.png",
+    "static/media/splash.png": "/scopecliq/scopecliq-ui/build/static/media/splash.3b8e6484338b08871f4b.png",
+    "static/media/placeholder-3.png": "/scopecliq/scopecliq-ui/build/static/media/placeholder-3.e9b96cf19a0feacab3cd.png",
+    "static/media/sq-logo.svg": "/scopecliq/scopecliq-ui/build/static/media/sq-logo.6b74f05d9fc2f4142ef0ce9c8923ac22.svg",
+    "index.html": "/scopecliq/scopecliq-ui/build/index.html",
+    "main.e261bd9b.css.map": "/scopecliq/scopecliq-ui/build/static/css/main.e261bd9b.css.map",
+    "main.75fa05ff.js.map": "/scopecliq/scopecliq-ui/build/static/js/main.75fa05ff.js.map"
   },
   "entrypoints": [
     "static/css/main.e261bd9b.css",
-    "static/js/main.99e393fd.js"
+    "static/js/main.75fa05ff.js"
   ]
 }
