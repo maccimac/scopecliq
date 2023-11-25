@@ -5,16 +5,7 @@ const loginSlice = createSlice({
   initialState: {
     isLoggedIn: false,
     userId: null,
-    user: {
-      // email: "julia@gmail.com",
-      // firstname: "Julia",
-      // lastname: "Shuvo",
-      // mobile: "+1 234 56789",
-      // password: "pass123",
-      // profile_photo: "julia.jpg",
-      // user_id: 123,
-      // _id: "6430cbd6980499ce3cb2b7c0"
-    }
+    user: null
   },
   reducers: {
     toggleLogin(state){
@@ -27,12 +18,22 @@ const loginSlice = createSlice({
       state.user = action.payload
     },
     setUserId(state, action){
+      if(action.payload){
+        localStorage.setItem("sq_user_id", action.payload);
+      }else{
+        localStorage.removeItem("sq_user_id")
+      }
+      console.log('set user id')
       state.userId = action.payload
     },
   }
 })
 export const isLoggedIn = (state) => state.login.isLoggedIn
 export const currentUser = (state) => state.login.user
-export const currentUserId = (state) => state.login.userId
+export const currentUserId = (state) => {
+  const localStorageUserId = localStorage.getItem("sq_user_id");
+  console.log('selector', localStorageUserId)
+  return localStorageUserId ? localStorageUserId : state.login.userId
+}
 export const { toggleLogin, setLogin, setUser, setUserId } = loginSlice.actions
 export default loginSlice.reducer

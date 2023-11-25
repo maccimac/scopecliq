@@ -115,7 +115,7 @@ const InvoiceList = () => {
 
                     <div className='mx-5'>
                         {milestones.map((m, i)=>(
-                            <div>
+                            <div key={i}>
                                 <Invoice
                                     propMilestoneId={m.id}
                                     milestone={m}

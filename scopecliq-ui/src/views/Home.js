@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showSnackbarMessage } from '../store/snackbar-store';
-import { setUserId, setLogin } from '../store/login-store';
+import { setUserId, currentUserId } from '../store/login-store';
 import OrganizationCardEdit from './../components/OrganizationCardEdit'
 import Modal from '@mui/material/Modal';
 import logo from '../assets/img/sq-logo.svg'
@@ -13,6 +13,7 @@ const Home = () => {
     const api = global.config.API
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const userId = useSelector(currentUserId)
     const [modelEmail,  set_modelEmail] = useState('')
     const [modelPassword, set_modelPassword] = useState('')
     const [modelPasswordVerify, set_modelPasswordVerify] = useState('')
@@ -205,6 +206,12 @@ const Home = () => {
 
      }
 
+
+    useEffect(()=>{
+        if(userId){
+              navigate('/dashboard/')
+        }
+    }, []);
 
 
     useEffect(()=>{

@@ -23,14 +23,17 @@ const DashboardPortalLayout = () => {
         <div class="sq-dashboard-portal">
             <div class="sq-body">
                 <NavBar>
-                    <Link 
-                        to={
-                            clientMode ? `/portal/${project?.portal_domain}/invoices` : `/dashboard/${project?.id}/invoices`
-                        } 
-                        className='d-inline sq-link text-color-sq-green'
-                    >
-                         <i class="fa-solid fa-receipt me-1"></i> Your Invoices
-                    </Link>
+                    <div className='ms-auto'>
+                        <Link 
+                            to={
+                                clientMode ? `/portal/${project?.portal_domain}/invoices` : `/dashboard/${project?.id}/invoices`
+                            } 
+                            className='d-inline sq-link text-color-sq-green'
+                        >
+                            <i class="fa-solid fa-receipt me-1"></i> Your Invoices
+                        </Link>
+                    </div>
+                   
                     
                    
                 </NavBar>
