@@ -88,6 +88,7 @@ class MilestonesController extends Controller
             'name' => $req->name,
             'description' => $req->description,
             'budget_percentage' => $req->budget_percentage,
+            'datetime_due' => $req->datetime_due,
             'status_completion' => null,
             'status_invoice' => null,
             'datetime_started' => null,
@@ -101,6 +102,7 @@ class MilestonesController extends Controller
             'name' => $req->name,
             'description' => $req->description,
             'budget_percentage' => $req->budget_percentage,
+            'datetime_due' => $req->datetime_due,
         ];
 
         $milestone = DB::table('milestones')

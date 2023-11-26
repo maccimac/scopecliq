@@ -202,7 +202,7 @@ export const ProjectEdit = (isConsultant=true) => {
                     </div>
 
                     <div className='label'>
-                        Due Date (Optional)
+                        Target Completion Date (Optional)
                     </div>
                     <input type="date" className='sq-input w-100 mb-2'
                         value={modelProjectDue} 
