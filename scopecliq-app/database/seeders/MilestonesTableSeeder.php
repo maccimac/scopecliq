@@ -26,6 +26,7 @@ class MilestonesTableSeeder extends Seeder
                 'status_completion' => 'COMPLETE',
                 'status_invoice' => 'PAID',
                 'datetime_started' => Carbon::create(2023, 6, 12, 14, 30, 0),
+                'datetime_due' => null
             ],
             [
                 'project_id' => 2,
@@ -36,6 +37,7 @@ class MilestonesTableSeeder extends Seeder
                 'status_completion' => 'STARTED',
                 'status_invoice' => 'SENT',
                 'datetime_started' => Carbon::create(2023, 6, 12, 14, 30, 0),
+                'datetime_due' => Carbon::create(2023, 10, 30, 0, 0, 0),
             ],
             [
                 'project_id' => 2,
@@ -46,6 +48,7 @@ class MilestonesTableSeeder extends Seeder
                 'status_completion' => 'PENDING',
                 'status_invoice' => null,
                 'datetime_started' => Carbon::create(2023, 9, 1, 14, 30, 0),
+                'datetime_due' => Carbon::create(2023, 11, 15, 0, 0, 0),
             ],
             [
                 'project_id' => 2,
@@ -55,7 +58,8 @@ class MilestonesTableSeeder extends Seeder
                 'budget_percentage'=> 25,
                 'status_completion' => 'PENDING',
                 'status_invoice' => null,
-                'datetime_started' => null
+                'datetime_started' => null,
+                'datetime_due' => null,
             ],
 
             // WAVEKO
@@ -68,6 +72,7 @@ class MilestonesTableSeeder extends Seeder
                 'status_completion' => 'PENDING',
                 'status_invoice' => null,
                 'datetime_started' => Carbon::create(2023, 9, 1, 14, 30, 0),
+                'datetime_due' => Carbon::create(2024, 12, 20, 0, 0, 0),
             ],
             [
                 'project_id' => 1,
@@ -77,7 +82,8 @@ class MilestonesTableSeeder extends Seeder
                 'budget_percentage'=> 25,
                 'status_completion' => 'PENDING',
                 'status_invoice' => null,
-                'datetime_started' => null
+                'datetime_started' => null,
+                'datetime_due' => null
             ],
 
             [
@@ -88,7 +94,8 @@ class MilestonesTableSeeder extends Seeder
                 'budget_percentage'=> 25,
                 'status_completion' => 'PENDING',
                 'status_invoice' => null,
-                'datetime_started' => null
+                'datetime_started' => null,
+                'datetime_due' => Carbon::create(2024, 2, 28, 0, 0, 0),
             ],
             
         ]);

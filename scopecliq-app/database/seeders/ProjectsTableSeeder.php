@@ -39,7 +39,7 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'status' => 'pending',
                 'portal_domain' => 'waveko',
                 'portal_password' => 'beach',
-                'datetime_due' => Carbon::create(2023, 12, 31, 0, 0, 0),
+                'datetime_due' => Carbon::create(2024, 2, 28, 0, 0, 0),
                 'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
