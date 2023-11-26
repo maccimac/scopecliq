@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('status_invoice')->nullable();
             $table->dateTime('datetime_started')->nullable();
             $table->dateTime('datetime_completed')->nullable();
+            $table->dateTime('datetime_due')->nullable();
             
             $table->timestamps();
         });

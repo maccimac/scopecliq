@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { DateTime} from 'luxon';
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
@@ -44,6 +45,13 @@ export const ProjectCard = ({
 
     const parseAmount = (num) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    }
+
+    const parseDate = (dateString) => {
+        if(!dateString) return <i>No due date</i>;
+        const date = DateTime.fromFormat(dateString, 'yyyy-MM-dd HH:mm:ss' )
+        return date.toFormat('MMM dd, yyyy')
+     
     }
 
 
@@ -113,6 +121,11 @@ export const ProjectCard = ({
                     <div className='text-prop'>Brief</div>
                     <div>{project.about}</div>
                 </div>
+                <div className='sq-grid'>
+                    <div className='text-prop'>Due</div>
+                    <div>{parseDate(project.datetime_due)}</div>
+                </div>
+
                 <div className='sq-grid'>
                     <div className='text-prop'>Total budget</div>
                     <div>${parseAmount(project.budget)}</div>

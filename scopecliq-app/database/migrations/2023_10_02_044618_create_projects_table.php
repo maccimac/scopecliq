@@ -19,12 +19,13 @@ return new class extends Migration
 
             $table->foreignId('organization_id')->constrained('organizations');
             $table->string('name');
-            $table->text('about');
+            $table->text('about')->nullable();
             $table->decimal('budget', 20, 2);
             $table->string('status');
             $table->string('portal_domain')->unique();
             $table->string('portal_password');
             $table->text('terms')->nullable();
+            $table->dateTime('datetime_due')->nullable();
 
             $table->timestamps();
         });

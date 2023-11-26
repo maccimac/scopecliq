@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProjectsTableSeeder extends Seeder
 {
@@ -38,6 +39,7 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'status' => 'pending',
                 'portal_domain' => 'waveko',
                 'portal_password' => 'beach',
+                'datetime_due' => Carbon::create(2023, 12, 31, 0, 0, 0),
                 'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
@@ -49,6 +51,7 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'status' => 'started',
                 'portal_domain' => 'siesta',
                 'portal_password' => 'pizza',
+                'datetime_due' => null,
                 'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
@@ -60,6 +63,7 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'status' => 'pending',
                 'portal_domain' => 'lettered-leather',
                 'portal_password' => 'luna',
+                'datetime_due' => null,
                 'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],

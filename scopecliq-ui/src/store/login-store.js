@@ -23,7 +23,6 @@ const loginSlice = createSlice({
       }else{
         localStorage.removeItem("sq_user_id")
       }
-      console.log('set user id')
       state.userId = action.payload
     },
   }
@@ -32,7 +31,6 @@ export const isLoggedIn = (state) => state.login.isLoggedIn
 export const currentUser = (state) => state.login.user
 export const currentUserId = (state) => {
   const localStorageUserId = localStorage.getItem("sq_user_id");
-  console.log('selector', localStorageUserId)
   return localStorageUserId ? localStorageUserId : state.login.userId
 }
 export const { toggleLogin, setLogin, setUser, setUserId } = loginSlice.actions

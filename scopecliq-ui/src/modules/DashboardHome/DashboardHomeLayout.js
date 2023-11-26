@@ -73,7 +73,7 @@ const DashboardHomeLayout = ({
                     <div class="col-md-3 mh-100">
                         <DashboardHomeSidebar className="w-100 h-100"/>
                     </div>
-                    <div className='col-md-9 mt-3'>
+                    <div className='col-md-9 mt-4'>
                         <div className='pe-4'>
                             <div className='d-flex justify-content-between mb-4 align-items-center'>
                                 <div>
@@ -114,7 +114,7 @@ const DashboardHomeLayout = ({
                 >
                     <div className='sq-modal-new-project d-flex align-items-center justify-content-center h-100'>
                         
-                        <div className="sq-modal-new-project__modal bg-sq-lav-dark my-auto p-2 rounded">
+                        <div className="sq-modal-new-project__modal bg-sq-lav-darker my-auto p-2 rounded">
                             <div className='d-flex justify-content-end'>
                                 <button
                                 className='sq-btn-icon bg-transparent'

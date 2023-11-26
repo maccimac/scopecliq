@@ -28,6 +28,7 @@ export const ProjectEdit = (isConsultant=true) => {
     const [modelProjectName, set_modelProjectName] = useState('')
     const [modelProjectAbout, set_modelProjectAbout] = useState('')
     const [modelProjectBudget, set_modelProjectBudget] = useState(null)
+    const [modelProjectDue, set_modelProjectDue] = useState(null)
     const [modelProjectDomain, set_modelProjectDomain] = useState('')
     const [modelProjectPassword, set_modelProjectPassword] = useState('')
     const [modelProjectTerms, set_modelProjectTerms] = useState('')
@@ -114,6 +115,7 @@ export const ProjectEdit = (isConsultant=true) => {
             budget: modelProjectBudget,
             portal_domain: modelProjectDomain,
             portal_password: modelProjectPassword,
+            datetime_due: modelProjectDue,
             terms: modelProjectTerms,
             consultant_user_id: userId,
         })
@@ -125,6 +127,7 @@ export const ProjectEdit = (isConsultant=true) => {
         modelProjectDomain,
         modelProjectPassword,
         modelProjectTerms,
+        modelProjectDue
     ])
 
 
@@ -197,6 +200,19 @@ export const ProjectEdit = (isConsultant=true) => {
                         placeholder='Project Budget'
                     ></input>
                     </div>
+
+                    <div className='label'>
+                        Due Date (Optional)
+                    </div>
+                    <input type="date" className='sq-input w-100 mb-2'
+                        value={modelProjectDue} 
+                        onChange={(e)=>{
+                            set_modelProjectDue(e.target.value)
+                        }}
+                    ></input>
+                    
+
+
                     
                     <div className='label'>
                         Portal information
