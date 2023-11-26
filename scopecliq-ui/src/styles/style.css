@@ -131,6 +131,18 @@
   color: #4E536D !important;
 }
 
+.bg-sq-lav-darker {
+  background-color: #3E404A !important;
+}
+
+.border-sq-lav-darker {
+  border: 1px solid #3E404A;
+}
+
+.text-color-sq-lav-darker {
+  color: #3E404A !important;
+}
+
 .bg-sq-lav-muted {
   background-color: #9B9EAF !important;
 }
@@ -201,6 +213,18 @@
 
 .text-color-sq-green-mid {
   color: #00B47E !important;
+}
+
+.bg-sq-green-muted {
+  background-color: #B3D8CD !important;
+}
+
+.border-sq-green-muted {
+  border: 1px solid #B3D8CD;
+}
+
+.text-color-sq-green-muted {
+  color: #B3D8CD !important;
 }
 
 .bg-sq-tomato {

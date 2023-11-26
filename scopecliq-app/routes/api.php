@@ -31,6 +31,7 @@ use App\Http\Controllers\AnalyticsController;
 Route::prefix('user')->group(function () {
     Route::post('/login', [UserController::class, 'login']);
     Route::post('/register', [UserController::class, 'register']);
+    Route::post('/validate', [UserController::class, 'validateRegistration']);
 
 });
 

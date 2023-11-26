@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('about');
             $table->decimal('budget', 20, 2);
             $table->string('status');
-            $table->string('portal_domain');
+            $table->string('portal_domain')->unique();
             $table->string('portal_password');
             $table->text('terms')->nullable();
 

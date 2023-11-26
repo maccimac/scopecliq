@@ -51,4 +51,15 @@ class UserController extends Controller
             'user_id' => $user->id
         ]);
     }
+
+
+    public function validateRegistration(Request $request){
+        $validatedData = $this->validate($request, [
+            // 'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+
+        return response()->json(['message' => 'Validation successful', 'data' => $validatedData, 'status' => 'success']);
+    }
 }

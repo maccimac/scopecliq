@@ -66,31 +66,57 @@ const Home = () => {
           );
       };
 
-    const isRegistrationValid = () =>{
-        if(!validateEmail(modelEmail)){
-            dispatch(showSnackbarMessage({
-                status: "error",
-                message: "Email is invalid"
-            }))
-            return false;
-        }
+    const isRegistrationValid = async (payload) =>{
+         // if(!validateEmail(modelEmail)){
+        //     dispatch(showSnackbarMessage({
+        //         status: "error",
+        //         message: "Email is invalid"
+        //     }))
+        //     return false;
+        // }
 
-        if(modelPassword.length < 8){
-            dispatch(showSnackbarMessage({
-                status: "error",
-                message: "Password should be 8 characters long"
-            }))
-            return false;
-        }
+        // if(modelPassword.length < 8){
+        //     dispatch(showSnackbarMessage({
+        //         status: "error",
+        //         message: "Password should be 8 characters long"
+        //     }))
+        //     return false;
+        // }
 
-        if(modelPassword !== modelPasswordVerify){
+        // if(modelPassword !== modelPasswordVerify){
+        //     dispatch(showSnackbarMessage({
+        //         status: "error",
+        //         message: "Password verification does not match"
+        //     }))
+        //     return false;
+        // }
+        let returnVal = false
+    
+        try{
+            const res = await axios.post( api + '/user/validate', payload, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+
+            console.log(res)
+
+            if(res.status === 'success'){
+                return returnVal = true
+            }
+
+    
+        }catch(e){
+            console.log(e)
             dispatch(showSnackbarMessage({
                 status: "error",
-                message: "Password verification does not match"
+                message:  e.response.data.message || e.message
             }))
+
             return false;
+        }finally{
+            return returnVal
         }
-        return true;
     }
 
     const isOrganizationValid = () =>{
@@ -119,14 +145,30 @@ const Home = () => {
 
      const initRegister = async() => {
         dispatch(setUserId(null))
-        if(!isRegistrationValid()){ return }        
-        set_showCreateOrg(true)
+        // const isRegValid = await isRegistrationValid({
+        //     email: modelEmail,
+        //     password: modelPassword
+        // });
+        // console.log({isRegValid})
+        // if( isRegValid === true){ 
+        //     set_showCreateOrg(true) 
+        // }  
+        if(!isRegistrationValid(({
+                email: modelEmail,
+                password: modelPassword
+            }))){ return }else{
+                set_showCreateOrg(true) 
+            }
+        
      }
 
     //  "SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it (Connection: mysql, SQL: insert into `organizations` (`organization_name`, `contact_name`, `contact_email`, `contact_about`, `contact_number`, `consultant_user_id`) values (Julia, Julia Macaranas, julia@email.com, df, 09065185085, 9))"
 
      const register =  async() => {
-        if(!isRegistrationValid()){ return }
+        if(!isRegistrationValid({
+            email: modelEmail,
+            password: modelPassword
+        })){ return }
         if(!isOrganizationValid()){ return } 
         console.log('attempting registration...')
         try {
@@ -227,7 +269,7 @@ const Home = () => {
         <div className='sq-home'>
                 <div className='p-4 sq-navigation container-fluid bg-transparent'>
                     <div className='col-md-2'>
-                        <img src={logo} className="sq-logo-md w-auto mb-1 me-3"></img >
+                        <img src={logo} className="sq-logo-md w-auto mb-1 me-3" alt="scopecliq-logo"></img >
                     </div>
 
                 </div>
