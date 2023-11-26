@@ -130,22 +130,28 @@ export const ProjectCard = ({
 
                     {full && (
                     <div>
-                        <div className='project-portal my-5'>
-                            <div className='d-flex align-items-center w-100 justify-content-between mb-3'>
-                                <h2 className='text-head mb-0'>Dedicated Portal</h2>
-                                <a className='sq-link' href={'/portal/'+project.portal_domain}>Go to portal</a>
-                            </div>
+                        <div className='project-portal bg-sq-lav-dark my-5 sq-outter-shadow rounded p-3'>
+                            {/* <div className='d-flex align-items-center w-100 justify-content-between mb-3'>
+                                
+                            </div> */}
+
+                            <h2 className='text-head mb-3'>Dedicated Portal</h2>
                             
-                            <div className='project-client'>
+                            <div className='project-client mb-3'>
                                 <div className='sq-grid'>
                                     <span className='text-prop'>URL</span>
                                     <span>{origin}/portal/{project.portal_domain}</span> 
                                 </div>
                                 <div className='sq-grid align-items-center'>
                                     <span className='text-prop'>Password</span>
-                                    <input disabled type="password" className='sq-input w-auto' value={project.portal_password}/> 
+                                    <input disabled className='sq-input w-auto' value={project.portal_password}/> 
                                 </div>
                             </div>
+                            <div className='d-flex justify-content-center'>
+                                <a className='sq-link text-color-sq-green' href={'/portal/'+project.portal_domain}>Go to portal</a>
+                            </div> 
+
+                           
                         </div>    
                         <div className='project-terms my-5'>        
                             <h2 className='text-head mb-1'>

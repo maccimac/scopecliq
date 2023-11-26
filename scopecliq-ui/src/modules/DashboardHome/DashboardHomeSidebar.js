@@ -108,7 +108,7 @@ const DashboardHomeSidebar = ({className, project}) => {
           </div>
           <hr/>
           <div className='my-4'>
-            <h4>Invoice and payments</h4>
+            <h4>Invoice and Payments</h4>
             <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
                 <div className='h2 mb-0'>
                   <span className='text-color-sq-green-mid'>6</span> 

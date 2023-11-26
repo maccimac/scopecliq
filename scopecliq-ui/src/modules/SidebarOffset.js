@@ -99,9 +99,9 @@ const SidebarOffset = () => {
                     <div className='mode-notifications'>
                         <div className='notifications px-2'>
                             <div className='d-flex justify-content-between mb-4 align-items-center mt-3 mx-2'>
-                                <h2 className='mb-0'>
+                                <h3 className='mb-0'>
                                     Notifications
-                                </h2>
+                                </h3>
                                 <div className='d-flex'>
                                     <button
                                         className='sq-btn-icon bg-transparent me-4'
@@ -131,7 +131,7 @@ const SidebarOffset = () => {
                                                 set_notifications
                                             }}/>
                                         ))
-                                    ): "No new notifications"
+                                    ): <p>No new notifications</p>
 
                                 }
                             

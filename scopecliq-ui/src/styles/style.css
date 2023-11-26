@@ -930,7 +930,7 @@ small {
   right: 0;
 }
 .sq-sidebar-offcanvas .offcanvas .offcanvas-body--PROJECT_DETAILS {
-  background-color: #4E536D;
+  background-color: #3E404A;
 }
 .sq-sidebar-offcanvas .offcanvas .offcanvas-body::-webkit-scrollbar {
   display: none;
@@ -1077,7 +1077,7 @@ small {
   font-size: 11px;
 }
 .sq-project-card.dark, .dark.sq-organization-card-small, .dark.sq-organization-card {
-  background-color: #4E536D;
+  background-color: #3E404A;
   color: #F9F9F9;
 }
 .sq-project-card.dark .text-head, .dark.sq-organization-card-small .text-head, .dark.sq-organization-card .text-head {
