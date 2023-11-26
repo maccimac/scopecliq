@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 
+import { useNavigate } from 'react-router-dom';
 import { isClient} from '../store/user-store';
 import { storeProject} from '../store/project-store';
+import { currentUserId, setUserId } from '../store/login-store';
 
 import { Link } from "react-router-dom";
 
@@ -15,26 +17,39 @@ import ProjectEdit from './ProjectEdit';
 
 const DashboardPortalLayout = () => {
     const api = global.config.API
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const clientMode = useSelector(isClient)
     const project=(useSelector(storeProject))
-    console.log(project)
+    const userId = (useSelector(currentUserId))
+    
+    const logout = () => {
+        dispatch(setUserId(null))
+        navigate("/")
+    }
 
     return(
         <div class="sq-dashboard-portal">
             <div class="sq-body">
                 <NavBar>
-                    <div className='ms-auto'>
+                    <div className='d-flex w-100 align-items-center justify-content-end'>
                         <Link 
                             to={
                                 clientMode ? `/portal/${project?.portal_domain}/invoices` : `/dashboard/${project?.id}/invoices`
                             } 
-                            className='d-inline sq-link text-color-sq-green'
+                            className='d-inline sq-link  text-color-sq-green'
                         >
                             <i class="fa-solid fa-receipt me-1"></i> Your Invoices
                         </Link>
-                    </div>
+
+                        {
+                            userId &&                 
+                            <div className='d-inline-flex align-items-center sq-link text-color-sq-lav-muted ms-4' onClick={logout}>
+                                <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>  Logout
+                            </div>
                    
-                    
+                        }
+                    </div>
                    
                 </NavBar>
                 <div class="sq-content h-100">

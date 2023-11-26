@@ -14,11 +14,6 @@ export const NavBar = ({children}) => {
     const navigate = useNavigate();
     const userId = useSelector(currentUserId)
 
-    const logout = () => {
-        dispatch(setUserId(null))
-        navigate("/")
-        
-    }
 
     return(
         <div className={`
@@ -37,17 +32,11 @@ export const NavBar = ({children}) => {
                 }>{clientMode ? 'Client Portal' : 'Consultant Dashboard'}</span>
             </div>
 
+
             <div className='d-flex w-100 align-item-center'>
                {children}
             </div>
-            {
-                userId && 
-                <div className='d-flex mt-1'>
-                    <div className='d-inline-flex align-items-center sq-link text-color-sq-lav-muted ms-4' onClick={logout}>
-                        <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>  Logout
-                    </div>
-                </div>
-            }
+            
 
             
             

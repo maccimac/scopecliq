@@ -42,3 +42,36 @@ $sq-inner-shadow: 0px 0px 12px 0px rgba(86, 92, 121, 0.18) inset;
 $sq-big-outter-shadow:  -12px 0px 12px 0px rgba(86, 92, 121, 0.16);
 $sq-big-outter-shadow-right:  12px 0px 12px 0px rgba(86, 92, 121, 0.16);
 $sq-floating-shadow:  6px 6px 16px 6px rgba(86, 92, 121, 0.08);
+
+
+
+
+$color-variables: (
+  sq-green: $sq-green,
+  sq-lav: $sq-lav,
+  sq-dark: $sq-dark,
+  sq-med: $sq-med,
+  sq-med-light: $sq-med-light,
+  sq-light: $sq-light,
+  sq-lightest: $sq-lightest,
+  sq-lighter: $sq-lighter,
+  sq-white: $sq-white,
+  sq-black: $sq-black,
+  sq-lav-dark: $sq-lav-dark,
+  sq-lav-darker: $sq-lav-darker,
+  sq-lav-muted: $sq-lav-muted,
+  sq-lav-light: $sq-lav-light,
+  sq-lav-light-bright: $sq-lav-light-bright,
+  sq-lav-mid: $sq-lav-mid,
+  sq-green-light: $sq-green-light,
+  sq-green-mid: $sq-greeen-mid,
+  sq-green-muted: $sq-green-muted,
+  sq-tomato: $sq-tomato,
+  sq-tomato-light: $sq-tomato-light,
+  sq-tomato-lightest: $sq-tomato-lightest,
+  sq-gold: $sq-gold,
+  sq-gold-mid: $sq-gold-mid,
+  sq-gold-light: $sq-gold-light,
+  sq-gold-lighter: $sq-gold-lighter,
+  sq-gold-lightest: $sq-gold-lightest
+);

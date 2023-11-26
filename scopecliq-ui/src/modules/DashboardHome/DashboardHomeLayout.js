@@ -4,7 +4,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { isClient} from '../../store/user-store';
 import { storeProject} from '../../store/project-store';
-import { currentUserId} from '../../store/login-store';
+import { currentUserId, setUserId} from '../../store/login-store';
 import { showSnackbarMessage} from '../../store/snackbar-store';
 
 import Modal from '@mui/material/Modal';
@@ -33,18 +33,33 @@ const DashboardHomeLayout = ({
         set_modalCreateOpen('false')        
     }
 
+       
+    const logout = () => {
+        dispatch(setUserId(null))
+        navigate("/")
+    }
+
     useEffect(()=>{
         if(!userId){
             navigate("/")
         }
     },[])
+    
 
 
     return(
         <div class="sq-body sq-dashboard-home">
             <div class="container-fluid px-0">
                 <NavBar>
-                    <div className='d-flex w-100 justify-content-end py-3'>
+                    <div className='d-flex w-100 justify-content-end py-3 align-items-center'>
+                    {
+                            userId &&                 
+                            <div className='align-items-center sq-link text-color-sq-lav-muted mx-4' onClick={logout}>
+                                <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>  Logout
+                            </div>
+                   
+                        }
+
                         <OrganizationCardSmall
                             organization={yourOrg}
                         >
@@ -67,17 +82,14 @@ const DashboardHomeLayout = ({
                                 </div>
 
                                 <div 
-                                    className='sq-btn  sq-btn-outline rounded d-flex align-items-center me-2 py-4'
+                                    className='sq-btn sq-btn-outline rounded d-flex align-items-center me-2'
                                     onClick={()=>{
                                         set_modalCreateOpen(true)
                                     }}
                                 >
-                                    <span className='font-size-18 text-color-sq-lav me-2'>
+                                    <span className='h3 text-color-sq-lav me-2 mb-0'>
                                         🚀 Start a new project
                                     </span>
-                                    <div className='sq-btn-add no-hover'> +
-                                    </div>
-
                                 </div>
                             </div>
                             <div className='row'>

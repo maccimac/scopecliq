@@ -99,16 +99,13 @@
     &:hover{
       border-color: $sq-lav  
     }
-    &.text-color-sq-green{
-        &:hover{
-            border-color: $sq-green  
-          }
-    }
-
-    &.text-color-sq-med{
-        &:hover{
-            border-color: $sq-med  
-          }
+    
+    @each $variable-name, $color-value in $color-variables {
+        &.text-color-#{$variable-name} {
+          &:hover{
+            border-color: $color-value  
+            }
+        }
     }
 }
 

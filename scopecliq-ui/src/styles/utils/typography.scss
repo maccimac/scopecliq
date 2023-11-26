@@ -87,4 +87,11 @@ small{
     .font-size-#{$i} {
         font-size: #{$i}px !important;
       }
-  }
+}
+
+@each $variable-name, $color-value in $color-variables {
+    .text-color-#{$variable-name} {
+      color: $color-value !important;
+    }
+}
+  
