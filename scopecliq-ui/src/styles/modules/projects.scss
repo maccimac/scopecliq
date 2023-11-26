@@ -41,3 +41,31 @@
     background-color: transparent;
     box-shadow: none;
 }
+
+.sq-organization-card-small{
+    @extend .sq-project-card;
+    min-height: 56px;
+    border-radius: 16px;
+    min-width: 120px;
+    background-color: $sq-black;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    color: $sq-lightest;
+    .org-logo{
+        height: 48px;
+        width: 64px;
+        overflow: hidden;
+        border-radius: 12px;
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        padding: 2px;
+        img{
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+}

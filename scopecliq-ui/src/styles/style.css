@@ -863,17 +863,17 @@ small {
 .sq-sidebar-offcanvas .offcanvas .mode-notifications {
   margin-bottom: 320px;
 }
-.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card {
+.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card-small, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card {
   position: absolute;
   bottom: 0;
   width: 100%;
   padding-bottom: 48px;
   margin-bottom: -8px !important;
 }
-.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card h3, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card h3 {
+.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card h3, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card-small h3, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card h3 {
   font-size: 16px;
 }
-.sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-organization-card {
+.sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-organization-card-small, .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-organization-card {
   box-shadow: none;
 }
 
@@ -996,34 +996,34 @@ small {
   margin-right: -4px !important;
 }
 
-.sq-project-card, .sq-organization-card {
+.sq-project-card, .sq-organization-card-small, .sq-organization-card {
   background-color: #fff;
   box-shadow: 6px 6px 16px 6px rgba(86, 92, 121, 0.08);
   font-size: 11px;
 }
-.sq-project-card.dark, .dark.sq-organization-card {
+.sq-project-card.dark, .dark.sq-organization-card-small, .dark.sq-organization-card {
   background-color: #4E536D;
   color: #F9F9F9;
 }
-.sq-project-card.dark .text-head, .dark.sq-organization-card .text-head {
+.sq-project-card.dark .text-head, .dark.sq-organization-card-small .text-head, .dark.sq-organization-card .text-head {
   color: #fff;
 }
-.sq-project-card.dark .sq-textarea, .dark.sq-organization-card .sq-textarea, .sq-project-card.dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card.dark .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card .description-edit, .sq-project-card.dark .sq-input, .dark.sq-organization-card .sq-input {
+.sq-project-card.dark .sq-textarea, .dark.sq-organization-card-small .sq-textarea, .dark.sq-organization-card .sq-textarea, .sq-project-card.dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card-small .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card.dark .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card-small .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card .description-edit, .sq-project-card.dark .sq-input, .dark.sq-organization-card-small .sq-input, .dark.sq-organization-card .sq-input {
   background-color: #E7E7E7;
 }
-.sq-project-card .text-prop, .sq-organization-card .text-prop {
+.sq-project-card .text-prop, .sq-organization-card-small .text-prop, .sq-organization-card .text-prop {
   color: #9B9EAF;
 }
-.sq-project-card .text-head, .sq-organization-card .text-head {
+.sq-project-card .text-head, .sq-organization-card-small .text-head, .sq-organization-card .text-head {
   color: #4E4E4E;
   font-weight: 700;
 }
-.sq-project-card .sq-grid, .sq-organization-card .sq-grid {
+.sq-project-card .sq-grid, .sq-organization-card-small .sq-grid, .sq-organization-card .sq-grid {
   display: grid;
   grid-template-columns: 2fr 5fr;
   margin-bottom: 4px;
 }
-.sq-project-card .sq-textarea.sq-textarea--terms, .sq-organization-card .sq-textarea.sq-textarea--terms, .sq-project-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card .sq-textarea--terms.description-edit {
+.sq-project-card .sq-textarea.sq-textarea--terms, .sq-organization-card-small .sq-textarea.sq-textarea--terms, .sq-organization-card .sq-textarea.sq-textarea--terms, .sq-project-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-organization-card-small .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card-small .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card .sq-textarea--terms.description-edit {
   height: 160px;
   resize: vertical;
   overflow: scroll-y;
@@ -1033,6 +1033,33 @@ small {
 .sq-organization-card {
   background-color: transparent;
   box-shadow: none;
+}
+
+.sq-organization-card-small {
+  min-height: 56px;
+  border-radius: 16px;
+  min-width: 120px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  color: #F9F9F9;
+}
+.sq-organization-card-small .org-logo {
+  height: 48px;
+  width: 64px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 2px;
+}
+.sq-organization-card-small .org-logo img {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .sq-invoice {

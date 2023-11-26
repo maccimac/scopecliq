@@ -10,14 +10,17 @@ import { showSnackbarMessage} from '../../store/snackbar-store';
 import Modal from '@mui/material/Modal';
 import NavBar from '../../components/NavBar';
 import ProjectEdit from '../ProjectEdit';
+import OrganizationCardSmall from '../../components/OrganizationCardSmall';
 
 
 import DashboardHomeSidebar from './DashboardHomeSidebar';
 import {ProjectCard} from '../../components/ProjectCard'
+import OrganizationCard from '../../components/OrganizationCard';
 
 
 const DashboardHomeLayout = ({
-    projects=[]
+    projects=[],
+    yourOrg
 }) => {
     const api = global.config.API
     const dispatch = useDispatch();
@@ -40,7 +43,17 @@ const DashboardHomeLayout = ({
     return(
         <div class="sq-body sq-dashboard-home">
             <div class="container-fluid px-0">
-                <NavBar/>
+                <NavBar>
+                    <div className='d-flex w-100 justify-content-end py-3'>
+                        <OrganizationCardSmall
+                            organization={yourOrg}
+                        >
+
+                        </OrganizationCardSmall>
+
+                    </div>
+                   
+                </NavBar>
                 <div className="sq-content row mh-100">
                     <div class="col-md-3 mh-100">
                         <DashboardHomeSidebar className="w-100 h-100"/>
