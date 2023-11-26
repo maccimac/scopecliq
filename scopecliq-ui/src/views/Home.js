@@ -67,29 +67,32 @@ const Home = () => {
       };
 
     const isRegistrationValid = async (payload) =>{
-         // if(!validateEmail(modelEmail)){
-        //     dispatch(showSnackbarMessage({
-        //         status: "error",
-        //         message: "Email is invalid"
-        //     }))
-        //     return false;
-        // }
+        // frontend validation
+         if(!validateEmail(modelEmail)){
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: "Email is invalid"
+            }))
+            return false;
+        }
 
-        // if(modelPassword.length < 8){
-        //     dispatch(showSnackbarMessage({
-        //         status: "error",
-        //         message: "Password should be 8 characters long"
-        //     }))
-        //     return false;
-        // }
+        if(modelPassword.length < 8){
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: "Password should be 8 characters long"
+            }))
+            return false;
+        }
 
-        // if(modelPassword !== modelPasswordVerify){
-        //     dispatch(showSnackbarMessage({
-        //         status: "error",
-        //         message: "Password verification does not match"
-        //     }))
-        //     return false;
-        // }
+        if(modelPassword !== modelPasswordVerify){
+            dispatch(showSnackbarMessage({
+                status: "error",
+                message: "Password verification does not match"
+            }))
+            return false;
+        }
+
+        // backend validation
         let returnVal = false
     
         try{
@@ -279,9 +282,9 @@ const Home = () => {
                         <h1 className='mb-3'>
                             Freelancing Toolkit for Emerging Businesses
                         </h1>
-                        <h2 className='text-color-sq-med mb-5'>
+                        <h3 className='h3-light mb-5'>
                             ScopeCliq is a straightforward freelancing management software that allows Clients to review project status overview real-time from a Client Portal.
-                        </h2>
+                        </h3>
                         <div>
                             <h3 className='text-color-sq-med-light'>
                                 {modeRegister ? 'Register' : 'Login'}

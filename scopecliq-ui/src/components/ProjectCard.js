@@ -100,13 +100,13 @@ export const ProjectCard = ({
             ${full && 'sq-project-card--full'}
         `}>
             {full && (<div className='project-title me-3'>
-                    <h3 className='text-head'>{project.name}</h3>
+                    <h2 className='text-head'>{project.name}</h2>
                 </div>)}
             <div className='project-header-stats d-flex justify-content-between mb-3'>
                 {resolveStatus(progress)}
             </div>
             {!full && (<div className='project-title'>
-                    <h3 className='text-head'>{project.name}</h3>
+                    <h2 className='text-head'>{project.name}</h2>
                 </div>)}
             <div className='project-body project-body--collapsed mt-4'>
                 <div className='sq-grid'>

@@ -49,9 +49,9 @@ const DashboardPortalLayout = () => {
                                     </Link>
                                 </strong>   
                             )}
-                            <h2 className='mt-2'>Your Project Blueprint: &nbsp;
+                            <h3 className='mt-2 h3-light'>Your Project Blueprint: &nbsp;
                                 <strong className='text-color-sq-lav-dark'>{project && project.name}</strong>
-                            </h2>
+                            </h3>
                         </div>
                         {
                             project ? (<ProjectBlueprint project={project}/>) : "Loading..."

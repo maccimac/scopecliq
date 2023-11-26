@@ -133,10 +133,10 @@ export const ProjectEdit = (isConsultant=true) => {
             <div className=''>
                 <div className='organization mb-4 w-100 me-4'>
                 
-                    <h2>
-                        Client  {organization && organization.organization_name}
+                    <h2 className='text-color-sq-lighter'>
+                        Client
                     </h2>
-                    <div className='sub mb-2'>Existing Organization</div>
+                    <div className='sub mb-2'>Client's Organization</div>
                     <select 
                         class="form-select sq-input form-select-sm" 
                         aria-label=".form-select-sm example"
@@ -165,13 +165,13 @@ export const ProjectEdit = (isConsultant=true) => {
                 </div>
 
                 <div className='project w-100'>
-                    <h2>
+                    <h2 className='text-color-sq-lighter'>
                         Project
                     </h2>
-                    {/* <div className='sub mb-2'>Existing Organization</div> */}
+                    <div className='sub mb-2'>Project Details</div>
 
                     <div className='label'>
-                        General Details
+                        General Information
                     </div>
                     <input className='sq-input w-100 mb-2 mb-2' 
                         value={modelProjectName} 

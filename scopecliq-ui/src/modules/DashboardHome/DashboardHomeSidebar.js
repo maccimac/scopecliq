@@ -28,15 +28,140 @@ const DashboardHomeSidebar = ({className, project}) => {
     }, [])
 
     return(
-        <div className={'sq-sidebar mt-5 ' + className}>
-          <div className='your-organization my-2 p-4 pb-5 bg-sq-lav-dark'>
-            <h2 className='text-color-sq-lav-muted my-3'>Your Organization</h2>
-            {organization && (
-                <OrganizationCard dark organization={organization}/>
-            )}
-            <div className='d-flex justify-content-end mt-2'>
-              <button className='sq-btn'>Edit your organization</button>
+        <div className={'sq-sidebar bg-sq-white mt-0 ' + className}>
+          <div className='sq-stats-holder p-4 pb-5'>
+          <h3 className=''>📈 KPI Summaries</h3>
+          <div className='my-4'>
+            <h4>Projects</h4>
+            <div className='d-flex align-items-stretch mb-2'>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 me-2 text-center'>
+                <span className='h2 text-color-sq-lav-mid mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Open projects
+                </div>
+              </div>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 text-center me-2'>
+                <span className='h2 text-color-sq-lav-muted mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Pending Projects
+                </div>
+              </div>
             </div>
+            <div className='d-flex align-items-stretch mb-2'>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-tomato-lightest rounded w-50 me-2 text-center'>
+                <span className='h2 text-color-sq-tomato mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Due projects this month
+                </div>
+              </div>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2'>
+                <p>
+                  <strong className='text-color-sq-green-mid'>40</strong> total completed milestones
+                </p>
+              </div>
+            </div>
+          </div>
+          <hr/>
+          <div className='my-4'>
+            <h4>Milestones and Deliverables</h4>
+            <div className='d-flex align-items-stretch mb-2'>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 me-2 text-center'>
+                <span className='h2 text-color-sq-lav-mid mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Open milestones
+                </div>
+              </div>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-green-light rounded w-50 text-center me-2'>
+                <div className='h2 mb-0'>
+                  <span className='text-color-sq-green-mid'>3</span> 
+                  <span className='h3 h3-light text-color-sq-light'>&nbsp; out of &nbsp;</span>
+                  <span className='text-color-sq-green-muted'>10</span>
+                </div>
+                <div className='p mt-0'>
+                  Deliverables completed from open milestones
+                </div>
+              </div>
+            </div>
+            <div className='d-flex align-items-stretch mb-2'>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-tomato-lightest rounded w-50 me-2 text-center'>
+                <span className='h2 text-color-sq-tomato mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Due projects this month
+                </div>
+              </div>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2 d-flex'>
+                <p>
+                  <strong className='text-color-sq-green-mid'>40</strong> total completed milestones
+                </p>
+              </div>
+            </div>
+          </div>
+          <hr/>
+          <div className='my-4'>
+            <h4>Invoice and payments</h4>
+            <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
+                <div className='h2 mb-0'>
+                  <span className='text-color-sq-green-mid'>6</span> 
+                  <span className='h3 h3-light text-color-sq-light'>&nbsp; out of &nbsp;</span>
+                  <span className='text-color-sq-green-muted'>24</span>
+                </div>
+                <div className='p mt-0'>
+                  of open invoices paid
+                </div>
+            </div>
+            <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
+                <div className='h2 mb-0'>
+                  <span className='text-color-sq-green-mid'>$ 2,400</span> 
+                </div>
+                <div className='p mt-0'>
+                  Total revenue received this month
+                </div>
+            </div>
+            <div className='d-flex align-items-stretch mb-2'>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 me-2 text-center'>
+                <span className='h2 text-color-sq-lav-mid mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Open projects
+                </div>
+              </div>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 text-center me-2'>
+                <span className='h2 text-color-sq-lav-muted mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Pending Projects
+                </div>
+              </div>
+            </div>
+            <div className='d-flex align-items-stretch mb-2'>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-tomato-lightest rounded w-50 me-2 text-center'>
+                <span className='h2 text-color-sq-tomato mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Due projects this month
+                </div>
+              </div>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2'>
+                
+              </div>
+            </div>
+          </div>
+              
+
+          
           </div>
 
         </div>

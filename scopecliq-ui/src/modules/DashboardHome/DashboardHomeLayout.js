@@ -38,30 +38,32 @@ const DashboardHomeLayout = ({
 
 
     return(
-        <div class="sq-dashboard-home">
+        <div class="sq-body sq-dashboard-home">
             <div class="container-fluid px-0">
                 <NavBar/>
                 <div className="sq-content row mh-100">
                     <div class="col-md-3 mh-100">
                         <DashboardHomeSidebar className="w-100 h-100"/>
                     </div>
-                    <div className='col-md-9 py-4 mt-5'>
+                    <div className='col-md-9 mt-3'>
                         <div className='pe-4'>
-                            <div className='d-flex justify-content-between mb-4'>
+                            <div className='d-flex justify-content-between mb-4 align-items-center'>
                                 <div>
-                                    <h2>🔨 Dive in existing projects </h2>
+                                    <h3>🔨 Dive in existing projects </h3>
                                     {/* <div>Sort by most recent</div> */}
                                 </div>
 
                                 <div 
-                                    className='sq-btn  sq-btn-outline d-flex align-items-center me-2'
+                                    className='sq-btn  sq-btn-outline rounded d-flex align-items-center me-2 py-4'
                                     onClick={()=>{
                                         set_modalCreateOpen(true)
                                     }}
                                 >
-                                    <span className='font-size-18 text-color-sq-lav'>
+                                    <span className='font-size-18 text-color-sq-lav me-2'>
                                         🚀 Start a new project
                                     </span>
+                                    <div className='sq-btn-add no-hover'> +
+                                    </div>
 
                                 </div>
                             </div>
