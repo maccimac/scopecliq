@@ -31,22 +31,6 @@ class AnalyticsController extends Controller
     }
 
     public function fetchProjectsAnalytics($user_id){
-        // $projects = DB::table('projects')
-        //     -> select('id')
-        //     -> where('consultant_user_id', $user_id)
-        //     -> where ('status', 'started')
-        //     -> get();
-        
-
-        // $milestones = DB::table('milestones')
-        // -> select('')
-        // -> whereIn('project_id', $project_id)
-        // -> orderBy('project_id')
-        // -> get();
-        // return $milestones;
-
-        // return $projects;
-
         $projectsController = new ProjectsController();
         $projects = $projectsController->fetchAllProjectsByConsultantUserId($user_id);
 
@@ -59,8 +43,6 @@ class AnalyticsController extends Controller
 
         $today = Carbon::now();
         $in30days = $today->addDays(30);
-        // $thisMonth = $today->startOfMonth();
-        // $startOfNextMonth = $thisMonth->addMonth();
 
         foreach ($projects as $proj) {
             $progressPercent = $this->fetchProgressPercentByProject($proj->id);
@@ -74,19 +56,61 @@ class AnalyticsController extends Controller
                     $stats['due'] += 1;
                 }
             }
-
-            // code to be executed for each key-value pair
         };
 
         return $stats;
+    }
 
-        // return $all;
+    public function fetchMilestonesAnalytics($user_id){
 
-        // $stats = array();
-        // $stats['open'] = 4;
-        // $stats['due'] = 5;
-        // $stats['pending'] = 6;
-        // $stats['completed'] = 120;
-        // return $stats;
+        // get open projects
+
+        $projectsController = new ProjectsController();
+        $projects = $projectsController->fetchAllProjectsByConsultantUserId($user_id);
+
+        $stats = array(
+            'open_milestones_id' => [],
+            'deliverables_completed_open_milestones'=> 0,
+            'open_milestones_due' => 0,
+            'deliverables_completed_all' => 0  
+        );
+
+        foreach ($projects as $proj) {
+            // deliverables
+            $projDeliverables = DB::table('deliverables')
+                ->select('*')
+                ->where('project_id', $proj->id)
+                ->get();
+
+            $complete = $projDeliverables
+                ->where('status', 'COMPLETE')
+                ->count();
+            $stats['deliverables_completed_all' ] += $complete; 
+        
+            $all = $projDeliverables
+                ->count();
+        
+            $progress = $all > 0 ? $complete / $all : 0;
+
+            if( $progress == 0){
+                // if proj not started
+
+            }else if ($progress == 1){
+                // if proj complete
+
+            }else{
+                $incompleteMilestones = $projDeliverables
+                    ->where('status', 'INCOMPLETE')
+                    ->pluck('milestone_id')
+                    ->toArray();
+               $stats['open_milestones_id'] = array_merge($stats['open_milestones_id'], $incompleteMilestones);
+               $stats['open_milestones_id'] = array_unique($stats['open_milestones_id']);                
+
+            }
+        };
+
+        $stats['open_milestones_id'] = array_values($stats['open_milestones_id']);
+        return $stats;
+
     }
 }

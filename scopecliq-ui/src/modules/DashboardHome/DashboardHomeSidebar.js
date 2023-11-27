@@ -20,6 +20,16 @@ const DashboardHomeSidebar = ({className, project}) => {
       pending: 0,
       complete: 0
     })
+    const [milestoneStats, set_milestoneStats] = useState({
+      open_milestones_id: [],
+      deliverables_completed_open_milestones: 0,
+      open_milestones_due: 0,
+      deliverables_completed_all: 0
+      // 'open_milestones' => [],
+      // 'deliverables_completed_open_milestones'=> 0,
+      // 'open_milestones_due' => 0,
+      // 'deliverables_completed_all' => 0  
+    })
 
   const fetchProjectStats = async() =>{
     try{
@@ -28,15 +38,24 @@ const DashboardHomeSidebar = ({className, project}) => {
       set_projectStats(res.data)
     }catch(e){
       console.log(e)
-    }
-    
+    }  
+  
+  }
+
+  const fetchMilestoneStats = async() =>{
+    try{
+      const res = await axios.get(`${api}/analytics/${userId}/milestones`);
+      console.log(res)
+      set_milestoneStats(res.data)
+    }catch(e){
+      console.log(e)
+    }  
   
   }
     
 
 
     const fetchConsultantOrg = async() =>{
-    
         const res = await axios.get(api+ '/organizations/consultant/'+userId)
         set_organization(res.data)
     }
@@ -46,6 +65,7 @@ const DashboardHomeSidebar = ({className, project}) => {
         // fetchAllProjects()
         // fetchConsultantOrg();
         fetchProjectStats()
+        fetchMilestoneStats()
     }, [])
 
     return(
@@ -95,7 +115,7 @@ const DashboardHomeSidebar = ({className, project}) => {
             <div className='d-flex align-items-stretch mb-2'>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 me-2 text-center'>
                 <span className='h2 text-color-sq-lav-mid mb-0'>
-                  3
+                  {milestoneStats.open_milestones_id.length}
                 </span>
                 <div className='p mt-0'>
                   Open milestones
@@ -123,7 +143,7 @@ const DashboardHomeSidebar = ({className, project}) => {
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2 d-flex'>
                 <p>
-                  <strong className='text-color-sq-green-mid'>340</strong> total completed milestones
+                  <strong className='text-color-sq-green-mid'>{milestoneStats.deliverables_completed_all}</strong> total completed deliverables
                 </p>
               </div>
             </div>
