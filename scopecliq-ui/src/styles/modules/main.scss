@@ -63,6 +63,29 @@ $scrollbar-width: 17;
     .sq-sidebar .project-organization h2{
         font-size: 24px;
     }
+    .sq-stat-card{
+        // min-height: 96;
+        p{
+            min-height: 32px;
+        }
+    }
+    .sq-stat-card-info-holder{
+        // outline: 2px solid hotpink;
+        display: flex;
+        width: 100%;
+        height: 0;
+        justify-content: end;
+        position: relative;
+        top: 0;
+        .sq-btn-icon{
+            margin-top: -2px;
+            background-color: $sq-lighter;
+            font-size: 10px;
+            color: $sq-light;
+            height: 20px;
+            width: 20px;
+        }
+    }
 }
 
 .sq-project-blueprint{

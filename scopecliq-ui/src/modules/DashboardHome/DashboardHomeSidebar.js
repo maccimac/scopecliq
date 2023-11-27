@@ -5,6 +5,7 @@ import { isClient} from '../../store/user-store';
 import { currentUserId } from '../../store/login-store';
 
 import OrganizationCard from '../../components/OrganizationCard';
+import { Tooltip } from '@mui/material';
 
 const DashboardHomeSidebar = ({className, project}) => {
     const api = global.config.API;
@@ -115,11 +116,21 @@ const DashboardHomeSidebar = ({className, project}) => {
             <h4>Milestones and Deliverables</h4>
             <div className='d-flex align-items-stretch mb-2'>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 me-2 text-center'>
+                <div className='sq-stat-card-info-holder'>
+                  <Tooltip title="
+                    Once you have completed one Deliverable in a milestone, it is now considered an open milestone.
+                  ">
+                    <div className='sq-btn-icon'>
+                      <i className='fa-solid fa-question'/>
+                    </div>
+                  </Tooltip>
+                </div>
+    
                 <span className='h2 text-color-sq-lav-mid mb-0'>
                   {milestoneStats.open_milestones_id.length}
                 </span>
                 <div className='p mt-0'>
-                  Open milestones
+                  Ongoing milestones
                 </div>
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-green-light rounded w-50 text-center me-2'>
@@ -135,11 +146,20 @@ const DashboardHomeSidebar = ({className, project}) => {
             </div>
             <div className='d-flex align-items-stretch mb-2'>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-tomato-lightest rounded w-50 me-2 text-center'>
+              <div className='sq-stat-card-info-holder'>
+                  <Tooltip title="
+                    Due milestones in ongoing projects. Completed milestones are not considered due.  
+                  ">
+                    <div className='sq-btn-icon'>
+                      <i className='fa-solid fa-question'/>
+                    </div>
+                  </Tooltip>
+                </div>
                 <span className='h2 text-color-sq-tomato mb-0'>
                   {projectStats.due}
                 </span>
                 <div className='p mt-0'>
-                  Due projects this month
+                  Due milestone in the next 30 days 
                 </div>
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2 d-flex'>

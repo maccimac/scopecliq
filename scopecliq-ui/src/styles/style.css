@@ -897,6 +897,25 @@ small {
 .sq-dashboard-home .sq-sidebar .project-organization h2 {
   font-size: 24px;
 }
+.sq-dashboard-home .sq-stat-card p {
+  min-height: 32px;
+}
+.sq-dashboard-home .sq-stat-card-info-holder {
+  display: flex;
+  width: 100%;
+  height: 0;
+  justify-content: end;
+  position: relative;
+  top: 0;
+}
+.sq-dashboard-home .sq-stat-card-info-holder .sq-btn-icon {
+  margin-top: -2px;
+  background-color: #E7E7E7;
+  font-size: 10px;
+  color: #CCCCCC;
+  height: 20px;
+  width: 20px;
+}
 
 .sq-project-blueprint {
   width: fit-content;
@@ -986,12 +1005,12 @@ small {
 .sq-milestone.sq-milestone--complete .milestone-status {
   color: #27D39F;
 }
-.sq-milestone.sq-milestone--started {
+.sq-milestone.sq-milestone--ongoing {
   border: 1px solid #5B79FC;
   background-color: #fff;
   box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
 }
-.sq-milestone.sq-milestone--started .milestone-status {
+.sq-milestone.sq-milestone--ongoing .milestone-status {
   color: #5B79FC;
 }
 .sq-milestone.sq-milestone--client-mode .sq-client--curser-def {

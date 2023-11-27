@@ -76,6 +76,10 @@ class AnalyticsController extends Controller
             'deliverables_completed_all' => 0  
         );
 
+        $today = Carbon::now();
+        $in30days = $today->addDays(30);
+
+
         foreach ($projects as $proj) {
             // deliverables
             $projDeliverables = DB::table('deliverables')
@@ -100,13 +104,18 @@ class AnalyticsController extends Controller
                 // if proj complete
 
             }else{
-                $incompleteMilestones = $projDeliverables
-                    ->where('status', 'INCOMPLETE')
+                $ongoingMilestones = DB::table('deliverables')
+                    ->select('milestone_id')
+                    ->where('project_id', $proj->id)
+                    ->groupBy('milestone_id')
+                    ->whereIn('status', ['COMPLETE', 'INCOMPLETE'])
+                    ->havingRaw('COUNT(DISTINCT status) = 2') // Ensure both statuses are present
                     ->pluck('milestone_id')
                     ->toArray();
-               $stats['open_milestones_id'] = array_merge($stats['open_milestones_id'], $incompleteMilestones);
-               $stats['open_milestones_id'] = array_unique($stats['open_milestones_id']); 
-                foreach( $incompleteMilestones as $milestoneId){
+
+                $stats['open_milestones_id'] = array_merge($stats['open_milestones_id'], $ongoingMilestones);
+                $stats['open_milestones_id'] = array_unique($stats['open_milestones_id']); 
+                foreach( $ongoingMilestones as $milestoneId){
                     $milestoneDeliverable = DB::table('deliverables')
                     ->select('*')
                     ->where('milestone_id', $milestoneId)
@@ -114,14 +123,23 @@ class AnalyticsController extends Controller
                     $countCompleteDeliverable =  $milestoneDeliverable
                     ->where('status', 'COMPLETE')
                     ->count();
-
-                    // 'deliverables_completed_open_milestones'=> 0,
-                    // 'deliverables_all_open_milestones'=> 0,
                     $stats['deliverables_open_milestones_all'] += $milestoneDeliverable->count();
+                    $stats['deliverables_open_milestones_complete'] += $countCompleteDeliverable;                    
+                }
+                
+                $incompleteMilestones = $projDeliverables
+                ->where('status', 'INCOMPLETE')
+                ->pluck('milestone_id')
+                ->toArray();
 
-                    $stats['deliverables_open_milestones_complete'] += $countCompleteDeliverable;
-                    
-                }               
+                $dueMilestones = DB::table('milestones')
+                ->select('*')
+                ->where('project_id', $proj->id)
+                ->whereIn('id', $incompleteMilestones)
+                ->where('datetime_due','<', $in30days)
+                ->count();
+                $stats['open_milestones_due'] += $dueMilestones;
+
 
             }
         };

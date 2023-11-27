@@ -51,7 +51,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
         }
         if(statArr.includes('INCOMPLETE')){
             if(statArr.includes('COMPLETE')){
-                setMilestoneStatus('started')
+                setMilestoneStatus('ongoing')
             }else{
                 setMilestoneStatus('pending')
             }
