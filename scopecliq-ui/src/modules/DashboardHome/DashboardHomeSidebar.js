@@ -42,22 +42,23 @@ const DashboardHomeSidebar = ({className, project}) => {
                   Open projects
                 </div>
               </div>
-              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 text-center me-2'>
-                <span className='h2 text-color-sq-lav-muted mb-0'>
-                  3
-                </span>
-                <div className='p mt-0'>
-                  Pending Projects
-                </div>
-              </div>
-            </div>
-            <div className='d-flex align-items-stretch mb-2'>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-tomato-lightest rounded w-50 me-2 text-center'>
                 <span className='h2 text-color-sq-tomato mb-0'>
                   3
                 </span>
                 <div className='p mt-0'>
                   Due projects this month
+                </div>
+              </div>
+              
+            </div>
+            <div className='d-flex align-items-stretch mb-2'>
+              <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 text-center me-2'>
+                <span className='h2 text-color-sq-lav-muted mb-0'>
+                  3
+                </span>
+                <div className='p mt-0'>
+                  Pending Projects
                 </div>
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2'>
@@ -101,7 +102,7 @@ const DashboardHomeSidebar = ({className, project}) => {
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2 d-flex'>
                 <p>
-                  <strong className='text-color-sq-green-mid'>40</strong> total completed milestones
+                  <strong className='text-color-sq-green-mid'>340</strong> total completed milestones
                 </p>
               </div>
             </div>
@@ -109,6 +110,29 @@ const DashboardHomeSidebar = ({className, project}) => {
           <hr/>
           <div className='my-4'>
             <h4>Invoice and Payments</h4>
+            <div className='d-flex align-items-stretch mb-2'>
+                <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-green-light rounded w-50 text-center me-2'>
+                  <div className='h2 mb-0'>
+                    <span className='text-color-sq-green-mid'>3</span> 
+                    {/* <span className='h3 h3-light text-color-sq-light'>&nbsp; out of &nbsp;</span>
+                    <span className='text-color-sq-green-muted'>10</span> */}
+                  </div>
+                  <div className='p mt-0'>
+                    Completed milestones ready to be invoiced
+                  </div>
+                </div>
+                <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-50 text-center me-2'>
+                  <div className='h2 mb-0'>
+                    <span className='text-color-sq-green-mid'>3</span> 
+                    {/* <span className='h3 h3-light text-color-sq-light'>&nbsp; out of &nbsp;</span>
+                    <span className='text-color-sq-green-muted'>10</span> */}
+                  </div>
+                  <div className='p mt-0'>
+                    Invoices paid this month
+                  </div>
+                </div>
+
+            </div>
             <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
                 <div className='h2 mb-0'>
                   <span className='text-color-sq-green-mid'>6</span> 
@@ -127,7 +151,15 @@ const DashboardHomeSidebar = ({className, project}) => {
                   Total revenue received this month
                 </div>
             </div>
-            <div className='d-flex align-items-stretch mb-2'>
+            <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
+                <div className='h2 mb-0'>
+                  <span className='text-color-sq-green-muted'>$ 1,650</span> 
+                </div>
+                <div className='p mt-0'>
+                  Total revenue unpaid from sent invoices
+                </div>
+            </div>
+            {/* <div className='d-flex align-items-stretch mb-2'>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 me-2 text-center'>
                 <span className='h2 text-color-sq-lav-mid mb-0'>
                   3
@@ -157,11 +189,9 @@ const DashboardHomeSidebar = ({className, project}) => {
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2'>
                 
               </div>
-            </div>
+            </div> */}
           </div>
-              
 
-          
           </div>
 
         </div>
