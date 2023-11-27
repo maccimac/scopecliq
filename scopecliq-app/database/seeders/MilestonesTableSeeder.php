@@ -101,13 +101,38 @@ class MilestonesTableSeeder extends Seeder
             [
                 'project_id' => 5,
                 'position' => 0,
-                'name' => 'Geographic resarch',
+                'name' => 'Geographic Research',
                 'description' => "Define requirements and objectives",
-                'budget_percentage'=> 100,
+                'budget_percentage'=> 30,
                 'status_completion' => 'COMPLETE',
                 'status_invoice' => null,
                 'datetime_started' => null,
-                'datetime_due' => Carbon::create(2024, 2, 28, 0, 0, 0),
+                'datetime_due' => Carbon::create(2023, 5, 28, 0, 0, 0),
+            ],
+
+            [
+                'project_id' => 5,
+                'position' => 1,
+                'name' => 'Technical Architecture',
+                'description' => "Choose a technology stack (programming language, database, framework).
+                Design the system architecture, considering scalability and performance.",
+                'budget_percentage'=> 40,
+                'status_completion' => 'COMPLETE',
+                'status_invoice' => null,
+                'datetime_started' => null,
+                'datetime_due' => Carbon::create(2023, 6, 28, 0, 0, 0),
+            ],
+
+            [
+                'project_id' => 5,
+                'position' => 2,
+                'name' => 'Mobile Applications',
+                'description' => "Develop mobile applications for drivers and customers to facilitate order management and tracking.",
+                'budget_percentage'=> 30,
+                'status_completion' => 'COMPLETE',
+                'status_invoice' => null,
+                'datetime_started' => null,
+                'datetime_due' => Carbon::create(2023, 8, 28, 0, 0, 0),
             ],
             
         ]);
