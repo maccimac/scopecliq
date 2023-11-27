@@ -79,7 +79,7 @@ const DashboardHomeSidebar = ({className, project}) => {
                   {projectStats.pending}
                 </span>
                 <div className='p mt-0'>
-                  Pending Projects
+                  Pending projects / not started
                 </div>
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2'>
