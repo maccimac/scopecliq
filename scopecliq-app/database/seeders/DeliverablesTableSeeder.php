@@ -209,6 +209,19 @@ class DeliverablesTableSeeder extends Seeder
                 'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
                 'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
             ],
+
+            // TRUCKFLOW
+
+            [
+                'project_id' => 5,
+                'milestone_id' => 8 ,
+                'position' => 0,
+                'description' => 'Define requirements and objectives',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+
         ]);
     }
 }

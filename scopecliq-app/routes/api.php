@@ -119,4 +119,5 @@ Route::prefix('notifications')->group(function () {
 
 Route::prefix('analytics')->group(function () {
     Route::get('/project/{project_id}/progress', [AnalyticsController::class, 'fetchProgressPercentByProject']);
+    Route::get('/{user_id}/projects', [AnalyticsController::class, 'fetchProjectsAnalytics']);
 });

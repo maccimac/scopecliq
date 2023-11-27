@@ -14,9 +14,29 @@ const DashboardHomeSidebar = ({className, project}) => {
     const userId = useSelector(currentUserId)
     // const [projects, set_projects] = useState(null)
     const [organization, set_organization] = useState(null)
+    const [projectStats, set_projectStats] = useState({
+      open: 0,
+      due: 0,
+      pending: 0,
+      complete: 0
+    })
+
+  const fetchProjectStats = async() =>{
+    try{
+      const res = await axios.get(`${api}/analytics/${userId}/projects`);
+      console.log(res)
+      set_projectStats(res.data)
+    }catch(e){
+      console.log(e)
+    }
+    
+  
+  }
+    
 
 
     const fetchConsultantOrg = async() =>{
+    
         const res = await axios.get(api+ '/organizations/consultant/'+userId)
         set_organization(res.data)
     }
@@ -24,7 +44,8 @@ const DashboardHomeSidebar = ({className, project}) => {
     useEffect(()=>{
         // dispatch(setAsConsultant)
         // fetchAllProjects()
-        fetchConsultantOrg();
+        // fetchConsultantOrg();
+        fetchProjectStats()
     }, [])
 
     return(
@@ -36,7 +57,7 @@ const DashboardHomeSidebar = ({className, project}) => {
             <div className='d-flex align-items-stretch mb-2'>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 me-2 text-center'>
                 <span className='h2 text-color-sq-lav-mid mb-0'>
-                  3
+                  {projectStats.open}
                 </span>
                 <div className='p mt-0'>
                   Open projects
@@ -44,10 +65,10 @@ const DashboardHomeSidebar = ({className, project}) => {
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-tomato-lightest rounded w-50 me-2 text-center'>
                 <span className='h2 text-color-sq-tomato mb-0'>
-                  3
+                  {projectStats.due}
                 </span>
                 <div className='p mt-0'>
-                  Due projects this month
+                  Open projects due next 30 days
                 </div>
               </div>
               
@@ -55,7 +76,7 @@ const DashboardHomeSidebar = ({className, project}) => {
             <div className='d-flex align-items-stretch mb-2'>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lav-light rounded w-50 text-center me-2'>
                 <span className='h2 text-color-sq-lav-muted mb-0'>
-                  3
+                  {projectStats.pending}
                 </span>
                 <div className='p mt-0'>
                   Pending Projects
@@ -63,7 +84,7 @@ const DashboardHomeSidebar = ({className, project}) => {
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2  rounded w-50 text-center me-2'>
                 <p>
-                  <strong className='text-color-sq-green-mid'>40</strong> total completed milestones
+                  <strong className='text-color-sq-green-mid'>{projectStats.complete}</strong> total completed projects
                 </p>
               </div>
             </div>
@@ -94,7 +115,7 @@ const DashboardHomeSidebar = ({className, project}) => {
             <div className='d-flex align-items-stretch mb-2'>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-tomato-lightest rounded w-50 me-2 text-center'>
                 <span className='h2 text-color-sq-tomato mb-0'>
-                  3
+                  {projectStats.due}
                 </span>
                 <div className='p mt-0'>
                   Due projects this month

@@ -97,6 +97,18 @@ class MilestonesTableSeeder extends Seeder
                 'datetime_started' => null,
                 'datetime_due' => Carbon::create(2024, 2, 28, 0, 0, 0),
             ],
+
+            [
+                'project_id' => 5,
+                'position' => 0,
+                'name' => 'Geographic resarch',
+                'description' => "Define requirements and objectives",
+                'budget_percentage'=> 100,
+                'status_completion' => 'COMPLETE',
+                'status_invoice' => null,
+                'datetime_started' => null,
+                'datetime_due' => Carbon::create(2024, 2, 28, 0, 0, 0),
+            ],
             
         ]);
     }

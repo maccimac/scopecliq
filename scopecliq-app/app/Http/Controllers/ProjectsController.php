@@ -24,6 +24,8 @@ class ProjectsController extends Controller
             -> get();
         return $projects;
     }
+
+    
     public function fetchById($project_id){
         $project = DB::table('projects')
             -> select('*')
