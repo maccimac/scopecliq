@@ -22,7 +22,8 @@ const DashboardHomeSidebar = ({className, project}) => {
     })
     const [milestoneStats, set_milestoneStats] = useState({
       open_milestones_id: [],
-      deliverables_completed_open_milestones: 0,
+      deliverables_open_milestones_all: 0,
+      deliverables_open_milestones_complete: 0,
       open_milestones_due: 0,
       deliverables_completed_all: 0
       // 'open_milestones' => [],
@@ -123,9 +124,9 @@ const DashboardHomeSidebar = ({className, project}) => {
               </div>
               <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-green-light rounded w-50 text-center me-2'>
                 <div className='h2 mb-0'>
-                  <span className='text-color-sq-green-mid'>3</span> 
-                  <span className='h3 h3-light text-color-sq-light'>&nbsp; out of &nbsp;</span>
-                  <span className='text-color-sq-green-muted'>10</span>
+                  <span className='text-color-sq-green-mid'>{milestoneStats.deliverables_open_milestones_complete}</span> 
+                  <span className='h3 h3-light text-color-sq-light'>&nbsp; of &nbsp;</span>
+                  <span className='text-color-sq-green-muted'>{milestoneStats.deliverables_open_milestones_all}</span>
                 </div>
                 <div className='p mt-0'>
                   Deliverables completed from open milestones

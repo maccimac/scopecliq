@@ -70,7 +70,8 @@ class AnalyticsController extends Controller
 
         $stats = array(
             'open_milestones_id' => [],
-            'deliverables_completed_open_milestones'=> 0,
+            'deliverables_open_milestones_all'=> 0,
+            'deliverables_open_milestones_complete'=> 0,
             'open_milestones_due' => 0,
             'deliverables_completed_all' => 0  
         );
@@ -104,7 +105,23 @@ class AnalyticsController extends Controller
                     ->pluck('milestone_id')
                     ->toArray();
                $stats['open_milestones_id'] = array_merge($stats['open_milestones_id'], $incompleteMilestones);
-               $stats['open_milestones_id'] = array_unique($stats['open_milestones_id']);                
+               $stats['open_milestones_id'] = array_unique($stats['open_milestones_id']); 
+                foreach( $incompleteMilestones as $milestoneId){
+                    $milestoneDeliverable = DB::table('deliverables')
+                    ->select('*')
+                    ->where('milestone_id', $milestoneId)
+                    ->get();
+                    $countCompleteDeliverable =  $milestoneDeliverable
+                    ->where('status', 'COMPLETE')
+                    ->count();
+
+                    // 'deliverables_completed_open_milestones'=> 0,
+                    // 'deliverables_all_open_milestones'=> 0,
+                    $stats['deliverables_open_milestones_all'] += $milestoneDeliverable->count();
+
+                    $stats['deliverables_open_milestones_complete'] += $countCompleteDeliverable;
+                    
+                }               
 
             }
         };
