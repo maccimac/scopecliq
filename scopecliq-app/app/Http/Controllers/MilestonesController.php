@@ -45,7 +45,8 @@ class MilestonesController extends Controller
             // Optionally, you can return a success message or a response here
             return [
                 'status' => 'success',
-                'message' => "Milestone with ID $milestone_id has been deleted."
+                'message' => "Milestone with ID $milestone_id has been deleted.",
+                'milestone_id'=> $milestone_id
             ];
         } else {
             return [

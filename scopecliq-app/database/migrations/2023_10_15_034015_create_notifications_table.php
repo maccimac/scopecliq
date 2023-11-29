@@ -43,6 +43,7 @@ return new class extends Migration
                 // 'CHANGE':{
                 //     'MADE': `✏️ ${attachmentType} has been changed`,
                 //     'CREATED': `✨ ${attachmentType} has been added`,
+                //     'DELETED': `🗑  ${attachmentType} deleted`,
                 //     /**
                 //      * MADE_APPROVED
                 //      * MADE_DECLINED
