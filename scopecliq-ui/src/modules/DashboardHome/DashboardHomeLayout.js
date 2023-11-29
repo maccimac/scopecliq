@@ -80,7 +80,7 @@ const DashboardHomeLayout = ({
     return(
         <div className='sq-dashboard-home'>
             <div className="sq-body">
-                <div className="container-fluid px-0">
+                <div className="container-fluid p-0">
                     <NavBar>
                         <div className='d-flex w-100 justify-content-end py-3 align-items-center'>
                             { userId &&                 
@@ -102,11 +102,11 @@ const DashboardHomeLayout = ({
                     
                     </NavBar>
 
-                    <div className="sq-content row mh-100">
-                        <div className="col-md-3 mh-100">
+                    <div className="sq-content row m-0 p-0">
+                        <div className="col-md-3">
                             <DashboardHomeSidebar className="w-100 h-100"/>
                         </div>
-                        <div className='col-md-9 mt-4'>
+                        <div className='col-md-9 sq-projects-holder pt-4'>
                             { !projects ?
                                 <div className='w-100 d-flex justify-content-center align-items-center p-5'>
                                     <img className='w-50 opacity-25' src={logo}/>
