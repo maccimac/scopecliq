@@ -966,15 +966,16 @@ small {
 .sq-sidebar-offcanvas .offcanvas .mode-notifications {
   margin-bottom: 320px;
 }
-.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card-small, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card {
+.sq-sidebar-offcanvas .offcanvas .mode-notifications .offset-footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding-bottom: 48px;
-  margin-bottom: -8px !important;
-}
-.sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-project-card h3, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card-small h3, .sq-sidebar-offcanvas .offcanvas .mode-notifications .sq-organization-card h3 {
-  font-size: 16px;
+  padding: 12px;
+  padding-bottom: 32px;
+  padding-bottom: 32px;
+  margin-bottom: -16px !important;
+  background-color: #3E404A;
+  border-radius: 16px;
 }
 .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-project-card, .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-organization-card-small, .sq-sidebar-offcanvas .offcanvas .mode-project-details .sq-organization-card {
   box-shadow: none;

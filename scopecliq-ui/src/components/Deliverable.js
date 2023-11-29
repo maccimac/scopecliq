@@ -82,9 +82,7 @@ export const Deliverable = ({
             headers: {
               "Content-Type": "application/json",
             },
-        });
-
-
+        })
     }
 
     const enableEdit = () => {

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import Notification from '../components/Notification';
 import ProjectCard from '../components/ProjectCard';
+import OrganizationCardSmall from '../components/OrganizationCardSmall';
 
 const SidebarOffsetBlueprint = () => {
     const api = global.config.API;
@@ -14,11 +15,18 @@ const SidebarOffsetBlueprint = () => {
     const [sidebarMode, set_sidebarMode] = useState('NOTIFICATIONS')
     const project= useSelector(storeProject);
     const [showOffcanvas, setShowOffcanvas] = useState(clientMode); // Set the initial state to true to show the Offcanvas
+    const [clientOrg, set_clientOrg] = useState(null)
 
     const fetchNotificationsByProject = async() =>{
         if(!project) return
         const res = await axios.get(api+ '/notifications/project/' + project.id)
         set_notifications(res.data)
+    }
+
+    const fetchOrganizationById = async () => {
+        if(!project.organization_id) return;
+        const res = await axios.get(api+ '/organizations/'+project.organization_id)
+        set_clientOrg(res.data)
     }
 
     const notifDeliverableComplete = {
@@ -65,6 +73,7 @@ const SidebarOffsetBlueprint = () => {
   };
 
   useEffect(()=>{
+    fetchOrganizationById()
     fetchNotificationsByProject()
   },[project])
 
@@ -138,8 +147,23 @@ const SidebarOffsetBlueprint = () => {
 
                             </div>
                         </div>
-                        <div>
-                            {project && <ProjectCard 
+                        <div className='offset-footer'>
+                            {clientOrg &&
+                                <div onClick={()=>{
+                                    set_sidebarMode('PROJECT_DETAILS')
+                                }}>
+                                    <OrganizationCardSmall
+                                        organization={clientOrg}
+                                    />
+                                    <div className='d-flex justify-content-center'>
+                                        <button className='sq-link text-color-sq-light'>
+                                            Go to project details &nbsp;
+                                            <i className='fa-solid fa-regular fa-arrow-right'/>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                            {/* {project && <ProjectCard 
                                 project={project}
                                 collapsed
                                 dark
@@ -148,12 +172,13 @@ const SidebarOffsetBlueprint = () => {
                                     <button className='sq-link text-color-sq-green' onClick={()=>{
                                         set_sidebarMode('PROJECT_DETAILS')
                                     }}>
-                                        Go to project details &nbsp;
+                                        Go to project detaimodels &nbsp;
                                         <i className='fa-solid fa-regular fa-arrow-right'/>
                                     </button>
                                 </div>
                                
-                            </ProjectCard>}
+                            </ProjectCard>} */}
+
                         </div>
                     </div>)}
 

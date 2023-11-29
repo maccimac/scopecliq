@@ -148,15 +148,27 @@ $scrollbar-width: 17;
                
 
             }
+            .offset-footer{
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    padding: 12px;
+                    padding-bottom: 32px;
+                    padding-bottom: 32px;
+                    margin-bottom: -16px !important;
+                    background-color: $sq-lav-darker;
+                    border-radius: 16px;
+
+            }
             .sq-project-card{
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                padding-bottom: 48px;
-                margin-bottom: -8px !important;
-                h3{
-                    font-size: 16px;
-                }
+                // position: absolute;
+                // bottom: 0;
+                // width: 100%;
+                // padding-bottom: 48px;
+                // margin-bottom: -8px !important;
+                // h3{
+                //     font-size: 16px;
+                // }
                
             }
         }
