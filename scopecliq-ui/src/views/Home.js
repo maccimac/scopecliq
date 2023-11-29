@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { showSnackbarMessage } from '../store/snackbar-store';
 import { setUserId, currentUserId } from '../store/login-store';
+import { setAsClient, setAsConsultant } from '../store/client-store';
 import OrganizationCardEdit from './../components/OrganizationCardEdit'
 import Modal from '@mui/material/Modal';
 import logo from '../assets/img/sq-logo.svg'
@@ -229,7 +230,7 @@ const Home = () => {
 
     useEffect(()=>{
         if(userId){
-              navigate('/dashboard/')
+            navigate('/dashboard/')
         }
     }, []);
 

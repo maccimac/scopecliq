@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 
-import { useNavigate } from 'react-router-dom';
-import { isClient} from '../store/client-store';
+import { useNavigate, useParams } from 'react-router-dom';
+import { isClient, setAsClient, setAsConsultant} from '../store/client-store';
 import { storeProject} from '../store/project-store';
 import { currentUserId, setUserId } from '../store/login-store';
 
@@ -22,15 +22,26 @@ const DashboardPortalLayout = () => {
     const clientMode = useSelector(isClient)
     const project=(useSelector(storeProject))
     const userId = (useSelector(currentUserId))
+
+    const { domain, projectId } = useParams();
+
+
     
     const logout = () => {
         dispatch(setUserId(null))
         navigate("/")
     }
+    
+    useEffect(()=>{
+        if(userId && projectId){
+            dispatch(setAsConsultant())
+        }
+    },[])
 
     return(
         <div class="sq-dashboard-portal">
             <div class="sq-body">
+
                 <NavBar>
                     <div className='d-flex w-100 align-items-center justify-content-end'>
                         <Link 

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { isClient} from '../../store/client-store';
+import { isClient, setAsClient, setAsConsultant} from '../../store/client-store';
 import { storeProject, setProject} from '../../store/project-store';
 import { currentUserId, currentUserOrg, setUserId, setUserOrg} from '../../store/login-store';
 import { showSnackbarMessage} from '../../store/snackbar-store';
@@ -61,10 +61,13 @@ const DashboardHomeLayout = ({
     }
 
     useEffect(()=>{
+        dispatch(setAsConsultant())
+
         if(!userId){
             navigate("/")
+            return
         }
-
+        
         fetchConsultantOrg();
         fetchAllProjectsByConsultant();
         
