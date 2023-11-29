@@ -228,23 +228,23 @@ const SidebarOffsetOrganizationEdit = ({
                         />
 
                         <CloudinaryContext cloudName={cloudinaryConfig.cloud_name}>
-                            <div>
-                                <input type="file" onChange={handleImageUpload} />
+                            <div className='mb-3'>
+                                <div className='label'>
+                                        Your Logo (Optional)
+                                </div>
+                                <input className="sq-input" type="file" onChange={handleImageUpload} />
                                 {modelImage && (
-                                    <div>
-                                    <p>Uploaded modelImage:</p>
-                                    <Image publicId={modelImage} width="300" height="200">
-                                        <Transformation crop="fit" />
-                                    </Image>
+                                    <div className='p-2 sq-input-image-holder'>
+                                    {/* <p>Uploaded modelImage:</p> */}
+                                        <Image className='rounded' publicId={modelImage}>
+                                            <Transformation crop="fit" />
+                                        </Image>
                                     </div>
                                 )}
                             </div>
                         </CloudinaryContext>
 
                         <div className='d-flex'>
-                            <button className='sq-btn' onClick={updateOrganization} >
-                               Upload
-                            </button>
                             <button className='sq-btn' onClick={updateOrganization} >
                                 {modeRegister ? 'Register' : 'Update'}
                             </button>
