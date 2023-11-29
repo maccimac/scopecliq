@@ -216,4 +216,61 @@ class AnalyticsController extends Controller
         return $stats;
     }
 
+    public function matchMilestonesToInvoice($user_id){
+
+        $completeMilestones = [];
+        $stats = array(
+            'complete_milestones_ids' => [],
+            'milestones_with_invoice_ids' => [],
+            'milestones_missing_invoice_ids' => [],
+        );
+
+        $projectsController = new ProjectsController();
+        $projects = $projectsController->fetchAllProjectsByConsultantUserId($user_id);
+
+        foreach ($projects as $proj){
+
+            $allProjMilestones = $totalDeliverables = DB::table('milestones')
+                ->select('*')
+                ->where('project_id', $proj->id)
+                ->get();
+
+            foreach ($allProjMilestones as $ms){
+                $totalDeliverables = DB::table('deliverables')
+                ->select('id')
+                ->where('milestone_id', $ms->id)
+                ->count();
+
+                $completeDeliverables = DB::table('deliverables')
+                    ->select('id')
+                    ->where('milestone_id', $ms->id)
+                    ->where('status', 'COMPLETE')
+                    ->count();
+
+                if($completeDeliverables/$totalDeliverables){
+                    $stats['complete_milestones_ids'][] = $ms->id;
+                }
+            }    
+        }
+        foreach($stats['complete_milestones_ids'] as $msId){
+            $hasInvoice = DB::table('invoices')
+                ->select('*')
+                ->where('milestone_id', $msId)
+                ->count();
+
+            if($hasInvoice > 0){
+                $stats['milestones_with_invoice_ids'][] = $msId;
+            }else{
+                $stats['milestones_missing_invoice_ids'][] = $msId;
+
+            }
+
+        }
+
+        return $stats;
+        
+ 
+
+    }
+
 }

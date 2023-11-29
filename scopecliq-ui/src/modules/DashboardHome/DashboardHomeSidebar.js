@@ -29,6 +29,13 @@ const DashboardHomeSidebar = ({className, project}) => {
       deliverables_completed_all: 0
     })
 
+    const [milestoneInvoiceStats, set_milestoneInvoiceStats] = useState({
+      complete_milestones_ids: [],
+      milestones_with_invoice_ids: [],
+      milestones_missing_invoice_ids: [],
+
+    })
+
     const [invoiceStats, set_invoiceStats] = useState({
         open_project_invoice_all_ids: [],
         open_project_invoice_paid_ids: [],
@@ -37,6 +44,7 @@ const DashboardHomeSidebar = ({className, project}) => {
         revenue_collectible: 0,    
 
     })
+    
 
   const fetchProjectStats = async() =>{
     try{
@@ -69,8 +77,19 @@ const DashboardHomeSidebar = ({className, project}) => {
     }  
   
   }
-    
 
+  const matchMilestonesToInvoice = async() =>{
+    try{
+      const res = await axios.get(`${api}/analytics/${userId}/match-milestone-to-invoice`);
+      console.log(res)
+      set_milestoneInvoiceStats(res.data)
+    }catch(e){
+      console.log(e)
+    }  
+  
+  }
+    
+    
 
     const fetchConsultantOrg = async() =>{
         const res = await axios.get(api+ '/organizations/consultant/'+userId)
@@ -88,6 +107,8 @@ const DashboardHomeSidebar = ({className, project}) => {
         fetchProjectStats()
         fetchMilestoneStats()
         fetchInvoicesStats()
+        matchMilestonesToInvoice()
+        
     }, [])
 
     return(
@@ -212,7 +233,7 @@ const DashboardHomeSidebar = ({className, project}) => {
                   </Tooltip>
                 </div>
                   <div className='h2 mb-0'>
-                    <span className='text-color-sq-green-mid'>{invoiceStats.milestones_to_invoice}</span> 
+                    <span className='text-color-sq-green-mid'>{milestoneInvoiceStats.milestones_missing_invoice_ids?.length}</span> 
                   </div>
                   <div className='p mt-0'>
                     Completed milestones ready to be invoiced
