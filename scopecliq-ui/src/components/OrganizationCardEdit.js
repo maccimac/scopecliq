@@ -69,7 +69,7 @@ export const OrganizationCardEdit = ({
                             placeholder='Organization Name'
                 ></input>
                 <div className='label'>
-                    Your contact
+                    Contact Details
                 </div>
                 <input className='sq-input w-100 mb-2 mb-2' 
                             value={modelContactName} 

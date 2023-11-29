@@ -258,7 +258,7 @@ h4, .h4 {
 
 p, .p {
   margin-top: 2px;
-  font-size: 11px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   margin-bottom: 4px;
@@ -275,7 +275,7 @@ a {
 .sub {
   margin-top: 4px;
   color: #9B9EAF;
-  font-size: 9px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 700;
   letter-spacing: 2.56px;
@@ -283,7 +283,7 @@ a {
 }
 
 .label {
-  font-size: 11px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   color: #9B9EAF;
