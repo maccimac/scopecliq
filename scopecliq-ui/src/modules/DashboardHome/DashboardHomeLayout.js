@@ -7,6 +7,8 @@ import { storeProject, setProject} from '../../store/project-store';
 import { currentUserId, currentUserOrg, setUserId, setUserOrg} from '../../store/login-store';
 import { showSnackbarMessage} from '../../store/snackbar-store';
 
+import logo from './../../assets/img/sq-logo.svg'
+
 import Modal from '@mui/material/Modal';
 import NavBar from '../../components/NavBar';
 import ProjectEdit from '../ProjectEdit';
@@ -30,7 +32,7 @@ const DashboardHomeLayout = ({
 
     const [modelCreateOpen, set_modalCreateOpen] = useState(false)
     const [showEditOrg, set_showEditOrg] = useState(false)
-    const [projects, set_projects] = useState([])
+    const [projects, set_projects] = useState(null)
 
     const fetchAllProjectsByConsultant = async() =>{
         const res = await axios.get(api+ '/projects/consultant-user-id/' + userId)
@@ -105,65 +107,69 @@ const DashboardHomeLayout = ({
                             <DashboardHomeSidebar className="w-100 h-100"/>
                         </div>
                         <div className='col-md-9 mt-4'>
-                            { projects?.length ?
-                                <div className='pe-4'>
-                                  <div className='d-flex justify-content-between mb-4 align-items-center'>
-                                      <div>
-                                          <h3>🔨 Dive in existing projects </h3>
-                                          {/* <div>Sort by most recent</div> */}
-                                      </div>
-  
-                                      <div 
-                                          className='sq-btn sq-btn-outline rounded d-flex align-items-center me-2'
-                                          onClick={()=>{
-                                              set_modalCreateOpen(true)
-                                          }}
-                                      >
-                                          <span className='h3 text-color-sq-lav me-2 mb-0'>
-                                              🚀 Start a new project
-                                          </span>
-                                      </div>
-                                  </div>
-                                  <div className='row'>
-                                      {projects.map(p => (
-                                          <div className="col-md-6" key={p.id}>
-                                              <ProjectCard  
-                                                  collapsed
-                                                  project={p}
-                                              />
-                                          </div>
-                                      ))}
-  
-                                  </div>
-                                </div> 
-
-
+                            { !projects ?
+                                <div className='w-100 d-flex justify-content-center align-items-center p-5'>
+                                    <img className='w-50 opacity-25' src={logo}/>
+                                </div>
                             :
-                               <div className='text-center py-5 w-auto'>
-                                    <h2> Welcome 
-                                        {userOrg &&
-                                            <>{`, ${userOrg?.contact_name}`}</>
-                                        }
-                                    </h2>
-                                    <p>
-                                        Let's get things running
-                                    </p>
-                                    <div 
-                                            className='d-flex-inline sq-btn sq-btn-outline rounded2 w-50 align-items-center mx-auto'
+                                <>{ projects.length > 0 ?
+                                    <div className='pe-4'>
+                                    <div className='d-flex justify-content-between mb-4 align-items-center'>
+                                        <div>
+                                            <h3>🔨 Dive in existing projects </h3>
+                                            {/* <div>Sort by most recent</div> */}
+                                        </div>
+    
+                                        <div 
+                                            className='sq-btn sq-btn-outline rounded d-flex align-items-center me-2'
                                             onClick={()=>{
                                                 set_modalCreateOpen(true)
                                             }}
-                                         >
+                                        >
                                             <span className='h3 text-color-sq-lav me-2 mb-0'>
                                                 🚀 Start a new project
                                             </span>
+                                        </div>
                                     </div>
-                                    
+                                    <div className='row'>
+                                        {projects.map(p => (
+                                            <div className="col-md-6" key={p.id}>
+                                                <ProjectCard  
+                                                    collapsed
+                                                    project={p}
+                                                />
+                                            </div>
+                                        ))}
+    
+                                    </div>
+                                    </div> 
 
-                               </div>
-                                
-                            }
-                            
+                                :
+                                <div className='text-center py-5 w-auto'>
+                                        <h2> Welcome 
+                                            {userOrg &&
+                                                <>{`, ${userOrg?.contact_name}`}</>
+                                            }
+                                        </h2>
+                                        <p>
+                                            Let's get things running
+                                        </p>
+                                        <div 
+                                                className='d-flex-inline sq-btn sq-btn-outline rounded2 w-50 align-items-center mx-auto'
+                                                onClick={()=>{
+                                                    set_modalCreateOpen(true)
+                                                }}
+                                            >
+                                                <span className='h3 text-color-sq-lav me-2 mb-0'>
+                                                    🚀 Start a new project
+                                                </span>
+                                        </div>
+                                        
+
+                                </div>
+                                    
+                                }</>
+                            } 
                         </div>
                     </div>
                     <Modal 
