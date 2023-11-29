@@ -19,7 +19,7 @@ export const OrganizationCard = ({
             ${className}
         `} >
             <div className='project-organization'>
-                <h2 className='text-head mb-3'>{organization.organization_name}</h2>
+                <h3 className='text-head mb-3'>{organization.organization_name}</h3>
                 <div className='project-client'>
                     <div className='sq-grid'>
                         <span className='text-prop'>Name</span>

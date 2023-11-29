@@ -23,14 +23,19 @@ const DashboardHomeSidebar = ({className, project}) => {
     })
     const [milestoneStats, set_milestoneStats] = useState({
       open_milestones_id: [],
-      deliverables_open_milestones_all: 0,
+      deliverables_open_milestones_all_ids: 0,
       deliverables_open_milestones_complete: 0,
       open_milestones_due: 0,
       deliverables_completed_all: 0
-      // 'open_milestones' => [],
-      // 'deliverables_completed_open_milestones'=> 0,
-      // 'open_milestones_due' => 0,
-      // 'deliverables_completed_all' => 0  
+    })
+
+    const [invoiceStats, set_invoiceStats] = useState({
+        open_project_invoice_all_ids: [],
+        open_project_invoice_paid_ids: [],
+        invoices_paid_last_30_days_ids: [],
+        revenue_received_last_30_days: 0,
+        revenue_collectible: 0,    
+
     })
 
   const fetchProjectStats = async() =>{
@@ -52,6 +57,16 @@ const DashboardHomeSidebar = ({className, project}) => {
     }catch(e){
       console.log(e)
     }  
+  }
+  
+  const fetchInvoicesStats = async() =>{
+    try{
+      const res = await axios.get(`${api}/analytics/${userId}/invoices`);
+      console.log(res)
+      set_invoiceStats(res.data)
+    }catch(e){
+      console.log(e)
+    }  
   
   }
     
@@ -62,12 +77,17 @@ const DashboardHomeSidebar = ({className, project}) => {
         set_organization(res.data)
     }
 
+    const parseAmount = (num) => {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  }
+
     useEffect(()=>{
         // dispatch(setAsConsultant)
         // fetchAllProjects()
         // fetchConsultantOrg();
         fetchProjectStats()
         fetchMilestoneStats()
+        fetchInvoicesStats()
     }, [])
 
     return(
@@ -172,12 +192,27 @@ const DashboardHomeSidebar = ({className, project}) => {
           <hr/>
           <div className='my-4'>
             <h4>Invoice and Payments</h4>
+            <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
+                <div className='h2 mb-0'>
+                  <span className='text-color-sq-green-mid'>$ {parseAmount(invoiceStats.revenue_received_last_30_days)}</span> 
+                </div>
+                <div className='p mt-0'>
+                  Total revenue received past 30 days
+                </div>
+            </div>
             <div className='d-flex align-items-stretch mb-2'>
                 <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-green-light rounded w-50 text-center me-2'>
+                <div className='sq-stat-card-info-holder'>
+                  <Tooltip title="
+                    These milestones are completed, but no invoices have not been generated yet  
+                  ">
+                    <div className='sq-btn-icon'>
+                      <i className='fa-solid fa-question'/>
+                    </div>
+                  </Tooltip>
+                </div>
                   <div className='h2 mb-0'>
-                    <span className='text-color-sq-green-mid'>3</span> 
-                    {/* <span className='h3 h3-light text-color-sq-light'>&nbsp; out of &nbsp;</span>
-                    <span className='text-color-sq-green-muted'>10</span> */}
+                    <span className='text-color-sq-green-mid'>{invoiceStats.milestones_to_invoice}</span> 
                   </div>
                   <div className='p mt-0'>
                     Completed milestones ready to be invoiced
@@ -185,37 +220,45 @@ const DashboardHomeSidebar = ({className, project}) => {
                 </div>
                 <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-50 text-center me-2'>
                   <div className='h2 mb-0'>
-                    <span className='text-color-sq-green-mid'>3</span> 
-                    {/* <span className='h3 h3-light text-color-sq-light'>&nbsp; out of &nbsp;</span>
-                    <span className='text-color-sq-green-muted'>10</span> */}
+                    <span className='text-color-sq-green-mid'>{invoiceStats.invoices_paid_last_30_days_ids?.length}</span> 
                   </div>
                   <div className='p mt-0'>
-                    Invoices paid this month
+                    Invoices paid past 30 days
                   </div>
                 </div>
 
             </div>
             <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
+                <div className='sq-stat-card-info-holder'>
+                  <Tooltip title="
+                    Non-payable invoices are those amounting to zero
+                  ">
+                    <div className='sq-btn-icon'>
+                      <i className='fa-solid fa-question'/>
+                    </div>
+                  </Tooltip>
+                </div>
                 <div className='h2 mb-0'>
-                  <span className='text-color-sq-green-mid'>6</span> 
+                  <span className='text-color-sq-green-mid'>{invoiceStats.open_project_invoice_paid_ids?.length}</span> 
                   <span className='h3 h3-light text-color-sq-light'>&nbsp; out of &nbsp;</span>
-                  <span className='text-color-sq-green-muted'>24</span>
+                  <span className='text-color-sq-green-muted'>{invoiceStats.open_project_invoice_all_ids?.length}</span>
                 </div>
                 <div className='p mt-0'>
-                  of open invoices paid
+                  of open payable invoices paid
                 </div>
             </div>
             <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
-                <div className='h2 mb-0'>
-                  <span className='text-color-sq-green-mid'>$ 2,400</span> 
+            <div className='sq-stat-card-info-holder'>
+                  <Tooltip title="
+                    When invoice has been sent to client but not yet paid or mark paid
+                  ">
+                    <div className='sq-btn-icon'>
+                      <i className='fa-solid fa-question'/>
+                    </div>
+                  </Tooltip>
                 </div>
-                <div className='p mt-0'>
-                  Total revenue received this month
-                </div>
-            </div>
-            <div className='sq-stat-card d-flex flex-column justify-content-center align-items-center p-2 bg-sq-lightest rounded w-100 mb-2 text-center me-2'>
                 <div className='h2 mb-0'>
-                  <span className='text-color-sq-green-muted'>$ 1,650</span> 
+                  <span className='text-color-sq-green-muted'>$ {parseAmount(invoiceStats.revenue_collectible)}</span> 
                 </div>
                 <div className='p mt-0'>
                   Total revenue unpaid from sent invoices

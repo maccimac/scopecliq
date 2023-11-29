@@ -139,43 +139,63 @@ export const ProjectCard = ({
                 </div>)}
 
                 {!isCollapsed && (<div className='more-details'>
+                    <hr/>
                     <OrganizationCard className="mt-3" organization={organization}/>
 
-                    {full && (
-                    <div>
-                        <div className='project-portal bg-sq-lav-dark my-5 sq-outter-shadow rounded p-3'>
-                            {/* <div className='d-flex align-items-center w-100 justify-content-between mb-3'>
+                    {full 
+                    ? 
+                        <div>
+                            <div className='project-portal bg-sq-lav-dark my-5 sq-outter-shadow rounded p-3'>
+                                {/* <div className='d-flex align-items-center w-100 justify-content-between mb-3'>
+                                    
+                                </div> */}
+
+                                <h2 className='text-head mb-3'>Dedicated Portal</h2>
                                 
-                            </div> */}
+                                <div className='project-client mb-3'>
+                                    <div className='sq-grid'>
+                                        <span className='text-prop'>URL</span>
+                                        <span>{origin}/portal/{project.portal_domain}</span> 
+                                    </div>
+                                    <div className='sq-grid align-items-center'>
+                                        <span className='text-prop'>Password</span>
+                                        <input disabled className='sq-input w-auto' value={project.portal_password}/> 
+                                    </div>
+                                </div>
+                                <div className='d-flex justify-content-center'>
+                                    <a className='sq-link text-color-sq-green' href={'/portal/'+project.portal_domain}>Go to portal</a>
+                                </div> 
 
-                            <h2 className='text-head mb-3'>Dedicated Portal</h2>
                             
-                            <div className='project-client mb-3'>
-                                <div className='sq-grid'>
-                                    <span className='text-prop'>URL</span>
-                                    <span>{origin}/portal/{project.portal_domain}</span> 
-                                </div>
-                                <div className='sq-grid align-items-center'>
-                                    <span className='text-prop'>Password</span>
-                                    <input disabled className='sq-input w-auto' value={project.portal_password}/> 
-                                </div>
+                            </div>    
+                            <div className='project-terms my-5'>        
+                                <h2 className='text-head mb-1'>
+                                    Terms and Conditions
+                                </h2>
+                                <textarea className='sq-textarea sq-textarea--terms w-100 terms-and-conditions' disabled>
+                                    {project.terms}
+                                </textarea>
                             </div>
-                            <div className='d-flex justify-content-center'>
-                                <a className='sq-link text-color-sq-green' href={'/portal/'+project.portal_domain}>Go to portal</a>
-                            </div> 
-
-                           
-                        </div>    
-                        <div className='project-terms my-5'>        
-                            <h2 className='text-head mb-1'>
-                                Terms and Conditions
-                            </h2>
-                            <textarea className='sq-textarea sq-textarea--terms w-100 terms-and-conditions' disabled>
-                                {project.terms}
-                            </textarea>
                         </div>
-                    </div>
-                    )}
+                    : 
+                        <div>
+                            <hr/>
+                            <div className='sq-grid'>
+                                <div className='text-prop'>Deliverables</div>
+                                <div>X deliverables of X total deliverables </div>
+                            </div>
+                             <div className='sq-grid'>
+                                <div className='text-prop'>Milestones</div>
+                                <div>X completes of X total milesstones </div>
+                            </div>
+                            <div className='sq-grid'>
+                                <div className='text-prop'>Invoices</div>
+                                <div>X paid of x sent</div>
+                            </div>
+                            <hr/>
+                        </div>
+
+                    }
                 </div>)}
 
                 
@@ -200,9 +220,9 @@ export const ProjectCard = ({
                         </span>
                     }
                     <div className='d-flex align-items-center '>
-                        {!isCollapsed && (<Link to={"/dashboard/" + project.id + "/invoices"} className='sq-link text-color-sq-green me-3'>
+                        <Link to={"/dashboard/" + project.id + "/invoices"} className='sq-link text-color-sq-green me-3'>
                             View invoices
-                        </Link>)}
+                        </Link>
 
                         <Link to={"/dashboard/" + project.id } className='sq-btn sq-btn--green'>
                             Go to project

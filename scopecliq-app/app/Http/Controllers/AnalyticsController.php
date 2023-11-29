@@ -9,7 +9,7 @@ use App\Http\Controllers\ProjectsController;
 
 class AnalyticsController extends Controller
 {
-    //
+
     public function fetchProgressPercentByProject($project_id){
         $totalDeliverables = DB::table('deliverables')
             ->select('*')
@@ -148,4 +148,72 @@ class AnalyticsController extends Controller
         return $stats;
 
     }
+
+    
+    public function fetchInvoicesAnalytics($user_id){
+
+        // get open projects
+
+        $projectsController = new ProjectsController();
+        $projects = $projectsController->fetchAllProjectsByConsultantUserId($user_id);
+
+        $stats = array(
+            'open_project_invoice_all_ids' => [],
+            'open_project_invoice_paid_ids'=> [],
+            'invoices_paid_last_30_days_ids' => [],
+            'revenue_received_last_30_days'=> 0,
+            'revenue_collectible'=> 0
+        );
+
+        $today = Carbon::now();
+        // $in30days = $today->addDays(30);
+        $last30days = Carbon::now()->subDays(30);
+        $startOfMonth =  Carbon::now()->startOfMonth();
+        $endOfMonth =  Carbon::now()->endOfMonth();
+
+        $stats['today'] = $today;
+        $stats['start_of_month'] = $startOfMonth;
+
+        // dd($startOfMonth->toDateTimeString(), $endOfMonth->toDateTimeString());
+
+        foreach ($projects as $proj) {
+            $progressPercent = $this->fetchProgressPercentByProject($proj->id);
+            $allProjInvoices = DB::table('invoices')
+                ->select('*')
+                ->where('project_id', $proj->id)
+                ->get();
+
+            foreach ($allProjInvoices as $inv){
+                if($inv->datetime_paid !== null){
+                    // $dateTimePaid = Carbon::parse($inv -> datetime_paid);
+                    if(
+                        $inv->datetime_paid > $startOfMonth
+                    ){
+                        $stats['invoices_paid_last_30_days_ids'][] = $inv-> id;
+                        $stats['revenue_received_last_30_days'] =  $inv->total; 
+                    }
+                }else{
+                    $stats['revenue_collectible'] +=    $inv->total; 
+                }
+            
+            }
+            if($progressPercent == 0){
+                // $stats['pending']+= 1;
+            }else if( $progressPercent == 1){
+                // $stats['complete'] += 1;
+            }else{
+                // OPEN PROJECTS
+                foreach ($allProjInvoices as $inv){
+                    $stats['open_project_invoice_all_ids'][] = $inv->id;
+
+                    if($inv->datetime_paid !== null || $inv->payment_client_secret !== null){
+                        $stats['open_project_invoice_paid_ids'][] = $inv->id;
+                    }
+                }
+            }
+        };
+
+        return $stats;
+    }
+
 }
