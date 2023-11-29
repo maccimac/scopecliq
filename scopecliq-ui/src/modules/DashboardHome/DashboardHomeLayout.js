@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { isClient} from '../../store/client-store';
-import { storeProject} from '../../store/project-store';
-import { currentUserId, currentUserOrg, setUserId} from '../../store/login-store';
+import { storeProject, setProject} from '../../store/project-store';
+import { currentUserId, currentUserOrg, setUserId, setUserOrg} from '../../store/login-store';
 import { showSnackbarMessage} from '../../store/snackbar-store';
 
 import Modal from '@mui/material/Modal';
@@ -20,7 +20,7 @@ import OrganizationCard from '../../components/OrganizationCard';
 
 
 const DashboardHomeLayout = ({
-    projects=[],
+    // projects=[],
 }) => {
     const api = global.config.API
     const dispatch = useDispatch()
@@ -30,6 +30,23 @@ const DashboardHomeLayout = ({
 
     const [modelCreateOpen, set_modalCreateOpen] = useState(false)
     const [showEditOrg, set_showEditOrg] = useState(false)
+    const [projects, set_projects] = useState([])
+
+    const fetchAllProjectsByConsultant = async() =>{
+        const res = await axios.get(api+ '/projects/consultant-user-id/' + userId)
+        set_projects(res.data)
+    }
+
+    const fetchConsultantOrg = async() =>{
+        try{
+            const res = await axios.get(api+ '/organizations/consultant/' + userId)
+            dispatch(setUserOrg(res.data))
+            console.log(res)
+        }catch(e){
+            console.log(e)
+        }
+       
+    }
 
        
     const logout = () => {
@@ -37,10 +54,20 @@ const DashboardHomeLayout = ({
         navigate("/")
     }
 
+    const onOrgUpdate = () =>{
+        set_showEditOrg(false)
+        fetchConsultantOrg()
+
+    }
+
     useEffect(()=>{
         if(!userId){
             navigate("/")
         }
+
+        fetchConsultantOrg();
+        fetchAllProjectsByConsultant();
+        
     },[])
 
 
@@ -134,14 +161,20 @@ const DashboardHomeLayout = ({
                     </Modal>
                 </div>
             </div>
-            <SidebarOffsetOrganizationEdit
-                showHeader={false}
-                show={showEditOrg}
-                organization={userOrg}
-                onClose={()=>{
-                    set_showEditOrg(false)
-                }}
-            />
+            {showEditOrg &&
+                <SidebarOffsetOrganizationEdit
+                    showHeader={false}
+                    show={showEditOrg}
+                    organization={userOrg}
+                    onClose={()=>{
+                        set_showEditOrg(false)
+                    }}
+                    cb={
+                       { onUpdate: onOrgUpdate}
+                    }
+                />
+            }
+            
         </div>
     )
 }

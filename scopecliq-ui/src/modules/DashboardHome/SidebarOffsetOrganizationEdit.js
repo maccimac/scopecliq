@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { currentUser, isClient} from '../../store/client-store';
 import {currentUserId, currentUserOrg} from '../../store/login-store'
+import { showSnackbarMessage } from '../../store/snackbar-store';
 // import { storeProject } from '../../store/project-store';
 // import { connect } from 'react-redux';
 import OrganizationCardEdit from '../../components/OrganizationCardEdit';
@@ -12,7 +13,8 @@ const SidebarOffsetOrganizationEdit = ({
     organization,
     show,
     showHeader = true,
-    onClose
+    onClose,
+    cb
 }) => {
     const api = global.config.API;
     const dispatch = useDispatch()
@@ -38,7 +40,39 @@ const SidebarOffsetOrganizationEdit = ({
         set_showOffcanvas(false);
     };
 
+    const updateOrganization = async () => {
+        try{
+            console.log({organizationEdit})
+            const res = await axios.post(`${api}/organizations/update/${organization.id}`, organizationEdit, {
+                headers: {
+                "Content-Type": "application/json",
+                },
+            });
+            console.log({res})
+            if(res.status===200){
+                dispatch(showSnackbarMessage({
+                    message: 'Save successful'
+                }))
+            }
+            if(cb.onUpdate){ cb.onUpdate()}
 
+            // set_organization({
+            //     ...organization,
+            //     organization_id: res.data
+            // })
+            // set_organizationId(res.data)
+            // console.log('no org', res)
+            // if(res){
+            //     // createProject(res.data)
+            // }
+        }catch(e){
+            console.log(e)
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message
+            }))
+        }
+    }
 
     useEffect(()=>{
         set_showOffcanvas(show)
@@ -53,6 +87,18 @@ const SidebarOffsetOrganizationEdit = ({
     useEffect(()=>{
         set_organizationEdit(organization)
     }, [organization])
+
+    // useEffect(()=>{
+    //     // 'organization_name' => $req->organization_name,
+    //     // 'contact_name' => $req->contact_name,
+    //     // 'contact_email' => $req->contact_email,
+    //     // 'contact_about' => $req->contact_about,
+    //     set_organizationEdit({
+    //         ...organization,
+    //         organization_name: modelOg
+
+    //     })
+    // })
 
 
     return(
@@ -135,13 +181,13 @@ const SidebarOffsetOrganizationEdit = ({
                         }                               
                         <OrganizationCardEdit
                             cb={{
-                                set_organizationEdit
+                                set_organization: set_organizationEdit
                             }}
                             organization={organizationEdit}
                         />
 
                         <div className='d-flex'>
-                            <button className='sq-btn' >
+                            <button className='sq-btn' onClick={updateOrganization} >
                                 {modeRegister ? 'Register' : 'Update'}
                             </button>
                         </div>

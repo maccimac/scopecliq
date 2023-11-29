@@ -57,10 +57,11 @@ class OrganizationsController extends Controller
             'contact_number' => $req->contact_number,
         ];
 
-        $milestone = DB::table('organization')
+        $organization = DB::table('organizations')
             -> where('id', $organization_id)
             -> update( $data );
-        return $milestone;
+
+        return $organization;
     }
 
 }

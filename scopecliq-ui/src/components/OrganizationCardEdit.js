@@ -44,7 +44,7 @@ export const OrganizationCardEdit = ({
         modelContactName,
         modelContactEmail,
         modelContactNumber,
-        modelContactAbout
+        modelContactAbout,
     ])
 
 
@@ -85,7 +85,7 @@ export const OrganizationCardEdit = ({
                                     set_modelContactEmail(e.target.value)
                                 }}
                                 placeholder='Contact Email'
-                                disabled={userOrg.contact_emailemail == organization.contact_email}
+                                disabled={userOrg?.contact_email == organization?.contact_email}
                     ></input>
                     <input className='sq-input w-100 mb-2' 
                             value={modelContactNumber} 

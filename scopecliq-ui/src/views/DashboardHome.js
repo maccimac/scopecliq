@@ -28,8 +28,14 @@ const DashboardHome = () => {
     }
 
     const fetchConsultantOrg = async() =>{
-        const res = await axios.get(api+ '/organizations/consultant/' + userId)
-        dispatch(setUserOrg(res.data))
+        try{
+            const res = await axios.get(api+ '/organizations/consultant/' + userId)
+            dispatch(setUserOrg(res.data))
+            console.log(res)
+        }catch(e){
+            console.log(e)
+        }
+       
     }
 
     useEffect(()=>{

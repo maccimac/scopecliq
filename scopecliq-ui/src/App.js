@@ -10,7 +10,8 @@ import Snackbar from '@mui/material/Snackbar';
 import Home from './views/Home.js';
 import Tests from './views/Tests.js';
 import ConsultantDashboard from './views/ConsultantDashboard.js';
-import DashboardHome from './views/DashboardHome.js';
+// import DashboardHomeLayout from './views/DashboardHomeLayout.js';
+import DashboardHomeLayout from './modules/DashboardHome/DashboardHomeLayout.js';
 import ClientPortal from './views/ClientPortal';
 import InvoiceList from './views/InvoiceList';
 import Invoice from './components/Invoice';
@@ -39,7 +40,7 @@ const App = () => {
         {/* If logged in
         <Route path="/" element={<Navigate replace to='/dashboard' />}/> */}
         <Route path="/dashboard/:projectId" element={<ConsultantDashboard/>}/>
-        <Route path="/dashboard" element={<DashboardHome/>}/>
+        <Route path="/dashboard" element={<DashboardHomeLayout/>}/>
         <Route path="/portal/:domain" element={<ClientPortal/>}/>
         <Route path="/invoice/:paramMilestoneId" element={<Invoice/>}/>
         <Route path="/portal/:domain/invoices" element={<InvoiceList/>}/>
