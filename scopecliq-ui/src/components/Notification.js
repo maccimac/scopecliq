@@ -34,8 +34,9 @@ export const Notification =({_notification, cb})=>{
             VOID: '❌ Invoice is voided'
         },
         'CHANGE':{
-            'MADE': `✏️ ${attachmentType} has been changed`,
-            'CREATED': `✨ ${attachmentType} has been added`,
+            MADE: `✏️ ${attachmentType} has been changed`,
+            CREATED: `✨ ${attachmentType} has been added`,
+            DELETED: `🗑  ${attachmentType} deleted`,
             /**
              * MADE_APPROVED
              * MADE_DECLINED

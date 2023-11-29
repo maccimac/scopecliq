@@ -40,29 +40,24 @@ export const MilestoneCard = ({
         setAnchorEl(null);
     };
 
-    const createNotification = async (
-            _payload, 
-            type="CHANGE",
-            status="CREATED") =>{
-        // const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
-        const payload = {
+    const createNotification = async (payload) =>{
+  
+        const _payload = {
             read_at: null,
-            type,
-            status,
             project_id: milestone.project_id,
             milestone_id: milestone.id,
             description: milestone.name,
-            ..._payload,
+            ...payload,
         }
         try{   
-            await axios.post(`${api}/notifications/project/${project.id}/add`, payload, {
+            await axios.post(`${api}/notifications/project/${project.id}/add`, _payload, {
                 headers: {
                   "Content-Type": "application/json",
                 },
             })
             setTimeout(()=>{
                 dispatch(updateNotif())
-            },1000)
+            },0)
         }catch(e){
             console.log(e)
         }
@@ -84,7 +79,14 @@ export const MilestoneCard = ({
                 },
             });
             console.log(res)
+            
             if(res.status===200){
+                createNotification({
+                    milestone_id: res.data,
+                    description: modelName,
+                    type: 'CHANGE',
+                    status: 'CREATED',
+                }) 
                 cb.updateMilestonesPositions(res.data)
             }
         }catch(e){
@@ -114,11 +116,10 @@ export const MilestoneCard = ({
             setEditMode(false)
             cb.getMilestones()
             dispatch(showSnackbarMessage({message: "Milestone updated"}))
-            createNotification(
-                null,
-                'CHANGE',
-                'MADE'
-            ) 
+            createNotification({
+                type: 'CHANGE',
+                status: 'MADE'
+            }) 
         }
     }
 
@@ -131,8 +132,17 @@ export const MilestoneCard = ({
                 },
             });
             console.log({res})
-            if(res.data.status == 'successs'){
-                cb.getMilestones()
+            if(res.data.status == 'success'){
+                createNotification({
+                    type: 'CHANGE',
+                    status: 'DELETED',
+                    milestone_id: res.data.milestone_id,
+                })
+                setTimeout(()=>{
+                    cb.getMilestones()
+                }, 100) 
+                
+                
             }else{
                 cb.getMilestones()
                 dispatch(showSnackbarMessage({
