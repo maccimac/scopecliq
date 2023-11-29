@@ -5,7 +5,8 @@ const loginSlice = createSlice({
   initialState: {
     isLoggedIn: false,
     userId: null,
-    user: null
+    user: null,
+    userOrg: null,
   },
   reducers: {
     toggleLogin(state){
@@ -17,9 +18,12 @@ const loginSlice = createSlice({
     setUser(state, action){
       state.user = action.payload
     },
+    setUserOrg(state, action){
+      state.userOrg = action.payload
+    },
     setUserId(state, action){
       if(action.payload){
-        localStorage.setItem("sq_user_id", action.payload);
+        localStorage.setItem("sq_user_id", action.payload)
       }else{
         localStorage.removeItem("sq_user_id")
       }
@@ -30,8 +34,10 @@ const loginSlice = createSlice({
 export const isLoggedIn = (state) => state.login.isLoggedIn
 export const currentUser = (state) => state.login.user
 export const currentUserId = (state) => {
-  const localStorageUserId = localStorage.getItem("sq_user_id");
+  const localStorageUserId = localStorage.getItem("sq_user_id")
   return localStorageUserId ? localStorageUserId : state.login.userId
 }
-export const { toggleLogin, setLogin, setUser, setUserId } = loginSlice.actions
+export const currentUserOrg = (state) => state.login.userOrg
+
+export const { toggleLogin, setLogin, setUser, setUserId, setUserOrg } = loginSlice.actions
 export default loginSlice.reducer

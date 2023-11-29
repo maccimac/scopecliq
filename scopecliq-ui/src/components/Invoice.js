@@ -7,7 +7,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { storeProject} from '../store/project-store';
 import { currentUserId } from '../store/login-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
-import { isClient } from '../store/user-store';
+import { isClient } from '../store/client-store';
 
 import CheckoutForm from '../modules/payments/CheckoutForm';
 import Modal from '@mui/material/Modal';

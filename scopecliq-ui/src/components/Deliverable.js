@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import { storeProject} from '../store/project-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 import Menu from '@mui/material/Menu';

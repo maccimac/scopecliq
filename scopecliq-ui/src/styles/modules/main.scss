@@ -60,6 +60,12 @@ $scrollbar-width: 17;
 }
 
 .sq-dashboard-home{
+    &:has(.sq-sidebar-offcanvas--open){
+        .sq-navigation, .sq-content{
+            max-width: calc(100% - #{$sidebar-offset-width}px);
+            
+        }
+    }
     .sq-sidebar .project-organization h2{
         font-size: 24px;
     }

@@ -3,7 +3,7 @@
 import logo from '../assets/img/sq-logo.svg'
 import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import { currentUserId, setUserId } from '../store/login-store';
 import { Link } from "react-router-dom";
 

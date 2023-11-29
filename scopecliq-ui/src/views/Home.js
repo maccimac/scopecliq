@@ -148,24 +148,13 @@ const Home = () => {
 
      const initRegister = async() => {
         dispatch(setUserId(null))
-        // const isRegValid = await isRegistrationValid({
-        //     email: modelEmail,
-        //     password: modelPassword
-        // });
-        // console.log({isRegValid})
-        // if( isRegValid === true){ 
-        //     set_showCreateOrg(true) 
-        // }  
         if(!isRegistrationValid(({
                 email: modelEmail,
                 password: modelPassword
             }))){ return }else{
                 set_showCreateOrg(true) 
-            }
-        
+            }        
      }
-
-    //  "SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it (Connection: mysql, SQL: insert into `organizations` (`organization_name`, `contact_name`, `contact_email`, `contact_about`, `contact_number`, `consultant_user_id`) values (Julia, Julia Macaranas, julia@email.com, df, 09065185085, 9))"
 
      const register =  async() => {
         if(!isRegistrationValid({
@@ -208,20 +197,6 @@ const Home = () => {
                 status: "error",
                 message: "Error creating your account: " +  error.response.data.message || error.message 
             }))
-
-
-            // if (error.response) {
-            //     // The request was made, but the server responded with an error status
-            //     console.error(error.response.data);
-            //     console.error(error.response.status);
-            //     console.error(error.response.headers);
-            // } else if (error.request) {
-            //     // The request was made but no response was received
-            //     console.error(error.request);
-            // } else {
-            //     // Something happened in setting up the request that triggered an error
-            //     console.error('Error', error.message);
-            // }
         }
      }
 
@@ -441,10 +416,6 @@ const Home = () => {
                     </div>
 
                 </Modal>
-
-
-               
-
           
              
         </div>    

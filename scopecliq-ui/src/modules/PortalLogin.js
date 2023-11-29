@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import NavBar from '../components/NavBar';
 import { storeProject} from '../store/project-store';
 import { useDispatch, useSelector} from 'react-redux';
-import { setAsClient} from '../store/user-store';
+import { setAsClient} from '../store/client-store';
 
 
 const PortalLogin = ({set_passswordValid}) => {

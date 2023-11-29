@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import { Navigate, Link, useNavigate } from "react-router-dom"
 
 // import { _project, _setProject } from '../store/project-store';

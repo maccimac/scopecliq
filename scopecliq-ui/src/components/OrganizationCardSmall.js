@@ -2,29 +2,32 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 
 export const OrganizationCardSmall = ({
     organization,
     dark=false,
-    className
+    className,
+    onClick
 
 }) => {
     // const api = global.config.API;
 
     if(organization) return(
-        <div className={`
-            sq-organization-card-small
-            ${dark && 'dark'}
-            ${className}
-        `} >
+        <div 
+            className={`
+                sq-organization-card-small
+                ${dark && 'dark'}
+                ${className}
+            `} 
+            onClick={onClick} 
+        >
             <div className='d-flex align-items-center'>
                 <div className='org-logo'>
                     <img src="https://webcrafterinc.com/img/brand/webcrafter-logo.png"/>
                 </div>
                 <div>
                     <div className='h3 text-color-sq-lightest mb-0'>
-                        {organization.organization_name}
                     </div>
                     <div className='p text-color-sq-light'>
                         {organization.contact_name}, {organization.contact_email}

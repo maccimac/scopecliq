@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient, setAsClient, setAsConsultant } from '../store/user-store';
+import { isClient, setAsClient, setAsConsultant } from '../store/client-store';
 import { currentUserId } from '../store/login-store';
 import { setProject } from '../store/project-store';
 

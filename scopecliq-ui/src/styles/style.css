@@ -894,6 +894,9 @@ small {
   max-height: calc(100vh - 80px);
 }
 
+.sq-dashboard-home:has(.sq-sidebar-offcanvas--open) .sq-navigation, .sq-dashboard-home:has(.sq-sidebar-offcanvas--open) .sq-content {
+  max-width: calc(100% - 320px);
+}
 .sq-dashboard-home .sq-sidebar .project-organization h2 {
   font-size: 24px;
 }

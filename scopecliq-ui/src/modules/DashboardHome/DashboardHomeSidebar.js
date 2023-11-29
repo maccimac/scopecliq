@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../../store/user-store';
+import { isClient} from '../../store/client-store';
 import { currentUserId } from '../../store/login-store';
 
 import OrganizationCard from '../../components/OrganizationCard';
@@ -49,7 +49,6 @@ const DashboardHomeSidebar = ({className, project}) => {
   const fetchProjectStats = async() =>{
     try{
       const res = await axios.get(`${api}/analytics/${userId}/projects`);
-      console.log(res)
       set_projectStats(res.data)
     }catch(e){
       console.log(e)
@@ -60,7 +59,6 @@ const DashboardHomeSidebar = ({className, project}) => {
   const fetchMilestoneStats = async() =>{
     try{
       const res = await axios.get(`${api}/analytics/${userId}/milestones`);
-      console.log(res)
       set_milestoneStats(res.data)
     }catch(e){
       console.log(e)
@@ -70,31 +68,25 @@ const DashboardHomeSidebar = ({className, project}) => {
   const fetchInvoicesStats = async() =>{
     try{
       const res = await axios.get(`${api}/analytics/${userId}/invoices`);
-      console.log(res)
       set_invoiceStats(res.data)
     }catch(e){
       console.log(e)
     }  
-  
   }
 
   const matchMilestonesToInvoice = async() =>{
     try{
       const res = await axios.get(`${api}/analytics/${userId}/match-milestone-to-invoice`);
-      console.log(res)
       set_milestoneInvoiceStats(res.data)
     }catch(e){
       console.log(e)
     }  
-  
   }
     
-    
-
-    const fetchConsultantOrg = async() =>{
-        const res = await axios.get(api+ '/organizations/consultant/'+userId)
-        set_organization(res.data)
-    }
+  const fetchConsultantOrg = async() =>{
+      const res = await axios.get(api+ '/organizations/consultant/'+userId)
+      set_organization(res.data)
+  }
 
     const parseAmount = (num) => {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")

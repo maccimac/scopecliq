@@ -6,7 +6,7 @@ import placeholder1 from '../assets/img/placeholder-1.png'
 import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import { storeProject} from '../store/project-store';
 import { showSnackbarMessage } from '../store/snackbar-store';
 

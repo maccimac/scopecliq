@@ -5,7 +5,7 @@ import  DashboardLayout  from '../modules/DashboardPortalLayout';
 import PortalLogin from '../modules/PortalLogin';
 
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient, setAsClient, setAsConsultant } from '../store/user-store';
+import { isClient, setAsClient, setAsConsultant } from '../store/client-store';
 import { currentUser } from '../store/login-store';
 import { storeProject, setProject} from '../store/project-store';
 

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 
-import { isClient, setAsClient, setAsConsultant} from '../store/user-store';
+import { isClient, setAsClient, setAsConsultant} from '../store/client-store';
 import { storeProject, setProject} from '../store/project-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 

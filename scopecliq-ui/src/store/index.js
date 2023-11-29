@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer from './user-store'
+import userReducer from './client-store'
 import projectReducer from './project-store'
 import loginReducer from './login-store'
 import snackbarReducer from './snackbar-store'

@@ -3,7 +3,7 @@ import { DateTime} from 'luxon';
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import {OrganizationCard} from './OrganizationCard'
 
 export const ProjectCard = ({

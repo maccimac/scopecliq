@@ -11,7 +11,7 @@ import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
 import BtnAdd from './BtnAdd';
 
-import { isClient } from '../store/user-store';
+import { isClient } from '../store/client-store';
 import { showSnackbarMessage } from '../store/snackbar-store';
 
 
