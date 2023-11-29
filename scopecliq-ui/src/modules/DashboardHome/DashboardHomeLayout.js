@@ -105,36 +105,65 @@ const DashboardHomeLayout = ({
                             <DashboardHomeSidebar className="w-100 h-100"/>
                         </div>
                         <div className='col-md-9 mt-4'>
-                            <div className='pe-4'>
-                                <div className='d-flex justify-content-between mb-4 align-items-center'>
-                                    <div>
-                                        <h3>🔨 Dive in existing projects </h3>
-                                        {/* <div>Sort by most recent</div> */}
-                                    </div>
+                            { projects?.length ?
+                                <div className='pe-4'>
+                                  <div className='d-flex justify-content-between mb-4 align-items-center'>
+                                      <div>
+                                          <h3>🔨 Dive in existing projects </h3>
+                                          {/* <div>Sort by most recent</div> */}
+                                      </div>
+  
+                                      <div 
+                                          className='sq-btn sq-btn-outline rounded d-flex align-items-center me-2'
+                                          onClick={()=>{
+                                              set_modalCreateOpen(true)
+                                          }}
+                                      >
+                                          <span className='h3 text-color-sq-lav me-2 mb-0'>
+                                              🚀 Start a new project
+                                          </span>
+                                      </div>
+                                  </div>
+                                  <div className='row'>
+                                      {projects.map(p => (
+                                          <div className="col-md-6" key={p.id}>
+                                              <ProjectCard  
+                                                  collapsed
+                                                  project={p}
+                                              />
+                                          </div>
+                                      ))}
+  
+                                  </div>
+                                </div> 
 
+
+                            :
+                               <div className='text-center py-5 w-auto'>
+                                    <h2> Welcome 
+                                        {userOrg &&
+                                            <>{`, ${userOrg?.contact_name}`}</>
+                                        }
+                                    </h2>
+                                    <p>
+                                        Let's get things running
+                                    </p>
                                     <div 
-                                        className='sq-btn sq-btn-outline rounded d-flex align-items-center me-2'
-                                        onClick={()=>{
-                                            set_modalCreateOpen(true)
-                                        }}
-                                    >
-                                        <span className='h3 text-color-sq-lav me-2 mb-0'>
-                                            🚀 Start a new project
-                                        </span>
+                                            className='d-flex-inline sq-btn sq-btn-outline rounded2 w-50 align-items-center mx-auto'
+                                            onClick={()=>{
+                                                set_modalCreateOpen(true)
+                                            }}
+                                         >
+                                            <span className='h3 text-color-sq-lav me-2 mb-0'>
+                                                🚀 Start a new project
+                                            </span>
                                     </div>
-                                </div>
-                                <div className='row'>
-                                    {projects.map(p => (
-                                        <div className="col-md-6" key={p.id}>
-                                            <ProjectCard  
-                                                collapsed
-                                                project={p}
-                                            />
-                                        </div>
-                                    ))}
+                                    
 
-                                </div>
-                            </div>   
+                               </div>
+                                
+                            }
+                            
                         </div>
                     </div>
                     <Modal 
