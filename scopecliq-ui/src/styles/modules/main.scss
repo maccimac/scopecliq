@@ -71,13 +71,8 @@ $scrollbar-width: 17;
     
     .sq-content{
 
-        // max-height: 50vh !important;
-        // flex-grow: 1;
-        // width: 100%;
-        // max-width: 100%;
-        // transition: none;
     }
-    .sq-sidebar, .sq-projects-holder{
+    .sq-content, .sq-sidebar, .sq-projects-holder{
         max-height: calc(100vh - #{$nav-height}px);
         overflow: auto;
         &::-webkit-scrollbar {

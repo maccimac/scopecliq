@@ -904,11 +904,11 @@ small {
 .sq-dashboard-home:has(.sq-sidebar-offcanvas--open) .sq-navigation, .sq-dashboard-home:has(.sq-sidebar-offcanvas--open) .sq-content {
   max-width: calc(100% - 320px);
 }
-.sq-dashboard-home .sq-sidebar, .sq-dashboard-home .sq-projects-holder {
+.sq-dashboard-home .sq-content, .sq-dashboard-home .sq-sidebar, .sq-dashboard-home .sq-projects-holder {
   max-height: calc(100vh - 80px);
   overflow: auto;
 }
-.sq-dashboard-home .sq-sidebar::-webkit-scrollbar, .sq-dashboard-home .sq-projects-holder::-webkit-scrollbar {
+.sq-dashboard-home .sq-content::-webkit-scrollbar, .sq-dashboard-home .sq-sidebar::-webkit-scrollbar, .sq-dashboard-home .sq-projects-holder::-webkit-scrollbar {
   display: none;
 }
 .sq-dashboard-home .sq-sidebar .project-organization h2 {
