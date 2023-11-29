@@ -49,13 +49,15 @@ $scrollbar-width: 17;
     .sq-navigation{
         padding-right: 96px !important;
     }
-    .project-header{
-        align-items: center;
-        height: auto;
-    }
+
     .project-blueprint-holder{
         overflow: auto;
         max-height: calc(100vh - #{$nav-height + $proj-header-height}px);
+        .project-header{
+            align-items: center;
+            height: auto;
+            position: fixed;
+        }
     }
 }
 
@@ -95,6 +97,7 @@ $scrollbar-width: 17;
 }
 
 .sq-project-blueprint{
+    margin-top: 72px;
     width: fit-content;
     display: flex;
     padding-right: 32px;

@@ -80,9 +80,31 @@ export const ProjectBlueprint = ({isConsultant}) => {
         })
     } 
 
+    const scrollToOngoing = () => {
+        const divOngoing = document.querySelector('.sq-milestone--ongoing');
+        if(divOngoing){
+            const holder = document.querySelector('.project-blueprint-holder');
+            holder.scrollTo({
+                behavior: "smooth",
+                left: divOngoing.getBoundingClientRect().left,
+            })
+        }
+       
+
+    }
+
     useEffect(()=>{
         if(project){
             getMilestones()    
+            setTimeout(()=>{
+                scrollToOngoing()
+            }, 600)
+            setTimeout(()=>{
+                scrollToOngoing()
+            }, 1000)
+            setTimeout(()=>{
+                scrollToOngoing()
+            }, 2000)
         }        
     }, [project])
 

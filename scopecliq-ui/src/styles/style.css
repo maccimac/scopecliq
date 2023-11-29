@@ -891,13 +891,14 @@ small {
 .sq-dashboard-portal .sq-navigation {
   padding-right: 96px !important;
 }
-.sq-dashboard-portal .project-header {
-  align-items: center;
-  height: auto;
-}
 .sq-dashboard-portal .project-blueprint-holder {
   overflow: auto;
   max-height: calc(100vh - 80px);
+}
+.sq-dashboard-portal .project-blueprint-holder .project-header {
+  align-items: center;
+  height: auto;
+  position: fixed;
 }
 
 .sq-dashboard-home:has(.sq-sidebar-offcanvas--open) .sq-navigation, .sq-dashboard-home:has(.sq-sidebar-offcanvas--open) .sq-content {
@@ -927,6 +928,7 @@ small {
 }
 
 .sq-project-blueprint {
+  margin-top: 72px;
   width: fit-content;
   display: flex;
   padding-right: 32px;
