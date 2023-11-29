@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/client-store';
+import { notifControl, updateNotif } from '../store/notif-store';
 import { storeProject } from '../store/project-store';
 import { connect } from 'react-redux';
 
@@ -11,7 +12,8 @@ import OrganizationCardSmall from '../components/OrganizationCardSmall';
 
 const SidebarOffsetBlueprint = () => {
     const api = global.config.API;
-    const clientMode = useSelector(isClient);
+    const clientMode = useSelector(isClient)
+    const notifUpdate = useSelector(notifControl)
     const [sidebarMode, set_sidebarMode] = useState('NOTIFICATIONS')
     const project= useSelector(storeProject);
     const [showOffcanvas, setShowOffcanvas] = useState(clientMode); // Set the initial state to true to show the Offcanvas
@@ -76,6 +78,10 @@ const SidebarOffsetBlueprint = () => {
     fetchOrganizationById()
     fetchNotificationsByProject()
   },[project])
+
+  useEffect(()=>{
+    fetchNotificationsByProject()
+  },[notifUpdate])
 
 
     return(
@@ -155,8 +161,8 @@ const SidebarOffsetBlueprint = () => {
                                     <OrganizationCardSmall
                                         organization={clientOrg}
                                     />
-                                    <div className='d-flex justify-content-center'>
-                                        <button className='sq-link text-color-sq-light'>
+                                    <div className='d-flex mt-1 justify-content-center'>
+                                        <button className='sq-link text-color-sq-lav-light-bright'>
                                             Go to project details &nbsp;
                                             <i className='fa-solid fa-regular fa-arrow-right'/>
                                         </button>
@@ -186,7 +192,7 @@ const SidebarOffsetBlueprint = () => {
                         
                         <div className='mode-project-details'>
                             <div className='d-flex mt-4 ms-2'>
-                                <button className='sq-link text-color-sq-green' onClick={()=>{
+                                <button className='sq-link text-color-sq-lav-light-bright' onClick={()=>{
                                     set_sidebarMode('NOTIFICATIONS')
                                 }}>
                                     <i className='fa-solid fa-regular fa-arrow-left'/> &nbsp;

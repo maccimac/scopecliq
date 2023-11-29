@@ -12,6 +12,7 @@ const SidebarOffset = ({
 }) => {
     const api = global.config.API;
 
+
     const [showOffcanvas, setShowOffcanvas] = useState(show); // Set the initial state to true to show the Offcanvas
 
     const toggleOffcanvas = () =>{ 

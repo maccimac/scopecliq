@@ -5,6 +5,7 @@ import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/client-store';
 import { storeProject} from '../store/project-store';
+import { updateNotif } from '../store/notif-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 import Menu from '@mui/material/Menu';
 
@@ -38,6 +39,35 @@ export const MilestoneCard = ({
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const createNotification = async (
+            _payload, 
+            type="CHANGE",
+            status="CREATED") =>{
+        // const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
+        const payload = {
+            read_at: null,
+            type,
+            status,
+            project_id: milestone.project_id,
+            milestone_id: milestone.id,
+            description: milestone.name,
+            ..._payload,
+        }
+        try{   
+            await axios.post(`${api}/notifications/project/${project.id}/add`, payload, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            })
+            setTimeout(()=>{
+                dispatch(updateNotif())
+            },1000)
+        }catch(e){
+            console.log(e)
+        }
+       
+    }
     
     const addMilestone = async () =>{
         const payloadDesc = {
@@ -84,6 +114,11 @@ export const MilestoneCard = ({
             setEditMode(false)
             cb.getMilestones()
             dispatch(showSnackbarMessage({message: "Milestone updated"}))
+            createNotification(
+                null,
+                'CHANGE',
+                'MADE'
+            ) 
         }
     }
 

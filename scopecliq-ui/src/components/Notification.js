@@ -13,7 +13,7 @@ export const Notification =({_notification, cb})=>{
     const navigate = useNavigate();
     
 
-    const [attachmentType, set_attachmentType] = useState("deliverable")
+    const [attachmentType, set_attachmentType] = useState("An item")
     const [title, set_title] = useState("")
     const [body, set_body] = useState("")
     const [cta, set_cta] = useState(null)
@@ -44,17 +44,18 @@ export const Notification =({_notification, cb})=>{
              */
         }
     }
-    const resolveTitle = () => {
+    
+    const resolveAttachment = () => {
         if(notification.deliverable_id){
-            //
             set_attachmentType('deliverable')
-           
         }else if(notification.milestone_id){
+            set_attachmentType('milestone')
             //
         }else if(notification.project_id){
+            set_attachmentType('project')
             //
         }
-        set_title(titleOpts[notification.type][notification.status])
+        // set_title(titleOpts[notification.type][notification.status])
     }
     const resolveCta = () => {
         switch(notification.type){
@@ -79,10 +80,13 @@ export const Notification =({_notification, cb})=>{
     }
 
     useEffect(()=>{
-        resolveTitle()
+        resolveAttachment()
         resolveCta()
     }, [_notification])
     
+    useEffect(()=>{
+        resolveAttachment()
+    },[])
     return(
         <div className={
             `sq-notification p-3 rounded sq-outter-shadow mb-3
@@ -97,7 +101,7 @@ export const Notification =({_notification, cb})=>{
                     ${notification.type == 'INVOICE' && 'text-color-sq-lav-mid' }
                     ${notification.type == 'CHANGE' && 'text-color-sq-gold-mid' }
             
-               `}>{title}</div>
+               `}>{titleOpts[notification.type][notification.status]}</div>
                     <i class="sq-btn-icon bg-transparent m-0 btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" onClick={markRead}></i>
             </div>
             <div className='notification-body'>
