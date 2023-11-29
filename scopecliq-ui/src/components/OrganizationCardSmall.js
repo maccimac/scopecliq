@@ -23,22 +23,26 @@ export const OrganizationCardSmall = ({
             onClick={onClick} 
         >
             <div className='d-flex align-items-center'>
-                <div className='org-logo'>
-                    <img src="https://webcrafterinc.com/img/brand/webcrafter-logo.png"/>
-                </div>
-                <div>
+                {
+                    organization?.organization_logo &&
+                    <div className='org-logo me-1'>
+                        <img src={organization?.organization_logo}/>
+                    </div>
+                }
+                
+                <div className='mx-1'>
                     <div className='h3 text-color-sq-lightest mb-0'>
+                        {organization.organization_name}
                     </div>
                     <div className='p text-color-sq-light'>
                         {organization.contact_name}, {organization.contact_email}
                     </div>
 
                 </div>
-                <div className='d-flex align-items-center'>
+                <div className='d-flex align-items-center mx-1'>
                     <div className='sq-btn-icon'>
                      <i className="fa-solid fa-chevron-down"></i>
                     </div>
-                    
                 </div>
 
             </div>

@@ -36,7 +36,7 @@ const SidebarOffsetOrganizationEdit = ({
     const [modelPassword, set_modelPassword] = useState('')
     const [modelPasswordVerify, set_modelPasswordVerify] = useState('')
     const [modeRegister, set_modeRegister]=useState(false)
-    const [image, setImage] = useState('');
+    const [modelImage, set_modelImage] = useState('');
    
     const [loading, set_loading] = useState(false)
 
@@ -62,7 +62,7 @@ const SidebarOffsetOrganizationEdit = ({
             });
 
             const data = await response.json();
-            setImage(data.secure_url);
+            set_modelImage(data.secure_url);
             console.log(data)
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -81,7 +81,10 @@ const SidebarOffsetOrganizationEdit = ({
     const updateOrganization = async () => {
         try{
             console.log({organizationEdit})
-            const res = await axios.post(`${api}/organizations/update/${organization.id}`, organizationEdit, {
+            const res = await axios.post(`${api}/organizations/update/${organization.id}`, {
+                ...organizationEdit,
+                organization_logo: modelImage,
+            }, {
                 headers: {
                 "Content-Type": "application/json",
                 },
@@ -227,10 +230,10 @@ const SidebarOffsetOrganizationEdit = ({
                         <CloudinaryContext cloudName={cloudinaryConfig.cloud_name}>
                             <div>
                                 <input type="file" onChange={handleImageUpload} />
-                                {image && (
+                                {modelImage && (
                                     <div>
-                                    <p>Uploaded Image:</p>
-                                    <Image publicId={image} width="300" height="200">
+                                    <p>Uploaded modelImage:</p>
+                                    <Image publicId={modelImage} width="300" height="200">
                                         <Transformation crop="fit" />
                                     </Image>
                                     </div>

@@ -55,6 +55,25 @@ class OrganizationsController extends Controller
             'contact_email' => $req->contact_email,
             'contact_about' => $req->contact_about,
             'contact_number' => $req->contact_number,
+            'organization_logo' => $req->organization_logo
+        ];
+
+        $organization = DB::table('organizations')
+            -> where('id', $organization_id)
+            -> update( $data );
+
+        return $organization;
+    }
+
+    public function updateOrganizationLogoById (Request $req, $organization_id) {
+
+        $data =  [
+            'organization_logo' => $req->organization_logo
+            // 'organization_name' => $req->organization_name,
+            // 'contact_name' => $req->contact_name,
+            // 'contact_email' => $req->contact_email,
+            // 'contact_about' => $req->contact_about,
+            // 'contact_number' => $req->contact_number,
         ];
 
         $organization = DB::table('organizations')

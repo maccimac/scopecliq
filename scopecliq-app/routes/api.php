@@ -43,6 +43,7 @@ Route::prefix('organizations')->group(function () {
     Route::get('/consultant/{user_id}', [OrganizationsController::class, 'fetchOrganizationByConsultantId']);
     Route::post('/add/{user_id}', [OrganizationsController::class, 'addOrganization']);
     Route::post('/update/{organization_id}', [OrganizationsController::class, 'updateOrganizationById']);
+    Route::post('/update-logo/{organization_id}', [OrganizationsController::class, 'updateOrganizationLogoById']);
 
 });
 

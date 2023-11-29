@@ -21,6 +21,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_about' => 'Head Contractor at Estilo Decada',
                 'contact_number' => '+1 234 567 8901',
                 'organization_address' => '2945 Jacklin Rd #406, Victoria, British Columbia, V9B 5E3, Canada',
+                'organization_logo' => null,
                 'consultant_user_id'=> null
                  
             ],
@@ -31,6 +32,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_about' => 'Julia Studios est 1992',
                 'contact_number' => '+63 234 567 8901',
                 'organization_address' => '2200 Eagle St, Cambridge, Ontario, N3H 0A1, Canada',
+                'organization_logo' => null,
                 'consultant_user_id'=> null
                 
             ],
@@ -41,6 +43,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_about' => 'Accounts Manager',
                 'contact_number' => '+1 234 567 8901',
                 'organization_address' => '2945 Jacklin Rd #406, Victoria, British Columbia, V9B 5E3, Canada',
+                'organization_logo' => null,
                 'consultant_user_id'=> null
             ],
 
@@ -51,6 +54,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_about' => 'Founder',
                 'contact_number' => '+63 234 567 8901',
                 'organization_address' => '700 Royal Ave, New Westminster, BC V3M 5Z5',
+                'organization_logo' => 'https://pbs.twimg.com/profile_images/1717259548569075712/X0Up3325_400x400.jpg',
                 'consultant_user_id'=> 1
             ],
 
@@ -62,6 +66,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_about' => 'Director',
                 'contact_number' => '+1 001 002 3456',
                 'organization_address' => '700 Royal Ave, New Westminster, BC V3M 5Z5',
+                'organization_logo' => 'https://webcrafterinc.com/img/brand/webcrafter-logo.png',
                 'consultant_user_id'=> 2
             ],
         ]);    
