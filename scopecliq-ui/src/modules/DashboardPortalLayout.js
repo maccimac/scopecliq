@@ -9,7 +9,7 @@ import { currentUserId, setUserId } from '../store/login-store';
 import { Link } from "react-router-dom";
 
 import NavBar from '../components/NavBar';
-import SidebarOffset from './SidebarOffset';
+import SidebarOffsetBlueprint from './SidebarOffsetBlueprint';
 import ProjectBlueprint from '../components/ProjectBlueprint';
 import { useDispatch, useSelector} from 'react-redux';
 import ProjectEdit from './ProjectEdit';
@@ -75,7 +75,7 @@ const DashboardPortalLayout = () => {
                     </div>
                 </div>
             </div>
-            <SidebarOffset/>
+            <SidebarOffsetBlueprint/>
         </div>
     )
 }

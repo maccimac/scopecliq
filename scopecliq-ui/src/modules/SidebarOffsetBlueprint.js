@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Notification from '../components/Notification';
 import ProjectCard from '../components/ProjectCard';
 
-const SidebarOffset = () => {
+const SidebarOffsetBlueprint = () => {
     const api = global.config.API;
     const clientMode = useSelector(isClient);
     const [sidebarMode, set_sidebarMode] = useState('NOTIFICATIONS')
@@ -193,7 +193,7 @@ const SidebarOffset = () => {
 }
 
   
-  export default SidebarOffset;
+  export default SidebarOffsetBlueprint;
   
   
   

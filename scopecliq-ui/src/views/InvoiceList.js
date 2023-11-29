@@ -10,7 +10,7 @@ import { showSnackbarMessage} from '../store/snackbar-store';
 
 import Invoice from '../components/Invoice';
 import NavBar from '../components/NavBar';
-import SidebarOffset from '../modules/SidebarOffset';
+import SidebarOffsetBlueprint from '../modules/SidebarOffsetBlueprint';
 
 
 
@@ -127,7 +127,7 @@ const InvoiceList = () => {
                     
                 </div>
             </div>
-            <SidebarOffset/>
+            <SidebarOffsetBlueprint/>
         </div>
     )
 }
