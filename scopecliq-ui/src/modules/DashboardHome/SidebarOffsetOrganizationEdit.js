@@ -8,6 +8,12 @@ import { showSnackbarMessage } from '../../store/snackbar-store';
 // import { connect } from 'react-redux';
 import OrganizationCardEdit from '../../components/OrganizationCardEdit';
 
+// import { Image, CloudinaryContext } from "@cloudinary/react";
+// import { Cloudinary } from "@cloudinary/url-gen";
+import { CloudinaryContext,  Image, Transformation } from 'cloudinary-react';
+
+
+
 
 const SidebarOffsetOrganizationEdit = ({
     organization,
@@ -30,8 +36,40 @@ const SidebarOffsetOrganizationEdit = ({
     const [modelPassword, set_modelPassword] = useState('')
     const [modelPasswordVerify, set_modelPasswordVerify] = useState('')
     const [modeRegister, set_modeRegister]=useState(false)
+    const [image, setImage] = useState('');
    
     const [loading, set_loading] = useState(false)
+
+    const cloudinaryConfig = {
+        cloud_name: 'dtvsn2pru',
+        api_key: '822627167663145',
+        api_secret: 'O2pEGw_mAtXA12zPEr_44Weyo9g',
+    };
+
+  
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'nxcbnbtl');
+        formData.append("cloud_name", "dtvsn2pru");
+
+        try {
+            const response = await fetch('https://api.cloudinary.com/v1_1/dtvsn2pru/image/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await response.json();
+            setImage(data.secure_url);
+            console.log(data)
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        }
+    };
+
+      
 
     const toggleOffcanvas = () =>{ 
         set_showOffcanvas(!showOffcanvas);
@@ -186,7 +224,24 @@ const SidebarOffsetOrganizationEdit = ({
                             organization={organizationEdit}
                         />
 
+                        <CloudinaryContext cloudName={cloudinaryConfig.cloud_name}>
+                            <div>
+                                <input type="file" onChange={handleImageUpload} />
+                                {image && (
+                                    <div>
+                                    <p>Uploaded Image:</p>
+                                    <Image publicId={image} width="300" height="200">
+                                        <Transformation crop="fit" />
+                                    </Image>
+                                    </div>
+                                )}
+                            </div>
+                        </CloudinaryContext>
+
                         <div className='d-flex'>
+                            <button className='sq-btn' onClick={updateOrganization} >
+                               Upload
+                            </button>
                             <button className='sq-btn' onClick={updateOrganization} >
                                 {modeRegister ? 'Register' : 'Update'}
                             </button>
