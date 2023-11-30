@@ -1129,6 +1129,21 @@ small {
 .sq-project-card.dark .sq-textarea, .dark.sq-organization-card-small .sq-textarea, .dark.sq-organization-card .sq-textarea, .sq-project-card.dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card-small .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card.dark .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card-small .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card .description-edit, .sq-project-card.dark .sq-input, .dark.sq-organization-card-small .sq-input, .dark.sq-organization-card .sq-input {
   background-color: #E7E7E7;
 }
+.sq-project-card .sq-progress-rate, .sq-organization-card-small .sq-progress-rate, .sq-organization-card .sq-progress-rate {
+  margin-top: -24px;
+  margin-right: -24px;
+  background-color: #fff;
+  height: 36px;
+  width: 36px;
+  border-radius: 36px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
+}
+.sq-project-card .sq-progress-rate .sq-label, .sq-organization-card-small .sq-progress-rate .sq-label, .sq-organization-card .sq-progress-rate .sq-label {
+  font-size: 9px;
+  letter-spacing: normal;
+}
 .sq-project-card .text-prop, .sq-organization-card-small .text-prop, .sq-organization-card .text-prop {
   color: #9B9EAF;
 }

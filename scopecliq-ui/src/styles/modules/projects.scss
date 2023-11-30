@@ -14,6 +14,23 @@
             background-color: $sq-lighter;
         }
     }
+    .sq-progress-rate{
+        margin-top: -24px;
+        margin-right: -24px;
+        background-color: #fff;
+        height: 36px;
+        width: 36px;
+        border-radius: 36px;
+        display: flex;
+        align-items: center;
+        box-shadow: $sq-outter-shadow;
+        .sq-label{
+            font-size: 9px;
+            letter-spacing: normal;
+        }
+    
+
+    }
 
     .text-prop{
         color: $sq-lav-muted

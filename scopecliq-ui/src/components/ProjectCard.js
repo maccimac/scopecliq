@@ -5,6 +5,8 @@ import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/client-store';
 import {OrganizationCard} from './OrganizationCard'
+import CircularWithValueLabel from './CircularProgressWithLabel';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const ProjectCard = ({
     project,
@@ -62,7 +64,8 @@ export const ProjectCard = ({
                     <div>
                         Pending (Not Started)
                     </div>
-                    <div>
+                    <div >
+                        {/* <CircularWithValueLabel variant="determinate" value={progress} /> */}
                         {progress}%
                     </div>
                 </div>
@@ -73,8 +76,9 @@ export const ProjectCard = ({
                     <div>
                         Complete
                     </div>
-                    <div>
-                    {progress}%
+                    <div className='sq-progress-rate'>
+                        <CircularWithValueLabel variant="determinate" value={progress} />
+                        {/* {progress}% */}
                     </div>
                 </div>
             )
@@ -86,8 +90,9 @@ export const ProjectCard = ({
                     <div>
                         Ongoing
                     </div>
-                    <div>
-                    {progress}%
+                    <div className='sq-progress-rate'>
+                        <CircularWithValueLabel variant="determinate" value={progress} />
+                        {/* {progress}% */}
                     </div>
                 </div>
             )
