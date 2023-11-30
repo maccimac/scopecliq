@@ -273,4 +273,40 @@ class AnalyticsController extends Controller
 
     }
 
+    public function fetchProgressPercentByMilestone($milestone_id){
+
+        // $stats = array(
+        //     'open_project_invoice_all_ids' => null,
+        //     'milestone' => null
+        // );
+
+        $totalDeliverables = DB::table('deliverables')
+        ->select('*')
+        ->where('milestone_id', $milestone_id)
+        ->get();
+        
+        
+        $complete = $totalDeliverables
+            ->where('status', 'COMPLETE')
+            ->count();
+        
+        $all = $totalDeliverables
+            ->count();
+        
+        if($all==0){
+            return 0;
+        }
+
+        $milestone = DB::table('milestones')
+        ->select('*')
+        ->where('id', $milestone_id)
+        ->first();
+
+        return array(
+           'completion_rate'=> $complete / $all,
+           'milestone' => $milestone
+        );
+
+    }
+
 }

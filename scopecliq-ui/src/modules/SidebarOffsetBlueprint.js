@@ -1,23 +1,37 @@
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/client-store';
 import { notifControl, updateNotif } from '../store/notif-store';
-import { storeProject } from '../store/project-store';
+import { storeProject, setProject } from '../store/project-store';
 import { connect } from 'react-redux';
 
 import Notification from '../components/Notification';
 import ProjectCard from '../components/ProjectCard';
 import OrganizationCardSmall from '../components/OrganizationCardSmall';
 
-const SidebarOffsetBlueprint = () => {
+const SidebarOffsetBlueprint = ({project}) => {
     const api = global.config.API;
+    const dispatch = useDispatch()
     const clientMode = useSelector(isClient)
     const notifUpdate = useSelector(notifControl)
     const [sidebarMode, set_sidebarMode] = useState('NOTIFICATIONS')
-    const project= useSelector(storeProject);
+    // const project = useSelector(storeProject);
     const [showOffcanvas, setShowOffcanvas] = useState(clientMode); // Set the initial state to true to show the Offcanvas
     const [clientOrg, set_clientOrg] = useState(null)
+    const { domain, projectId } = useParams();
+
+    const fetchProject = async () => {
+       console.log({domain, projectId})
+       if(domain){
+        const res = await axios.get(api+ '/projects/portal/' + domain)
+        dispatch(setProject(res.data))
+       }else if(projectId){
+        const res = await axios.get(api+ '/projects/' + projectId)
+        dispatch(setProject(res.data))
+       }
+    }
 
     const fetchNotificationsByProject = async() =>{
         if(!project) return
@@ -26,43 +40,11 @@ const SidebarOffsetBlueprint = () => {
     }
 
     const fetchOrganizationById = async () => {
-        if(!project.organization_id) return;
+        if(!project) return;
         const res = await axios.get(api+ '/organizations/'+project.organization_id)
+        console.log(res)
         set_clientOrg(res.data)
     }
-
-    const notifDeliverableComplete = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  3,
-        deliverable_id:  7,
-        type:  'STATUS_UPDATE',
-        status:  'COMPLETE',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
-    }
-
-    const notifInvoiceSent = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  null,
-        deliverable_id:  null,
-        type:  'INVOICE',
-        status:  'SENT',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
-    }
-    const notifItemChanged = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  null,
-        deliverable_id:  null,
-        type:  'CHANGE',
-        status:  'MADE',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
-    }
-
 
     const [notifications, set_notifications] = useState([])
 
@@ -75,6 +57,15 @@ const SidebarOffsetBlueprint = () => {
   };
 
   useEffect(()=>{
+    if(!project){
+        fetchProject()
+    }
+  },[])
+
+  useEffect(()=>{
+    // if(!project){
+    //     fetchProject()
+    // }
     fetchOrganizationById()
     fetchNotificationsByProject()
   },[project])
@@ -115,7 +106,7 @@ const SidebarOffsetBlueprint = () => {
                         <div className='notifications px-2'>
                             <div className='d-flex justify-content-between mb-4 align-items-center mt-3 mx-2'>
                                 <h3 className='mb-0'>
-                                    Notifications
+                                    { clientMode ? 'Notifications' : "Client's Unread Notifications"} 
                                 </h3>
                                 <div className='d-flex'>
                                     <button
@@ -160,6 +151,7 @@ const SidebarOffsetBlueprint = () => {
                                 }}>
                                     <OrganizationCardSmall
                                         organization={clientOrg}
+                                        className='find-me w-100 d-flex justify-content-space-between'
                                     />
                                     <div className='d-flex mt-1 justify-content-center'>
                                         <button className='sq-link text-color-sq-lav-light-bright'>

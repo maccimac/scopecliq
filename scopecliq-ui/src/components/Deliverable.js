@@ -7,6 +7,7 @@ import { storeProject} from '../store/project-store';
 import { updateNotif } from '../store/notif-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 import Menu from '@mui/material/Menu';
+import Milestone from './Milestone';
 
 
 export const Deliverable = ({
@@ -54,6 +55,39 @@ export const Deliverable = ({
     const [classNameState, setClassNameState]  = useState(null)
     const [statusIcon, setStatusIcon]  = useState(null)
 
+    const updateMilestoneStatInDb = async () => {
+        const res = await axios.get(api + `/analytics/milestone/${deliverable.milestone_id}/progress`)
+        console.log({res})
+        if(res.status === 200){
+            const completionRate = res.data.completion_rate
+            let newStat;
+            if (completionRate == 1){
+               newStat = 'COMPLETE'
+            }else if(completionRate == 0){
+                newStat = 'PENDING'
+            }else{
+                newStat = 'ONGOING'
+            }
+            if(newStat === res.data.milestone.status_completion ) return
+            const res2 = await axios.post(`${api}/milestones/update-status/${deliverable.milestone_id}/${newStat}`)
+            console.log(res2)
+            if(res2.status==200){
+                dispatch(showSnackbarMessage({
+                    message: 'Milestone status is now ' + newStat + ' for ' + res2.data.name
+                }))
+                if(newStat == 'COMPLETE'){
+                    createNotification({
+                        ...deliverable,
+                        deliverable_id: null,
+                        type: 'STATUS_UPDATE',
+                        status: 'COMPLETE'
+                    })
+                }
+            }
+        }
+
+    }
+
     const toggleComplete = async () => {
         if (clientMode) return;
         const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
@@ -63,6 +97,7 @@ export const Deliverable = ({
             resolveClassStyleByStatus(status)
             cb.fetchDeliverableByMilestone()
             setTimeout(()=>{
+                updateMilestoneStatInDb()
                 // const withUpdate = true;
                 // cb.updateMilestoneStatus(withUpdate)
             }, 1000)

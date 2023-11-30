@@ -121,6 +121,7 @@ Route::prefix('notifications')->group(function () {
 
 Route::prefix('analytics')->group(function () {
     Route::get('/project/{project_id}/progress', [AnalyticsController::class, 'fetchProgressPercentByProject']);
+    Route::get('/milestone/{milestone_id}/progress', [AnalyticsController::class, 'fetchProgressPercentByMilestone']);
     Route::get('/{user_id}/projects', [AnalyticsController::class, 'fetchProjectsAnalytics']);
     Route::get('/{user_id}/milestones', [AnalyticsController::class, 'fetchMilestonesAnalytics']);
     Route::get('/{user_id}/invoices', [AnalyticsController::class, 'fetchInvoicesAnalytics']);

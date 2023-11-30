@@ -40,7 +40,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
         }
     }
 
-    const updateMilestoneStatus = async (withUpdate= true) => {
+    const updateMilestoneStatus = async () => {
         console.log('update')
         if(!deliverables) return
         let statArr = []
@@ -60,29 +60,9 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
             newStat='COMPLETE'   
         }
         if(!newStat) return
+
+        setMilestoneStatus(newStat)
     
-        if(newStat && withUpdate){
-            setMilestoneStatus(newStat)
-            // const stat = milestoneStatus;
-        
-            
-            // if(newStat !== milestone.status_completion){
-            //     console.log(milestone.name, newStat, milestone.status_completion)
-            //     try{
-            //         const res = await axios.post(`${api}/milestones/update-status/${milestone.id}/${newStat}`)
-            //         console.log('status change', res)
-            //         setMilestoneStatus(newStat)
-            //         // dispatch(showSnackbarMessage({
-            //         //     message: 'Milestone status is now ' + newStat + ' for ' + milestone.name
-            //         // }))
-                    
-            //     }catch(e){
-            //         console.log(e)
-            //     }
-                
-            // }
-        }
-     
     }
 
     const checkInvoiceStatus = async () =>{

@@ -17,12 +17,13 @@ export const OrganizationCardSmall = ({
         <div 
             className={`
                 sq-organization-card-small
+                d-flex align-items-center
                 ${dark && 'dark'}
                 ${className}
             `} 
             onClick={onClick} 
         >
-            <div className='d-flex align-items-center'>
+            
                 {
                     organization?.organization_logo &&
                     <div className='org-logo me-1'>
@@ -30,7 +31,7 @@ export const OrganizationCardSmall = ({
                     </div>
                 }
                 
-                <div className='mx-1'>
+                <div className='mx-1 w-100'>
                     <div className='h3 text-color-sq-lightest mb-0'>
                         {organization.organization_name}
                     </div>
@@ -44,28 +45,6 @@ export const OrganizationCardSmall = ({
                      <i className="fa-solid fa-chevron-down"></i>
                     </div>
                 </div>
-
-            </div>
-            {/* <div className='project-organization'>
-                <h2 className='text-head mb-3'>{organization.organization_name}</h2>
-                <div className='project-client'>
-                    <div className='sq-grid'>
-                        <span className='text-prop'>Name</span>
-                        <span>
-                            <strong>{organization.contact_name}</strong>, {organization.contact_about}
-                        </span> 
-                    </div>
-                    
-                    <div className='sq-grid'>
-                        <span className='text-prop'>Email</span>
-                        <span>{organization.contact_email}</span> 
-                    </div>
-                    <div className='sq-grid'>
-                        <span className='text-prop'>Phone</span>
-                        <span>{organization.contact_number}</span> 
-                    </div>
-                </div>
-            </div> */}
         </div>
     )
 }

@@ -86,7 +86,9 @@ const DashboardPortalLayout = () => {
                     </div>
                 </div>
             </div>
-            <SidebarOffsetBlueprint/>
+            <SidebarOffsetBlueprint
+                project={project}
+            />
         </div>
     )
 }

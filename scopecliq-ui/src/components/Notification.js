@@ -11,7 +11,7 @@ export const Notification =({_notification, cb})=>{
 
     const api = global.config.API;
     const navigate = useNavigate();
-    
+    const clientMode = useSelector(isClient)
 
     const [attachmentType, set_attachmentType] = useState("An item")
     const [title, set_title] = useState("")
@@ -103,7 +103,16 @@ export const Notification =({_notification, cb})=>{
                     ${notification.type == 'CHANGE' && 'text-color-sq-gold-mid' }
             
                `}>{titleOpts[notification.type][notification.status]}</div>
-                    <i class="sq-btn-icon bg-transparent m-0 btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" onClick={markRead}></i>
+               { clientMode &&
+                    <i 
+                    class="sq-btn-icon bg-transparent m-0 btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" 
+                    onClick={markRead}
+                >        
+                </i>
+                
+               }
+                    
+                 
             </div>
             <div className='notification-body'>
                 <p>This status is for <strong>{notification.description}</strong>.</p>

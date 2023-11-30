@@ -137,6 +137,11 @@ class MilestonesController extends Controller
         $milestone = DB::table('milestones')
             -> where('id', $milestone_id)
             -> update( $data );
+
+        $milestone = DB::table('milestones')
+            -> where('id', $milestone_id)
+            -> first();
+            
         return $milestone;
     }
 
