@@ -39,6 +39,10 @@ $scrollbar-width: 17;
             // width: 100%;
             max-width: calc(100% - #{$sidebar-offset-width}px);
             // padding-right: 16px !important;
+            .project-header{
+    
+                max-width: calc(100% - #{$sidebar-offset-width}px - 18px);
+            }
             
         }
         .project-blueprint-holder{
@@ -57,6 +61,8 @@ $scrollbar-width: 17;
             align-items: center;
             height: auto;
             position: fixed;
+            background-color: $sq-lightest;
+            width: calc(100% - 20px);
         }
     }
 }

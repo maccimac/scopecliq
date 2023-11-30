@@ -62,6 +62,10 @@ export const Deliverable = ({
             setStatusModel(status)
             resolveClassStyleByStatus(status)
             cb.fetchDeliverableByMilestone()
+            setTimeout(()=>{
+                // const withUpdate = true;
+                // cb.updateMilestoneStatus(withUpdate)
+            }, 1000)
         }
         const payloadNotification = {
             type: "STATUS_UPDATE",

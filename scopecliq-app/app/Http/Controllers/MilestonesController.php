@@ -126,5 +126,19 @@ class MilestonesController extends Controller
         return $milestone;
     }
 
+    public function updateMilestoneStatusById (Request $req, $milestone_id, $status) {
+        $data = [
+            'status_completion' => $status
+            // 'name' => $req->name,
+            // 'description' => $req->description,
+            // 'budget_percentage' => $req->budget_percentage,
+        ];
+
+        $milestone = DB::table('milestones')
+            -> where('id', $milestone_id)
+            -> update( $data );
+        return $milestone;
+    }
+
    
 }

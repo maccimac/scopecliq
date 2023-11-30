@@ -21,7 +21,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
     const navigate = useNavigate()
     const clientMode = useSelector(isClient);
 
-    const [milestoneStatus, setMilestoneStatus] = useState('complete')
+    const [milestoneStatus, setMilestoneStatus] = useState(null)
     const [deliverables, setDeliverables] = useState([])
     const [editMode, set_editMode] = useState(edit)
     const [invoice, set_invoice] = useState(true)
@@ -40,25 +40,49 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
         }
     }
 
-    const updateMilestoneStatus = () => {
+    const updateMilestoneStatus = async (withUpdate= true) => {
+        console.log('update')
+        if(!deliverables) return
         let statArr = []
         deliverables.forEach(d => {
             statArr.push(d.status)
         });
+        // console.log(statArr)
+        let newStat;
+
         if (!statArr.length){
-            setMilestoneStatus('pending');
-            return;
+            newStat='PENDING';
+        } else if(statArr.includes('INCOMPLETE') && statArr.includes('COMPLETE')){
+            newStat='ONGOING'
+        } else if(statArr.includes('INCOMPLETE')){
+            newStat='PENDING'
+        } else if(statArr.includes('COMPLETE')){
+            newStat='COMPLETE'   
         }
-        if(statArr.includes('INCOMPLETE')){
-            if(statArr.includes('COMPLETE')){
-                setMilestoneStatus('ongoing')
-            }else{
-                setMilestoneStatus('pending')
-            }
-        }else{
-            setMilestoneStatus('complete')
+        if(!newStat) return
+    
+        if(newStat && withUpdate){
+            setMilestoneStatus(newStat)
+            // const stat = milestoneStatus;
+        
             
+            // if(newStat !== milestone.status_completion){
+            //     console.log(milestone.name, newStat, milestone.status_completion)
+            //     try{
+            //         const res = await axios.post(`${api}/milestones/update-status/${milestone.id}/${newStat}`)
+            //         console.log('status change', res)
+            //         setMilestoneStatus(newStat)
+            //         // dispatch(showSnackbarMessage({
+            //         //     message: 'Milestone status is now ' + newStat + ' for ' + milestone.name
+            //         // }))
+                    
+            //     }catch(e){
+            //         console.log(e)
+            //     }
+                
+            // }
         }
+     
     }
 
     const checkInvoiceStatus = async () =>{
@@ -135,15 +159,22 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
     }
 
     useEffect(()=>{
+        if(milestone.status_completion){
+            setMilestoneStatus(milestone.status_completion)
+        }
+    }, [milestone])
+
+    useEffect(()=>{
         fetchDeliverableByMilestone()
         checkInvoiceStatus()
+        updateMilestoneStatus(false)
     }, [])
 
     useEffect(()=>{
         const isNewArr = deliverables.map(d => d.is_new);
         set_editMode(isNewArr.includes(true))
         updateMilestoneStatus()
-        checkInvoiceStatus()
+        checkInvoiceStatus(true)
     }, [deliverables])
 
     return(
@@ -201,7 +232,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
                             cb={{
                                 saveAllPositions,
                                 fetchDeliverableByMilestone,
-                                // updateMilestoneStatus
+                                updateMilestoneStatus
                             }}
                             cancelNewDeliverable={()=>{
                                 cancelNewDeliverable(i)
