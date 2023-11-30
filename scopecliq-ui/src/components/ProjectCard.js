@@ -185,7 +185,7 @@ export const ProjectCard = ({
                     : 
                         <div>
                             <hr/>
-                            <div className='sq-grid'>
+                            {/* <div className='sq-grid'>
                                 <div className='text-prop'>Deliverables</div>
                                 <div>X deliverables of X total deliverables </div>
                             </div>
@@ -197,7 +197,7 @@ export const ProjectCard = ({
                                 <div className='text-prop'>Invoices</div>
                                 <div>X paid of x sent</div>
                             </div>
-                            <hr/>
+                            <hr/> */}
                         </div>
 
                     }
