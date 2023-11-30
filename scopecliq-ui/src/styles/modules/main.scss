@@ -1,4 +1,4 @@
-$nav-height: 80;
+$nav-height: 90;
 $proj-header-height: 0;
 $sidebar-offset-width: 320;
 $scrollbar-width: 17;
@@ -76,6 +76,7 @@ $scrollbar-width: 17;
     }
     
     .sq-content{
+        overflow: hidden;
 
     }
     .sq-content, .sq-sidebar, .sq-projects-holder{
@@ -86,10 +87,6 @@ $scrollbar-width: 17;
         }
     }
 
-    .sq-sidebar .project-organization h2{
-        
-        font-size: 24px;
-    }
     .sq-stat-card{
         // min-height: 96;
         p{
@@ -125,7 +122,7 @@ $scrollbar-width: 17;
 
 
 .sq-sidebar{
-    min-height: 100vh;   
+    // min-height: 100vh;   
     background-color: $sq-lav-light;
     box-shadow: $sq-big-outter-shadow-right;
 }

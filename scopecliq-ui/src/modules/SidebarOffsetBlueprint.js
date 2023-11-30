@@ -104,10 +104,15 @@ const SidebarOffsetBlueprint = ({project}) => {
                     {sidebarMode=='NOTIFICATIONS' && (
                     <div className='mode-notifications'>
                         <div className='notifications px-2'>
-                            <div className='d-flex justify-content-between mb-4 align-items-center mt-3 mx-2'>
-                                <h3 className='mb-0'>
-                                    { clientMode ? 'Notifications' : "Client's Unread Notifications"} 
-                                </h3>
+                            <div className='d-flex justify-content-between mb-2 mt-3 mx-2'>
+                                <div>
+                                    <h3 className='mb-1 find'>
+                                        { clientMode ? 'Notifications' : "Client's Unread Notifications"} 
+                                        
+                                    </h3>
+                                    <p className='text-color-sq-light'>See your project activities and mark read to acknowledge</p>
+                                </div>
+
                                 <div className='d-flex'>
                                     <button
                                         className='sq-btn-icon bg-transparent me-4'
@@ -127,6 +132,7 @@ const SidebarOffsetBlueprint = ({project}) => {
                                     </button> */}
                                 </div>
                             </div>
+                            
                             <div className='notification-list p-2'>
                                 {
                                     notifications?.length 
@@ -151,7 +157,7 @@ const SidebarOffsetBlueprint = ({project}) => {
                                 }}>
                                     <OrganizationCardSmall
                                         organization={clientOrg}
-                                        className='find-me w-100 d-flex justify-content-space-between'
+                                        className='w-100 d-flex justify-content-space-between'
                                     />
                                     <div className='d-flex mt-1 justify-content-center'>
                                         <button className='sq-link text-color-sq-lav-light-bright'>

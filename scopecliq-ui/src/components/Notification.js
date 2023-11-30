@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { isClient} from '../store/client-store';
 import { Navigate, Link, useNavigate } from "react-router-dom"
+import { Tooltip } from '@mui/material';
 
 // import { _project, _setProject } from '../store/project-store';
 
@@ -104,11 +105,15 @@ export const Notification =({_notification, cb})=>{
             
                `}>{titleOpts[notification.type][notification.status]}</div>
                { clientMode &&
-                    <i 
-                    class="sq-btn-icon bg-transparent m-0 btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" 
-                    onClick={markRead}
-                >        
-                </i>
+                    <Tooltip title="Mark read">
+                        <div className='sq-btn-icon d-flex align-items-center p-1 justfirt-content-center btn-notif-exit '>
+                            <i 
+                            class="m-0 fa-solid fa-regular fa-xmark fa-md m-1 text-color-sq-green-mid" 
+                            onClick={markRead}
+                        >        
+                        </i>
+                        </div>
+                    </Tooltip>
                 
                }
                     

@@ -103,10 +103,10 @@ const DashboardHomeLayout = ({
                     </NavBar>
 
                     <div className="sq-content row m-0 p-0">
-                        <div className="col-md-3">
+                        <div className="col-md-3 sq-sidebar-holder">
                             <DashboardHomeSidebar className="w-100 h-100"/>
                         </div>
-                        <div className='col-md-9 sq-projects-holder pt-4'>
+                        <div className='col-md-9 sq-projects-holder py-4'>
                             { !projects ?
                                 <div className='w-100 d-flex justify-content-center align-items-center p-5'>
                                     <img className='w-50 opacity-25' src={logo}/>

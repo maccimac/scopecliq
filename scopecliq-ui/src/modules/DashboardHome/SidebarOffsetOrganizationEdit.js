@@ -4,12 +4,8 @@ import { useDispatch, useSelector} from 'react-redux';
 import { currentUser, isClient} from '../../store/client-store';
 import {currentUserId, currentUserOrg} from '../../store/login-store'
 import { showSnackbarMessage } from '../../store/snackbar-store';
-// import { storeProject } from '../../store/project-store';
-// import { connect } from 'react-redux';
 import OrganizationCardEdit from '../../components/OrganizationCardEdit';
-
-// import { Image, CloudinaryContext } from "@cloudinary/react";
-// import { Cloudinary } from "@cloudinary/url-gen";
+import { Tooltip } from '@mui/material';
 import { CloudinaryContext,  Image, Transformation } from 'cloudinary-react';
 
 
@@ -24,6 +20,7 @@ const SidebarOffsetOrganizationEdit = ({
 }) => {
     const api = global.config.API;
     const dispatch = useDispatch()
+    const clientMode = useSelector(isClient)
     const userId = useSelector(currentUserId)
     const userOrg = useSelector(currentUserOrg)
 
@@ -186,10 +183,10 @@ const SidebarOffsetOrganizationEdit = ({
                         {modeRegister && 
                             <div>
                                 <div className='sub mb-2'>Your Login Details</div>
-                                <div className='label'>
-                                    Your Email
-                                </div>
                                 <div className=''>
+                                    <div className='label'>
+                                        Your Email
+                                    </div>
                                     <input className='sq-input w-75 mb-2 me-2' 
                                                 value={modelEmail} 
                                                 onChange={(e)=>{
@@ -228,7 +225,7 @@ const SidebarOffsetOrganizationEdit = ({
                         />
 
                         <CloudinaryContext cloudName={cloudinaryConfig.cloud_name}>
-                            <div className='mb-3'>
+                            <div className='mb-2'>
                                 <div className='label'>
                                         Your Logo (Optional)
                                 </div>
@@ -243,8 +240,23 @@ const SidebarOffsetOrganizationEdit = ({
                                 )}
                             </div>
                         </CloudinaryContext>
+                        <div>
+                            <div className='d-flex label justify-content-between align-items-end'>
+                                    Your Stripe API Key
+                                    <Tooltip title="
+                                      This enables your invoicing feature and send processed payment to your account
+                                    ">
+                                        <div className='sq-btn-icon'>
+                                        <i className='fa-solid fa-question'/>
+                                        </div>
+                                    </Tooltip>
+                            </div>
+                            <input className='sq-input w-100 mb-2 me-2' 
+                                        placeholder='API Key'
+                            ></input>
+                        </div>
 
-                        <div className='d-flex'>
+                        <div className='d-flex mt-2'>
                             <button className='sq-btn' onClick={updateOrganization} >
                                 {modeRegister ? 'Register' : 'Update'}
                             </button>

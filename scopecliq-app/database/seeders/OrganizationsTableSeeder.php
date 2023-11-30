@@ -32,7 +32,7 @@ class OrganizationsTableSeeder extends Seeder
                 'contact_about' => 'Julia Studios est 1992',
                 'contact_number' => '+63 234 567 8901',
                 'organization_address' => '2200 Eagle St, Cambridge, Ontario, N3H 0A1, Canada',
-                'organization_logo' => null,
+                'organization_logo' => 'https://res.cloudinary.com/dtvsn2pru/image/upload/v1701369706/kxvnvsey2gfucxdyo6pq.jpg',
                 'consultant_user_id'=> null
                 
             ],

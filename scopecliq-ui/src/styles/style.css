@@ -859,7 +859,7 @@ small {
   top: 0;
   left: 0;
   background-color: #fff;
-  height: 80px;
+  height: 90px;
   z-index: 1;
 }
 
@@ -872,7 +872,7 @@ small {
 }
 
 .sq-body {
-  padding-top: 80px;
+  padding-top: 90px;
   min-height: 100vh;
 }
 .sq-body .sq-content {
@@ -896,7 +896,7 @@ small {
 }
 .sq-dashboard-portal .project-blueprint-holder {
   overflow: auto;
-  max-height: calc(100vh - 80px);
+  max-height: calc(100vh - 90px);
 }
 .sq-dashboard-portal .project-blueprint-holder .project-header {
   align-items: center;
@@ -909,15 +909,15 @@ small {
 .sq-dashboard-home:has(.sq-sidebar-offcanvas--open) .sq-navigation, .sq-dashboard-home:has(.sq-sidebar-offcanvas--open) .sq-content {
   max-width: calc(100% - 320px);
 }
+.sq-dashboard-home .sq-content {
+  overflow: hidden;
+}
 .sq-dashboard-home .sq-content, .sq-dashboard-home .sq-sidebar, .sq-dashboard-home .sq-projects-holder {
-  max-height: calc(100vh - 80px);
+  max-height: calc(100vh - 90px);
   overflow: auto;
 }
 .sq-dashboard-home .sq-content::-webkit-scrollbar, .sq-dashboard-home .sq-sidebar::-webkit-scrollbar, .sq-dashboard-home .sq-projects-holder::-webkit-scrollbar {
   display: none;
-}
-.sq-dashboard-home .sq-sidebar .project-organization h2 {
-  font-size: 24px;
 }
 .sq-dashboard-home .sq-stat-card p {
   min-height: 32px;
@@ -944,11 +944,10 @@ small {
   width: fit-content;
   display: flex;
   padding-right: 32px;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 90px);
 }
 
 .sq-sidebar {
-  min-height: 100vh;
   background-color: #EEF1FF;
   box-shadow: 12px 0px 12px 0px rgba(86, 92, 121, 0.16);
 }
@@ -1112,6 +1111,9 @@ small {
 .sq-notification .btn-notif-exit {
   margin-top: -4px !important;
   margin-right: -4px !important;
+}
+.sq-notification .btn-notif-exit:hover {
+  scale: 1.1;
 }
 
 .sq-project-card, .sq-organization-card-small, .sq-organization-card {
