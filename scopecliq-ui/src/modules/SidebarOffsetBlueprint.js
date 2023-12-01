@@ -110,7 +110,10 @@ const SidebarOffsetBlueprint = ({project}) => {
                                         { clientMode ? 'Notifications' : "Client's Unread Notifications"} 
                                         
                                     </h3>
-                                    <p className='text-color-sq-light'>See your project activities and mark read to acknowledge</p>
+                                    { clientMode &&
+                                        <p className='text-color-sq-light'>See your project activities and mark read to acknowledge</p>
+                                    }
+
                                 </div>
 
                                 <div className='d-flex'>
@@ -155,6 +158,10 @@ const SidebarOffsetBlueprint = ({project}) => {
                                 <div onClick={()=>{
                                     set_sidebarMode('PROJECT_DETAILS')
                                 }}>
+                                    {/* <OrganizationCardSmall
+                                        organization={clientOrg}
+                                        className='w-100 d-flex justify-content-space-between mb-2'
+                                    /> */}
                                     <OrganizationCardSmall
                                         organization={clientOrg}
                                         className='w-100 d-flex justify-content-space-between'
