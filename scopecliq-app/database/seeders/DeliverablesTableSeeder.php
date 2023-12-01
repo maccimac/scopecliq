@@ -16,7 +16,7 @@ class DeliverablesTableSeeder extends Seeder
     {
         DB::table('deliverables')->insert([
 
-            // SIESTA
+            // SIESTA 1 of 2
             [
                 'project_id' => 2,
                 'milestone_id' => 1,
@@ -310,6 +310,17 @@ class DeliverablesTableSeeder extends Seeder
                 'status' => 'COMPLETE',
                 'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
                 'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+
+            // SIESTA 2 of 2
+            [
+                'project_id' => 2,
+                'milestone_id' => 11,
+                'position' => 0,
+                'description' => 'All hands meeting',
+                'status' => 'INCOMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => null,
             ],
         ]);
     }

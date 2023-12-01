@@ -32,18 +32,18 @@ export const OrganizationCardSmall = ({
                 }
                 
                 <div className='mx-1 w-100'>
-                    <div className='h3 text-color-sq-lightest mb-0'>
+                    <div className='h3 mb-0'>
                         {organization.organization_name}
                     </div>
-                    <div className='p text-color-sq-light'>
+                    <div className=''>
                         {organization.contact_name}, {organization.contact_email}
                     </div>
 
                 </div>
                 <div className='d-flex align-items-center mx-1'>
-                    <div className='sq-btn-icon'>
+                    {/* <div className='sq-btn-icon'>
                      <i className="fa-solid fa-chevron-down"></i>
-                    </div>
+                    </div> */}
                 </div>
         </div>
     )

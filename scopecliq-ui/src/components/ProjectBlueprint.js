@@ -81,12 +81,12 @@ export const ProjectBlueprint = ({isConsultant}) => {
     } 
 
     const scrollToOngoing = () => {
-        const divOngoing = document.querySelector('.sq-milestone--ongoing');
+        const divOngoing = document.querySelector('.sq-milestone--ONGOING');
         if(divOngoing){
             const holder = document.querySelector('.project-blueprint-holder');
             holder.scrollTo({
                 behavior: "smooth",
-                left: divOngoing.getBoundingClientRect().left,
+                left: divOngoing.getBoundingClientRect().left - 10,
             })
         }
        
@@ -98,13 +98,13 @@ export const ProjectBlueprint = ({isConsultant}) => {
             getMilestones()    
             setTimeout(()=>{
                 scrollToOngoing()
-            }, 600)
+            }, 800)
             setTimeout(()=>{
                 scrollToOngoing()
-            }, 1000)
+            }, 1600)
             setTimeout(()=>{
                 scrollToOngoing()
-            }, 2000)
+            }, 3600)
         }        
     }, [project])
 
@@ -117,7 +117,7 @@ export const ProjectBlueprint = ({isConsultant}) => {
                         <i className="fa-solid fa-plus"></i>
                 </div>
             </div>)}
-            { milestones && milestones.length && milestones.map( (m,i)=>(
+            { milestones && milestones.length>0 && milestones.map( (m,i)=>(
                 <div className='d-flex' key={m.id}>
                     <Milestone
                         milestone={m}

@@ -108,7 +108,7 @@ export const Notification =({_notification, cb})=>{
                     <Tooltip title="Mark read">
                         <div className='sq-btn-icon d-flex align-items-center p-1 justfirt-content-center btn-notif-exit '>
                             <i 
-                            class="m-0 fa-solid fa-regular fa-xmark fa-md m-1 text-color-sq-green-mid" 
+                            class="m-0 fa-solid fa-regular fa-xmark fa-md m-1 text-color-sq-green-black" 
                             onClick={markRead}
                         >        
                         </i>

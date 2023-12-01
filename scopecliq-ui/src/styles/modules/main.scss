@@ -11,6 +11,17 @@ $scrollbar-width: 17;
     background-color: $sq-white;
     height: #{$nav-height}px;
     z-index: 1;
+
+    &--client{
+        .sq-organization-card-small{
+            background-color: $sq-lightest;
+            color: $sq-lav-dark;
+            .h3{
+                color: $sq-black;
+            }
+        }
+
+    }
 }
 
 .sq-logo-sm{
@@ -19,6 +30,12 @@ $scrollbar-width: 17;
 
 .sq-logo-md{
     max-width: 240px;
+}
+
+.sq-grid{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    margin-bottom: 4px;
 }
 
 .sq-body{

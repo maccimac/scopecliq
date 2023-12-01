@@ -220,10 +220,11 @@ hr {
 }
 
 h1, .h1 {
-  color: #333;
-  font-size: 48px;
+  color: #3E404A;
+  font-size: 40px;
   font-weight: 800;
   letter-spacing: -1px;
+  line-height: 40px;
 }
 
 h2, .h2 {
@@ -862,6 +863,13 @@ small {
   height: 90px;
   z-index: 1;
 }
+.sq-navigation--client .sq-organization-card-small {
+  background-color: #F9F9F9;
+  color: #4E536D;
+}
+.sq-navigation--client .sq-organization-card-small .h3 {
+  color: #333;
+}
 
 .sq-logo-sm {
   max-width: 148px;
@@ -869,6 +877,12 @@ small {
 
 .sq-logo-md {
   max-width: 240px;
+}
+
+.sq-grid {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  margin-bottom: 4px;
 }
 
 .sq-body {
@@ -1131,13 +1145,16 @@ small {
 .sq-project-card.dark .sq-textarea, .dark.sq-organization-card-small .sq-textarea, .dark.sq-organization-card .sq-textarea, .sq-project-card.dark .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card-small .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .dark.sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card.dark .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card-small .description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .dark.sq-organization-card .description-edit, .sq-project-card.dark .sq-input, .dark.sq-organization-card-small .sq-input, .dark.sq-organization-card .sq-input {
   background-color: #E7E7E7;
 }
-.sq-project-card .sq-progress-rate, .sq-organization-card-small .sq-progress-rate, .sq-organization-card .sq-progress-rate {
-  margin-top: -24px;
-  margin-right: -24px;
+.sq-project-card:not(.sq-project-card--full) .sq-progress-rate, .sq-organization-card-small:not(.sq-project-card--full) .sq-progress-rate, .sq-organization-card:not(.sq-project-card--full) .sq-progress-rate {
   background-color: #fff;
+  margin-right: -24px;
+  margin-top: -24px;
+}
+.sq-project-card .sq-progress-rate, .sq-organization-card-small .sq-progress-rate, .sq-organization-card .sq-progress-rate {
   height: 36px;
   width: 36px;
   border-radius: 36px;
+  margin-top: -16px;
   display: flex;
   align-items: center;
   box-shadow: 0px 0px 6px 0px rgba(91, 121, 252, 0.12);
@@ -1153,11 +1170,6 @@ small {
   color: #4E4E4E;
   font-weight: 700;
 }
-.sq-project-card .sq-grid, .sq-organization-card-small .sq-grid, .sq-organization-card .sq-grid {
-  display: grid;
-  grid-template-columns: 2fr 5fr;
-  margin-bottom: 4px;
-}
 .sq-project-card .sq-textarea.sq-textarea--terms, .sq-organization-card-small .sq-textarea.sq-textarea--terms, .sq-organization-card .sq-textarea.sq-textarea--terms, .sq-project-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-organization-card-small .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-organization-card .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-project-card .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card-small .sq-textarea--terms.description-edit, .sq-milestone .sq-deliverable.sq-deliverable--edit .sq-organization-card .sq-textarea--terms.description-edit {
   height: 160px;
   resize: vertical;
@@ -1171,18 +1183,24 @@ small {
 }
 
 .sq-organization-card-small {
-  min-height: 56px;
+  height: 60px;
   border-radius: 16px;
-  min-width: 120px;
-  background-color: #333;
+  width: 240px;
+  min-width: 240px;
+  max-width: 320px;
   display: flex;
   align-items: center;
   padding: 8px;
+  background-color: #333;
+  color: #F9F9F9;
+}
+.sq-organization-card-small .h3 {
   color: #F9F9F9;
 }
 .sq-organization-card-small .org-logo {
   height: 48px;
-  width: 72px;
+  min-width: 48px;
+  max-width: 64px;
   overflow: hidden;
   border-radius: 12px;
   margin-right: 8px;
@@ -1193,8 +1211,8 @@ small {
   padding: 2px;
 }
 .sq-organization-card-small .org-logo img {
-  max-height: 100%;
-  max-width: 100%;
+  max-height: 110%;
+  max-width: 110%;
 }
 
 .sq-invoice {

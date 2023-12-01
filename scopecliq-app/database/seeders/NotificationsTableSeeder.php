@@ -58,6 +58,26 @@ class NotificationsTableSeeder extends Seeder
                 'extra' => 'Please recreate',
                 'created_at' => Carbon::yesterday()  
             ],
+            [
+                'project_id' => 2,
+                'milestone_id' => 11,
+                'deliverable_id' => null,
+                'type' => 'CHANGE',
+                'status' => 'CREATED',
+                'description' => 'Retrospective',
+                'extra' => '',
+                'created_at' => Carbon::yesterday()  
+            ],
+            [
+                'project_id' => 2,
+                'milestone_id' => 11,
+                'deliverable_id' => 33,
+                'type' => 'CHANGE',
+                'status' => 'CREATED',
+                'description' => 'All hand meeting',
+                'extra' => '',
+                'created_at' => Carbon::yesterday()  
+            ],
         ]);    
     }
 }

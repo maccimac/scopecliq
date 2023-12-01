@@ -44,7 +44,7 @@ class MilestonesTableSeeder extends Seeder
                 'position' => 2,
                 'name' => 'Website',
                 'description' => "Best way possible leads can reach out. Home for articles and resources we can provide client.",
-                'budget_percentage'=> 50,
+                'budget_percentage'=> 45,
                 'status_completion' => 'ONGOING',
                 'status_invoice' => null,
                 'datetime_started' => Carbon::create(2023, 9, 1, 14, 30, 0),
@@ -134,6 +134,21 @@ class MilestonesTableSeeder extends Seeder
                 'datetime_started' => null,
                 'datetime_due' => Carbon::create(2023, 8, 28, 0, 0, 0),
             ],
+
+            // Siesta
+            [
+                'project_id' => 2,
+                'position' => 5,
+                'name' => 'Retrospective',
+                'description' => 'Post mortem of project completion',
+                'budget_percentage'=> 5,
+                'status_completion' => 'PENDING',
+                'status_invoice' => null,
+                'datetime_started' => null,
+                'datetime_due' => null,
+            ],
+
+
             
         ]);
     }

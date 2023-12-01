@@ -250,87 +250,101 @@ const Home = () => {
                     <div className='col-md-2'>
                         <img src={logo} className="sq-logo-md w-auto mb-1 me-3" alt="scopecliq-logo"></img >
                     </div>
-
                 </div>
                 {/* <NavBar/> */}
-                <div className='sq-body container align-items-center d-flex'>
-                    <div className='col-sm-12 col-md-6 mb-5'>
-                        <h1 className='mb-3'>
-                            Freelancing Toolkit for Emerging Businesses
-                        </h1>
-                        <h3 className='h3-light mb-5'>
-                            ScopeCliq is a straightforward freelancing management software that allows Clients to review project status overview real-time from a Client Portal.
-                        </h3>
-                        <div>
-                            <h3 className='text-color-sq-med-light'>
-                                {modeRegister ? 'Register' : 'Login'}
+                <div className='sq-body container align-items-center'>
+                    <div className='row align-items-center'>
+                        <div className='col-12 col-md-5 col-lg-6'>
+                            <h1 className='mb-3'>
+                                Freelancing Toolkit for Emerging Businesses
+                            </h1>
+                            <h3 className='h3-light mb-4'>
+                                ScopeCliq is a straightforward freelancing management software that allows Clients to review project status overview real-time from a Client Portal.
                             </h3>
-                            <div className=''>
-                                <input className='sq-input w-75 mb-2 me-2' 
-                                            value={modelEmail} 
-                                            onChange={(e)=>{
-                                                set_modelEmail(e.target.value)
-                                            }}
-                                            placeholder='Email'
-                                ></input>
-                                <br/>
-                                <input type="password" className='sq-input w-75 mb-2' 
-                                        value={modelPassword} 
-                                        onChange={(e)=>{
-                                            set_modelPassword(e.target.value)
-                                        }}
-                                        placeholder='Password'
-                                ></input>
-                                <br/>
-                                {
-                                    modeRegister &&
-                                    <input type="password" className='sq-input w-75 mb-2' 
-                                        value={modelPasswordVerify} 
-                                        onChange={(e)=>{
-                                            set_modelPasswordVerify(e.target.value)
-                                        }}
-                                            placeholder='Verify Password'
+                            <div className='bg-sq-lav-light w-75 sq-outter-shadow mb-3 p-3 rounded'>
+                                <div className='sub mb-2'>
+                                    Demo Login Credentials
+                                </div>
+                                <div className='sq-grid font-size-11 w-75'>
+                                    <strong>Email:</strong>
+                                    <div className=''>doug@douglasdevs.com</div>
+                                </div>
+                                <div className='sq-grid font-size-11 w-75'>
+                                    <strong>Password:</strong>
+                                    <div className=''>pass1234</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className='text-color-sq-med-light'>
+                                    {modeRegister ? 'Register' : 'Login'}
+                                </h3>
+                                <div className=''>
+                                    <input className='sq-input w-75 mb-2 me-2' 
+                                                value={modelEmail} 
+                                                onChange={(e)=>{
+                                                    set_modelEmail(e.target.value)
+                                                }}
+                                                placeholder='Email'
                                     ></input>
-                                }
+                                    <br/>
+                                    <input type="password" className='sq-input w-75 mb-2' 
+                                            value={modelPassword} 
+                                            onChange={(e)=>{
+                                                set_modelPassword(e.target.value)
+                                            }}
+                                            placeholder='Password'
+                                    ></input>
+                                    <br/>
+                                    {
+                                        modeRegister &&
+                                        <input type="password" className='sq-input w-75 mb-2' 
+                                            value={modelPasswordVerify} 
+                                            onChange={(e)=>{
+                                                set_modelPasswordVerify(e.target.value)
+                                            }}
+                                                placeholder='Verify Password'
+                                        ></input>
+                                    }
 
+                                </div>
                             </div>
-                        </div>
-                        {
-                            !modeRegister ?
-                            <div className='d-flex align-items-center'>
-                                <button className='sq-btn me-2' onClick={login}>
-                                    Login
-                                </button>
-                                <p>
-                                    No account yet? &nbsp; 
-                                    <a className='sq-link' onClick={()=>{
-                                        set_modeRegister(true)
-                                    }}>
+                            {
+                                !modeRegister ?
+                                <div className='d-flex align-items-center'>
+                                    <button className='sq-btn me-2' onClick={login}>
+                                        Login
+                                    </button>
+                                    <p>
+                                        No account yet? &nbsp; 
+                                        <a className='sq-link' onClick={()=>{
+                                            set_modeRegister(true)
+                                        }}>
+                                            Register
+                                        </a>
+                                    </p>
+                                    
+                                </div>
+                                :
+                                <div className='d-flex align-items-center'>
+                                    <button className='sq-btn me-2' onClick={initRegister}>
                                         Register
+                                    </button>
+                                    <p>
+                                        Already have an account? &nbsp;
+                                        <a className='sq-link' onClick={()=>{
+                                        set_modeRegister(false)
+                                    }}>
+                                        Login
                                     </a>
-                                </p>
-                                
+                                    </p>
+                                    
                             </div>
-                            :
-                            <div className='d-flex align-items-center'>
-                                <button className='sq-btn me-2' onClick={initRegister}>
-                                    Register
-                                </button>
-                                <p>
-                                    Already have an account? &nbsp;
-                                    <a className='sq-link' onClick={()=>{
-                                    set_modeRegister(false)
-                                }}>
-                                    Login
-                                </a>
-                                </p>
-                                
+                            }
+                        
                         </div>
-                        }
-                      
-                    </div>
-                    <div className='col-sm-12 col-md-6 d-flex align-items-center text-center p-3'>
-                        <img src={splash} className="w-100 mt-5"></img >
+                        <div className='col-12 col-md-7 col-lg-6 d-flex align-items-center text-center p-3'>
+                            <img src={splash} className="w-100 mt-5"></img >
+                        </div>
                     </div>
 
                 </div>

@@ -14,13 +14,17 @@
             background-color: $sq-lighter;
         }
     }
-    .sq-progress-rate{
-        margin-top: -24px;
-        margin-right: -24px;
+    
+    &:not(.sq-project-card--full) .sq-progress-rate{
         background-color: #fff;
+        margin-right: -24px;
+        margin-top: -24px;
+    }
+    .sq-progress-rate{
         height: 36px;
         width: 36px;
         border-radius: 36px;
+        margin-top: -16px;
         display: flex;
         align-items: center;
         box-shadow: $sq-outter-shadow;
@@ -28,7 +32,6 @@
             font-size: 9px;
             letter-spacing: normal;
         }
-    
 
     }
 
@@ -38,12 +41,6 @@
     .text-head{
         color: $sq-dark;
         font-weight: 700;
-    }
-
-    .sq-grid{
-        display: grid;
-        grid-template-columns: 2fr 5fr;
-        margin-bottom: 4px;
     }
     .sq-textarea.sq-textarea--terms{
         height: 160px;
@@ -61,17 +58,23 @@
 
 .sq-organization-card-small{
     @extend .sq-project-card;
-    min-height: 56px;
+    height: 60px;
     border-radius: 16px;
-    min-width: 120px;
-    background-color: $sq-black;
+    width: 240px;
+    min-width: 240px;
+    max-width: 320px;
     display: flex;
     align-items: center;
     padding: 8px;
+    background-color: $sq-black;
     color: $sq-lightest;
+    .h3{
+        color: $sq-lightest;
+    }
     .org-logo{
         height: 48px;
-        width: 72px;
+        min-width: 48px;
+        max-width: 64px;
         overflow: hidden;
         border-radius: 12px;
         margin-right: 8px;
@@ -81,8 +84,8 @@
         background-color: #fff;
         padding: 2px;
         img{
-            max-height: 100%;
-            max-width: 100%;
+            max-height: 110%;
+            max-width: 110%;
         }
     }
 }

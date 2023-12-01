@@ -65,7 +65,6 @@ export const ProjectCard = ({
                         Pending (Not Started)
                     </div>
                     <div >
-                        {/* <CircularWithValueLabel variant="determinate" value={progress} /> */}
                         {progress}%
                     </div>
                 </div>
@@ -77,8 +76,11 @@ export const ProjectCard = ({
                         Complete
                     </div>
                     <div className='sq-progress-rate'>
-                        <CircularWithValueLabel variant="determinate" value={progress} />
-                        {/* {progress}% */}
+                        {full ?
+                            <>{progress}% </>
+                        :
+                            <CircularWithValueLabel variant="determinate" value={progress} />
+                        }
                     </div>
                 </div>
             )
@@ -150,12 +152,12 @@ export const ProjectCard = ({
                     {full 
                     ? 
                         <div>
-                            <div className='project-portal bg-sq-lav-dark my-5 sq-outter-shadow rounded p-3'>
+                            <hr/>
+                            <div className='project-portal bg-sq-lav-dark my-4 sq-outter-shadow rounded p-3'>
                                 {/* <div className='d-flex align-items-center w-100 justify-content-between mb-3'>
                                     
                                 </div> */}
-
-                                <h2 className='text-head mb-3'>Dedicated Portal</h2>
+                                <h3 className='text-head mb-3'>Dedicated Client Portal</h3>
                                 
                                 <div className='project-client mb-3'>
                                     <div className='sq-grid'>
@@ -172,11 +174,12 @@ export const ProjectCard = ({
                                 </div> 
 
                             
-                            </div>    
-                            <div className='project-terms my-5'>        
-                                <h2 className='text-head mb-1'>
+                            </div> 
+                            <hr/>   
+                            <div className='project-terms my-3'>        
+                                <h3 className='text-head mb-1'>
                                     Terms and Conditions
-                                </h2>
+                                </h3>
                                 <textarea className='sq-textarea sq-textarea--terms w-100 terms-and-conditions' disabled>
                                     {project.terms}
                                 </textarea>
