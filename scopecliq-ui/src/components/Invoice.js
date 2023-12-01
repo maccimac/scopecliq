@@ -11,6 +11,7 @@ import { isClient } from '../store/client-store';
 
 import CheckoutForm from '../modules/payments/CheckoutForm';
 import Modal from '@mui/material/Modal';
+import Tooltip from '@mui/material/Tooltip';
 
 import { DateTime } from 'luxon';
 import {Elements} from '@stripe/react-stripe-js';
@@ -157,6 +158,19 @@ const Invoice = ({
         // return (num).toLocaleString('en-US'); 
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
+
+
+    const origin = window.location.origin;
+    const copyToClipboard = () => {
+        const urlLink =  `${origin}/invoice/${invoice.id}` ;
+        navigator.clipboard.writeText(urlLink)
+          .then(() => {
+            console.log('Text successfully copied to clipboard');
+          })
+          .catch(err => {
+            console.error('Unable to copy text to clipboard', err);
+          });
+      };
           
     useEffect(()=>{
         if(!initLoad){
@@ -199,6 +213,7 @@ const Invoice = ({
                                 </h2>
                             </div>
                         </div>
+
                         <div className={`
                             sub d-flex-inline align-items-center p-2 px-4 mb-2 rounded text-color-sq-white
                                 ${ (!invoice.datetime_paid && !invoice.datetime_void) && 'bg-sq-lav' }
@@ -209,15 +224,17 @@ const Invoice = ({
                                 {
                                     parseInt(invoice.budget_percentage) === 0 ? 'No Payment Required'
                                     :
-                                    (<>                                        { !invoice.datetime_paid && !invoice.datetime_void && 'Invoice Sent' }
+                                    (<> { !invoice.datetime_paid && !invoice.datetime_void && 
+                                            <div className='text-center'>Invoice Sent <br/> <span className='font-size-8'>Payment Required</span></div>
+                                        }
                                         { invoice.datetime_paid && 'Invoice Paid'}
                                         { invoice.datetime_void && 'Invoice Void' }
                                         </>
                                     )
                                     
                                 }
-                                </div>
-                              
+                        </div>
+                           
                     </div>
                     <hr/>
 
@@ -293,7 +310,7 @@ const Invoice = ({
                                 </div>
                             )
                         }   
-
+                        
                         <div className='d-flex font-size-12'>
                             <div className='me-4'>
                                 <div className='mb-2'>
@@ -315,6 +332,22 @@ const Invoice = ({
                             )}
                         </div>
                         <hr/>
+
+                        <div className='d-flex font-size-12 my-3 align-items-center'>
+                            <div className='label'>Invoice Link: &nbsp;</div>
+                            <Tooltip title="Copy invoice URL to clipboard">
+                                <div className='sq-input d-flex w-75' onClick={copyToClipboard}>
+                                    <input className='w-100 me-1 outline-none border-none bg-transparent' disabled 
+                                        value={`${origin}/invoice/${invoice.id}`}/>
+                                    <div className='sq-btn sq-btn-icon p-2 bg-sq-lighter' >
+                                        <i className='fa fa-solid fa-link'/>
+                                    </div>
+                                </div>
+                            </Tooltip>
+
+                        </div>
+                        
+                        
                         {/* {invoice.notes ?
                             (<div>
                                 
@@ -328,7 +361,7 @@ const Invoice = ({
 
                     
                     </>)}
-                    
+                    <hr/>
                     <div className='d-flex justify-content-between align-items-center'>
                         {!invoice.datetime_paid && clientSecret && (
                             clientMode ? (

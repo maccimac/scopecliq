@@ -173,7 +173,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
                 edit={!milestone.id}
             />
 
-            {!invoice && !clientMode && milestoneStatus==='complete' && (
+            {!invoice && !clientMode && milestoneStatus==='COMPLETE' && (
                 <div>
                     <hr/>
                     <p>
