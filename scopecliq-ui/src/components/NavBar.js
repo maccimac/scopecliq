@@ -55,7 +55,7 @@ export const NavBar = ({children}) => {
             ${clientMode ? 'sq-navigation--client bg-sq-white' : 'sq-navigation--consultant bg-sq-lav-darker'}
         `
         }>
-            <div className="d-flex col-2 align-items-center" style={{}}>
+            <div className="d-flex col-6 align-items-center" style={{}}>
                 <Link to="/">
                     <img src={logo} className="sq-logo-sm w-auto mb-1 me-3" alt="scopecliq-logo"></img >
                 </Link>
@@ -65,7 +65,7 @@ export const NavBar = ({children}) => {
                     `
                 }>{clientMode ? 'Client Portal' : 'Consultant Dashboard'}</div>
 
-                {clientMode && clientOrg && consultantOrg &&
+            {clientMode && clientOrg && consultantOrg &&
                   <div className='d-flex sub align-items-center'>
                             &nbsp; <i className='fa-solid fa-plus mx-2'></i>  &nbsp; 
                                 <span className='text-color-sq-med'>{clientOrg.organization_name}</span> 
@@ -73,38 +73,11 @@ export const NavBar = ({children}) => {
                                 <span className='text-color-sq-med'>{consultantOrg.organization_name}</span> 
                     </div>
             }
-                     
 
             </div>
-
-            {
-                  // <div className='col-lg-6 d-flex '>
-                    //     <OrganizationCardSmall
-                    //         className="me-2 w-50"
-                    //         organization={clientOrg}/>
-                    //     <OrganizationCardSmall className="w-50"
-                    //         organization={consultantOrg}/>
-                    // </div>
-            }
-
-             {/* {clientMode && clientOrg && consultantOrg &&
-                        <div className='col-4 d-flex ms-2 mt-1 align-items-center text-color-sq-lighter'>
-                            
-                       
-                                 <div className='d-flex py-4 p-3'>
-                        <OrganizationCardSmall
-                            className="me-2 w-auto"
-                            organization={clientOrg}/>
-                        <OrganizationCardSmall className="w-auto"
-                            organization={consultantOrg}/>
-                    </div>
-                            
-                        </div>
-                } */}
-            <div className='col-6 d-flex w-100 align-item-center justify-content-end'>
-               {children}
-
-               {/* {clientOrg && consultantOrg &&
+            
+            <div className='d-flex w-100 align-item-center justify-content-end'>
+            {/* {clientOrg && consultantOrg &&
                      <>
                      <div className='d-flex py-4 p-3'>
                         <OrganizationCardSmall
@@ -115,6 +88,10 @@ export const NavBar = ({children}) => {
                     </div>
                      </>
                 } */}
+
+               {children}
+
+           
 
 
             </div>
