@@ -106,7 +106,7 @@ const DashboardHomeSidebar = ({className, project}) => {
     return(
         <div className={'sq-sidebar bg-sq-white mt-0 ' + className}>
           <div className='sq-stats-holder p-4 pb-5'>
-          <h3 className=''>📈 KPI Summaries</h3>
+          <h3 className=''>📈 Key Performance Indicator Summaries</h3>
           <div className='my-4'>
             <h4>Projects</h4>
             <div className='d-flex align-items-stretch mb-2'>

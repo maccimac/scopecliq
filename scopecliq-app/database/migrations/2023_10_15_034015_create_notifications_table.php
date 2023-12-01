@@ -38,19 +38,11 @@ return new class extends Migration
                 // 'INVOICE':{
                 //     SENT: '📬 Invoice has been sent',
                 //     PAID: '💸 Invoice has been paid',
-                //     VOID: '❌ Invoice is voided'
                 // },
                 // 'CHANGE':{
                 //     'MADE': `✏️ ${attachmentType} has been changed`,
                 //     'CREATED': `✨ ${attachmentType} has been added`,
                 //     'DELETED': `🗑  ${attachmentType} deleted`,
-                //     /**
-                //      * MADE_APPROVED
-                //      * MADE_DECLINED
-                //      * CREATED_APPROVED
-                //      * CREATED_DECLINED
-                //      */
-                // }
             $table->string('status');
             $table->text('description')->nullable();
             $table->text('extra')->nullable();

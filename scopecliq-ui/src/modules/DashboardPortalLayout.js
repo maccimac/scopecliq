@@ -50,7 +50,7 @@ const DashboardPortalLayout = () => {
                             } 
                             className='d-inline sq-link  text-color-sq-green'
                         >
-                            <i class="fa-solid fa-receipt me-1"></i> Your Invoices
+                            <i class="fa-solid fa-receipt me-1"></i> View Invoices
                         </Link>
 
                         {

@@ -108,7 +108,7 @@ const InvoiceList = () => {
                                 Back to Project
                             </Link>
                         </strong>   
-                        <h2 className='mt-2'>Your Invoices: &nbsp;
+                        <h2 className='mt-2'>Invoices: &nbsp;
                             <strong className='text-color-sq-lav-dark'>{project && project.name}</strong>
                         </h2> 
                     </div>)}
@@ -127,7 +127,7 @@ const InvoiceList = () => {
                     
                 </div>
             </div>
-            <SidebarOffsetBlueprint/>
+            {/* <SidebarOffsetBlueprint/> */}
         </div>
     )
 }

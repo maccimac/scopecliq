@@ -315,7 +315,7 @@ const Invoice = ({
                             )}
                         </div>
                         <hr/>
-                        {invoice.notes ?
+                        {/* {invoice.notes ?
                             (<div>
                                 
                                 <span className='label'>Notes: &nbsp;</span> {invoice.notes}
@@ -323,11 +323,12 @@ const Invoice = ({
                             <div className='sq-link d-inline'>
                                 Add note
                             </div>
-                        }
+                            <hr/>
+                        } */}
 
                     
                     </>)}
-                    <hr/>
+                    
                     <div className='d-flex justify-content-between align-items-center'>
                         {!invoice.datetime_paid && clientSecret && (
                             clientMode ? (

@@ -212,9 +212,9 @@ const SidebarOffsetBlueprint = ({project}) => {
                                 dark
                             >
                                 <div className='d-flex'>
-                                    <div className='sq-btn'>
+                                    {/* <div className='sq-btn'>
                                         Edit
-                                    </div>
+                                    </div> */}
                                     
                                 </div>
                             </ProjectCard>)}
