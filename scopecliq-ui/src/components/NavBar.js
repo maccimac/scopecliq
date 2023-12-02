@@ -55,7 +55,7 @@ export const NavBar = ({children}) => {
             ${clientMode ? 'sq-navigation--client bg-sq-white' : 'sq-navigation--consultant bg-sq-lav-darker'}
         `
         }>
-            <div className="d-flex col-6 align-items-center" style={{}}>
+            <div className="d-flex w-75 align-items-center" style={{}}>
                 <Link to="/">
                     <img src={logo} className="sq-logo-sm w-auto mb-1 me-3" alt="scopecliq-logo"></img >
                 </Link>

@@ -20,7 +20,6 @@ import {loadStripe} from '@stripe/stripe-js';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_51OFRqQCUuD2E5VcQunafcxNGQs53fPIlzkKlUSmcXJTic0RiMGDJyN0vN03qiNt6XCzp593F5F693yVGMfSQk86A00RfBIiUPe'); // FRONTEND
-
 const stripe = require("stripe")('sk_test_51OFRqQCUuD2E5VcQlnxuimTBgtF5JUyKE3gxrHXsVx0FGkbe0yedLV3ywwW2N8wCzVMKl2rzFZGF6JEBIUdzbUUi00T8ww4o7U'); // BACKEND
 
 
@@ -95,7 +94,7 @@ const Invoice = ({
             id: invoice.id,
             payment_id: paymentIntent.id,
             payment_method: paymentIntent.payment_method,
-            paymen_client_secret: paymentIntent.client_secret
+            payment_client_secret: paymentIntent.client_secret
         }
         try{
             const res = await axios.post(`${api}/invoices/pay/${invoice.id}`, payload, {
@@ -194,7 +193,7 @@ const Invoice = ({
                         clientMode ? `/portal/${invoice.portal_domain}` : `/dashboard/${invoice.project_id}`
                         } className='sq-link text-color-sq-med pb-0'>
                         <i className="fa-solid fa-regular fa-arrow-left me-2 fa-xs"/>
-                        Back to Project
+                        Back to Client Portal
                     </Link>
                 </div>   )}
             
@@ -441,7 +440,12 @@ const Invoice = ({
                 >
                     <div className='d-inline-flex fill-height align-center p-5 justify-content-center w-100 mx-auto outline-none border-none'>
                         <div className='sq-checkout__modal rounded p-4 sq-outter-shadow'>
-                            <div className='d-flex justify-content-end'>
+                            <div className='d-flex justify-content-between alig-items-center'>
+                                    {/* <h3 className='mb-0'>Payment Gateway</h3> */}
+                                    <div className='me-4 text-color-sq-black'>
+                                        <h3>Process Payment</h3>
+                                        <p>You are paying <strong>${parseAmount(invoice.total)}</strong> for <strong>Invoice #00{invoice.id}</strong></p>
+                                    </div>
                                     <button
                                         className='sq-btn-icon bg-transparent'
                                         onClick={()=>{
@@ -451,11 +455,11 @@ const Invoice = ({
                                         <i className='fa fa-regular fa-solid fa-xmark text-color-sq-dark fa-xl'/>
                                     </button>
                             </div>
-                            <div className='mt-4'>
+                            {/* <div className='mt-4 text-color-sq-black'>
                                 
                                         You are paying <strong>${parseAmount(invoice.total)}</strong> for <strong>Invoice #00{invoice.id}</strong>
-                            </div>
-                            <hr className='mb-4'/>
+                            </div> */}
+                            <hr className='mb-3'/>
                             <CheckoutForm 
                                 clientSecret={paymentIntent.client_secret} 
                                 paymentIntent={paymentIntent}

@@ -122,9 +122,15 @@ export default function CheckoutForm({
   return (
     <div className="sq-checkout">
 
-        <div className="font-size-10 text-color-sq-med-light mb-2">
-          <strong>Test Card Number:</strong> 5555555555554444
+        
+        <div className='bg-sq-lav-light w-100 sq-outter-shadow mb-4 p-3 rounded'>
+          <div className='sub mb-2'>Demo Test Card</div>
+            <div className='sq-grid font-size-11 w-100'>
+                <strong>Card Number:</strong>
+                <div className=''>5555555555554444</div>
+            </div>
         </div>
+        <hr className="mb-4"/>
        <form id="payment-form" onSubmit={handleSubmit}>
 
         <PaymentElement id="payment-element" options={paymentElementOptions} />
