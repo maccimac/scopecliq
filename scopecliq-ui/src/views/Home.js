@@ -248,12 +248,10 @@ const Home = () => {
                     <div className='row align-items-center'>
                         <div className='col-12 col-md-5 col-lg-6'>
                             <h1 className='mb-3'>
-                                Freelancing Toolkit for Emerging Businesses
+                                A Freelancing Toolkit for your Emerging Business
                             </h1>
-                            <h3 className='h3-light mb-4'>
-                                ScopeCliq is a straightforward freelancing management software that allows Clients to review project status overview real-time from a Client Portal.
-                            </h3>
-                            <div className='bg-sq-lav-light w-75 sq-outter-shadow mb-3 p-3 rounded'>
+                            {/* <h3 className='h3-light mb-4'>Freelance Toolkit</h3> */}
+                            <div className='bg-sq-lav-light w-75 sq-outter-shadow mb-4 p-3 rounded'>
                                 <div className='sub mb-2'>
                                     Demo Login Credentials
                                 </div>
@@ -267,7 +265,7 @@ const Home = () => {
                                 </div>
                             </div>
                             <div>
-                                <h3 className='text-color-sq-med-light'>
+                                <h3 className='h3-light'>
                                     {modeRegister ? 'Register' : 'Login'}
                                 </h3>
                                 <div className=''>
@@ -317,7 +315,7 @@ const Home = () => {
                                     
                                 </div>
                                 :
-                                <div className='d-flex align-items-center'>
+                                <div className='d-flex align-items-center mb-5'>
                                     <button className='sq-btn me-2' onClick={initRegister}>
                                         Register
                                     </button>

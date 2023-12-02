@@ -158,7 +158,7 @@ const Invoice = ({
 
     const origin = window.location.origin;
     const copyToClipboard = () => {
-        const urlLink =  `${origin}/invoice/${invoice.id}` ;
+        const urlLink =  `${origin}/invoice/${milestoneId}` ;
         navigator.clipboard.writeText(urlLink)
           .then(() => {
             console.log('Text successfully copied to clipboard');
@@ -334,7 +334,7 @@ const Invoice = ({
                             <Tooltip title="Copy invoice URL to clipboard">
                                 <div className='sq-input d-flex w-75' onClick={copyToClipboard}>
                                     <input className='w-100 me-1 outline-none border-none bg-transparent' disabled 
-                                        value={`${origin}/invoice/${invoice.id}`}/>
+                                        value={`${origin}/invoice/${milestoneId}`}/>
                                     <div className='sq-btn sq-btn-icon p-2 bg-sq-lighter' >
                                         <i className='fa fa-solid fa-link'/>
                                     </div>
