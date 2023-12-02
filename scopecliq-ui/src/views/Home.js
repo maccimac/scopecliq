@@ -175,22 +175,14 @@ const Home = () => {
                 }
             });
     
-            console.log(response.data); // Log the response data
-            if(response?.data?.status==='success'){
-                
+            if(response?.data?.status==='success'){   
                 const userId = response.data.user_id
                 dispatch(setUserId(userId))
-
                 dispatch(showSnackbarMessage({
                     message: "Account created"
                 }))
-
                 await createOrganization(userId)
-            }else{
-
-            }
-            // You can perform actions based on the response here, e.g., redirect on success
-    
+            } 
         } catch (error) {
             console.log(error)
 

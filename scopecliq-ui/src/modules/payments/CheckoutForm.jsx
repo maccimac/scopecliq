@@ -22,18 +22,12 @@ export default function CheckoutForm({
   const location = useLocation()
   const dispatch = useDispatch()
 
-  console.log({location})
-
-
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchIntent = async() => {
-    
     try{
       const payIntent = await stripe.retrievePaymentIntent(clientSecret)
-      console.log({payIntent});
-    
   
     }catch(e){
       console.log(e)
@@ -68,8 +62,6 @@ export default function CheckoutForm({
     e.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
 
@@ -86,7 +78,6 @@ export default function CheckoutForm({
         },
         handleActions: false, 
       });
-    
 
       // This point will only be reached if there is an immediate error when
       // confirming the payment. Otherwise, your customer will be redirected to
@@ -109,8 +100,6 @@ export default function CheckoutForm({
         message: e.response.data.message 
     }))
     }
-
-
 
     setIsLoading(false);
   };
@@ -147,7 +136,7 @@ export default function CheckoutForm({
           </span>
         </button>
         {/* Show any error or success messages */}
-        {/* {message && <div id="payment-message">{message}</div>} */}
+        {message && <div id="payment-message">{message}</div>}
         </form>
 
     </div>

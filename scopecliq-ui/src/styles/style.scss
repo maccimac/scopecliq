@@ -6,7 +6,6 @@
 @import './utils/effects.scss';
 @import './utils/buttons-and-forms.scss';
 
-
 @import './modules/main.scss';
 @import './modules/milestones.scss';
 @import './modules/notifications.scss';
@@ -31,12 +30,8 @@ body{
         border: 1px solid $sq-lighter;
     }
     &::-webkit-scrollbar-thumb {
-        // height: 1rem;
-        // border-bottom: 1rem solid $sq-lav-light-bright;
-        // border-right: 1rem solid $sq-lav-light-bright;
         border-top: 1px solid #ddd;
-        background-color: $sq-lav-light;
-        
+        background-color: $sq-lav-light;       
     }
 }
 

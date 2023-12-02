@@ -46,6 +46,18 @@ const Invoice = ({
 
     const [showCheckout, setShowCheckout] = useState(false)
 
+    const markAsPaid = async () =>{
+        try{
+            const res = await axios.post(`${api}/invoices/mark-paid/${invoice.id}`)
+            getInvoiceDetails()
+        }catch(e){
+            dispatch(showSnackbarMessage({
+                status: 'error',
+                message: e.response.data.message 
+            }))
+        }
+    }
+
     const fetchPaymentIntent = async () =>{
         if(!invoice?.total || invoice?.total <= 0) return
          if(invoice?.datetime_paid) return
@@ -70,21 +82,7 @@ const Invoice = ({
             }
         }catch(e){
             console.log(e)
-        }      
-          
-    }
-
-
-    const markAsPaid = async () =>{
-        try{
-            const res = await axios.post(`${api}/invoices/mark-paid/${invoice.id}`)
-            getInvoiceDetails()
-        }catch(e){
-            dispatch(showSnackbarMessage({
-                status: 'error',
-                message: e.response.data.message 
-            }))
-        }
+        }           
     }
 
 
@@ -157,7 +155,6 @@ const Invoice = ({
         // return (num).toLocaleString('en-US'); 
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
-
 
     const origin = window.location.origin;
     const copyToClipboard = () => {

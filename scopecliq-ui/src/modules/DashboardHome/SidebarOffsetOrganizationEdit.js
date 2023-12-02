@@ -227,7 +227,7 @@ const SidebarOffsetOrganizationEdit = ({
                         <CloudinaryContext cloudName={cloudinaryConfig.cloud_name}>
                             <div className='mb-2'>
                                 <div className='label'>
-                                        Your Logo (Optional)
+                                        Your Logo or Avatar (Optional)
                                 </div>
                                 <input className="sq-input" type="file" onChange={handleImageUpload} />
                                 {modelImage && (
