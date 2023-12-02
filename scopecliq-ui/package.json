@@ -1,6 +1,5 @@
 {
   "name": "scopecliq-ui",
-  "homepage": "https://scopecliq.com/scopecliq/scopecliq-ui/build",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
