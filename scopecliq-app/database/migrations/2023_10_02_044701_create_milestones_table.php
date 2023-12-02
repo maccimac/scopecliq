@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('milestones', function (Blueprint $table) {
             $table->id();
-
             $table->foreignId('project_id')->constrained('projects');
             $table->integer('position');
             $table->string('name');
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->string('status_invoice')->nullable();
             $table->dateTime('datetime_started')->nullable();
             $table->dateTime('datetime_completed')->nullable();
-            
+            $table->dateTime('datetime_due')->nullable();
             $table->timestamps();
         });
     }

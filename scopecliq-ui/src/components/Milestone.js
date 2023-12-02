@@ -11,7 +11,7 @@ import placeholder2 from '../assets/img/placeholder-2.png'
 import placeholder3 from '../assets/img/placeholder-3.png'
 import BtnAdd from './BtnAdd';
 
-import { isClient } from '../store/user-store';
+import { isClient } from '../store/client-store';
 import { showSnackbarMessage } from '../store/snackbar-store';
 
 
@@ -21,7 +21,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
     const navigate = useNavigate()
     const clientMode = useSelector(isClient);
 
-    const [milestoneStatus, setMilestoneStatus] = useState('complete')
+    const [milestoneStatus, setMilestoneStatus] = useState(null)
     const [deliverables, setDeliverables] = useState([])
     const [editMode, set_editMode] = useState(edit)
     const [invoice, set_invoice] = useState(true)
@@ -40,25 +40,29 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
         }
     }
 
-    const updateMilestoneStatus = () => {
+    const updateMilestoneStatus = async () => {
+        console.log('update')
+        if(!deliverables) return
         let statArr = []
         deliverables.forEach(d => {
             statArr.push(d.status)
         });
+        // console.log(statArr)
+        let newStat;
+
         if (!statArr.length){
-            setMilestoneStatus('pending');
-            return;
+            newStat='PENDING';
+        } else if(statArr.includes('INCOMPLETE') && statArr.includes('COMPLETE')){
+            newStat='ONGOING'
+        } else if(statArr.includes('INCOMPLETE')){
+            newStat='PENDING'
+        } else if(statArr.includes('COMPLETE')){
+            newStat='COMPLETE'   
         }
-        if(statArr.includes('INCOMPLETE')){
-            if(statArr.includes('COMPLETE')){
-                setMilestoneStatus('started')
-            }else{
-                setMilestoneStatus('pending')
-            }
-        }else{
-            setMilestoneStatus('complete')
-            
-        }
+        if(!newStat) return
+
+        setMilestoneStatus(newStat)
+    
     }
 
     const checkInvoiceStatus = async () =>{
@@ -135,15 +139,22 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
     }
 
     useEffect(()=>{
+        if(milestone.status_completion){
+            setMilestoneStatus(milestone.status_completion)
+        }
+    }, [milestone])
+
+    useEffect(()=>{
         fetchDeliverableByMilestone()
         checkInvoiceStatus()
+        updateMilestoneStatus(false)
     }, [])
 
     useEffect(()=>{
         const isNewArr = deliverables.map(d => d.is_new);
         set_editMode(isNewArr.includes(true))
         updateMilestoneStatus()
-        checkInvoiceStatus()
+        checkInvoiceStatus(true)
     }, [deliverables])
 
     return(
@@ -162,7 +173,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
                 edit={!milestone.id}
             />
 
-            {!invoice && !clientMode && milestoneStatus==='complete' && (
+            {!invoice && !clientMode && milestoneStatus==='COMPLETE' && (
                 <div>
                     <hr/>
                     <p>
@@ -201,7 +212,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
                             cb={{
                                 saveAllPositions,
                                 fetchDeliverableByMilestone,
-                                // updateMilestoneStatus
+                                updateMilestoneStatus
                             }}
                             cancelNewDeliverable={()=>{
                                 cancelNewDeliverable(i)

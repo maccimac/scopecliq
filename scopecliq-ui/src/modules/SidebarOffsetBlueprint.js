@@ -1,19 +1,37 @@
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
-import { storeProject } from '../store/project-store';
+import { isClient} from '../store/client-store';
+import { notifControl, updateNotif } from '../store/notif-store';
+import { storeProject, setProject } from '../store/project-store';
 import { connect } from 'react-redux';
 
 import Notification from '../components/Notification';
 import ProjectCard from '../components/ProjectCard';
+import OrganizationCardSmall from '../components/OrganizationCardSmall';
 
-const SidebarOffset = () => {
+const SidebarOffsetBlueprint = ({project}) => {
     const api = global.config.API;
-    const clientMode = useSelector(isClient);
+    const dispatch = useDispatch()
+    const clientMode = useSelector(isClient)
+    const notifUpdate = useSelector(notifControl)
     const [sidebarMode, set_sidebarMode] = useState('NOTIFICATIONS')
-    const project= useSelector(storeProject);
+    // const project = useSelector(storeProject);
     const [showOffcanvas, setShowOffcanvas] = useState(clientMode); // Set the initial state to true to show the Offcanvas
+    const [clientOrg, set_clientOrg] = useState(null)
+    const { domain, projectId } = useParams();
+
+    const fetchProject = async () => {
+       console.log({domain, projectId})
+       if(domain){
+        const res = await axios.get(api+ '/projects/portal/' + domain)
+        dispatch(setProject(res.data))
+       }else if(projectId){
+        const res = await axios.get(api+ '/projects/' + projectId)
+        dispatch(setProject(res.data))
+       }
+    }
 
     const fetchNotificationsByProject = async() =>{
         if(!project) return
@@ -21,38 +39,12 @@ const SidebarOffset = () => {
         set_notifications(res.data)
     }
 
-    const notifDeliverableComplete = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  3,
-        deliverable_id:  7,
-        type:  'STATUS_UPDATE',
-        status:  'COMPLETE',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
+    const fetchOrganizationById = async () => {
+        if(!project) return;
+        const res = await axios.get(api+ '/organizations/'+project.organization_id)
+        console.log(res)
+        set_clientOrg(res.data)
     }
-
-    const notifInvoiceSent = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  null,
-        deliverable_id:  null,
-        type:  'INVOICE',
-        status:  'SENT',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
-    }
-    const notifItemChanged = {
-        id: 1,
-        project_id:  2,
-        milestone_id:  null,
-        deliverable_id:  null,
-        type:  'CHANGE',
-        status:  'MADE',
-        description:  'Market, competition, and demography research',
-        additional_message:  'This is done, thanks for your help.',  
-    }
-
 
     const [notifications, set_notifications] = useState([])
 
@@ -65,8 +57,22 @@ const SidebarOffset = () => {
   };
 
   useEffect(()=>{
+    if(!project){
+        fetchProject()
+    }
+  },[])
+
+  useEffect(()=>{
+    // if(!project){
+    //     fetchProject()
+    // }
+    fetchOrganizationById()
     fetchNotificationsByProject()
   },[project])
+
+  useEffect(()=>{
+    fetchNotificationsByProject()
+  },[notifUpdate])
 
 
     return(
@@ -74,7 +80,7 @@ const SidebarOffset = () => {
         sq-sidebar-offcanvas
         ${showOffcanvas && 'sq-sidebar-offcanvas--open'}
         `}>
-            <div className="sq-btn btn-menu mt-2 me-2 bg-sq-lav-dark" onClick={toggleOffcanvas}>
+            <div className="sq-btn btn-menu mt-4 me-3 bg-sq-lav-dark" onClick={toggleOffcanvas}>
                 <i className="fa-solid fa-bars"></i>
             </div>
             <div className={'offcanvas offcanvas-end ' + ( showOffcanvas ? 'show' : '')} data-bs-backdrop="static" tabIndex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel"
@@ -98,10 +104,18 @@ const SidebarOffset = () => {
                     {sidebarMode=='NOTIFICATIONS' && (
                     <div className='mode-notifications'>
                         <div className='notifications px-2'>
-                            <div className='d-flex justify-content-between mb-4 align-items-center mt-3 mx-2'>
-                                <h2 className='mb-0'>
-                                    Notifications
-                                </h2>
+                            <div className='d-flex justify-content-between mb-2 mt-3 mx-2'>
+                                <div>
+                                    <h3 className='mb-1 find'>
+                                        { clientMode ? 'Notifications' : "Client's Unread Notifications"} 
+                                        
+                                    </h3>
+                                    { clientMode &&
+                                        <p className='text-color-sq-light'>See your project activities and mark read to acknowledge</p>
+                                    }
+
+                                </div>
+
                                 <div className='d-flex'>
                                     <button
                                         className='sq-btn-icon bg-transparent me-4'
@@ -121,6 +135,7 @@ const SidebarOffset = () => {
                                     </button> */}
                                 </div>
                             </div>
+                            
                             <div className='notification-list p-2'>
                                 {
                                     notifications?.length 
@@ -131,15 +146,35 @@ const SidebarOffset = () => {
                                                 set_notifications
                                             }}/>
                                         ))
-                                    ): "No new notifications"
+                                    ): <p>No new notifications</p>
 
                                 }
                             
 
                             </div>
                         </div>
-                        <div>
-                            {project && <ProjectCard 
+                        <div className='offset-footer'>
+                            {clientOrg &&
+                                <div onClick={()=>{
+                                    set_sidebarMode('PROJECT_DETAILS')
+                                }}>
+                                    {/* <OrganizationCardSmall
+                                        organization={clientOrg}
+                                        className='w-100 d-flex justify-content-space-between mb-2'
+                                    /> */}
+                                    <OrganizationCardSmall
+                                        organization={clientOrg}
+                                        className='w-100 d-flex justify-content-space-between'
+                                    />
+                                    <div className='d-flex mt-1 justify-content-center'>
+                                        <button className='sq-link text-color-sq-lav-light-bright'>
+                                            Go to project details &nbsp;
+                                            <i className='fa-solid fa-regular fa-arrow-right'/>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                            {/* {project && <ProjectCard 
                                 project={project}
                                 collapsed
                                 dark
@@ -148,12 +183,13 @@ const SidebarOffset = () => {
                                     <button className='sq-link text-color-sq-green' onClick={()=>{
                                         set_sidebarMode('PROJECT_DETAILS')
                                     }}>
-                                        Go to project details &nbsp;
+                                        Go to project detaimodels &nbsp;
                                         <i className='fa-solid fa-regular fa-arrow-right'/>
                                     </button>
                                 </div>
                                
-                            </ProjectCard>}
+                            </ProjectCard>} */}
+
                         </div>
                     </div>)}
 
@@ -161,7 +197,7 @@ const SidebarOffset = () => {
                         
                         <div className='mode-project-details'>
                             <div className='d-flex mt-4 ms-2'>
-                                <button className='sq-link text-color-sq-green' onClick={()=>{
+                                <button className='sq-link text-color-sq-lav-light-bright' onClick={()=>{
                                     set_sidebarMode('NOTIFICATIONS')
                                 }}>
                                     <i className='fa-solid fa-regular fa-arrow-left'/> &nbsp;
@@ -176,9 +212,9 @@ const SidebarOffset = () => {
                                 dark
                             >
                                 <div className='d-flex'>
-                                    <div className='sq-btn'>
+                                    {/* <div className='sq-btn'>
                                         Edit
-                                    </div>
+                                    </div> */}
                                     
                                 </div>
                             </ProjectCard>)}
@@ -193,7 +229,7 @@ const SidebarOffset = () => {
 }
 
   
-  export default SidebarOffset;
+  export default SidebarOffsetBlueprint;
   
   
   

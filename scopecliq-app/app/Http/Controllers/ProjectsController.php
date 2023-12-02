@@ -16,6 +16,16 @@ class ProjectsController extends Controller
         return $projects;
     }
 
+
+    public function fetchAllProjectsByConsultantUserId($user_id){
+        $projects = DB::table('projects')
+            -> select('*')
+            ->  where('consultant_user_id', $user_id)
+            -> get();
+        return $projects;
+    }
+
+    
     public function fetchById($project_id){
         $project = DB::table('projects')
             -> select('*')
@@ -61,6 +71,19 @@ class ProjectsController extends Controller
     }
 
     public function addProject(Request $req, $organization_id) {
+
+
+        $this->validate($req, [
+            
+                'name' => 'required|string',
+                'portal_domain' => 'required|string|unique:projects',
+                'portal_password' => 'required|string',
+                'datetime_due' => 'nullable|date|after:now', // Ensures datetime_due is in the future
+                'consultant_user_id' => 'required|numeric',
+        ]);
+
+        
+
         $newProjId = DB::table('projects')
             ->insertGetId([
                 'organization_id' => $organization_id,
@@ -70,7 +93,9 @@ class ProjectsController extends Controller
                 'status' => 'pending',
                 'portal_domain' => $req->portal_domain,
                 'portal_password' => $req->portal_password,
+                'datetime_due' => $req->datetime_due,
                 'terms' => $req->terms,
+                'consultant_user_id'=>$req->consultant_user_id
             
         ]);
 

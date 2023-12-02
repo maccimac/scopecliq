@@ -2,7 +2,8 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
+import { currentUserOrg } from '../store/login-store';
 
 export const OrganizationCardEdit = ({
     organization,
@@ -12,29 +13,38 @@ export const OrganizationCardEdit = ({
 
 }) => {
     const api = global.config.API;
-    const [modelOrganizationName, set_modelOrganizationName] = useState('')
-    const [modelContactName, set_modelContactName] = useState('')
-    const [modelContactEmail,  set_modelContactEmail] = useState('')
-    const [modelContactAbout, set_modelContactAbout] = useState('')
-    const [ modelContactNumber, set_modelContactNumber] = useState('')
+    const userOrg = useSelector(currentUserOrg)
+    const [modelOrganizationName, set_modelOrganizationName] = useState(organization?.organization_name || '')
+    const [modelContactName, set_modelContactName] = useState(organization?.contact_name || '')
+    const [modelContactEmail,  set_modelContactEmail] = useState(organization?.contact_email || '')
+    const [modelContactAbout, set_modelContactAbout] = useState(organization?.contact_about || '')
+    const [ modelContactNumber, set_modelContactNumber] = useState(organization?.contact_number || '')
 
-    
 
     useEffect(()=>{
-        cb.set_organization({
-            organization_name: modelOrganizationName,
-            contact_name: modelContactName,
-            contact_email: modelContactEmail,
-            contact_number: modelContactNumber,
-            contact_about: modelContactAbout,
-        })
 
+        if(cb?.set_organization){
+            cb.set_organization({
+                organization_name: modelOrganizationName,
+                contact_name: modelContactName,
+                contact_email: modelContactEmail,
+                contact_number: modelContactNumber,
+                contact_about: modelContactAbout,
+            })
+        }
+
+        if(
+            organization?.contact_email
+        ){
+            set_modelContactEmail(organization.contact_email)
+        }
+    
     }, [
         modelOrganizationName,
         modelContactName,
         modelContactEmail,
         modelContactNumber,
-        modelContactAbout
+        modelContactAbout,
     ])
 
 
@@ -44,13 +54,12 @@ export const OrganizationCardEdit = ({
             ${dark && 'dark'}
             ${className}
         `} >
-        <div class="sq-input-group mb-2">
-            
+        <div className="sq-input-group my-2">
             <div>
-                <hr/>
-                <div className='sub mb-2'>New Organization</div>
+                {/* <hr/> */}
+                <div className='sub mb-2'>Organization</div>
                 <div className='label'>
-                    Organization
+                    Organization Name
                 </div>
                 <input className='sq-input w-100 mb-2 mb-2' 
                             value={modelOrganizationName} 
@@ -60,7 +69,7 @@ export const OrganizationCardEdit = ({
                             placeholder='Organization Name'
                 ></input>
                 <div className='label'>
-                    Your contact
+                    Contact Details
                 </div>
                 <input className='sq-input w-100 mb-2 mb-2' 
                             value={modelContactName} 
@@ -76,6 +85,7 @@ export const OrganizationCardEdit = ({
                                     set_modelContactEmail(e.target.value)
                                 }}
                                 placeholder='Contact Email'
+                                disabled={userOrg?.contact_email == organization?.contact_email}
                     ></input>
                     <input className='sq-input w-100 mb-2' 
                             value={modelContactNumber} 

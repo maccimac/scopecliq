@@ -1,9 +1,11 @@
 import axios from 'axios'
+import {DateTime} from 'luxon'
 import { useState, useEffect } from "react";
 import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import { storeProject} from '../store/project-store';
+import { updateNotif } from '../store/notif-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 import Menu from '@mui/material/Menu';
 
@@ -24,6 +26,7 @@ export const MilestoneCard = ({
     const [modelName, set_modelName] = useState(milestone.name)
     const [modelDescription, set_modelDescription] = useState(milestone.description)
     const [modelPercentage, set_modePercentage] = useState(milestone.budget_percentage)
+    const [modelDue, set_modelDue] = useState(milestone.datetime_due)
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -36,15 +39,38 @@ export const MilestoneCard = ({
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const createNotification = async (payload) =>{
+  
+        const _payload = {
+            read_at: null,
+            project_id: milestone.project_id,
+            milestone_id: milestone.id,
+            description: milestone.name,
+            ...payload,
+        }
+        try{   
+            await axios.post(`${api}/notifications/project/${project.id}/add`, _payload, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            })
+            setTimeout(()=>{
+                dispatch(updateNotif())
+            },0)
+        }catch(e){
+            console.log(e)
+        }
+       
+    }
     
-
-
     const addMilestone = async () =>{
         const payloadDesc = {
             project_id: project.id,
             name: modelName,
             description: modelDescription,
-            budget_percentage: modelPercentage
+            budget_percentage: modelPercentage,
+            datetime_due: modelDue,
         }
         try{
             const res = await axios.post(`${api}/milestones/add/${project.id}`, payloadDesc, {
@@ -53,7 +79,14 @@ export const MilestoneCard = ({
                 },
             });
             console.log(res)
+            
             if(res.status===200){
+                createNotification({
+                    milestone_id: res.data,
+                    description: modelName,
+                    type: 'CHANGE',
+                    status: 'CREATED',
+                }) 
                 cb.updateMilestonesPositions(res.data)
             }
         }catch(e){
@@ -71,7 +104,8 @@ export const MilestoneCard = ({
             ...milestone,
             name: modelName,
             description: modelDescription,
-            budget_percentage: modelPercentage
+            budget_percentage: modelPercentage,
+            datetime_due: modelDue
         }
         const res = await axios.post(`${api}/milestones/update/${milestone.id}`, payloadDesc, {
             headers: {
@@ -82,6 +116,10 @@ export const MilestoneCard = ({
             setEditMode(false)
             cb.getMilestones()
             dispatch(showSnackbarMessage({message: "Milestone updated"}))
+            createNotification({
+                type: 'CHANGE',
+                status: 'MADE'
+            }) 
         }
     }
 
@@ -94,8 +132,17 @@ export const MilestoneCard = ({
                 },
             });
             console.log({res})
-            if(res.data.status == 'successs'){
-                cb.getMilestones()
+            if(res.data.status == 'success'){
+                createNotification({
+                    type: 'CHANGE',
+                    status: 'DELETED',
+                    milestone_id: res.data.milestone_id,
+                })
+                setTimeout(()=>{
+                    cb.getMilestones()
+                }, 100) 
+                
+                
             }else{
                 cb.getMilestones()
                 dispatch(showSnackbarMessage({
@@ -111,6 +158,13 @@ export const MilestoneCard = ({
                 message: e.response.data.message 
             }))
         }        
+    }
+
+    const parseDate = (dateString) => {
+        if(!dateString) return <i>No due date</i>;
+        const date = DateTime.fromFormat(dateString, 'yyyy-MM-dd HH:mm:ss' )
+        return date.toFormat('MMM dd, yyyy')
+     
     }
 
 
@@ -220,6 +274,14 @@ export const MilestoneCard = ({
                         <p>{milestone.description}
                         </p>                
                     </div>
+                    {milestone.datetime_due && 
+                        <div className='mb-2'>
+                                <p>
+                                    <span className="label">Target date: &nbsp;</span>
+                                    {parseDate(milestone.datetime_due)}
+                                </p>
+                        </div>
+                    }
                     <div className='mb-2'>
                             <p>
                                 <span className="label">Fee: &nbsp;</span>
@@ -251,9 +313,19 @@ export const MilestoneCard = ({
                     ></textarea>
                 </div>
 
+                <div className='label'>
+                        Due Date (Optional)
+                </div>
+                <input type="date" className='sq-input w-100 mb-2'
+                    value={modelDue} 
+                    onChange={(e)=>{
+                        set_modelDue(e.target.value)
+                    }}
+                ></input>
+
                 <div className='d-flex w-100 align-items-end justify-content-between'>
                     <div className='sq-input-group'>
-                        <div className='label'>Budget Perecentage</div>
+                        <div className='label'>Budget Percentage</div>
                         <input type="number" className='sq-input w-25' placeholder='10' 
                             value={modelPercentage}
                             onChange={(e)=>{

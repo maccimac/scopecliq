@@ -5,7 +5,7 @@
     font-size: 11px;
 
     &.dark{
-        background-color: $sq-lav-dark;
+        background-color: $sq-lav-darker;
         color: $sq-lightest;
         .text-head{
             color: $sq-white;
@@ -14,6 +14,26 @@
             background-color: $sq-lighter;
         }
     }
+    
+    &:not(.sq-project-card--full) .sq-progress-rate{
+        background-color: #fff;
+        margin-right: -24px;
+        margin-top: -24px;
+    }
+    .sq-progress-rate{
+        height: 36px;
+        width: 36px;
+        border-radius: 36px;
+        margin-top: -16px;
+        display: flex;
+        align-items: center;
+        box-shadow: $sq-outter-shadow;
+        .sq-label{
+            font-size: 9px;
+            letter-spacing: normal;
+        }
+
+    }
 
     .text-prop{
         color: $sq-lav-muted
@@ -21,12 +41,6 @@
     .text-head{
         color: $sq-dark;
         font-weight: 700;
-    }
-
-    .sq-grid{
-        display: grid;
-        grid-template-columns: 2fr 5fr;
-        margin-bottom: 4px;
     }
     .sq-textarea.sq-textarea--terms{
         height: 160px;
@@ -40,4 +54,38 @@
     @extend .sq-project-card;
     background-color: transparent;
     box-shadow: none;
+}
+
+.sq-organization-card-small{
+    @extend .sq-project-card;
+    height: 60px;
+    border-radius: 16px;
+    width: 240px;
+    min-width: 240px;
+    max-width: 320px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: $sq-black;
+    color: $sq-lightest;
+    .h3{
+        color: $sq-lightest;
+    }
+    .org-logo{
+        height: 48px;
+        min-width: 48px;
+        max-width: 64px;
+        overflow: hidden;
+        border-radius: 12px;
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        padding: 2px;
+        img{
+            max-height: 110%;
+            max-width: 110%;
+        }
+    }
 }

@@ -4,13 +4,13 @@ import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
 
-import { isClient, setAsClient, setAsConsultant} from '../store/user-store';
+import { isClient, setAsClient, setAsConsultant} from '../store/client-store';
 import { storeProject, setProject} from '../store/project-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 
 import Invoice from '../components/Invoice';
 import NavBar from '../components/NavBar';
-import SidebarOffset from '../modules/SidebarOffset';
+import SidebarOffsetBlueprint from '../modules/SidebarOffsetBlueprint';
 
 
 
@@ -108,14 +108,14 @@ const InvoiceList = () => {
                                 Back to Project
                             </Link>
                         </strong>   
-                        <h2 className='mt-2'>Your Invoices: &nbsp;
+                        <h2 className='mt-2'>Invoices: &nbsp;
                             <strong className='text-color-sq-lav-dark'>{project && project.name}</strong>
                         </h2> 
                     </div>)}
 
                     <div className='mx-5'>
                         {milestones.map((m, i)=>(
-                            <div>
+                            <div key={i}>
                                 <Invoice
                                     propMilestoneId={m.id}
                                     milestone={m}
@@ -127,7 +127,7 @@ const InvoiceList = () => {
                     
                 </div>
             </div>
-            <SidebarOffset/>
+            {/* <SidebarOffsetBlueprint/> */}
         </div>
     )
 }

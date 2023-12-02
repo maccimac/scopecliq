@@ -1,20 +1,50 @@
-h2{
-    color: $sq-lav-muted;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+h1, .h1{
+    color: $sq-lav-darker;
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 40px;
 }
-h3{
+
+h2, .h2{
     font-size: 24px;
     font-weight: 700;
-    color: $sq-black;
+    font-style: normal;
+    &.h2-light{
+        color: $sq-lav-muted;
+        font-style: normal;
+        font-weight: 500;
 
+    }
+    // color: $sq-lav-muted;
+    // font-size: 18px;
+    // font-style: normal;
+    // font-weight: 500;
+    // line-height: normal;
+}
+h3, .h3{
+    // font-size: 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: $sq-black;
+    color: $sq-med-light;
+    &.h3-light{
+        color: $sq-lav-muted;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+    }
+}
+h4, .h4{
+   font-size: 12px;
+   font-weight: 800;
+   color: $sq-black; 
 }
 
-p{
+p, .p{
     margin-top: 2px;
-    font-size: 11px;
+    // font-size: 11px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 400;
     margin-bottom: 4px;
@@ -31,14 +61,14 @@ a{
 .sub{
     margin-top: 4px;
     color: $sq-lav-muted;
-    font-size: 9px;
+    font-size: 10px;
     font-style: normal;
     font-weight: 700;
     letter-spacing: 2.56px;
     text-transform: uppercase;
 }
 .label{
-    font-size: 11px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     color: $sq-lav-muted;
@@ -59,4 +89,11 @@ small{
     .font-size-#{$i} {
         font-size: #{$i}px !important;
       }
-  }
+}
+
+@each $variable-name, $color-value in $color-variables {
+    .text-color-#{$variable-name} {
+      color: $color-value !important;
+    }
+}
+  

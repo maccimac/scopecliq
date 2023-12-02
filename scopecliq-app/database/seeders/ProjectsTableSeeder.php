@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProjectsTableSeeder extends Seeder
 {
@@ -35,9 +36,10 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'name' => 'WaveKo Surf Lounge',
                 'about' => 'Design and build of resort villa',
                 'budget' => 88000,
-                'status' => 'pending',
                 'portal_domain' => 'waveko',
                 'portal_password' => 'beach',
+                'datetime_due' => Carbon::create(2023, 12, 15, 0, 0, 0),
+                'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
             [
@@ -45,9 +47,10 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'name' => 'Siesta Farm and Restaurant',
                 'about' => 'Markekting package. Farm to table artisinal easy dining',
                 'budget' => 40600,
-                'status' => 'started',
                 'portal_domain' => 'siesta',
                 'portal_password' => 'pizza',
+                'datetime_due' => null,
+                'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
             [
@@ -55,9 +58,33 @@ Technical Support and Website Care - Technical support and minor troubleshooting
                 'name' => 'Lettered Leather',
                 'about' => 'Markating package. Local leathered goods',
                 'budget' => 8000,
-                'status' => 'pending',
                 'portal_domain' => 'lettered-leather',
                 'portal_password' => 'luna',
+                'datetime_due' => Carbon::create(2023, 12, 25, 0, 0, 0),
+                'consultant_user_id' => 1,
+                'terms' => $termsPlaceholder,
+            ],
+            [
+                'organization_id' => 2,
+                'name' => 'TechMate',
+                'about' => 'Mobile App',
+                'budget' => 8000,
+                'portal_domain' => 'techmate',
+                'portal_password' => 'luna',
+                'datetime_due' => Carbon::create(2023, 11, 29, 0, 0, 0),
+                'consultant_user_id' => 1,
+                'terms' => $termsPlaceholder,        
+            ],
+
+            [
+                'organization_id' => 2,
+                'name' => 'Truck Flow Digital',
+                'about' => 'Logistic system',
+                'budget' => 4200,
+                'portal_domain' => 'truckflow',
+                'portal_password' => 'bobcat',
+                'datetime_due' => Carbon::create(2023, 9, 1, 0, 0, 0),
+                'consultant_user_id' => 1,
                 'terms' => $termsPlaceholder,
             ],
         ]);

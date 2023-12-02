@@ -2,5 +2,10 @@
     .btn-notif-exit{
         margin-top: -4px !important;
         margin-right: -4px  !important;
+        // background-color: $sq-green-muted;
+        // outline: 2px solid $sq-green;
+        &:hover{
+            scale: 1.1
+        }
     }    
 }

@@ -16,7 +16,7 @@ class DeliverablesTableSeeder extends Seeder
     {
         DB::table('deliverables')->insert([
 
-            // SIESTA
+            // SIESTA 1 of 2
             [
                 'project_id' => 2,
                 'milestone_id' => 1,
@@ -208,6 +208,119 @@ class DeliverablesTableSeeder extends Seeder
                 'status' => 'INCOMPLETE',
                 'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
                 'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+
+            // TRUCKFLOW
+
+            [
+                'project_id' => 5,
+                'milestone_id' => 8 ,
+                'position' => 0,
+                'description' => 'Define requirements and objectives',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 8 ,
+                'position' => 1,
+                'description' => 'Identify key features such as order management, route optimization, real-time tracking, reporting, user management, and more.',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 8 ,
+                'position' => 2,
+                'description' => 'Consider scalability, security, and user experience.',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 9 ,
+                'position' => 0,
+                'description' => 'Consider scalability, security, and user experience.',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 9 ,
+                'position' => 1,
+                'description' => 'Database design',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 9 ,
+                'position' => 2,
+                'description' => 'Design the database schema to store information about orders, drivers, vehicles, routes, and other relevant data. Implement a relational database (e.g., MySQL, PostgreSQL) for data storage.',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 9 ,
+                'position' => 3,
+                'description' => 'Implement user authentication and authorization mechanisms',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 9 ,
+                'position' => 4,
+                'description' => 'Implement a system for managing cargo orders.',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 10 ,
+                'position' => 0,
+                'description' => 'Allow users to place, modify, and track orders',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 10 ,
+                'position' => 1,
+                'description' => 'Route optimization',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+            [
+                'project_id' => 5,
+                'milestone_id' => 10 ,
+                'position' => 2,
+                'description' => 'Provide a user interface for customers and administrators to track shipments',
+                'status' => 'COMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => Carbon::create(2023, 6, 20, 6, 30, 0),
+            ],
+
+            // SIESTA 2 of 2
+            [
+                'project_id' => 2,
+                'milestone_id' => 11,
+                'position' => 0,
+                'description' => 'All hands meeting',
+                'status' => 'INCOMPLETE',
+                'datetime_started' => Carbon::create(2023, 6, 18, 6, 30, 0),
+                'datetime_completed' => null,
             ],
         ]);
     }

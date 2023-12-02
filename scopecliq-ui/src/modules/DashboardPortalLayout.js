@@ -1,13 +1,15 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 
-import { isClient} from '../store/user-store';
+import { useNavigate, useParams } from 'react-router-dom';
+import { isClient, setAsClient, setAsConsultant} from '../store/client-store';
 import { storeProject} from '../store/project-store';
+import { currentUserId, setUserId } from '../store/login-store';
 
 import { Link } from "react-router-dom";
 
 import NavBar from '../components/NavBar';
-import SidebarOffset from './SidebarOffset';
+import SidebarOffsetBlueprint from './SidebarOffsetBlueprint';
 import ProjectBlueprint from '../components/ProjectBlueprint';
 import { useDispatch, useSelector} from 'react-redux';
 import ProjectEdit from './ProjectEdit';
@@ -15,23 +17,50 @@ import ProjectEdit from './ProjectEdit';
 
 const DashboardPortalLayout = () => {
     const api = global.config.API
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const clientMode = useSelector(isClient)
     const project=(useSelector(storeProject))
-    console.log(project)
+    const userId = (useSelector(currentUserId))
+
+    const { domain, projectId } = useParams();
+
+
+    
+    const logout = () => {
+        dispatch(setUserId(null))
+        navigate("/")
+    }
+    
+    useEffect(()=>{
+        if(userId && projectId){
+            dispatch(setAsConsultant())
+        }
+    },[])
 
     return(
         <div class="sq-dashboard-portal">
             <div class="sq-body">
+
                 <NavBar>
-                    <Link 
-                        to={
-                            clientMode ? `/portal/${project?.portal_domain}/invoices` : `/dashboard/${project?.id}/invoices`
-                        } 
-                        className='d-inline sq-link text-color-sq-green'
-                    >
-                         <i class="fa-solid fa-receipt me-1"></i> Your Invoices
-                    </Link>
-                    
+                    <div className='d-flex w-100 align-items-center justify-content-end'>
+                        <Link 
+                            to={
+                                clientMode ? `/portal/${project?.portal_domain}/invoices` : `/dashboard/${project?.id}/invoices`
+                            } 
+                            className='d-inline sq-link  text-color-sq-green'
+                        >
+                            <i class="fa-solid fa-receipt me-1"></i> View Invoices
+                        </Link>
+
+                        {
+                            userId &&                 
+                            <div className='d-inline-flex align-items-center sq-link text-color-sq-lav-muted ms-4' onClick={logout}>
+                                <i class="fa-solid fa-arrow-right-from-bracket me-1"></i>  Logout
+                            </div>
+                   
+                        }
+                    </div>
                    
                 </NavBar>
                 <div class="sq-content h-100">
@@ -46,9 +75,9 @@ const DashboardPortalLayout = () => {
                                     </Link>
                                 </strong>   
                             )}
-                            <h2 className='mt-2'>Your Project Blueprint: &nbsp;
+                            <h3 className='mt-2 h3-light'>Your Project Blueprint: &nbsp;
                                 <strong className='text-color-sq-lav-dark'>{project && project.name}</strong>
-                            </h2>
+                            </h3>
                         </div>
                         {
                             project ? (<ProjectBlueprint project={project}/>) : "Loading..."
@@ -57,7 +86,9 @@ const DashboardPortalLayout = () => {
                     </div>
                 </div>
             </div>
-            <SidebarOffset/>
+            <SidebarOffsetBlueprint
+                project={project}
+            />
         </div>
     )
 }

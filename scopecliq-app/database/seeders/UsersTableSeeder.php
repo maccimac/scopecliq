@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
             ],
 
             [
-                'name' => 'Margaret McMoo' ,
+                'name' => 'Emmanuelle McRunners' ,
                 'email' => 'web@webcrafterinc.com',
                 'password' => '$2y$10$zv21Uy3QzuImfvsZVsSWc.IFML8whlaXdOSudPjKGn7vzgWTpSdPS', // scopecliq_v1
                  

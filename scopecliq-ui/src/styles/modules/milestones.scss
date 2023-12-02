@@ -11,13 +11,13 @@
         }
     }
 
-    &.sq-milestone--complete{
+    &.sq-milestone--COMPLETE{
         .milestone-status{
             color: $sq-green;
         }
     }
 
-    &.sq-milestone--started{
+    &.sq-milestone--ONGOING{
         .milestone-status{
             color: $sq-lav;
         }

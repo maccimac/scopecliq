@@ -26,6 +26,7 @@ class MilestonesTableSeeder extends Seeder
                 'status_completion' => 'COMPLETE',
                 'status_invoice' => 'PAID',
                 'datetime_started' => Carbon::create(2023, 6, 12, 14, 30, 0),
+                'datetime_due' => null
             ],
             [
                 'project_id' => 2,
@@ -33,19 +34,21 @@ class MilestonesTableSeeder extends Seeder
                 'name' => 'Branding',
                 'description' => "The consistent theme / image you want in your consumer’s mind.",
                 'budget_percentage'=>25,
-                'status_completion' => 'STARTED',
+                'status_completion' => 'COMPLETE',
                 'status_invoice' => 'SENT',
                 'datetime_started' => Carbon::create(2023, 6, 12, 14, 30, 0),
+                'datetime_due' => Carbon::create(2023, 10, 30, 0, 0, 0),
             ],
             [
                 'project_id' => 2,
                 'position' => 2,
                 'name' => 'Website',
                 'description' => "Best way possible leads can reach out. Home for articles and resources we can provide client.",
-                'budget_percentage'=> 50,
-                'status_completion' => 'PENDING',
+                'budget_percentage'=> 45,
+                'status_completion' => 'ONGOING',
                 'status_invoice' => null,
                 'datetime_started' => Carbon::create(2023, 9, 1, 14, 30, 0),
+                'datetime_due' => Carbon::create(2023, 11, 15, 0, 0, 0),
             ],
             [
                 'project_id' => 2,
@@ -55,7 +58,8 @@ class MilestonesTableSeeder extends Seeder
                 'budget_percentage'=> 25,
                 'status_completion' => 'PENDING',
                 'status_invoice' => null,
-                'datetime_started' => null
+                'datetime_started' => null,
+                'datetime_due' => null,
             ],
 
             // WAVEKO
@@ -65,9 +69,10 @@ class MilestonesTableSeeder extends Seeder
                 'name' => 'Website',
                 'description' => "Best way possible leads can reach out. Home for articles and resources we can provide client.",
                 'budget_percentage'=> 50,
-                'status_completion' => 'PENDING',
+                'status_completion' => 'COMPLETE',
                 'status_invoice' => null,
                 'datetime_started' => Carbon::create(2023, 9, 1, 14, 30, 0),
+                'datetime_due' => Carbon::create(2024, 12, 20, 0, 0, 0),
             ],
             [
                 'project_id' => 1,
@@ -75,9 +80,10 @@ class MilestonesTableSeeder extends Seeder
                 'name' => 'Digital Marketing',
                 'description' => "Research. Marketing Plan. Corporate versus Personal Branding. Setup and Implementation.",
                 'budget_percentage'=> 25,
-                'status_completion' => 'PENDING',
+                'status_completion' => 'ONGOING',
                 'status_invoice' => null,
-                'datetime_started' => null
+                'datetime_started' => null,
+                'datetime_due' => null
             ],
 
             [
@@ -88,8 +94,61 @@ class MilestonesTableSeeder extends Seeder
                 'budget_percentage'=> 25,
                 'status_completion' => 'PENDING',
                 'status_invoice' => null,
-                'datetime_started' => null
+                'datetime_started' => null,
+                'datetime_due' => Carbon::create(2024, 2, 28, 0, 0, 0),
             ],
+
+            [
+                'project_id' => 5,
+                'position' => 0,
+                'name' => 'Geographic Research',
+                'description' => "Define requirements and objectives",
+                'budget_percentage'=> 30,
+                'status_completion' => 'COMPLETE',
+                'status_invoice' => null,
+                'datetime_started' => null,
+                'datetime_due' => Carbon::create(2023, 5, 28, 0, 0, 0),
+            ],
+
+            [
+                'project_id' => 5,
+                'position' => 1,
+                'name' => 'Technical Architecture',
+                'description' => "Choose a technology stack (programming language, database, framework).
+                Design the system architecture, considering scalability and performance.",
+                'budget_percentage'=> 40,
+                'status_completion' => 'COMPLETE',
+                'status_invoice' => null,
+                'datetime_started' => null,
+                'datetime_due' => Carbon::create(2023, 6, 28, 0, 0, 0),
+            ],
+
+            [
+                'project_id' => 5,
+                'position' => 2,
+                'name' => 'Mobile Applications',
+                'description' => "Develop mobile applications for drivers and customers to facilitate order management and tracking.",
+                'budget_percentage'=> 30,
+                'status_completion' => 'COMPLETE',
+                'status_invoice' => null,
+                'datetime_started' => null,
+                'datetime_due' => Carbon::create(2023, 8, 28, 0, 0, 0),
+            ],
+
+            // Siesta
+            [
+                'project_id' => 2,
+                'position' => 5,
+                'name' => 'Retrospective',
+                'description' => 'Post mortem of project completion',
+                'budget_percentage'=> 5,
+                'status_completion' => 'PENDING',
+                'status_invoice' => null,
+                'datetime_started' => null,
+                'datetime_due' => null,
+            ],
+
+
             
         ]);
     }

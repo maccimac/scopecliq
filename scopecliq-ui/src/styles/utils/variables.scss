@@ -2,7 +2,8 @@ $sq-green:  #27D39F;
 $sq-lav: #5B79FC;
 $sq-dark: #4E4E4E;
 $sq-med: #777;
-$sq-med-light: #999999;
+$sq-med-light: #9B9EAF; // #ACAEB9;
+// $sq-med-light: #999999;
 $sq-light: #CCCCCC;
 $sq-lighter: #E7E7E7;
 $sq-lightest-alt: #f4f4f4;
@@ -12,8 +13,10 @@ $sq-white: #fff;
 $sq-black: #333;
 $sq-mid-trans: rgba(119,119,119,0.07);
 
-$sq-lav-dark: #565C79;
-$sq-lav-muted: #ACB1C6;
+$sq-lav-dark: #4E536D; 
+// #565C79;
+$sq-lav-darker: #3E404A; 
+$sq-lav-muted: $sq-med-light; //  #ACB1C6;
 $sq-lav-light: #EEF1FF;
 $sq-lav-light-bright: #BBC7FD;
 $sq-lav-mid: #5D6BA8; // #4C68E5;
@@ -22,6 +25,7 @@ $sq-lav-mid-trans: rgba(93,107,188, 0.07);
 
 $sq-green-light: #E5F4F0;
 $sq-greeen-mid: #00B47E;
+$sq-green-muted: #B3D8CD;
 
 $sq-tomato: #FC5130;
 $sq-tomato-light: #FD917C;
@@ -38,3 +42,36 @@ $sq-inner-shadow: 0px 0px 12px 0px rgba(86, 92, 121, 0.18) inset;
 $sq-big-outter-shadow:  -12px 0px 12px 0px rgba(86, 92, 121, 0.16);
 $sq-big-outter-shadow-right:  12px 0px 12px 0px rgba(86, 92, 121, 0.16);
 $sq-floating-shadow:  6px 6px 16px 6px rgba(86, 92, 121, 0.08);
+
+
+
+
+$color-variables: (
+  sq-green: $sq-green,
+  sq-lav: $sq-lav,
+  sq-dark: $sq-dark,
+  sq-med: $sq-med,
+  sq-med-light: $sq-med-light,
+  sq-light: $sq-light,
+  sq-lightest: $sq-lightest,
+  sq-lighter: $sq-lighter,
+  sq-white: $sq-white,
+  sq-black: $sq-black,
+  sq-lav-dark: $sq-lav-dark,
+  sq-lav-darker: $sq-lav-darker,
+  sq-lav-muted: $sq-lav-muted,
+  sq-lav-light: $sq-lav-light,
+  sq-lav-light-bright: $sq-lav-light-bright,
+  sq-lav-mid: $sq-lav-mid,
+  sq-green-light: $sq-green-light,
+  sq-green-mid: $sq-greeen-mid,
+  sq-green-muted: $sq-green-muted,
+  sq-tomato: $sq-tomato,
+  sq-tomato-light: $sq-tomato-light,
+  sq-tomato-lightest: $sq-tomato-lightest,
+  sq-gold: $sq-gold,
+  sq-gold-mid: $sq-gold-mid,
+  sq-gold-light: $sq-gold-light,
+  sq-gold-lighter: $sq-gold-lighter,
+  sq-gold-lightest: $sq-gold-lightest
+);

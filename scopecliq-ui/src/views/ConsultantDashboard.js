@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient, setAsClient, setAsConsultant } from '../store/user-store';
+import { isClient, setAsClient, setAsConsultant } from '../store/client-store';
+import { currentUserId } from '../store/login-store';
 import { setProject } from '../store/project-store';
 
 
@@ -11,6 +12,8 @@ import  DashboardPortalLayout  from '../modules/DashboardPortalLayout';
 const ConsultantDashboard = () => {
     const api = global.config.API
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const userId = useSelector(currentUserId)
 
     const [project, set_project] = useState(null)
     const { projectId } = useParams();
@@ -23,6 +26,9 @@ const ConsultantDashboard = () => {
 
 
     useEffect(()=>{
+        if(!userId){
+            navigate("/")
+        }
         dispatch(setAsConsultant)
         fetchProjectById()
     }, [])

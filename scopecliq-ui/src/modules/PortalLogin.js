@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import NavBar from '../components/NavBar';
 import { storeProject} from '../store/project-store';
 import { useDispatch, useSelector} from 'react-redux';
-import { setAsClient} from '../store/user-store';
+import { setAsClient} from '../store/client-store';
 
 
 const PortalLogin = ({set_passswordValid}) => {
@@ -35,7 +35,7 @@ const PortalLogin = ({set_passswordValid}) => {
     }, [])
 
     return(
-        <div class="sq-portal-login sq-body">
+        <div className="sq-portal-login sq-body">
             <NavBar/>
             <div className='portal__body p-4'>
             <h2 className='mb-3'>
@@ -51,7 +51,7 @@ const PortalLogin = ({set_passswordValid}) => {
                 set_passwordModel(e.target.value)
             }}placeholder='Password'/>
             <button className='sq-btn ' onClick={submit}>Enter</button>
-            <dov className='text-color-sq-tomato font-size-10'>{passwordStatus}</dov>
+            <div className='text-color-sq-tomato font-size-10'>{passwordStatus}</div>
             </div>
 
         </div>

@@ -1,9 +1,12 @@
 import axios from 'axios'
+import { DateTime} from 'luxon';
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import {OrganizationCard} from './OrganizationCard'
+import CircularWithValueLabel from './CircularProgressWithLabel';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const ProjectCard = ({
     project,
@@ -46,15 +49,22 @@ export const ProjectCard = ({
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
+    const parseDate = (dateString) => {
+        if(!dateString) return <i>No due date</i>;
+        const date = DateTime.fromFormat(dateString, 'yyyy-MM-dd HH:mm:ss' )
+        return date.toFormat('MMM dd, yyyy')
+     
+    }
+
 
     const resolveStatus = (progress) =>{
         if(progress==0){
             return (
                 <div className='d-flex w-100 justify-content-between sub '>
                     <div>
-                        Not started
+                        Pending (Not Started)
                     </div>
-                    <div>
+                    <div >
                         {progress}%
                     </div>
                 </div>
@@ -65,8 +75,12 @@ export const ProjectCard = ({
                     <div>
                         Complete
                     </div>
-                    <div>
-                    {progress}%
+                    <div className='sq-progress-rate'>
+                        {full ?
+                            <>{progress}% </>
+                        :
+                            <CircularWithValueLabel variant="determinate" value={progress} />
+                        }
                     </div>
                 </div>
             )
@@ -78,8 +92,9 @@ export const ProjectCard = ({
                     <div>
                         Ongoing
                     </div>
-                    <div>
-                    {progress}%
+                    <div className='sq-progress-rate'>
+                        <CircularWithValueLabel variant="determinate" value={progress} />
+                        {/* {progress}% */}
                     </div>
                 </div>
             )
@@ -100,19 +115,24 @@ export const ProjectCard = ({
             ${full && 'sq-project-card--full'}
         `}>
             {full && (<div className='project-title me-3'>
-                    <h3 className='text-head'>{project.name}</h3>
+                    <h2 className='text-head'>{project.name}</h2>
                 </div>)}
             <div className='project-header-stats d-flex justify-content-between mb-3'>
                 {resolveStatus(progress)}
             </div>
             {!full && (<div className='project-title'>
-                    <h3 className='text-head'>{project.name}</h3>
+                    <h2 className='text-head'>{project.name}</h2>
                 </div>)}
             <div className='project-body project-body--collapsed mt-4'>
                 <div className='sq-grid'>
                     <div className='text-prop'>Brief</div>
                     <div>{project.about}</div>
                 </div>
+                <div className='sq-grid'>
+                    <div className='text-prop'>Due</div>
+                    <div>{parseDate(project.datetime_due)}</div>
+                </div>
+
                 <div className='sq-grid'>
                     <div className='text-prop'>Total budget</div>
                     <div>${parseAmount(project.budget)}</div>
@@ -126,37 +146,64 @@ export const ProjectCard = ({
                 </div>)}
 
                 {!isCollapsed && (<div className='more-details'>
+                    <hr/>
                     <OrganizationCard className="mt-3" organization={organization}/>
 
-                    {full && (
-                    <div>
-                        <div className='project-portal my-5'>
-                            <div className='d-flex align-items-center w-100 justify-content-between mb-3'>
-                                <h2 className='text-head mb-0'>Dedicated Portal</h2>
-                                <a className='sq-link' href={'/portal/'+project.portal_domain}>Go to portal</a>
-                            </div>
+                    {full 
+                    ? 
+                        <div>
+                            <hr/>
+                            <div className='project-portal bg-sq-lav-dark my-4 sq-outter-shadow rounded p-3'>
+                                {/* <div className='d-flex align-items-center w-100 justify-content-between mb-3'>
+                                    
+                                </div> */}
+                                <h3 className='text-head mb-3'>Dedicated Client Portal</h3>
+                                
+                                <div className='project-client mb-3'>
+                                    <div className='sq-grid'>
+                                        <span className='text-prop'>URL</span>
+                                        <span>{origin}/portal/{project.portal_domain}</span> 
+                                    </div>
+                                    <div className='sq-grid align-items-center'>
+                                        <span className='text-prop'>Password</span>
+                                        <input disabled className='sq-input w-auto' value={project.portal_password}/> 
+                                    </div>
+                                </div>
+                                <div className='d-flex justify-content-center'>
+                                    <a className='sq-link text-color-sq-green' href={'/portal/'+project.portal_domain}>Go to portal</a>
+                                </div> 
+
                             
-                            <div className='project-client'>
-                                <div className='sq-grid'>
-                                    <span className='text-prop'>URL</span>
-                                    <span>{origin}/portal/{project.portal_domain}</span> 
-                                </div>
-                                <div className='sq-grid align-items-center'>
-                                    <span className='text-prop'>Password</span>
-                                    <input disabled type="password" className='sq-input w-auto' value={project.portal_password}/> 
-                                </div>
+                            </div> 
+                            <hr/>   
+                            <div className='project-terms my-3'>        
+                                <h3 className='text-head mb-1'>
+                                    Terms and Conditions
+                                </h3>
+                                <textarea className='sq-textarea sq-textarea--terms w-100 terms-and-conditions' disabled>
+                                    {project.terms}
+                                </textarea>
                             </div>
-                        </div>    
-                        <div className='project-terms my-5'>        
-                            <h2 className='text-head mb-1'>
-                                Terms and Conditions
-                            </h2>
-                            <textarea className='sq-textarea sq-textarea--terms w-100 terms-and-conditions' disabled>
-                                {project.terms}
-                            </textarea>
                         </div>
-                    </div>
-                    )}
+                    : 
+                        <div>
+                            <hr/>
+                            {/* <div className='sq-grid'>
+                                <div className='text-prop'>Deliverables</div>
+                                <div>X deliverables of X total deliverables </div>
+                            </div>
+                             <div className='sq-grid'>
+                                <div className='text-prop'>Milestones</div>
+                                <div>X completes of X total milesstones </div>
+                            </div>
+                            <div className='sq-grid'>
+                                <div className='text-prop'>Invoices</div>
+                                <div>X paid of x sent</div>
+                            </div>
+                            <hr/> */}
+                        </div>
+
+                    }
                 </div>)}
 
                 
@@ -181,9 +228,9 @@ export const ProjectCard = ({
                         </span>
                     }
                     <div className='d-flex align-items-center '>
-                        {!isCollapsed && (<Link to={"/dashboard/" + project.id + "/invoices"} className='sq-link text-color-sq-green me-3'>
+                        <Link to={"/dashboard/" + project.id + "/invoices"} className='sq-link text-color-sq-green me-3'>
                             View invoices
-                        </Link>)}
+                        </Link>
 
                         <Link to={"/dashboard/" + project.id } className='sq-btn sq-btn--green'>
                             Go to project

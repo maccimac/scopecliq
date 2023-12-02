@@ -2,24 +2,25 @@ import axios from 'axios'
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 
 export const OrganizationCard = ({
     organization,
     dark=false,
-    className
-
+    className,
 }) => {
     const api = global.config.API;
 
     return(
-        <div className={`
-            sq-organization-card
-            ${dark && 'dark'}
-            ${className}
-        `} >
+        <div 
+            className={`
+                sq-organization-card
+                ${dark && 'dark'}
+                ${className}
+            `}
+        >
             <div className='project-organization'>
-                <h2 className='text-head mb-3'>{organization.organization_name}</h2>
+                <h3 className='text-head mb-3'>{organization.organization_name}</h3>
                 <div className='project-client'>
                     <div className='sq-grid'>
                         <span className='text-prop'>Name</span>

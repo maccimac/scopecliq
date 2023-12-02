@@ -43,24 +43,36 @@ class OrganizationsController extends Controller
                 'consultant_user_id' => $user_id,
             
         ]);
-        return $newOrgId;
-        
+        return $newOrgId;   
     }
 
     public function updateOrganizationById (Request $req, $organization_id) {
-
         $data =  [
             'organization_name' => $req->organization_name,
             'contact_name' => $req->contact_name,
             'contact_email' => $req->contact_email,
             'contact_about' => $req->contact_about,
             'contact_number' => $req->contact_number,
+            'organization_logo' => $req->organization_logo
         ];
 
-        $milestone = DB::table('organization')
+        $organization = DB::table('organizations')
             -> where('id', $organization_id)
             -> update( $data );
-        return $milestone;
+
+        return $organization;
+    }
+
+    public function updateOrganizationLogoById (Request $req, $organization_id) {
+        $data =  [
+            'organization_logo' => $req->organization_logo
+        ];
+
+        $organization = DB::table('organizations')
+            -> where('id', $organization_id)
+            -> update( $data );
+
+        return $organization;
     }
 
 }

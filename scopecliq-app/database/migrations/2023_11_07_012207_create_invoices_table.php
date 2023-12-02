@@ -20,6 +20,9 @@ return new class extends Migration
             $table->dateTime('datetime_paid')->nullable();
             $table->dateTime('datetime_void')->nullable();
             $table->text('notes')->nullable();
+            $table->string('payment_id')->nullable();
+            $table->string('payment_method')->nullable();
+            $table->string('payment_client_secret')->nullable();
             $table->timestamps();
         });
     }

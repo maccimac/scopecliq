@@ -1,4 +1,4 @@
-$nav-height: 48;
+$nav-height: 90;
 $proj-header-height: 0;
 $sidebar-offset-width: 320;
 $scrollbar-width: 17;
@@ -11,9 +11,31 @@ $scrollbar-width: 17;
     background-color: $sq-white;
     height: #{$nav-height}px;
     z-index: 1;
-    .sq-logo{
-        max-width: 148px;
+
+    &--client{
+        .sq-organization-card-small{
+            background-color: $sq-lightest;
+            color: $sq-lav-dark;
+            .h3{
+                color: $sq-black;
+            }
+        }
+
     }
+}
+
+.sq-logo-sm{
+    max-width: 148px;
+}
+
+.sq-logo-md{
+    max-width: 240px;
+}
+
+.sq-grid{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    margin-bottom: 4px;
 }
 
 .sq-body{
@@ -34,6 +56,10 @@ $scrollbar-width: 17;
             // width: 100%;
             max-width: calc(100% - #{$sidebar-offset-width}px);
             // padding-right: 16px !important;
+            .project-header{
+    
+                max-width: calc(100% - #{$sidebar-offset-width}px - 18px);
+            }
             
         }
         .project-blueprint-holder{
@@ -44,23 +70,67 @@ $scrollbar-width: 17;
     .sq-navigation{
         padding-right: 96px !important;
     }
-    .project-header{
-        align-items: center;
-        height: auto;
-    }
+
     .project-blueprint-holder{
         overflow: auto;
         max-height: calc(100vh - #{$nav-height + $proj-header-height}px);
+        .project-header{
+            align-items: center;
+            height: auto;
+            position: fixed;
+            background-color: $sq-lightest;
+            width: calc(100% - 20px);
+        }
     }
 }
 
 .sq-dashboard-home{
-    .sq-sidebar .project-organization h2{
-        font-size: 24px;
+    &:has(.sq-sidebar-offcanvas--open){
+        .sq-navigation, .sq-content{
+            max-width: calc(100% - #{$sidebar-offset-width}px);
+            
+        }
+    }
+    
+    .sq-content{
+        overflow: hidden;
+
+    }
+    .sq-content, .sq-sidebar, .sq-projects-holder{
+        max-height: calc(100vh - #{$nav-height}px);
+        overflow: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .sq-stat-card{
+        // min-height: 96;
+        p{
+            min-height: 32px;
+        }
+    }
+    .sq-stat-card-info-holder{
+        // outline: 2px solid hotpink;
+        display: flex;
+        width: 100%;
+        height: 0;
+        justify-content: end;
+        position: relative;
+        top: 0;
+        .sq-btn-icon{
+            margin-top: -2px;
+            background-color: $sq-lighter;
+            font-size: 10px;
+            color: $sq-light;
+            height: 20px;
+            width: 20px;
+        }
     }
 }
 
 .sq-project-blueprint{
+    margin-top: 72px;
     width: fit-content;
     display: flex;
     padding-right: 32px;
@@ -69,7 +139,7 @@ $scrollbar-width: 17;
 
 
 .sq-sidebar{
-    min-height: 100vh;   
+    // min-height: 100vh;   
     background-color: $sq-lav-light;
     box-shadow: $sq-big-outter-shadow-right;
 }
@@ -92,7 +162,7 @@ $scrollbar-width: 17;
         }
         .offcanvas-body{
             &--PROJECT_DETAILS{
-                background-color: $sq-lav-dark;
+                background-color: $sq-lav-darker;
             }
             &::-webkit-scrollbar {
                 display: none;
@@ -114,15 +184,27 @@ $scrollbar-width: 17;
                
 
             }
+            .offset-footer{
+                    position: absolute;
+                    bottom: 0;
+                    width: 100%;
+                    padding: 12px;
+                    padding-bottom: 32px;
+                    padding-bottom: 32px;
+                    margin-bottom: -16px !important;
+                    background-color: $sq-lav-darker;
+                    border-radius: 16px;
+
+            }
             .sq-project-card{
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                padding-bottom: 48px;
-                margin-bottom: -8px !important;
-                h3{
-                    font-size: 16px;
-                }
+                // position: absolute;
+                // bottom: 0;
+                // width: 100%;
+                // padding-bottom: 48px;
+                // margin-bottom: -8px !important;
+                // h3{
+                //     font-size: 16px;
+                // }
                
             }
         }

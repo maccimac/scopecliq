@@ -1,32 +1,4 @@
 
-$color-variables: (
-  sq-green: $sq-green,
-  sq-lav: $sq-lav,
-  sq-dark: $sq-dark,
-  sq-med: $sq-med,
-  sq-med-light: $sq-med-light,
-  sq-light: $sq-light,
-  sq-lightest: $sq-lightest,
-  sq-lighter: $sq-lighter,
-  sq-white: $sq-white,
-  sq-black: $sq-black,
-  sq-lav-dark: $sq-lav-dark,
-  sq-lav-muted: $sq-lav-muted,
-  sq-lav-light: $sq-lav-light,
-  sq-lav-light-bright: $sq-lav-light-bright,
-  sq-lav-mid: $sq-lav-mid,
-  sq-green-light: $sq-green-light,
-  sq-green-mid: $sq-greeen-mid,
-  sq-tomato: $sq-tomato,
-  sq-tomato-light: $sq-tomato-light,
-  sq-tomato-lightest: $sq-tomato-lightest,
-  sq-gold: $sq-gold,
-  sq-gold-mid: $sq-gold-mid,
-  sq-gold-light: $sq-gold-light,
-  sq-gold-lighter: $sq-gold-lighter,
-  sq-gold-lightest: $sq-gold-lightest
-);
-
 
 @each $variable-name, $color-value in $color-variables {
   .bg-#{$variable-name} {
@@ -37,10 +9,6 @@ $color-variables: (
     border: 1px solid $color-value;
   }
 
-  // .color-#{$variable-name}, 
-  .text-color-#{$variable-name} {
-    color: $color-value !important;
-  }
 }
 
 hr{

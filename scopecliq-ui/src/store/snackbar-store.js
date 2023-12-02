@@ -8,7 +8,6 @@ const snackbarSlice = createSlice({
         status: null,
         message: ""
       }
-      
   },
   reducers: {
     showSnackbarMessage(state, action){
@@ -18,8 +17,6 @@ const snackbarSlice = createSlice({
         status: action.payload.status,
         message: action.payload.message 
       };  
-
-      
     },
     resetSnackbarMessage(state){
       state.snackbarActive = {
@@ -27,9 +24,7 @@ const snackbarSlice = createSlice({
         status: null,
         message: ""
       }  
-
-    }
-    
+    }    
   }
 })
 export const storeSnackbar = (state) => state.snackbar.snackbarActive

@@ -18,6 +18,8 @@ class InvoicesController extends Controller
                 'i.datetime_paid',
                 'i.datetime_void',
                 'i.notes',
+                'i.payment_id',
+                'i.payment_id',
                 'm.position',
             )
             ->join('milestones as m', 'i.milestone_id', '=', 'm.id')
@@ -27,7 +29,6 @@ class InvoicesController extends Controller
         return $invoices;
 
         // select i.id, i.total, i.project_id, i.milestone_id, i.datetime_generated, i.datetime_paid, i.datetime_void, i.notes, m.position from invoices as i inner join milestones as m on i.milestone_id = m.id;
-
         // select 
         // 	i.id, i.total, i.project_id, i.milestone_id, 
         //     i.datetime_generated, i.datetime_paid, i.datetime_void, 
@@ -56,6 +57,7 @@ class InvoicesController extends Controller
                 'i.datetime_paid',
                 'i.datetime_void',
                 'i.notes',
+                'i.payment_id',
                 'm.name',
                 'm.position',
                 'm.budget_percentage',
@@ -115,7 +117,7 @@ class InvoicesController extends Controller
             ->insertGetId([
             'project_id' => $milestone->project_id,
             'milestone_id' => $req->milestone_id,
-            'total' => ($milestone->budget_percentage * $project->budget),
+            'total' => (($milestone->budget_percentage/100) * $project->budget),
             'notes' => null,
             'datetime_generated' => now(),
             'created_at'=>now()
@@ -135,14 +137,42 @@ class InvoicesController extends Controller
             ],
         ]);
 
-        return $newId;
-
-        
+        return $newId;   
     }
 
-    // mark as paid
-    public function markInvoicePaid($id) {
+    
+    public function payInvoice($id, Request $req) {
 
+        $invoice = DB::table('invoices')
+            -> where('id', $id)
+            ->first();
+        
+        DB::table('invoices')
+        -> where('id', $id)
+        -> update([
+            'datetime_paid'=> now(),
+            'payment_id' => $req->payment_id,
+            'payment_method' => $req->payment_method,
+            'payment_client_secret' => $req->payment_client_secret
+        ]);
+
+        DB::table('notifications')
+        ->insert([
+            [   'deliverable_id' => null,
+                'project_id'=> $invoice->project_id,
+                'milestone_id' => $invoice->milestone_id,
+                'type'=> 'INVOICE',
+                'status'=> 'PAID',
+                'description' => "Invoice has been paid for invoice #$invoice->id",
+                'extra' => "Payment date: $invoice->datetime_paid",
+                'created_at' => now()
+            ],
+        ]);
+
+        return $invoice;
+    }
+
+    public function markInvoicePaid($id) {
         $invoice = DB::table('invoices')
             -> where('id', $id)
             ->first();
@@ -165,8 +195,7 @@ class InvoicesController extends Controller
                 'created_at' => now()
             ],
         ]);
-
         return $invoice;
     }
-    // mark as void
+
 }

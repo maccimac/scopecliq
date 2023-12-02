@@ -2,10 +2,12 @@ import * as React from 'react';
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import { storeProject} from '../store/project-store';
+import { updateNotif } from '../store/notif-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 import Menu from '@mui/material/Menu';
+import Milestone from './Milestone';
 
 
 export const Deliverable = ({
@@ -53,6 +55,39 @@ export const Deliverable = ({
     const [classNameState, setClassNameState]  = useState(null)
     const [statusIcon, setStatusIcon]  = useState(null)
 
+    const updateMilestoneStatInDb = async () => {
+        const res = await axios.get(api + `/analytics/milestone/${deliverable.milestone_id}/progress`)
+        console.log({res})
+        if(res.status === 200){
+            const completionRate = res.data.completion_rate
+            let newStat;
+            if (completionRate == 1){
+               newStat = 'COMPLETE'
+            }else if(completionRate == 0){
+                newStat = 'PENDING'
+            }else{
+                newStat = 'ONGOING'
+            }
+            if(newStat === res.data.milestone.status_completion ) return
+            const res2 = await axios.post(`${api}/milestones/update-status/${deliverable.milestone_id}/${newStat}`)
+            console.log(res2)
+            if(res2.status==200){
+                dispatch(showSnackbarMessage({
+                    message: 'Milestone status is now ' + newStat + ' for ' + res2.data.name
+                }))
+                if(newStat == 'COMPLETE'){
+                    createNotification({
+                        ...deliverable,
+                        deliverable_id: null,
+                        type: 'STATUS_UPDATE',
+                        status: 'COMPLETE'
+                    })
+                }
+            }
+        }
+
+    }
+
     const toggleComplete = async () => {
         if (clientMode) return;
         const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
@@ -61,6 +96,11 @@ export const Deliverable = ({
             setStatusModel(status)
             resolveClassStyleByStatus(status)
             cb.fetchDeliverableByMilestone()
+            setTimeout(()=>{
+                updateMilestoneStatInDb()
+                // const withUpdate = true;
+                // cb.updateMilestoneStatus(withUpdate)
+            }, 1000)
         }
         const payloadNotification = {
             type: "STATUS_UPDATE",
@@ -69,22 +109,27 @@ export const Deliverable = ({
         createNotification(payloadNotification);
     } 
 
-    const createNotification = async (_payload) =>{
-        const status = (statusModel === 'COMPLETE') ? 'INCOMPLETE' : 'COMPLETE'; 
-        const payload = {
+    const createNotification = async (payload) => {
+        const _payload = {
             ...deliverable,
+            deliverable_id: deliverable.id,
             read_at: null,
-            type: 'STATUS_UPDATE',
-            status,
-            ..._payload,
+            type: "",
+            status: "",
+            ...payload,
         }
-        await axios.post(`${api}/notifications/project/${project.id}/add`, payload, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-        });
-
-
+        try{
+            await axios.post(`${api}/notifications/project/${project.id}/add`, _payload, {
+                headers: {
+                "Content-Type": "application/json",
+                },
+            })
+            setTimeout(()=>{
+                dispatch(updateNotif())
+            },0)
+        }catch(e){
+            console.log(e)
+        }
     }
 
     const enableEdit = () => {
@@ -110,9 +155,9 @@ export const Deliverable = ({
             setDescriptionModel(descriptionModelEdit)
         }
         createNotification({
-            type: "CHANGE",
-            status: "MADE",
-            extra: "The description has been changes"
+                extra: "The description has been changed",
+                type: "CHANGE",
+                status: "MADE",
         })     
         finishEdit()
     }
@@ -128,17 +173,18 @@ export const Deliverable = ({
             },
         });
         const newItem = res.data
-        if(res.status===200){
+        if(res.data && res.status===200){
+            createNotification({
+                    ...newItem,
+                    deliverable_id: newItem.id,
+                    type: "CHANGE",
+                    status: "CREATED",
+            })
+
             setnNewMode(false)
             setEditMode(false)
             setDescriptionModel(descriptionModelEdit)
             finishEdit()
-            createNotification({
-                ...newItem,
-                type: "CHANGE",
-                status: "CREATED",
-                extra: "A new deliverable has been added to the deliverable"
-            })
             cb.saveAllPositions()        
             cb.fetchDeliverableByMilestone()
         }
@@ -152,8 +198,12 @@ export const Deliverable = ({
                 },
             });
             if(res.status == 200){
+                createNotification({
+                    type: "CHANGE",
+                    status: "DELETED",
+                })
                 dispatch(showSnackbarMessage({
-                    message: "Deliverable  deleted"
+                    message: "Deliverable deleted"
                 }))            
                 cb.fetchDeliverableByMilestone()
                 cb.saveAllPositions()

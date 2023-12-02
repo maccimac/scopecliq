@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from 'react-redux';
-import { isClient} from '../store/user-store';
+import { isClient} from '../store/client-store';
 import { Navigate, Link, useNavigate } from "react-router-dom"
+import { Tooltip } from '@mui/material';
 
 // import { _project, _setProject } from '../store/project-store';
 
@@ -11,9 +12,9 @@ export const Notification =({_notification, cb})=>{
 
     const api = global.config.API;
     const navigate = useNavigate();
-    
+    const clientMode = useSelector(isClient)
 
-    const [attachmentType, set_attachmentType] = useState("deliverable")
+    const [attachmentType, set_attachmentType] = useState("An item")
     const [title, set_title] = useState("")
     const [body, set_body] = useState("")
     const [cta, set_cta] = useState(null)
@@ -34,8 +35,9 @@ export const Notification =({_notification, cb})=>{
             VOID: '❌ Invoice is voided'
         },
         'CHANGE':{
-            'MADE': `✏️ ${attachmentType} has been changed`,
-            'CREATED': `✨ ${attachmentType} has been added`,
+            MADE: `✏️ ${attachmentType} has been changed`,
+            CREATED: `✨ ${attachmentType} has been added`,
+            DELETED: `🗑  ${attachmentType} deleted`,
             /**
              * MADE_APPROVED
              * MADE_DECLINED
@@ -44,17 +46,18 @@ export const Notification =({_notification, cb})=>{
              */
         }
     }
-    const resolveTitle = () => {
+    
+    const resolveAttachment = () => {
         if(notification.deliverable_id){
-            //
             set_attachmentType('deliverable')
-           
         }else if(notification.milestone_id){
+            set_attachmentType('milestone')
             //
         }else if(notification.project_id){
+            set_attachmentType('project')
             //
         }
-        set_title(titleOpts[notification.type][notification.status])
+        // set_title(titleOpts[notification.type][notification.status])
     }
     const resolveCta = () => {
         switch(notification.type){
@@ -79,10 +82,13 @@ export const Notification =({_notification, cb})=>{
     }
 
     useEffect(()=>{
-        resolveTitle()
+        resolveAttachment()
         resolveCta()
     }, [_notification])
     
+    useEffect(()=>{
+        resolveAttachment()
+    },[])
     return(
         <div className={
             `sq-notification p-3 rounded sq-outter-shadow mb-3
@@ -97,8 +103,21 @@ export const Notification =({_notification, cb})=>{
                     ${notification.type == 'INVOICE' && 'text-color-sq-lav-mid' }
                     ${notification.type == 'CHANGE' && 'text-color-sq-gold-mid' }
             
-               `}>{title}</div>
-                    <i class="sq-btn-icon bg-transparent m-0 btn-notif-exit fa-solid fa-regular fa-xmark fa-md m-1 sq-btn-icon text-color-sq-med" onClick={markRead}></i>
+               `}>{titleOpts[notification.type][notification.status]}</div>
+               { clientMode &&
+                    <Tooltip title="Mark read">
+                        <div className='sq-btn-icon d-flex align-items-center p-1 justfirt-content-center btn-notif-exit '>
+                            <i 
+                            class="m-0 fa-solid fa-regular fa-xmark fa-md m-1 text-color-sq-green-black" 
+                            onClick={markRead}
+                        >        
+                        </i>
+                        </div>
+                    </Tooltip>
+                
+               }
+                    
+                 
             </div>
             <div className='notification-body'>
                 <p>This status is for <strong>{notification.description}</strong>.</p>

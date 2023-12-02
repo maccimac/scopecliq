@@ -28,7 +28,6 @@ class MilestonesController extends Controller
 
 
     public function deleteMilestoneById($milestone_id){
-
         $deliverablesCount = DB::table('deliverables')
             ->where('milestone_id', $milestone_id)
             ->count();
@@ -45,7 +44,8 @@ class MilestonesController extends Controller
             // Optionally, you can return a success message or a response here
             return [
                 'status' => 'success',
-                'message' => "Milestone with ID $milestone_id has been deleted."
+                'message' => "Milestone with ID $milestone_id has been deleted.",
+                'milestone_id'=> $milestone_id
             ];
         } else {
             return [
@@ -88,6 +88,7 @@ class MilestonesController extends Controller
             'name' => $req->name,
             'description' => $req->description,
             'budget_percentage' => $req->budget_percentage,
+            'datetime_due' => $req->datetime_due,
             'status_completion' => null,
             'status_invoice' => null,
             'datetime_started' => null,
@@ -101,6 +102,7 @@ class MilestonesController extends Controller
             'name' => $req->name,
             'description' => $req->description,
             'budget_percentage' => $req->budget_percentage,
+            'datetime_due' => $req->datetime_due,
         ];
 
         $milestone = DB::table('milestones')
@@ -112,14 +114,27 @@ class MilestonesController extends Controller
     public function updateMilestonePositionById (Request $req, $milestone_id, $position) {
         $data = [
             'position' => $position
-            // 'name' => $req->name,
-            // 'description' => $req->description,
-            // 'budget_percentage' => $req->budget_percentage,
         ];
 
         $milestone = DB::table('milestones')
             -> where('id', $milestone_id)
             -> update( $data );
+        return $milestone;
+    }
+
+    public function updateMilestoneStatusById (Request $req, $milestone_id, $status) {
+        $data = [
+            'status_completion' => $status
+        ];
+
+        $milestone = DB::table('milestones')
+            -> where('id', $milestone_id)
+            -> update( $data );
+
+        $milestone = DB::table('milestones')
+            -> where('id', $milestone_id)
+            -> first();
+            
         return $milestone;
     }
 
