@@ -62,9 +62,6 @@ class AnalyticsController extends Controller
     }
 
     public function fetchMilestonesAnalytics($user_id){
-
-        // get open projects
-
         $projectsController = new ProjectsController();
         $projects = $projectsController->fetchAllProjectsByConsultantUserId($user_id);
 
@@ -78,8 +75,6 @@ class AnalyticsController extends Controller
 
         $today = Carbon::now();
         $in30days = $today->addDays(30);
-
-
         foreach ($projects as $proj) {
             // deliverables
             $projDeliverables = DB::table('deliverables')
@@ -94,15 +89,12 @@ class AnalyticsController extends Controller
         
             $all = $projDeliverables
                 ->count();
-        
             $progress = $all > 0 ? $complete / $all : 0;
 
             if( $progress == 0){
                 // if proj not started
-
             }else if ($progress == 1){
                 // if proj complete
-
             }else{
                 $ongoingMilestones = DB::table('deliverables')
                     ->select('milestone_id')
@@ -139,14 +131,11 @@ class AnalyticsController extends Controller
                 ->where('datetime_due','<', $in30days)
                 ->count();
                 $stats['open_milestones_due'] += $dueMilestones;
-
-
             }
         };
 
         $stats['open_milestones_id'] = array_values($stats['open_milestones_id']);
         return $stats;
-
     }
 
     
@@ -265,15 +254,12 @@ class AnalyticsController extends Controller
 
             }
         }
+
         return $stats;
+
     }
 
     public function fetchProgressPercentByMilestone($milestone_id){
-
-        // $stats = array(
-        //     'open_project_invoice_all_ids' => null,
-        //     'milestone' => null
-        // );
 
         $totalDeliverables = DB::table('deliverables')
         ->select('*')

@@ -47,7 +47,6 @@ class OrganizationsController extends Controller
     }
 
     public function updateOrganizationById (Request $req, $organization_id) {
-
         $data =  [
             'organization_name' => $req->organization_name,
             'contact_name' => $req->contact_name,
@@ -65,7 +64,6 @@ class OrganizationsController extends Controller
     }
 
     public function updateOrganizationLogoById (Request $req, $organization_id) {
-
         $data =  [
             'organization_logo' => $req->organization_logo
         ];

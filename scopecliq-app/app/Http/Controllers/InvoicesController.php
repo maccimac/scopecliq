@@ -137,12 +137,10 @@ class InvoicesController extends Controller
             ],
         ]);
 
-        return $newId;
-
-        
+        return $newId;   
     }
 
-    // mark as paid
+    
     public function payInvoice($id, Request $req) {
 
         $invoice = DB::table('invoices')
@@ -173,7 +171,6 @@ class InvoicesController extends Controller
 
         return $invoice;
     }
-
 
     public function markInvoicePaid($id) {
         $invoice = DB::table('invoices')

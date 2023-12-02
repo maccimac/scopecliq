@@ -8,6 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class NotificationsController extends Controller
 {
+    
+    // STATUS_UPDATE' : {
+    //     COMPLETE: `✅ ${attachmentType} has been completed`,
+    //     INCOMPLETE: `⚪️ Hmm.  A ${attachmentType} has been marked incomplete`,
+    // },
+    // 'INVOICE':{
+    //     SENT: '📬 Invoice has been sent',
+    //     PAID: '💸 Invoice has been paid',
+    // },
+    // 'CHANGE':{
+    //     'MADE': `✏️ ${attachmentType} has been changed`,
+    //     'CREATED': `✨ ${attachmentType} has been added`,
+    //     'DELETED': `🗑  ${attachmentType} deleted`,
+    // }
+            
     public function addNotificationToProject(Request $req, $project_id){
         DB::table('notifications')
             ->insert([
@@ -22,7 +37,7 @@ class NotificationsController extends Controller
             ],
         ]);
     }
-    
+
     // retrieve unread notifications by project
     public function fetchNotificationById($id){
         $notification = DB::table('notifications')
