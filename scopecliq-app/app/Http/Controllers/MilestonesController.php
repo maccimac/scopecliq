@@ -28,7 +28,6 @@ class MilestonesController extends Controller
 
 
     public function deleteMilestoneById($milestone_id){
-
         $deliverablesCount = DB::table('deliverables')
             ->where('milestone_id', $milestone_id)
             ->count();
@@ -115,9 +114,6 @@ class MilestonesController extends Controller
     public function updateMilestonePositionById (Request $req, $milestone_id, $position) {
         $data = [
             'position' => $position
-            // 'name' => $req->name,
-            // 'description' => $req->description,
-            // 'budget_percentage' => $req->budget_percentage,
         ];
 
         $milestone = DB::table('milestones')
@@ -129,9 +125,6 @@ class MilestonesController extends Controller
     public function updateMilestoneStatusById (Request $req, $milestone_id, $status) {
         $data = [
             'status_completion' => $status
-            // 'name' => $req->name,
-            // 'description' => $req->description,
-            // 'budget_percentage' => $req->budget_percentage,
         ];
 
         $milestone = DB::table('milestones')

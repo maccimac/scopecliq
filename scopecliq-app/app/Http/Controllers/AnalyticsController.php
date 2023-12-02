@@ -264,13 +264,8 @@ class AnalyticsController extends Controller
                 $stats['milestones_missing_invoice_ids'][] = $msId;
 
             }
-
         }
-
         return $stats;
-        
- 
-
     }
 
     public function fetchProgressPercentByMilestone($milestone_id){

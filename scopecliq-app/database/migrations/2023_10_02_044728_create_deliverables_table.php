@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('deliverables', function (Blueprint $table) {
             $table->id();
-
             $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('milestone_id')->constrained('milestones');
             $table->integer('position');
@@ -21,10 +20,6 @@ return new class extends Migration
             $table->string('status')->default('not_started');
             $table->dateTime('datetime_started')->nullable();
             $table->dateTime('datetime_completed')->nullable();
-
-
-
-
             $table->timestamps();
         });
     }

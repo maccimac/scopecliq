@@ -43,8 +43,7 @@ class OrganizationsController extends Controller
                 'consultant_user_id' => $user_id,
             
         ]);
-        return $newOrgId;
-        
+        return $newOrgId;   
     }
 
     public function updateOrganizationById (Request $req, $organization_id) {
@@ -69,11 +68,6 @@ class OrganizationsController extends Controller
 
         $data =  [
             'organization_logo' => $req->organization_logo
-            // 'organization_name' => $req->organization_name,
-            // 'contact_name' => $req->contact_name,
-            // 'contact_email' => $req->contact_email,
-            // 'contact_about' => $req->contact_about,
-            // 'contact_number' => $req->contact_number,
         ];
 
         $organization = DB::table('organizations')

@@ -14,26 +14,13 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->integer('receiver_type')->default(0); // 0 is consultant, 1 is client, 2  is both
-            
-            // :: CONSTRAINED ::
-            // $table->foreignId('project_id')->constrained('projects');
-            // $table->bigInteger('milestone_id')->unsigned()->nullable();
-            // $table->foreign('milestone_id')->references('id')->on('milestones');
-            // $table->bigInteger('deliverable_id')->unsigned()->nullable();
-            // $table->foreign('deliverable_id')->references('id')->on('deliverables');
-
             $table->integer('project_id');
             $table->bigInteger('milestone_id')->unsigned()->nullable();
-            // $table->foreign('milestone_id')->references('id')->on('milestones');
             $table->bigInteger('deliverable_id')->unsigned()->nullable();
-            // $table->foreign('deliverable_id')->references('id')->on('deliverables');
-
             $table->string('type'); 
                 // STATUS_UPDATE' : {
                 //     COMPLETE: `✅ ${attachmentType} has been completed`,
                 //     INCOMPLETE: `⚪️ Hmm.  A ${attachmentType} has been marked incomplete`,
-                //     CANCELLED: `❌  ${attachmentType} cancelled`,
-                //     DELETED: ` 🗑  ${attachmentType} deleted`,
                 // },
                 // 'INVOICE':{
                 //     SENT: '📬 Invoice has been sent',

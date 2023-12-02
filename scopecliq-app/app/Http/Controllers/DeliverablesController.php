@@ -73,8 +73,6 @@ class DeliverablesController extends Controller
         $d = [];
         if($req->description){  $d['description'] = $req->description;}
         if($req->status){  $d['status'] = $req->status; }
-        // add datetime_start
-        // add datetime_end
 
         $deliverable = DB::table('deliverables')
             -> where('id', $id)

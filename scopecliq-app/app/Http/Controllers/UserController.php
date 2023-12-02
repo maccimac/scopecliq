@@ -6,6 +6,40 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
+    public function register(Request $request)
+    {
+        // Implement your custom registration logic here.
+        // Create a new user, validate input, and save to the database.
+
+        $this->validate($request, [
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+
+        $user = new User;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Registration successful', 
+            'user_id' => $user->id
+        ]);
+    }
+
+    public function validateRegistration(Request $request){
+        $validatedData = $this->validate($request, [
+            // 'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+
+        return response()->json(['message' => 'Validation successful', 'data' => $validatedData, 'status' => 'success']);
+    }
+
     public function login(Request $request)
     {
         // Implement your custom authentication logic here.
@@ -27,39 +61,5 @@ class UserController extends Controller
             ], 401); // You can adjust the status code as needed.
         }
     }
-
-    public function register(Request $request)
-    {
-        // Implement your custom registration logic here.
-        // Create a new user, validate input, and save to the database.
-
-        $this->validate($request, [
-            // 'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
-
-        $user = new User;
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->save();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Registration successful', 
-            'user_id' => $user->id
-        ]);
-    }
-
-
-    public function validateRegistration(Request $request){
-        $validatedData = $this->validate($request, [
-            // 'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
-
-        return response()->json(['message' => 'Validation successful', 'data' => $validatedData, 'status' => 'success']);
-    }
+   
 }

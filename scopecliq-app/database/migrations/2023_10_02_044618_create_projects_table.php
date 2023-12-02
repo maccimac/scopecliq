@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-
             $table->bigInteger('consultant_user_id')->unsigned()->nullable();
             $table->foreign('consultant_user_id')->references('id')->on('users');
-
             $table->foreignId('organization_id')->constrained('organizations');
             $table->string('name');
             $table->text('about')->nullable();
@@ -25,7 +23,6 @@ return new class extends Migration
             $table->string('portal_password');
             $table->text('terms')->nullable();
             $table->dateTime('datetime_due')->nullable();
-
             $table->timestamps();
         });
     }

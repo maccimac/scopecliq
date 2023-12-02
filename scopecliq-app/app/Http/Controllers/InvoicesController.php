@@ -29,7 +29,6 @@ class InvoicesController extends Controller
         return $invoices;
 
         // select i.id, i.total, i.project_id, i.milestone_id, i.datetime_generated, i.datetime_paid, i.datetime_void, i.notes, m.position from invoices as i inner join milestones as m on i.milestone_id = m.id;
-
         // select 
         // 	i.id, i.total, i.project_id, i.milestone_id, 
         //     i.datetime_generated, i.datetime_paid, i.datetime_void, 
@@ -177,7 +176,6 @@ class InvoicesController extends Controller
 
 
     public function markInvoicePaid($id) {
-
         $invoice = DB::table('invoices')
             -> where('id', $id)
             ->first();
@@ -200,8 +198,7 @@ class InvoicesController extends Controller
                 'created_at' => now()
             ],
         ]);
-
         return $invoice;
     }
-    // mark as void
+
 }
