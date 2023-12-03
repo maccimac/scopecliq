@@ -250,7 +250,7 @@ const Home = () => {
                             <h1 className='mb-3'>
                                 A Freelancing Toolkit for your Emerging Business
                             </h1>
-                            {/* <h3 className='h3-light mb-4'>Freelance Toolkit</h3> */}
+                            <h3 className='h3-light mb-4'>ScopeCliq is a straightforward freelancing toolkit that helps you focus on your core tasks by reducing client update requests, improving client alignment, and supporting project + account management.</h3>
                             <div className='bg-sq-lav-light w-75 sq-outter-shadow mb-4 p-3 rounded'>
                                 <div className='sub mb-2'>
                                     Demo Login Credentials
