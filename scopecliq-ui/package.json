@@ -1,6 +1,7 @@
 {
   "name": "scopecliq-ui",
   "version": "0.1.0",
+   "homepage": "https://scopecliq.com/scopecliq/scopecliq-ui/build",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",

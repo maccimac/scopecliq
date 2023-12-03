@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/scopecliq/scopecliq-ui/build/static/css/main.8a3ddc18.css",
-    "main.js": "/scopecliq/scopecliq-ui/build/static/js/main.19244c8b.js",
+    "main.js": "/scopecliq/scopecliq-ui/build/static/js/main.b3af17ca.js",
     "static/media/placeholder-2.png": "/scopecliq/scopecliq-ui/build/static/media/placeholder-2.6d28cfa2395d97eec196.png",
     "static/media/placeholder-1.png": "/scopecliq/scopecliq-ui/build/static/media/placeholder-1.acd54b08795de5c4d2ef.png",
     "static/media/splash.png": "/scopecliq/scopecliq-ui/build/static/media/splash.3b8e6484338b08871f4b.png",
@@ -9,10 +9,10 @@
     "static/media/sq-logo.svg": "/scopecliq/scopecliq-ui/build/static/media/sq-logo.6b74f05d9fc2f4142ef0ce9c8923ac22.svg",
     "index.html": "/scopecliq/scopecliq-ui/build/index.html",
     "main.8a3ddc18.css.map": "/scopecliq/scopecliq-ui/build/static/css/main.8a3ddc18.css.map",
-    "main.19244c8b.js.map": "/scopecliq/scopecliq-ui/build/static/js/main.19244c8b.js.map"
+    "main.b3af17ca.js.map": "/scopecliq/scopecliq-ui/build/static/js/main.b3af17ca.js.map"
   },
   "entrypoints": [
     "static/css/main.8a3ddc18.css",
-    "static/js/main.19244c8b.js"
+    "static/js/main.b3af17ca.js"
   ]
 }
