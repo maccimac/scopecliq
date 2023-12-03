@@ -136,7 +136,7 @@ const Invoice = ({
   
         const _payload = {
             read_at: null,
-            project_id: milestone.project_id,
+            project_id: invoice.project_id,
             milestone_id: invoice.milestone_id,
             description: invoice.project_name,
             ...payload,
