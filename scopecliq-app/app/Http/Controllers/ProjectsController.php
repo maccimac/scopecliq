@@ -90,7 +90,6 @@ class ProjectsController extends Controller
                 'name' => $req->name,
                 'budget' => $req->budget,
                 'about' => $req->about,
-                'status' => 'pending',
                 'portal_domain' => $req->portal_domain,
                 'portal_password' => $req->portal_password,
                 'datetime_due' => $req->datetime_due,

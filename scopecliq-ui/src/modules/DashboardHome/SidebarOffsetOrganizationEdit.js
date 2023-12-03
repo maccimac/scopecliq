@@ -124,6 +124,7 @@ const SidebarOffsetOrganizationEdit = ({
 
     useEffect(()=>{
         set_organizationEdit(organization)
+        set_modelImage(organization.organization_logo)
     }, [organization])
 
     // useEffect(()=>{
