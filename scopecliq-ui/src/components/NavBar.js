@@ -23,7 +23,7 @@ export const NavBar = ({children}) => {
     const fetchProjectOrganizationById = async () => {
         if(!project) return;
         const res = await axios.get(api+ '/organizations/'+project.organization_id)
-        console.log(res)
+
         set_clientOrg(res.data)
     }
 
@@ -31,7 +31,6 @@ export const NavBar = ({children}) => {
         try{
             const res = await axios.get(api+ '/organizations/consultant/' + project.consultant_user_id)
             dispatch(set_consultantOrg(res.data))
-            console.log(res)
         }catch(e){
             console.log(e)
         }

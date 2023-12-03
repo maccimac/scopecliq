@@ -11,7 +11,7 @@ const snackbarSlice = createSlice({
   },
   reducers: {
     showSnackbarMessage(state, action){
-      console.log({action, state})
+
       state.snackbarActive = {
         show: true,
         status: action.payload.status,

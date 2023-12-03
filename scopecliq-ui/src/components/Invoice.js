@@ -120,10 +120,10 @@ const Invoice = ({
 
         }catch(e){
             console.log(e)
-            dispatch(showSnackbarMessage({
-                status: 'error',
-                message: e.response.data.message 
-            }))
+            // dispatch(showSnackbarMessage({
+            //     status: 'error',
+            //     message: e.response.data.message 
+            // }))
         }
     }
 

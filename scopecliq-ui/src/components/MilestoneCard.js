@@ -131,7 +131,6 @@ export const MilestoneCard = ({
                   "Content-Type": "application/json",
                 },
             });
-            console.log({res})
             if(res.data.status == 'success'){
                 createNotification({
                     type: 'CHANGE',

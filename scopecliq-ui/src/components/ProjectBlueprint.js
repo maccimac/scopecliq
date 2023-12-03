@@ -33,7 +33,7 @@ export const ProjectBlueprint = ({isConsultant}) => {
         try{
             const res = await axios.get(api+  '/milestones/project/'+ project.id )
             set_milestones(res.data)
-            console.log(res.data)
+    
             if(!res.data.length){
                 set_milestones([emptyMilestone])
             }

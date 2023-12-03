@@ -86,7 +86,6 @@ const SidebarOffsetOrganizationEdit = ({
                 "Content-Type": "application/json",
                 },
             });
-            console.log({res})
             if(res.status===200){
                 dispatch(showSnackbarMessage({
                     message: 'Save successful'

@@ -103,7 +103,6 @@ const Home = () => {
                 }
             });
 
-            console.log(res)
 
             if(res.status === 'success'){
                 return returnVal = true

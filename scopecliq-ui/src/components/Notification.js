@@ -76,7 +76,6 @@ export const Notification =({_notification, cb})=>{
     
     const markRead = async () => {
         const res = await axios.post(`${api}/notifications/read/${notification.id}`)
-        console.log(res)
         // cb.set_notifications([])
         cb.fetchNotificationsByProject()
     }

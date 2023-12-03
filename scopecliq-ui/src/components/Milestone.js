@@ -41,13 +41,11 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
     }
 
     const updateMilestoneStatus = async () => {
-        console.log('update')
         if(!deliverables) return
         let statArr = []
         deliverables.forEach(d => {
             statArr.push(d.status)
         });
-        // console.log(statArr)
         let newStat;
 
         if (!statArr.length){
@@ -71,10 +69,10 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
             set_invoice(res.data)
         }catch(e){
             console.log(e)
-            dispatch(showSnackbarMessage({
-                status: 'error',
-                message: e.response.data.message 
-            }))
+            // dispatch(showSnackbarMessage({
+            //     status: 'error',
+            //     message: e.response.data.message 
+            // }))
         }
     }
 
@@ -132,7 +130,6 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
     const saveAllPositions =  () =>{
         deliverables.map( async (d,i) =>{
             const res = await axios.post(api + `/deliverables/update/${d.id}/position/${i}`)
-            console.log(res)
         })
 
 
