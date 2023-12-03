@@ -8,6 +8,7 @@ import { storeProject} from '../store/project-store';
 import { currentUserId } from '../store/login-store';
 import { showSnackbarMessage} from '../store/snackbar-store';
 import { isClient } from '../store/client-store';
+import { updateNotif } from '../store/notif-store';
 
 import CheckoutForm from '../modules/payments/CheckoutForm';
 import Modal from '@mui/material/Modal';
@@ -131,6 +132,41 @@ const Invoice = ({
         set_consultant(res.data)
     }
 
+    const createNotification = async (payload) =>{
+  
+        const _payload = {
+            read_at: null,
+            project_id: milestone.project_id,
+            milestone_id: invoice.milestone_id,
+            description: invoice.project_name,
+            ...payload,
+        }
+        try{   
+            await axios.post(`${api}/notifications/project/${project.id}/add`, _payload, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            })
+            setTimeout(()=>{
+                dispatch(updateNotif())
+                dispatch(showSnackbarMessage({
+                    message: "Invoice reminder sent" 
+                }))
+            },0)
+        }catch(e){
+            console.log(e)
+        }
+       
+    }
+
+    const resendNotification = () => {
+        createNotification({
+          type: "INVOICE",
+          status: "SENT"  
+        })
+    }
+
+
     const parseDateTime = (str) => {
         try {
           // Split the input string into date and time parts
@@ -190,7 +226,7 @@ const Invoice = ({
                         clientMode ? `/portal/${invoice.portal_domain}` : `/dashboard/${invoice.project_id}`
                         } className='sq-link text-color-sq-med pb-0'>
                         <i className="fa-solid fa-regular fa-arrow-left me-2 fa-xs"/>
-                        Back to Client Portal
+                        Back to {invoice.project_name}
                     </Link>
                 </div>   )}
             
@@ -331,15 +367,16 @@ const Invoice = ({
 
                         <div className='d-flex font-size-12 my-3 align-items-center'>
                             <div className='label'>Invoice Link: &nbsp;</div>
-                            <Tooltip title="Copy invoice URL to clipboard">
+                           
                                 <div className='sq-input d-flex w-75' onClick={copyToClipboard}>
                                     <input className='w-100 me-1 outline-none border-none bg-transparent' disabled 
                                         value={`${origin}/invoice/${milestoneId}`}/>
-                                    <div className='sq-btn sq-btn-icon p-2 bg-sq-lighter' >
-                                        <i className='fa fa-solid fa-link'/>
-                                    </div>
+                                         <Tooltip title="Copy invoice URL to clipboard">
+                                        <div className='sq-btn sq-btn-icon p-2 bg-sq-light' >
+                                            <i className='fa fa-solid fa-link'/>
+                                        </div>
+                                    </Tooltip>
                                 </div>
-                            </Tooltip>
 
                         </div>
                         
@@ -376,7 +413,7 @@ const Invoice = ({
                                     <div className='sq-btn bg-sq-green me-2' onClick={markAsPaid}>
                                         Mark as paid
                                     </div>
-                                    <div className='sq-link'>
+                                    <div className='sq-link' onClick={resendNotification}>
                                         Resend invoice notification
                                     </div>
                                 </div>

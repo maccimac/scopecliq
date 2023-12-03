@@ -105,7 +105,7 @@ const InvoiceList = () => {
                                 clientMode ? `/portal/${project?.portal_domain}` : `/dashboard/${project?.id}`
                                 } className='sq-link text-color-sq-med pb-0'>
                                 <i class="fa-solid fa-regular fa-arrow-left me-2 fa-xs"/>
-                                Back to Project
+                                Back to {project?.name}
                             </Link>
                         </strong>   
                         <h2 className='mt-2'>Invoices: &nbsp;
