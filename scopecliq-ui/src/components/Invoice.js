@@ -115,7 +115,7 @@ const Invoice = ({
     
     const getInvoiceDetails = async () =>{
         try{
-            const res = await axios.post(`${api}/invoices/milestone/${milestoneId}`)
+            const res = await axios.get(`${api}/invoices/milestone/${milestoneId}`)
             set_invoice(res.data)
 
         }catch(e){

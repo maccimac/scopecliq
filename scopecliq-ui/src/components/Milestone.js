@@ -33,10 +33,10 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
             setDeliverables(res.data)
         }catch(e){
             console.log(e)
-            dispatch(showSnackbarMessage({
-                status: 'error',
-                message: e.response.data.message 
-            }))
+            // dispatch(showSnackbarMessage({
+            //     status: 'error',
+            //     message: e.response.data.message 
+            // }))
         }
     }
 
@@ -67,7 +67,7 @@ export const Milestone = ({ milestone, index, image, cb, edit=true}) => {
 
     const checkInvoiceStatus = async () =>{
         try{
-            const res = await axios.post(`${api}/invoices/milestone/${milestone.id}`)
+            const res = await axios.get(`${api}/invoices/milestone/${milestone.id}`)
             set_invoice(res.data)
         }catch(e){
             console.log(e)
